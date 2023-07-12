@@ -13,6 +13,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvTextview.setText("哇哈哈")
+        binding.tvTextview.setText("成功啦")
     }
 }
