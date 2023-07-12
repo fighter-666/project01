@@ -1,0 +1,3 @@
+<backup-configuration>
+    <include path="." />
+</backup-configuration>
