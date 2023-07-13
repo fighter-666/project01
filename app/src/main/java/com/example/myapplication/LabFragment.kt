@@ -9,22 +9,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ComponentsBinding
 import com.example.myapplication.databinding.ComponentsFragmentBinding
+import com.example.myapplication.databinding.FragmentLabBinding
 
-class ComponentsFragment : Fragment(){
-    private lateinit var binding: ComponentsFragmentBinding
+class LabFragment : Fragment(){
+    private lateinit var binding: FragmentLabBinding
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = ComponentsFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentLabBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
 
     companion object {
-        fun newInstance(text: String): ComponentsFragment {
+        fun newInstance(text: String): LabFragment {
             val args = Bundle()
             args.putString("text", text)
-            val fragment = ComponentsFragment()
+            val fragment = LabFragment()
             fragment.arguments = args
             return fragment
         }
@@ -38,7 +39,7 @@ class ComponentsFragment : Fragment(){
 
     inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.components, parent, false)
+            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.lab, parent, false)
             return MyViewHolder(itemView)
         }
 
