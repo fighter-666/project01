@@ -44,7 +44,7 @@ class LabFragment : Fragment(){
         piggies = ArrayList()
         for (i in 1 until 7) {
              if (i == 1) { val image1 =R.drawable.ic_canyin
-                 piggies.add(Piggy(image1, "QMUIColorHelper3"))}
+                 piggies.add(Piggy(image1, "QMUIColorHelper"))}
             if (i == 2) { val image1 =R.drawable.ic_canyin_fs
                 piggies.add(Piggy(image1, "QMUIDeviceHelper"))}
             if (i == 3) { val image1 =R.drawable.ic_fushi
@@ -83,7 +83,7 @@ class LabFragment : Fragment(){
              binding.itemTitle.text = item.name
          }
 
-
+    }
 
 
 

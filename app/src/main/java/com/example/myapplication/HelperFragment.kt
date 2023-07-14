@@ -70,6 +70,7 @@ class HelperFragment : Fragment(){
         _binding = null
     }
 
+
      class MyAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
          inner class MyViewHolder(binding: HelperBinding): RecyclerView.ViewHolder(binding.root) {
         }
