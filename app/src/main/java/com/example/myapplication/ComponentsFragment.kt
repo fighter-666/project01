@@ -11,11 +11,11 @@ import com.example.myapplication.databinding.ComponentsBinding
 import com.example.myapplication.databinding.ComponentsFragmentBinding
 
 class ComponentsFragment : Fragment(){
-    private lateinit var binding: ComponentsFragmentBinding
-
+    private  var _binding : ComponentsFragmentBinding? = null
+    val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = ComponentsFragmentBinding.inflate(inflater, container, false)
+        _binding = ComponentsFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -35,6 +35,12 @@ class ComponentsFragment : Fragment(){
         binding.recyclerView.layoutManager = GridLayoutManager(context,3)
         binding.recyclerView.adapter = MyAdapter()
     }
+
+    override fun onDestroyView(){
+        super.onDestroyView()
+        _binding = null
+    }
+
 
     inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
