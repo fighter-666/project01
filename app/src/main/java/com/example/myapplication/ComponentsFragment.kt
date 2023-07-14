@@ -40,9 +40,6 @@ class ComponentsFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         piggies = ArrayList()
-        when{
-
-        }
         for (i in 1 until 7) {
              if (i == 1) { val image1 =R.drawable.ic_canyin
                  piggies.add(Piggy(image1, "QMUIColorHelper"))}
@@ -56,18 +53,6 @@ class ComponentsFragment : Fragment(){
                 piggies.add(Piggy(image1, "QMUIViewHelper"))}
             if (i == 6) { val image1 =R.drawable.ic_jiaotong
                 piggies.add(Piggy(image1, "QMUINotchHelper"))}
-
-//            val image2 = if (i == 2)  R.drawable.ic_canyin_fs
-//            val image3 = if (i == 3)  R.drawable.ic_fushi
-//            val image4 = if (i == 4)  R.drawable.ic_gouwu
-//            val image5 = if (i == 5)  R.drawable.ic_gouwu_fs
-//            val image6 = if (i == 6) R.drawable.bgs else R.drawable.ic_jiaotong
-//            piggies.add(Piggy(image1, "QMUIColorHelper"))
-//            piggies.add(Piggy(image2, "QMUIDeviceHelper"))
-//            piggies.add(Piggy(image3, "QWUIDrawableHelper"))
-//            piggies.add(Piggy(image4, "QMUIStatusBarHelper"))
-//            piggies.add(Piggy(image5, "QMUIViewHelper"))
-//            piggies.add(Piggy(image6, "QMUINotchHelper"))
         }
 
         val myAdapter = MyAdapter(R.layout.components, piggies)
