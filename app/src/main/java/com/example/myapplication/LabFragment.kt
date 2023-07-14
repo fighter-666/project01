@@ -83,7 +83,7 @@ class LabFragment : Fragment(){
              binding.itemTitle.text = item.name
          }
 
-    }
+
 
 
 
