@@ -63,7 +63,7 @@ class LabFragment : Fragment(){
 //            holder.binding.itemTitle.text = "架构师"
 //            holder.binding.itemMessage.text = "哇哈哈"
             holder.image.setImageResource(R.drawable.images)
-            holder.title.text = "冰箱"
+            holder.title.text = "SSH"
             holder.message.text = "洗衣机"
         }
 
