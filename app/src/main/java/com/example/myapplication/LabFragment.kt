@@ -43,8 +43,18 @@ class LabFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         piggies = ArrayList()
         for (i in 1 until 7) {
-            val image = if (i % 2 == 0) R.drawable.bgs else R.drawable.images
-            piggies.add(Piggy(image, "小猪佩奇$i"))
+             if (i == 1) { val image1 =R.drawable.ic_canyin
+                 piggies.add(Piggy(image1, "QMUIColorHelper3"))}
+            if (i == 2) { val image1 =R.drawable.ic_canyin_fs
+                piggies.add(Piggy(image1, "QMUIDeviceHelper"))}
+            if (i == 3) { val image1 =R.drawable.ic_fushi
+                piggies.add(Piggy(image1, "QWUIDrawableHelper"))}
+            if (i == 4) { val image1 =R.drawable.ic_gouwu
+                piggies.add(Piggy(image1, "QMUIStatusBarHelper"))}
+            if (i == 5) { val image1 =R.drawable.ic_gouwu_fs
+                piggies.add(Piggy(image1, "QMUIViewHelper"))}
+            if (i == 6) { val image1 =R.drawable.ic_jiaotong
+                piggies.add(Piggy(image1, "QMUINotchHelper"))}
         }
 
         val myAdapter = MyAdapter(R.layout.components, piggies)

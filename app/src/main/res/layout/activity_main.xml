@@ -28,7 +28,8 @@
             app:tabMode="scrollable"
             app:tabSelectedTextColor="#ff678f"
             app:tabTextColor="#333333"
-            app:tabUnboundedRipple="true"/>
+            app:tabUnboundedRipple="true">
+        </com.google.android.material.tabs.TabLayout>
 
 
     </LinearLayout>
