@@ -6,24 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.ComponentsBinding
 import com.example.myapplication.databinding.ComponentsFragmentBinding
 import com.example.myapplication.databinding.FragmentHelperBinding
+import com.example.myapplication.databinding.HelperBinding
 
 class HelperFragment : Fragment(){
     private  var _binding : FragmentHelperBinding? = null
     val binding get() = _binding!!
+    private lateinit var piggies: MutableList<Piggy>
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHelperBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+        return view
     }
 
     companion object {
@@ -38,9 +41,21 @@ class HelperFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        piggies = ArrayList()
+        for (i in 1 until 7) {
+            val image = if (i % 2 == 0) R.drawable.bgs else R.drawable.images
+            piggies.add(Piggy(image, "小猪佩奇$i"))
+        }
+
+        val myAdapter = MyAdapter(R.layout.components, piggies)
         binding.recyclerView.layoutManager = GridLayoutManager(context,3)
-        binding.recyclerView.adapter = MyAdapter()
+        binding.recyclerView.adapter = myAdapter
+
+
+        myAdapter.setNewData(piggies)
     }
+
+
 
     override fun onDestroyView(){
         super.onDestroyView()
@@ -48,36 +63,20 @@ class HelperFragment : Fragment(){
     }
 
 
-     class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-         inner class MyViewHolder(binding: ComponentsBinding): RecyclerView.ViewHolder(binding.root) {
-            val image: ImageView = binding.itemImage
-             val title: TextView = binding.itemTitle
-             val message : TextView = binding.itemMessage
+     class MyAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
+         inner class MyViewHolder(binding: HelperBinding): RecyclerView.ViewHolder(binding.root) {
         }
 
-         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-             val binding =
-                 ComponentsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-             return MyViewHolder(binding)
+         override fun convert(holder: BaseViewHolder, item: Piggy) {
+             val binding = ComponentsBinding.bind(holder.itemView)
+             binding.itemImage.setImageResource(item.image)
+             binding.itemTitle.text = item.name
          }
 
-        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//            holder.binding.itemImage.setImageResource(R.drawable.bgs)
-//            holder.binding.itemTitle.text = "架构师"
-//            holder.binding.itemMessage.text = "哇哈哈"
-            holder.image.setImageResource(R.drawable.images)
-            holder.title.text = "空调"
-            holder.message.text = "风扇"
-        }
-
-        override fun getItemCount(): Int {
-            return 6
-        }
     }
 
-    class MyViewHolder(binding: ComponentsBinding): RecyclerView.ViewHolder(binding.root) {
 
-    }
+
 }
 
 
