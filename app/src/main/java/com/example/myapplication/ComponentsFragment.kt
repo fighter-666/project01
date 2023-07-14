@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,16 +44,26 @@ class ComponentsFragment : Fragment(){
     }
 
 
-    inner class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val itemView = LayoutInflater.from(parent.context).inflate(R.layout.components, parent, false)
-            return MyViewHolder(itemView)
+     class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+         inner class MyViewHolder(binding: ComponentsBinding): RecyclerView.ViewHolder(binding.root) {
+            val image: ImageView = binding.itemImage
+             val title: TextView = binding.itemTitle
+             val message : TextView = binding.itemMessage
         }
+
+         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+             val binding =
+                 ComponentsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+             return MyViewHolder(binding)
+         }
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 //            holder.binding.itemImage.setImageResource(R.drawable.bgs)
 //            holder.binding.itemTitle.text = "架构师"
 //            holder.binding.itemMessage.text = "哇哈哈"
+            holder.image.setImageResource(R.drawable.images)
+            holder.title.text = "电脑"
+            holder.message.text = "手机"
         }
 
         override fun getItemCount(): Int {
@@ -59,13 +71,8 @@ class ComponentsFragment : Fragment(){
         }
     }
 
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
-//        lateinit var binding: ComponentsBinding
-//        fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//            binding = ComponentsBinding.inflate(inflater, container, false)
-//            val view = binding.root
-//            return view
-//        }
+    class MyViewHolder(binding: ComponentsBinding): RecyclerView.ViewHolder(binding.root) {
+
     }
 }
 
