@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
@@ -20,7 +21,6 @@ import com.example.myapplication.databinding.HelperBinding
 class HelperFragment : Fragment(){
     private  var _binding : FragmentHelperBinding? = null
     val binding get() = _binding!!
-    private lateinit var piggies: MutableList<Piggy>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHelperBinding.inflate(inflater, container, false)
@@ -41,18 +41,18 @@ class HelperFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val piggies = listOf(
-            Pair(R.drawable.ic_canyin, "QMUIColorHelper2"),
-            Pair(R.drawable.ic_canyin_fs, "QMUIDeviceHelper"),
-            Pair(R.drawable.ic_fushi, "QWUIDrawableHelper"),
-            Pair(R.drawable.ic_gouwu, "QMUIStatusBarHelper"),
-            Pair(R.drawable.ic_gouwu_fs, "QMUIViewHelper"),
-            Pair(R.drawable.ic_jiaotong, "QMUINotchHelper")
+            Pair(R.mipmap.icon_grid_color_helper, "QMUIColorHelper2"),
+            Pair(R.mipmap.icon_grid_device_helper, "QMUIDeviceHelper"),
+            Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "QMUIStatusBarHelper"),
+            Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper")
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
         val myAdapter = LabAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(context, 3)
+            layoutManager = LinearLayoutManager(context)
             adapter = myAdapter
         }
     }
