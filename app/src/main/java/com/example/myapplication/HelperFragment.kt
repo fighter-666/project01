@@ -50,7 +50,7 @@ class HelperFragment : Fragment(){
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
-        val myAdapter = MyAdapter(R.layout.components, piggies)
+        val myAdapter = LabAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = myAdapter
@@ -60,16 +60,6 @@ class HelperFragment : Fragment(){
     override fun onDestroyView(){
         super.onDestroyView()
         _binding = null
-    }
-
-     class MyAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
-         inner class MyViewHolder(binding: HelperBinding): RecyclerView.ViewHolder(binding.root) {
-        }
-         override fun convert(holder: BaseViewHolder, item: Piggy) {
-             val binding = ComponentsBinding.bind(holder.itemView)
-             binding.itemImage.setImageResource(item.image)
-             binding.itemTitle.text = item.name
-         }
     }
 }
 

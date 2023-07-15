@@ -18,18 +18,26 @@
             android:orientation="horizontal" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:tabGravity="center"
-            app:tabIndicatorColor="#ff678f"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="2dp"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="#ff678f"
-            app:tabTextColor="#333333"
-            app:tabUnboundedRipple="true">
-        </com.google.android.material.tabs.TabLayout>
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.AppCompat"/>
+
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:id="@+id/tab_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            app:tabGravity="center"-->
+<!--            app:tabIndicatorColor="#ff678f"-->
+<!--            app:tabIndicatorFullWidth="false"-->
+<!--            app:tabIndicatorHeight="2dp"-->
+<!--            app:tabMode="scrollable"-->
+<!--            app:tabSelectedTextColor="#ff678f"-->
+<!--            app:tabTextColor="#333333"-->
+<!--            app:tabUnboundedRipple="true">-->
+<!--        </com.google.android.material.tabs.TabLayout>-->
 
 
     </LinearLayout>

@@ -4,16 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.example.myapplication.databinding.ComponentsBinding
 import com.example.myapplication.databinding.ComponentsFragmentBinding
+
 
 class ComponentsFragment : Fragment(){
     private  var _binding : ComponentsFragmentBinding? = null
@@ -49,7 +43,7 @@ class ComponentsFragment : Fragment(){
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
-        val myAdapter = MyAdapter(R.layout.components, piggies)
+        val myAdapter = ComponentsAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = myAdapter
@@ -61,15 +55,7 @@ class ComponentsFragment : Fragment(){
         _binding = null
     }
 
-     class MyAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
-         inner class MyViewHolder(binding: ComponentsBinding): RecyclerView.ViewHolder(binding.root) {
-        }
-         override fun convert(holder: BaseViewHolder, item: Piggy) {
-             val binding = ComponentsBinding.bind(holder.itemView)
-             binding.itemImage.setImageResource(item.image)
-             binding.itemTitle.text = item.name
-         }
-    }
+
 }
 
 
