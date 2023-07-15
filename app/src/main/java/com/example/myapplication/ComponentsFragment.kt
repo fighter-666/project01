@@ -39,52 +39,37 @@ class ComponentsFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        piggies = ArrayList()
-        for (i in 1 until 7) {
-             if (i == 1) { val image1 =R.drawable.ic_canyin
-                 piggies.add(Piggy(image1, "QMUIColorHelper"))}
-            if (i == 2) { val image1 =R.drawable.ic_canyin_fs
-                piggies.add(Piggy(image1, "QMUIDeviceHelper"))}
-            if (i == 3) { val image1 =R.drawable.ic_fushi
-                piggies.add(Piggy(image1, "QWUIDrawableHelper"))}
-            if (i == 4) { val image1 =R.drawable.ic_gouwu
-                piggies.add(Piggy(image1, "QMUIStatusBarHelper"))}
-            if (i == 5) { val image1 =R.drawable.ic_gouwu_fs
-                piggies.add(Piggy(image1, "QMUIViewHelper"))}
-            if (i == 6) { val image1 =R.drawable.ic_jiaotong
-                piggies.add(Piggy(image1, "QMUINotchHelper"))}
-        }
-
+        val piggies = listOf(
+            Pair(R.drawable.ic_canyin, "QMUIColorHelper"),
+            Pair(R.drawable.ic_canyin_fs, "QMUIDeviceHelper"),
+            Pair(R.drawable.ic_fushi, "QWUIDrawableHelper"),
+            Pair(R.drawable.ic_gouwu, "QMUIStatusBarHelper"),
+            Pair(R.drawable.ic_gouwu_fs, "QMUIViewHelper"),
+            Pair(R.drawable.ic_jiaotong, "QMUINotchHelper")
+        ).map { (imageResId, helperText) ->
+            Piggy(imageResId, helperText)
+        }.toMutableList()
         val myAdapter = MyAdapter(R.layout.components, piggies)
-        binding.recyclerView.layoutManager = GridLayoutManager(context,3)
-        binding.recyclerView.adapter = myAdapter
-
-
-        myAdapter.setNewData(piggies)
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 3)
+            adapter = myAdapter
+        }
     }
-
-
 
     override fun onDestroyView(){
         super.onDestroyView()
         _binding = null
     }
 
-
      class MyAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
          inner class MyViewHolder(binding: ComponentsBinding): RecyclerView.ViewHolder(binding.root) {
         }
-
          override fun convert(holder: BaseViewHolder, item: Piggy) {
              val binding = ComponentsBinding.bind(holder.itemView)
              binding.itemImage.setImageResource(item.image)
              binding.itemTitle.text = item.name
          }
-
     }
-
-
-
 }
 
 
