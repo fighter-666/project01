@@ -50,7 +50,7 @@ class HelperFragment : Fragment(){
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
-        val myAdapter = ComponentsFragment.MyAdapter(R.layout.components, piggies)
+        val myAdapter = MyAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = myAdapter
