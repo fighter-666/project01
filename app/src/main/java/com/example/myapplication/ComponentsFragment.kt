@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,19 +49,52 @@ class ComponentsFragment : Fragment(){
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = myAdapter
-
         }
-        val adapter = ComponentsAdapter(R.layout.components,piggies)
-        adapter.setOnItemClickListener(object : ComponentsAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                // 处理点击事件，根据 position 获取点击的项在列表中的位置
-                val clickedItem = piggies[position]
 
-                // 执行详细的点击事件处理逻辑
-                // 例如，根据数据执行特定操作、跳转到详情页等
-                Toast.makeText(context, "点击了第 ${position + 1} 项", Toast.LENGTH_SHORT).show()
+        myAdapter.setOnItemClickListener { piggy ->
+            // 处理列表项点击事件
+            Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
+            when (piggy.name) {
+                "QMUIColorHelper" -> {
+                    val intent = Intent(context, FirstActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "QMUIDeviceHelper" -> {
+                    val intent = Intent(context, SecondActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "QWUIDrawableHelper" -> {
+                    val intent = Intent(context, ThirdActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "QMUIStatusBarHelper" -> {
+                    val intent = Intent(context, FourthActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "QMUIViewHelper" -> {
+                    val intent = Intent(context, FifthActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "QMUINotchHelper" -> {
+                    val intent = Intent(context, SisthActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                // 其他Piggy对象的处理逻辑...
+
+                else -> {
+                    // 默认的页面跳转逻辑
+                    val intent = Intent(context, FirstActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
             }
-        })
+        }
 
     }
 
@@ -68,8 +102,6 @@ class ComponentsFragment : Fragment(){
         super.onDestroyView()
         _binding = null
     }
-
-
 }
 
 

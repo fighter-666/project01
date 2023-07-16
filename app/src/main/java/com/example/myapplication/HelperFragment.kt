@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -50,10 +51,14 @@ class HelperFragment : Fragment(){
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
-        val myAdapter = LabAdapter(R.layout.components, piggies)
+        val myAdapter = HelperAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = myAdapter
+        }
+        myAdapter.setOnItemClickListener { piggy ->
+            // 处理列表项点击事件
+            Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
         }
     }
 

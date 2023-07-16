@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,10 @@ class LabFragment : Fragment(){
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = myAdapter
+        }
+        myAdapter.setOnItemClickListener { piggy ->
+            // 处理列表项点击事件
+            Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
         }
     }
 

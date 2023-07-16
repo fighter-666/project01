@@ -8,11 +8,17 @@ import com.example.myapplication.databinding.ComponentsBinding
 import com.example.myapplication.databinding.HelperBinding
 
 class HelperAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
-    inner class MyViewHolder(binding: HelperBinding): RecyclerView.ViewHolder(binding.root) {
-    }
+    private var onItemClickListener: ((Piggy) -> Unit)? = null
     override fun convert(holder: BaseViewHolder, item: Piggy) {
         val binding = HelperBinding.bind(holder.itemView)
         binding.itemImage.setImageResource(item.image)
         binding.itemTitle.text = item.name
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.invoke(item)
+        }
+    }
+    fun setOnItemClickListener(listener: (Piggy) -> Unit) {
+        onItemClickListener = listener
     }
 }
