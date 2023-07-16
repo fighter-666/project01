@@ -8,6 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myapplication.components.FifthActivity
+import com.example.myapplication.components.FirstActivity
+import com.example.myapplication.components.FourthActivity
+import com.example.myapplication.components.SecondActivity
+import com.example.myapplication.components.SisthActivity
+import com.example.myapplication.components.ThirdActivity
 import com.example.myapplication.databinding.ComponentsFragmentBinding
 
 

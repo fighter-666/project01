@@ -12,8 +12,12 @@ class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) 
 
     override fun convert(holder: BaseViewHolder, item: Piggy) {
         val binding = ComponentsBinding.bind(holder.itemView)
+
+        //设置图片和标题
         binding.itemImage.setImageResource(item.image)
         binding.itemTitle.text = item.name
+
+        //设置点击事件监听器
         holder.itemView.setOnClickListener {
             onItemClickListener?.invoke(item)
         }

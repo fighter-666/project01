@@ -1,8 +1,7 @@
-package com.example.myapplication
+package com.example.myapplication.components
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myapplication.databinding.ActivityFirstBinding
 import com.example.myapplication.databinding.ActivityThirdBinding
 
 class ThirdActivity : AppCompatActivity() {
