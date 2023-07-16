@@ -19,20 +19,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    val activeColor: Int = Color.parseColor("#ff678f")
-    val normalColor: Int = Color.parseColor("#666666")
-
-    var normalSize: Int = 14
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val tabs = arrayOf("  Components", " Helper", "Lab")
-        val image1 = R.mipmap.icon_tabbar_component_selected
-        val image2 = R.mipmap.icon_tabbar_util_selected
-        val image3 = R.mipmap.icon_tabbar_lab_selected
-        val pics = arrayOf(image1,image2,image3)
+        val pics = arrayOf(
+            R.mipmap.icon_tabbar_component_selected,
+            R.mipmap.icon_tabbar_util_selected,
+            R.mipmap.icon_tabbar_lab_selected
+        )
         binding.viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
         binding.viewPager.adapter = object : FragmentStateAdapter(supportFragmentManager,lifecycle) {
             override fun getItemCount(): Int {
