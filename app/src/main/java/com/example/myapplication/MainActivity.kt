@@ -23,10 +23,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val tabs = arrayOf("  Components", " Helper", "Lab")
+        val tabs = arrayOf("  Components", " Helper", "Lab", "Waterfall")
         val pics = arrayOf(
             R.mipmap.icon_tabbar_component_selected,
             R.mipmap.icon_tabbar_util_selected,
+            R.mipmap.icon_tabbar_lab_selected,
             R.mipmap.icon_tabbar_lab_selected
         )
         binding.viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             ComponentsFragment(),
             HelperFragment(),
             LabFragment(),
+            WaterfallFragment(),
             //加载更多的 Fragment 实例
         )
 

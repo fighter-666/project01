@@ -1,16 +1,14 @@
 package com.example.myapplication
 
 import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.ComponentsBinding
-import com.example.myapplication.databinding.HelperBinding
 
-class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
-    private var onItemClickListener: ((Piggy) -> Unit)? = null
+class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) : BaseQuickAdapter<Card, BaseViewHolder>(layoutResId, data) {
+    private var onItemClickListener: ((Card) -> Unit)? = null
 
-    override fun convert(holder: BaseViewHolder, item: Piggy) {
+    override fun convert(holder: BaseViewHolder, item: Card) {
         val binding = ComponentsBinding.bind(holder.itemView)
 
         //设置图片和标题
@@ -22,7 +20,9 @@ class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) 
             onItemClickListener?.invoke(item)
         }
     }
-    fun setOnItemClickListener(listener: (Piggy) -> Unit) {
+    fun setOnItemClickListener(listener: (Card) -> Unit) {
         onItemClickListener = listener
     }
+
+
 }

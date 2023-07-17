@@ -7,33 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.components.FifthActivity
 import com.example.myapplication.components.FirstActivity
 import com.example.myapplication.components.FourthActivity
 import com.example.myapplication.components.SecondActivity
 import com.example.myapplication.components.SisthActivity
 import com.example.myapplication.components.ThirdActivity
-import com.example.myapplication.databinding.ComponentsFragmentBinding
+import com.example.myapplication.databinding.WaterfallFragmentBinding
 
 
-class ComponentsFragment : Fragment(){
-    private  var _binding : ComponentsFragmentBinding? = null
+class WaterfallFragment : Fragment(){
+    private  var _binding : WaterfallFragmentBinding? = null
     val binding get() = _binding!!
-    private lateinit var piggies: MutableList<Piggy>
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = ComponentsFragmentBinding.inflate(inflater, container, false)
+        _binding = WaterfallFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
 
     companion object {
-        fun newInstance(text: String): ComponentsFragment {
+        fun newInstance(text: String): WaterfallFragment {
             val args = Bundle()
             args.putString("text", text)
-            val fragment = ComponentsFragment()
+            val fragment = WaterfallFragment()
             fragment.arguments = args
             return fragment
         }
@@ -53,8 +51,10 @@ class ComponentsFragment : Fragment(){
         }.toMutableList()
         val myAdapter = ComponentsAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(context, 3)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
             adapter = myAdapter
+
         }
 
         myAdapter.setOnItemClickListener { piggy ->
