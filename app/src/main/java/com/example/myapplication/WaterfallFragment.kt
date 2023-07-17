@@ -41,15 +41,15 @@ class WaterfallFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         val piggies = listOf(
             Pair(R.mipmap.icon_grid_color_helper, "QMUIColorHelper"),
-            Pair(R.mipmap.icon_grid_device_helper, "QMUIDeviceHelper"),
+            Pair(R.drawable.a, "哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈QMUIDeviceHelper"),
             Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "QMUIStatusBarHelper"),
             Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper")
         ).map { (imageResId, helperText) ->
-            Card(imageResId, helperText,0,0)
+            Piggy(imageResId, helperText)
         }.toMutableList()
-        val myAdapter = ComponentsAdapter(R.layout.components, piggies)
+        val myAdapter = WaterfallAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 

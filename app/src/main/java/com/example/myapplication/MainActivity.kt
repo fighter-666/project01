@@ -1,7 +1,5 @@
 package com.example.myapplication
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
