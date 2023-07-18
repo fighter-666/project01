@@ -11,11 +11,8 @@ class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) : B
 
     private val SCALE = 4 * 1.0f / 3 //图片缩放比例
 
-    private val cards: List<Card> = ArrayList()
-
     override fun convert(holder: BaseViewHolder, item: Card) {
         val binding = WaterfallBinding.bind(holder.itemView)
-
 
         //设置图片和标题
         binding.itemImage.setImageResource(item.image)

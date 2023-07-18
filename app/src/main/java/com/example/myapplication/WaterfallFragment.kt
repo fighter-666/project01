@@ -27,16 +27,6 @@ class WaterfallFragment : Fragment(){
         return view
     }
 
-    companion object {
-        fun newInstance(text: String): WaterfallFragment {
-            val args = Bundle()
-            args.putString("text", text)
-            val fragment = WaterfallFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val piggies = listOf(
@@ -52,9 +42,7 @@ class WaterfallFragment : Fragment(){
         val myAdapter = WaterfallAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
             adapter = myAdapter
-
         }
 
         myAdapter.setOnItemClickListener { piggy ->
