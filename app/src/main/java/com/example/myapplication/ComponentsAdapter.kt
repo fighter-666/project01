@@ -5,10 +5,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.ComponentsBinding
 
-class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) : BaseQuickAdapter<Card, BaseViewHolder>(layoutResId, data) {
-    private var onItemClickListener: ((Card) -> Unit)? = null
+class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
+    private var onItemClickListener: ((Piggy) -> Unit)? = null
 
-    override fun convert(holder: BaseViewHolder, item: Card) {
+    override fun convert(holder: BaseViewHolder, item: Piggy) {
         val binding = ComponentsBinding.bind(holder.itemView)
 
         //设置图片和标题
@@ -20,7 +20,7 @@ class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) : 
             onItemClickListener?.invoke(item)
         }
     }
-    fun setOnItemClickListener(listener: (Card) -> Unit) {
+    fun setOnItemClickListener(listener: (Piggy) -> Unit) {
         onItemClickListener = listener
     }
 

@@ -47,7 +47,7 @@ class WaterfallFragment : Fragment(){
             Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper")
         ).map { (imageResId, helperText) ->
-            Piggy(imageResId, helperText)
+            Card(imageResId, helperText,0,0)
         }.toMutableList()
         val myAdapter = WaterfallAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {

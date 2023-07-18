@@ -20,8 +20,6 @@ import com.example.myapplication.databinding.ComponentsFragmentBinding
 class ComponentsFragment : Fragment(){
     private  var _binding : ComponentsFragmentBinding? = null
     val binding get() = _binding!!
-    private lateinit var piggies: MutableList<Piggy>
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = ComponentsFragmentBinding.inflate(inflater, container, false)
@@ -49,7 +47,7 @@ class ComponentsFragment : Fragment(){
             Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper")
         ).map { (imageResId, helperText) ->
-            Card(imageResId, helperText,0,0)
+            Piggy(imageResId, helperText)
         }.toMutableList()
         val myAdapter = ComponentsAdapter(R.layout.components, piggies)
         binding.recyclerView.apply {
