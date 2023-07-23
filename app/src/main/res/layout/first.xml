@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="85dp"
+    android:background="@drawable/shape_rectangle6"
+    android:layout_marginRight="10dp"
+    android:layout_height="90dp">
+
+    <LinearLayout
+        android:layout_width="85dp"
+        android:layout_height="90dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        >
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bean"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="充流量"
+            android:textColor="#333333"
+            android:textSize="13sp"
+
+            />
+
+        <TextView
+            android:id="@+id/name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="流量告急速订购"
+            android:textColor="#999999"
+            android:textSize="8sp"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>

@@ -15,7 +15,7 @@
             android:id="@+id/item_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/bgs"
+            android:src="@drawable/jetpack"
             android:layout_gravity="center"/>
 
         <LinearLayout

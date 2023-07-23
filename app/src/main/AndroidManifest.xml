@@ -16,7 +16,7 @@
             android:name=".components.SecondActivity"
             android:exported="false" />
         <activity
-            android:name=".components.FirstActivity"
+            android:name=".components.RechargePage"
             android:exported="false" />
         <activity android:name=".components.ThirdActivity" />
         <activity android:name=".components.FourthActivity" />

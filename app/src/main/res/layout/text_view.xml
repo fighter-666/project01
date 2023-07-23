@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="97dp"
+    android:background="@drawable/square2"
+    android:layout_marginRight="10dp"
+    android:layout_height="98dp">
+
+    <TextView
+        android:id="@+id/name1"
+        android:layout_width="55dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="无门槛"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_rectangle13"
+        android:textColor="#c88f56"
+        android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff5a59"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:text="爱奇艺"
+            android:textSize="15sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/name3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#bb6f42"
+            android:layout_gravity="center"
+            android:text="会员优惠券"
+            android:textSize="15sp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/name4"
+            android:layout_width="61dp"
+            android:layout_height="22dp"
+            android:textColor="#bb6f42"
+            android:layout_gravity="center"
+            android:text="去使用"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/shape_rectangle14"
+            android:textSize="15sp"
+            android:gravity="center" />
+
+</LinearLayout>

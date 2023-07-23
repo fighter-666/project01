@@ -9,12 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.components.FifthActivity
-import com.example.myapplication.components.FirstActivity
 import com.example.myapplication.components.FourthActivity
 import com.example.myapplication.components.SecondActivity
 import com.example.myapplication.components.SisthActivity
 import com.example.myapplication.components.ThirdActivity
 import com.example.myapplication.databinding.ComponentsFragmentBinding
+import com.example.myapplication.components.RechargePage
 
 
 class ComponentsFragment : Fragment(){
@@ -60,7 +60,7 @@ class ComponentsFragment : Fragment(){
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
             when (piggy.name) {
                 "QMUIColorHelper" -> {
-                    val intent = Intent(context, FirstActivity::class.java)
+                    val intent = Intent(context, RechargePage::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
@@ -93,7 +93,7 @@ class ComponentsFragment : Fragment(){
 
                 else -> {
                     // 默认的页面跳转逻辑
-                    val intent = Intent(context, FirstActivity::class.java)
+                    val intent = Intent(context, RechargePage::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
