@@ -7,30 +7,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <androidx.constraintlayout.utils.widget.MockView
-        android:id="@+id/Avatar"
+    <androidx.constraintlayout.helper.widget.Layer
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="300dp"
+        android:background="@drawable/image7"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/AndroidImg"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/falls1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.utils.widget.MockView
-        android:id="@+id/Name"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/Avatar"
-        app:layout_constraintTop_toTopOf="@id/Avatar" />
 
-    <androidx.constraintlayout.utils.widget.MockView
-        android:id="@+id/Age"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="@id/Avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/Avatar" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
