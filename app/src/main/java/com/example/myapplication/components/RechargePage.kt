@@ -72,10 +72,10 @@ class RechargePage : ComponentActivity() {
         val secondAdapter = SecondAdapter(R.layout.second, piggies2)
 
         //设置布局管理器
-        //binding.recyclerView2.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        binding.recyclerView2.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
 
         //给RecycleView设置适配器
-       // binding.recyclerView2.setAdapter(secondAdapter)
+        binding.recyclerView2.setAdapter(secondAdapter)
 
 
         //第三个
@@ -88,10 +88,10 @@ class RechargePage : ComponentActivity() {
         val thirdAdapter = MultipleItemQuickAdapter( piggies3)
 
         //设置布局管理器
-       // binding.recyclerView3.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+       binding.recyclerView3.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
 
         //给RecycleView设置适配器
-       // binding.recyclerView3.setAdapter(thirdAdapter)
+       binding.recyclerView3.setAdapter(thirdAdapter)
 
 
         //第三个
@@ -107,10 +107,10 @@ class RechargePage : ComponentActivity() {
         val fourthAdapter = FourthAdapter(R.layout.fourth, piggies4)
 
         //设置布局管理器
-        //binding.recyclerView4.setLayoutManager(StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL))
+        binding.recyclerView4.setLayoutManager(StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL))
 
         //给RecycleView设置适配器
-        //binding.recyclerView4.setAdapter(fourthAdapter)
+        binding.recyclerView4.setAdapter(fourthAdapter)
     }
 
 
