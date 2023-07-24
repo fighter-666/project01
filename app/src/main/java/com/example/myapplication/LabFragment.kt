@@ -49,32 +49,32 @@ class LabFragment : Fragment(){
             // 处理列表项点击事件
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
             when (piggy.name) {
-                "QMUIColorHelper" -> {
+                "1" -> {
                     val intent = Intent(context, RechargePage::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
-                "QMUIDeviceHelper" -> {
+                "2" -> {
                     val intent = Intent(context, SecondActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
-                "QWUIDrawableHelper" -> {
+                "3" -> {
                     val intent = Intent(context, ThirdActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
-                "QMUIStatusBarHelper" -> {
+                "4" -> {
                     val intent = Intent(context, FourthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
-                "QMUIViewHelper" -> {
+                "5" -> {
                     val intent = Intent(context, FifthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
-                "QMUINotchHelper" -> {
+                "6" -> {
                     val intent = Intent(context, SisthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)

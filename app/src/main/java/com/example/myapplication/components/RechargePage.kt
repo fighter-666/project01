@@ -1,6 +1,10 @@
 package com.example.myapplication.components
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -14,6 +18,7 @@ import com.example.recharge.MultipleItemQuickAdapter
 import com.example.recharge.Piggy
 import com.example.recharge.Second
 import com.example.recharge.SecondAdapter
+import com.gyf.immersionbar.ImmersionBar
 
 
 class RechargePage : ComponentActivity() {
@@ -23,6 +28,12 @@ class RechargePage : ComponentActivity() {
         super.onCreate(savedInstanceState)
         binding = RechargePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //沉浸式
+        ImmersionBar.with(this)
+            .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
+            .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
+            .init();
+
         val piggies = mutableListOf<Piggy>()
         piggies.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
         piggies.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
