@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             R.mipmap.icon_tabbar_lab_selected
         )
         binding.viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+        
         binding.viewPager.adapter = object : FragmentStateAdapter(supportFragmentManager,lifecycle) {
             override fun getItemCount(): Int {
                 return tabs.size

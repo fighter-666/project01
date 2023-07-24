@@ -28,20 +28,23 @@ class LabFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val piggies = listOf(
-            Pair(R.mipmap.icon_grid_color_helper, "QMUIColorHelper3"),
-            Pair(R.mipmap.icon_grid_device_helper, "QMUIDeviceHelper"),
-            Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "QMUIStatusBarHelper"),
-            Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper")
+            Pair(R.mipmap.icon_grid_color_helper, "1"),
+            Pair(R.mipmap.icon_grid_device_helper, "2"),
+            Pair(R.mipmap.icon_grid_drawable_helper, "3"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "4"),
+            Pair(R.mipmap.icon_grid_view_helper, "5"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "6")
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
-        val myAdapter = LabAdapter(R.layout.components, piggies)
+        val myAdapter = LabAdapter(R.layout.lab, piggies)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = myAdapter
         }
+
+
+
         myAdapter.setOnItemClickListener { piggy ->
             // 处理列表项点击事件
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
