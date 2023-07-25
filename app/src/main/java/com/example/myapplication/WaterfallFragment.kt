@@ -31,7 +31,7 @@ class WaterfallFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         val piggies = listOf(
             Pair(R.mipmap.icon_grid_color_helper, "QMUIColorHelper"),
-            Pair(R.drawable.a, "哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈QMUIDeviceHelper"),
+            Pair(R.drawable.a2, "哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈哇哈哈QMUIDeviceHelper"),
             Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "QMUIStatusBarHelper"),
             Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),

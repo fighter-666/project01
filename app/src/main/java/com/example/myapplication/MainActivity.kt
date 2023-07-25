@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
         val tabs = arrayOf("  Components", " Helper", "Lab", "Waterfall")
         val pics = arrayOf(
             R.mipmap.icon_tabbar_component_selected,
