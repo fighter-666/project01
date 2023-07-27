@@ -11,13 +11,12 @@
         android:layout_height="90dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_gravity="center"
         >
 
         <ImageView
             android:id="@+id/iv_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="21dp"
+            android:layout_height="24dp"
             android:src="@drawable/bean"/>
 
         <TextView
@@ -25,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="充流量"
+            android:layout_marginTop="8dp"
             android:textColor="#333333"
             android:textSize="13sp"
 
@@ -35,8 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="流量告急速订购"
+            android:layout_marginTop="5dp"
             android:textColor="#999999"
-            android:textSize="8sp"
+            android:textSize="10sp"
 
             />
     </LinearLayout>

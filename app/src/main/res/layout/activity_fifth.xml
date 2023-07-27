@@ -2,15 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fifth"
-        android:layout_gravity="center"
+    <com.example.myapplication.ImageTextLayoutView
+        android:id="@+id/tv2_tv"
+        android:layout_marginTop="27dp"
+        android:layout_width="160dp"
+        android:layout_height="36dp"
+        android:layout_weight="1"
         android:gravity="center"
-        android:textSize="24sp"
-        android:background="@color/design_default_color_secondary_variant"/>
-
+        android:background="@drawable/shape_rectangle2"
+        app:imageSrc="@drawable/bean"
+        app:imageWidth="40dp"
+        app:imageHeight="40dp"
+        app:imageAndTextMargin="10dp"
+        app:textSize="10sp"
+        app:textColor="@android:color/holo_red_dark"
+        app:textContent="另一个自定义view"/>
 </LinearLayout>

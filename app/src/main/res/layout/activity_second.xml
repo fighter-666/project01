@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    >
 
+
+        <LinearLayout
+            android:id="@+id/llAddAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="70dp"
+        android:background="@drawable/shape_rectangle10">
+
+
+        <ImageView
+            android:id="@+id/ivMakeNote"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="2dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:src="@drawable/batman" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="你好"
+            android:id="@+id/tvText"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            />
-
+            android:gravity="center"
+            android:paddingRight="12dp"
+            android:background="@color/purple_200"
+            android:text="添加账户"
+            android:textSize="24sp" />
 </LinearLayout>
+    </RelativeLayout>

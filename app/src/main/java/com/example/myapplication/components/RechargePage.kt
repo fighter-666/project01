@@ -1,10 +1,7 @@
 package com.example.myapplication.components
 
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -33,6 +30,8 @@ class RechargePage : ComponentActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init();
+
+
 
         val piggies = mutableListOf<Piggy>()
         piggies.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))

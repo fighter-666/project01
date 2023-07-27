@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="360dp"
-    android:layout_height="1353dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f4f4f4">
 
@@ -139,19 +139,23 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:background="@drawable/shape_rectangle"/>
 
-    <TextView
-        android:id="@+id/tv2_tv"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_weight="1"
-        android:background="@drawable/shape_rectangle2"
-        android:gravity="center"
-        android:text="查询余额"
-        android:layout_marginTop="27dp"
-        android:textColor="@color/white"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_tv6"
-        android:textSize="16sp" />
+            <com.example.myapplication.ImageTextLayoutView
+                android:id="@+id/tv2_tv"
+                android:layout_marginTop="27dp"
+                android:layout_width="160dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/shape_rectangle2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_tv6"
+                app:imageWidth="20dp"
+                app:imageWidth2="20dp"
+                app:imageHeight="20dp"
+                app:imageHeight2="20dp"
+                app:textSize="16sp"
+                app:textColor="@android:color/white"
+                app:textContent="查询余额"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -232,7 +236,7 @@
         <ImageView
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="8dp"
             android:layout_marginRight="13dp"
             android:src="@drawable/close"
             app:layout_constraintBottom_toBottomOf="@id/im1_im"
@@ -291,6 +295,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl2_tv1"
             />
@@ -503,7 +508,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="共有"
-            android:paddingLeft="13dp"
+            android:paddingLeft="74dp"
             android:textColor="#999999"
             android:textSize="13sp"
             app:layout_constraintLeft_toRightOf="@id/cl3_tv7"

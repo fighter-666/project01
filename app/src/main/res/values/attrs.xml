@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ImageTextCustomView">
+    <attr name="imageWidth" format="dimension"/>
+    <attr name="imageWidth2" format="dimension"/>
+    <attr name="imageHeight" format="dimension"/>
+    <attr name="imageHeight2" format="dimension"/>
+    <attr name="imageSrc" format="reference"/>
+    <attr name="imageSrc2" format="reference"/>
+    <attr name="textSize" format="float|dimension"/>
+    <attr name="textColor" format="color|reference"/>
+    <attr name="textWidth" format="dimension"/>
+    <attr name="textHeight" format="dimension"/>
+    <attr name="textContent" format="string"/>
+    <attr name="imageAndTextMargin" format="dimension"/>
+    </declare-styleable>
+</resources>
