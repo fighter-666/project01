@@ -5,28 +5,35 @@
     android:gravity="center"
     android:id="@+id/rl">
 
-    <ImageView
-        android:id="@+id/top_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/upload"
-        />
-
-    <TextView
-        android:id="@+id/bottom_text"
-        android:layout_width="150dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:layout_toRightOf="@id/top_image"
-        android:textSize="16sp"
-        android:text="查询余额"
-        android:layout_centerInParent="true" />
+        >
+        <ImageView
+            android:id="@+id/top_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/upload"
+            />
+
+        <TextView
+            android:id="@+id/bottom_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/top_image"
+            android:textSize="16sp"
+            android:text="查询余额"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/top_image2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/upload"
         />

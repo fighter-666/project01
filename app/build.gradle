@@ -45,6 +45,7 @@ dependencies {
     implementation "io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14"
     implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'com.blankj:utilcodex:1.31.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

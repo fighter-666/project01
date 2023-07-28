@@ -143,10 +143,9 @@ class ImageTextLayoutView : RelativeLayout {
                 val marginPixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12f, resources.displayMetrics).toInt()
 
 // 设置文本内容
-                textView.text = "余额：580000.00元"
+                textView.text = "余额：58.00元"
                 textView.maxLines = 1
                 textView.ellipsize = TextUtils.TruncateAt.END
-                textView.setAutoSizeTextTypeUniformWithConfiguration(8, 32, 1, TypedValue.COMPLEX_UNIT_SP)
             }
         }
     }
