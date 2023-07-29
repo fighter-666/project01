@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
 
     <com.example.myapplication.ImageTextLayoutView
         android:id="@+id/tv2_tv"
@@ -12,11 +15,25 @@
         android:layout_weight="1"
         android:gravity="center"
         android:background="@drawable/shape_rectangle2"
-        app:imageSrc="@drawable/bean"
-        app:imageWidth="40dp"
-        app:imageHeight="40dp"
-        app:imageAndTextMargin="10dp"
-        app:textSize="10sp"
-        app:textColor="@android:color/holo_red_dark"
-        app:textContent="另一个自定义view"/>
+        app:imageWidth="20dp"
+        app:imageWidth2="20dp"
+        app:imageHeight="20dp"
+        app:imageHeight2="20dp"
+        app:textSize="16sp"
+        app:textColor="@android:color/white"
+        app:textContent="查询余额"/>
+
+    <com.example.myapplication.CommonActionBar
+        android:id="@+id/tv_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:gravity="center"
+        app:imageWidth3="20dp"
+        app:imageHeight3="20dp"
+        app:title="评价"
+        app:textContent="aaaaa"
+        app:textSize="16sp"
+        app:back_src="@drawable/back"
+        />
+
 </LinearLayout>

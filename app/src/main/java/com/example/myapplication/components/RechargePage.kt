@@ -27,10 +27,10 @@ class RechargePage : ComponentActivity() {
         setContentView(binding.root)
         //沉浸式
         ImmersionBar.with(this)
+            .transparentStatusBar()  //透明状态栏，不写默认透明色
+            .titleBar(binding.tvTv1)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
-            .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init();
-
 
 
         val piggies = mutableListOf<Piggy>()

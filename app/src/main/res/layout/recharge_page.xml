@@ -20,25 +20,22 @@
             <!-- 在这里添加你的约束布局内容 -->
 
 
-    <ImageView
-        android:layout_width="11dp"
-        android:layout_height="19dp"
-        android:src="@drawable/back"
-        android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <com.example.myapplication.CommonActionBar
+                android:id="@+id/tv_tv1"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:textColor="#333333"
+                android:gravity="center"
+                app:imageWidth3="20dp"
+                app:imageHeight3="20dp"
+                app:title="评价"
+                app:textContent="aaaaa"
+                app:textSize="16sp"
+                app:back_src="@drawable/back"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
-    <TextView
-        android:id="@+id/tv_tv1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="right"
-        android:text="评价"
-        android:textColor="#333333"
-        android:textSize="15sp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_iv1"
