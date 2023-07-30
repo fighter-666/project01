@@ -42,8 +42,8 @@ class FlipPage : AppCompatActivity() {
 
         val beamScaleX0 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.000000000000000001f)
         val beamScaleY0 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.000000000000000001f)
-        beamScaleX0.duration = 400
-        beamScaleY0.duration = 400
+        beamScaleX0.duration = 1
+        beamScaleY0.duration = 1
         val scaleX = ObjectAnimator.ofFloat(card, View.SCALE_X, 1.5f)
         val scaleY = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f)
         scaleX.duration = 400
