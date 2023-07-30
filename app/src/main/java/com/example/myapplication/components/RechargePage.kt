@@ -1,17 +1,19 @@
 package com.example.myapplication.components
 
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.myapplication.FlipPage
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
 import com.example.recharge.Cards
 import com.example.recharge.FirstAdapter
 import com.example.recharge.FourthAdapter
-import com.example.recharge.MultipleItem
-import com.example.recharge.MultipleItemQuickAdapter
 import com.example.recharge.Piggy
 import com.example.recharge.Second
 import com.example.recharge.SecondAdapter
@@ -31,6 +33,26 @@ class RechargePage : ComponentActivity() {
             .titleBar(binding.tvTv1)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
+
+        //点击事件
+        binding.imCard1.setOnClickListener {
+            // 创建一个透明背景的Dialog
+            val dialog = Dialog(this)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+// 设置Dialog的ContentView为FlipPage的布局文件
+            dialog.setContentView(R.layout.activity_flip_page)
+
+// 设置Dialog的背景透明度
+            dialog.window?.decorView?.alpha = 0.5f
+
+// 显示Dialog
+            dialog.show()
+            val intent = Intent(this, FlipPage::class.java)
+            startActivity(intent)
+
+            overridePendingTransition(0, 0) // 禁用默认的Activity切换动画
+        }
 
 
         val piggies = mutableListOf<Piggy>()
@@ -88,7 +110,7 @@ class RechargePage : ComponentActivity() {
         binding.recyclerView2.setAdapter(secondAdapter)
 
 
-        //第三个
+        /*//第三个
         val piggies3 = mutableListOf<MultipleItem>()
         piggies3.add(MultipleItem(1,))
         piggies3.add(MultipleItem(2,))
@@ -101,7 +123,7 @@ class RechargePage : ComponentActivity() {
        binding.recyclerView3.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
 
         //给RecycleView设置适配器
-       binding.recyclerView3.setAdapter(thirdAdapter)
+       binding.recyclerView3.setAdapter(thirdAdapter)*/
 
 
         //第三个
