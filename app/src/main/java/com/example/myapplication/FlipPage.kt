@@ -4,34 +4,41 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.drawable.AnimatedImageDrawable
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
 import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
-import android.view.animation.ScaleAnimation
-import android.view.animation.TranslateAnimation
+import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.components.RechargePage
 
 class FlipPage : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_Transparent) // 设置透明主题
         setContentView(R.layout.activity_flip_page)
+        val frameLayout = findViewById<FrameLayout>(R.id.fl)
+        frameLayout.setOnClickListener {
+            val intent = Intent(this,RechargePage::class.java)
+            startActivity(intent)
+        }
 
         val card = findViewById<ImageView>(R.id.card)
 
         val beam = findViewById<ImageView>(R.id.beam)
 
         val bottom = findViewById<ImageView>(R.id.bottom)
+        beam.setImageResource(R.drawable.ic_flip_card_ray)
+        card.setImageResource(R.drawable.card1)
+
 
         val beamScaleX0 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.000000000000000001f)
         val beamScaleY0 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.000000000000000001f)
@@ -82,6 +89,7 @@ class FlipPage : AppCompatActivity() {
 
         val rotation6 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 0f, 270f)
         rotation6.duration = 1800
+        rotation6.interpolator = LinearInterpolator()
 
         val scaleX6 = ObjectAnimator.ofFloat(card, View.SCALE_X, 1.5f, 2.2f)
         val scaleY6 = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f, 2.2f)
@@ -118,8 +126,12 @@ class FlipPage : AppCompatActivity() {
 
 // 底部动效出现动画
         val bottomAnim8 = ObjectAnimator.ofFloat(bottom, View.ALPHA, 0f, 1f)
-        bottomAnim8.duration = 500
-
+        bottomAnim8.duration = 200
+        bottomAnim8.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                (bottom.drawable as? AnimatedImageDrawable)?.start()
+            }
+        })
 
 
         val cardAnimatorSet = AnimatorSet().apply {
@@ -138,7 +150,15 @@ class FlipPage : AppCompatActivity() {
             playTogether(rotation8, bottomAnim8)
             playSequentially(scaleX, rotation, rotation2, rotation3, rotation4,beamScaleX5, rotation6, rotation7, rotation8)
         }
-
+        card.setOnClickListener {
+            AnimatorSet().apply {
+                if (combinedAnimatorSet.isRunning) {
+                    combinedAnimatorSet.end()
+                }
+                playSequentially(rotation7, rotation8)
+                start()
+            }
+        }
 
         combinedAnimatorSet.start()
     }
