@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/beam"
-        android:layout_width="700dp"
+        android:layout_width="900dp"
         android:layout_height="match_parent"
         android:layout_gravity="center" />
 
@@ -17,15 +17,7 @@
         android:layout_gravity="center"
         android:scaleType="fitCenter" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
 
-        <!-- FrameLayout的内容 -->
-
-    </LinearLayout>
     <ImageView
         android:id="@+id/bottom"
         android:layout_width="match_parent"

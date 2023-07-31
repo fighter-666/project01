@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.recharge
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -16,6 +16,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.R
 import com.example.myapplication.components.RechargePage
 
 class FlipPage : AppCompatActivity() {
@@ -91,8 +92,8 @@ class FlipPage : AppCompatActivity() {
         rotation6.duration = 1800
         rotation6.interpolator = LinearInterpolator()
 
-        val scaleX6 = ObjectAnimator.ofFloat(card, View.SCALE_X, 1.5f, 2.2f)
-        val scaleY6 = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f, 2.2f)
+        val scaleX6 = ObjectAnimator.ofFloat(card, View.SCALE_X, 1.5f, 3f)
+        val scaleY6 = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f, 3f)
         scaleX6.duration = 1800
         scaleY6.duration = 1800
 
@@ -100,7 +101,7 @@ class FlipPage : AppCompatActivity() {
         alpha6.duration = 1600
 
 
-        val rotation7 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, -90f, 0f)
+        val rotation7 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 270f, 360f)
         rotation7.duration = 200
 
         val alpha7 = ObjectAnimator.ofFloat(beam, View.ALPHA, 0f, 1f)

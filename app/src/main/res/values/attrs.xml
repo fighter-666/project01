@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <declare-styleable name="TitleBar">
         <attr name="title" format="string" />
         <attr name="back_src" format="reference" />
@@ -19,7 +20,6 @@
     <attr name="textWidth" format="dimension"/>
     <attr name="textHeight" format="dimension"/>
     <attr name="textContent" format="string"/>
-    <attr name="imageAndTextMargin" format="dimension"/>
     </declare-styleable>
 
 

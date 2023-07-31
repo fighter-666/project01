@@ -8,7 +8,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.myapplication.FlipPage
+import com.example.myapplication.recharge.FlipPage
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
 import com.example.recharge.Cards

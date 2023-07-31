@@ -1,15 +1,16 @@
 package com.example.myapplication.components
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myapplication.databinding.ActivityThirdBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.R
 
-class ThirdActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityThirdBinding
 
+class ThirdActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityThirdBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
     }
+
+    // 设置动画
+
 }

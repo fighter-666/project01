@@ -81,7 +81,6 @@ class ImageTextLayoutView : RelativeLayout {
         val xmlTextColor = typedArray.getColor(R.styleable.ImageTextCustomView_textColor, Color.BLACK)
         val xmlTextSize = typedArray.getDimension(R.styleable.ImageTextCustomView_textSize, 12f)
         val content = typedArray.getString(R.styleable.ImageTextCustomView_textContent)
-        val imageAndTextMargin = typedArray.getDimensionPixelSize(R.styleable.ImageTextCustomView_imageAndTextMargin, 0)
         typedArray.recycle()
 
         // 将获取到的属性值应用到您的视图或逻辑中
@@ -99,12 +98,6 @@ class ImageTextLayoutView : RelativeLayout {
         textView.setTextColor(xmlTextColor)
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,xmlTextSize)
         textView.text = content
-
-        // 设置图片和文本的间距
-        val layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
-        layoutParams.addRule(RelativeLayout.RIGHT_OF, imageView.id) // 设置文本在图片右边
-        layoutParams.setMargins(imageAndTextMargin, 0, 0, 0)
-        textView.layoutParams = layoutParams
 
 // 声明一个全局的 Animation 对象
         var animation: Animation? = null
