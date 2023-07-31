@@ -99,25 +99,25 @@ class FlipPage : AppCompatActivity() {
 
         val alpha6 = ObjectAnimator.ofFloat(beam, View.ALPHA, 1f, 0f)
         alpha6.duration = 1600
-
-
-        val rotation7 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 270f, 360f)
-        rotation7.duration = 200
-
-        val alpha7 = ObjectAnimator.ofFloat(beam, View.ALPHA, 0f, 1f)
-        alpha7.duration = 200
-
-        val scaleX7 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.6f, 1f)
-        val scaleY7 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.6f, 1f)
-        scaleX7.duration = 200
-        scaleY7.duration = 200
-
-        rotation7.addListener(object : AnimatorListenerAdapter() {
+        rotation6.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation7结束后更换图片资源
                 card.setImageResource(R.drawable.card2)
             }
         })
+
+        val rotation7 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 270f, 360f)
+        rotation7.duration = 2000
+
+        val alpha7 = ObjectAnimator.ofFloat(beam, View.ALPHA, 0f, 1f)
+        alpha7.duration = 2000
+
+        val scaleX7 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.6f, 1f)
+        val scaleY7 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.6f, 1f)
+        scaleX7.duration = 2000
+        scaleY7.duration = 2000
+
+
 
         // 光束旋转动画
         val rotation8 = ObjectAnimator.ofFloat(beam, View.ROTATION, 0f, 360f)

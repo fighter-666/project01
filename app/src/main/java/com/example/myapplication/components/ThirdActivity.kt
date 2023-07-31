@@ -8,7 +8,7 @@ import com.example.myapplication.R
 class ThirdActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_third)
     }
 
     // 设置动画
