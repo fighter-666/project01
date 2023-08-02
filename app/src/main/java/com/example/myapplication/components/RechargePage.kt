@@ -1,16 +1,9 @@
 package com.example.myapplication.components
 
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
-import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.myapplication.recharge.FlipPage
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
 import com.example.recharge.Cards
@@ -38,24 +31,7 @@ class RechargePage : ComponentActivity() {
 
 
         //点击事件
-        binding.imCard1.setOnClickListener {
-            // 创建一个透明背景的Dialog
-            val dialog = Dialog(this)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-// 设置Dialog的ContentView为FlipPage的布局文件
-            dialog.setContentView(R.layout.activity_flip_page)
-
-// 设置Dialog的背景透明度
-            dialog.window?.decorView?.alpha = 0.5f
-
-// 显示Dialog
-            dialog.show()
-            val intent = Intent(this, FlipPage::class.java)
-            startActivity(intent)
-
-            overridePendingTransition(0, 0) // 禁用默认的Activity切换动画
-        }
 
 
         val piggies = mutableListOf<Piggy>()

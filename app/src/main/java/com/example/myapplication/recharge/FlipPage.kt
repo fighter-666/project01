@@ -18,6 +18,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -35,20 +36,18 @@ class FlipPage : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme_Transparent) // 设置透明主题
         setContentView(R.layout.activity_flip_page)
-        ImmersionBar.with(this)
-            .transparentStatusBar()  //透明状态栏，不写默认透明色
-            .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
-            .init();
 
-        val frameLayout = findViewById<FrameLayout>(R.id.fl)
-        frameLayout.setOnClickListener {
+
+        val frameLayout = findViewById<ConstraintLayout>(R.id.fl)
+        /*frameLayout.setOnClickListener {
             val intent = Intent(this,RechargePage::class.java)
             startActivity(intent)
-        }
+        }*/
 
         val card = findViewById<ImageView>(R.id.card)
+
+        val closeicon = findViewById<ImageView>(R.id.card3)
 
         val beam = findViewById<ImageView>(R.id.beam)
 
@@ -57,6 +56,9 @@ class FlipPage : AppCompatActivity() {
         card.setImageResource(R.drawable.card1)
         bottom.setImageResource(R.drawable.cheer)
 
+        closeicon.setOnClickListener {
+            finish()
+        }
 
         val beamScaleX0 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.000000000000000001f)
         val beamScaleY0 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.000000000000000001f)
@@ -64,8 +66,8 @@ class FlipPage : AppCompatActivity() {
         beamScaleY0.duration = 1
         val scaleX = ObjectAnimator.ofFloat(card, View.SCALE_X, 1.5f)
         val scaleY = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f)
-        scaleX.duration = 200
-        scaleY.duration = 200
+        scaleX.duration = 400
+        scaleY.duration = 400
 
 
         val rotation = ObjectAnimator.ofFloat(card, View.ROTATION, 15f)
@@ -106,7 +108,7 @@ class FlipPage : AppCompatActivity() {
         beamScaleY5.duration = 200
 
         val rotation6 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 0f, 270f)
-        rotation6.duration = 2000
+        rotation6.duration = 400
         rotation6.interpolator = LinearInterpolator()
 
         val scaleX6 = ObjectAnimator.ofFloat(card, View.SCALE_X, 1.5f, 3f)
@@ -119,7 +121,7 @@ class FlipPage : AppCompatActivity() {
         rotation6.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation6结束后更换图片资源
-                card.setImageResource(R.drawable.card2)
+                card.setImageResource(R.drawable.winner)
             }
         })
 
@@ -135,11 +137,24 @@ class FlipPage : AppCompatActivity() {
         val alpha7 = ObjectAnimator.ofFloat(beam, View.ALPHA, 0f, 1f)
         alpha7.duration = 200
 
-        val scaleX7 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.6f, 1f)
-        val scaleY7 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.6f, 1f)
+        val scaleX7 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.6f, 1.5f)
+        val scaleY7 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.6f, 1.5f)
         scaleX7.duration = 200
         scaleY7.duration = 200
+        rotation7.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                // 在rotation6结束后更换图片资源
+                closeicon.setImageResource(R.drawable.closeicon)
+            }
+        })
 
+// 底部动效出现动画
+        rotation7.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                /*(bottom.drawable as? AnimatedImageDrawable)?.start()*/
+                loadImage(bottom)
+            }
+        })
 
 
         // 光束旋转动画
@@ -148,13 +163,6 @@ class FlipPage : AppCompatActivity() {
         rotation8.repeatCount = ValueAnimator.INFINITE
         rotation8.interpolator = LinearInterpolator()
 
-
-// 底部动效出现动画
-        rotation7.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                (bottom.drawable as? AnimatedImageDrawable)?.start()
-            }
-        })
 
 
 
@@ -174,7 +182,7 @@ class FlipPage : AppCompatActivity() {
             playTogether(rotation8)
             playSequentially(scaleX, rotation, rotation2, rotation3, rotation4,beamScaleX5, rotation6, rotation7, rotation8)
         }
-        card.setOnClickListener {
+        /*card.setOnClickListener {
             AnimatorSet().apply {
                 if (combinedAnimatorSet.isRunning) {
                     combinedAnimatorSet.end()
@@ -182,7 +190,7 @@ class FlipPage : AppCompatActivity() {
                 playSequentially(rotation7, rotation8)
                 start()
             }
-        }
+        }*/
 
         combinedAnimatorSet.start()
 

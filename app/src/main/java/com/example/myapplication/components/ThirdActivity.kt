@@ -20,15 +20,7 @@ class ThirdActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_third)
-        val button: Button = findViewById(R.id.button)
-        val card: ImageView = findViewById(R.id.image)
-        card.setImageResource(R.drawable.card2)
 
-        card.setPivotX(card.getWidth()/2f);
-        card.setPivotY(card.getHeight()/2f);//支点在图片中心
-        val rotation7 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 0f, 360f)
-        rotation7.duration = 4000
-        rotation7.start()
     }
 
 
