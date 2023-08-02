@@ -15,7 +15,6 @@
     <attr name="imageHeight2" format="dimension"/>
     <attr name="imageSrc" format="reference"/>
     <attr name="imageSrc2" format="reference"/>
-    <attr name="textSize" format="float|dimension"/>
     <attr name="textColor" format="color|reference"/>
     <attr name="textWidth" format="dimension"/>
     <attr name="textHeight" format="dimension"/>

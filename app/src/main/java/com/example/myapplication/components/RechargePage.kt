@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
+import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -33,6 +35,7 @@ class RechargePage : ComponentActivity() {
             .titleBar(binding.tvTv1)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
+
 
         //点击事件
         binding.imCard1.setOnClickListener {
@@ -129,7 +132,7 @@ class RechargePage : ComponentActivity() {
         //第三个
         val piggies4 = mutableListOf<Cards>()
         piggies4.add(Cards(0,0,R.drawable.falls1, "电信关爱版-为老年人架桥", "0","0","0","0","0", 0, 0))
-        piggies4.add(Cards(R.drawable.shape_rectangle18,R.drawable.shape_rectangle18,R.drawable.falls8,  "加装【副卡】，一份套餐全家用 ", "赠新人礼包","赠美团神券","￥","10/月","0", 0, 0))
+        piggies4.add(Cards(R.drawable.shape_rectangle18,R.drawable.shape_rectangle18,R.drawable.falls8,  "加装【副卡】，一份套餐全家用 ", "赠新人礼包","赠美团神券","￥","10","/月", 0, 0))
         piggies4.add(Cards(R.drawable.shape_rectangle18,R.drawable.shape_rectangle18,R.drawable.fall,  "iPhone12 128GB 红色 双卡双待", "免运费","送配件","0","0","0", 0, 0))
         piggies4.add(Cards(R.drawable.shape_rectangle18,0,R.drawable.falls4,  "15GB定向流量+腾讯视频月会员卡", "0","0","0","0","0", 0, 0))
         //piggies4.add(Cards(R.drawable.falls3, "iPhone12 128GB 红色 双卡双待", "免运费","0","0","0","0", 0, 0))

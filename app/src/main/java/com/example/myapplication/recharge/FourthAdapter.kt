@@ -65,7 +65,7 @@ class FourthAdapter(@LayoutRes layoutResId: Int, data: MutableList<Cards>?) : Ba
     private fun setCardView(holder: BaseViewHolder, binding: FourthBinding, card: Cards) {
         //计算图片宽高
         val layoutParams = binding.ivImage.layoutParams as ConstraintLayout.LayoutParams
-        val space = DensityUtils.dpToPx(context, 45f)
+        val space = DensityUtils.dpToPx(context, 56f)
         //2列的瀑布流，屏幕宽度减去两列间的间距space所的值再除以2，计算出单列的imageview的宽度，space的值在RecyclerView初始化时传入
         val itemWidth: Float = (DisplayUtils.getScreenWidth(context) - space.toFloat()) / 2
         layoutParams.width = itemWidth.toInt()

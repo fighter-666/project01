@@ -17,14 +17,13 @@
             android:id="@+id/tv_tv1"
             android:layout_width="match_parent"
             android:layout_height="39dp"
-            android:paddingRight="15dp"
+            android:paddingRight="13dp"
             android:textColor="#333333"
             android:gravity="center"
             app:imageWidth3="9dp"
             app:imageHeight3="15dp"
             app:title="评价"
             app:textContent="aaaaa"
-            app:textSize="16sp"
             app:back_src="@drawable/back"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,8 +41,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
             android:layout_height="wrap_content"
             >
 
@@ -143,7 +142,6 @@
         android:layout_width="160dp"
         android:layout_height="36dp"
         android:text="继续充值"
-        android:layout_weight="1"
         android:textColor="#333333"
         android:layout_marginTop="27dp"
         android:textSize="16sp"
@@ -159,8 +157,6 @@
             android:layout_marginTop="27dp"
             android:layout_width="160dp"
             android:layout_height="36dp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/shape_rectangle2"
             app:layout_constraintLeft_toRightOf="@id/tv2_1tv"
             app:layout_constraintRight_toRightOf="parent"
@@ -169,7 +165,6 @@
             app:imageWidth2="16dp"
             app:imageHeight="17dp"
             app:imageHeight2="14dp"
-            app:textSize="16sp"
             app:textColor="@android:color/white"
             app:textContent="查询余额"/>
 
@@ -179,7 +174,6 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="15dp"
-        android:gravity="center"
         android:background="@drawable/shape_rectangle3"
         app:layout_constraintTop_toBottomOf="@id/tv2_tv"
         tools:ignore="MissingConstraints">
@@ -199,14 +193,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="充值奖励 "
-            android:paddingLeft="5dp"
             android:layout_marginLeft="6dp"
-            android:layout_marginTop="15dp"
             android:textColor="#666666"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@id/im1_im"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/im1_im"
-            android:gravity="left"
             />
 
         <TextView
@@ -214,35 +206,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+80金豆"
-            android:layout_marginTop="15dp"
             android:textColor="#fe5561"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@id/im1_im"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/tv2_tv2"
-            android:gravity="left"
             />
 
         <TextView
             android:id="@+id/tv2_tv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="，多充多得哦～ "
+            android:text="，多充多得哦～"
             android:textColor="#666666"
-            android:layout_marginTop="15dp"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@id/im1_im"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/tv2_tv3"
-            android:gravity="left"
             />
 
         <TextView
             android:layout_width="52dp"
             android:layout_height="22dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="15dp"
             android:text="兑好物"
             android:textColor="#ffffff"
             android:textSize="11sp"
-            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/tv2_tv4"
             android:background="@drawable/shape_rectangle4"
@@ -252,10 +242,9 @@
         <ImageView
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginTop="8dp"
             android:layout_marginRight="13dp"
             android:src="@drawable/close"
-            app:layout_constraintBottom_toBottomOf="@id/im1_im"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -300,16 +289,16 @@
             android:id="@+id/cl2_im1"
             android:layout_width="5dp"
             android:layout_height="9dp"
-            android:layout_marginTop="22dp"
             android:layout_marginRight="12dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cl2_tv1"
+            app:layout_constraintBottom_toBottomOf="@id/cl2_tv1"
             android:src="@drawable/arrow" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="85dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="12dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -360,6 +349,7 @@
             android:text="开启自动充值得金豆"
             android:textColor="#333333"
             android:textSize="14sp"
+            android:layout_marginLeft="6dp"
             app:layout_constraintLeft_toRightOf="@id/cl3_cl1"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -372,18 +362,20 @@
             android:text="首次开启得"
             android:textColor="#999999"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/cl3_cl1"
-            app:layout_constraintTop_toBottomOf="@id/cl3_tv1"
+            app:layout_constraintLeft_toLeftOf="@id/cl3_tv1"
+            app:layout_constraintBottom_toBottomOf="@id/cl3_cl1"
             />
 
         <ImageView
             android:id="@+id/cl3_tv3"
             android:layout_width="13dp"
             android:layout_height="13dp"
-            android:layout_marginTop="2dp"
+            app:layout_constraintTop_toTopOf="@id/cl3_tv2"
             android:src="@drawable/bean"
+            android:layout_marginLeft="4dp"
             app:layout_constraintLeft_toRightOf="@id/cl3_tv2"
-            app:layout_constraintTop_toBottomOf="@id/cl3_tv1"/>
+            app:layout_constraintBottom_toBottomOf="@id/cl3_cl1"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -392,7 +384,7 @@
             android:textColor="#f3bb62"
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@id/cl3_tv3"
-            app:layout_constraintTop_toBottomOf="@id/cl3_tv1"
+            app:layout_constraintBaseline_toBaselineOf="@id/cl3_tv2"
             />
 
         <TextView
@@ -447,9 +439,9 @@
             android:text="看科普视频得金豆"
             android:textColor="#333333"
             android:textSize="14sp"
+            android:layout_marginLeft="6dp"
             app:layout_constraintLeft_toRightOf="@id/cl3_cl1"
-            android:layout_marginTop="89dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cl3_cl2"
             />
 
         <TextView
@@ -459,8 +451,8 @@
             android:text="多看多得浏览15s得多看多得..."
             android:textColor="#999999"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/cl3_cl1"
-            app:layout_constraintTop_toBottomOf="@id/cl3_tv4"
+            app:layout_constraintLeft_toLeftOf="@id/cl3_tv4"
+            app:layout_constraintBottom_toBottomOf="@id/cl3_cl2"
             />
 
         <ImageView
@@ -469,8 +461,11 @@
             android:layout_height="13dp"
             android:layout_marginTop="2dp"
             android:src="@drawable/bean"
+            android:layout_marginLeft="4dp"
             app:layout_constraintLeft_toRightOf="@id/cl3_tv5"
-            app:layout_constraintTop_toBottomOf="@id/cl3_tv4"/>
+            app:layout_constraintTop_toTopOf="@id/cl3_tv5"
+            app:layout_constraintBottom_toBottomOf="@id/cl3_tv5"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -479,7 +474,7 @@
             android:textColor="#f3bb62"
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@id/cl3_tv6"
-            app:layout_constraintTop_toBottomOf="@id/cl3_tv4"
+            app:layout_constraintBaseline_toBaselineOf="@id/cl3_tv5"
             />
 
         <TextView
@@ -524,51 +519,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="共有"
-            android:paddingLeft="74dp"
             android:textColor="#999999"
             android:textSize="13sp"
-            app:layout_constraintLeft_toRightOf="@id/cl3_tv7"
-            app:layout_constraintBaseline_toBaselineOf="@id/cl3_tv7"
+            android:layout_marginRight="4dp"
+            app:layout_constraintRight_toLeftOf="@id/cl3_tv9"
+            app:layout_constraintBottom_toBottomOf="@id/cl3_tv7"
+            app:layout_constraintTop_toTopOf="@id/cl3_tv7"
             />
 
         <ImageView
             android:id="@+id/cl3_tv9"
             android:layout_width="13dp"
             android:layout_height="13dp"
-            android:layout_marginBottom="2dp"
             android:src="@drawable/bean"
-            app:layout_constraintLeft_toRightOf="@id/cl3_tv8"
             app:layout_constraintBottom_toBottomOf="@id/cl3_tv7"
-            />
+            app:layout_constraintRight_toLeftOf="@id/cl3_tv11"
+            app:layout_constraintTop_toTopOf="@id/cl3_tv7" />
 
         <TextView
+            android:id="@+id/cl3_tv11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5金豆"
+            android:text="1356金豆"
             android:textColor="#f3bb62"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/cl3_tv9"
+            android:layout_marginRight="14dp"
+            app:layout_constraintRight_toLeftOf="@id/cl3_tv12"
             app:layout_constraintBottom_toBottomOf="@id/cl3_tv7"
+            app:layout_constraintTop_toTopOf="@id/cl3_tv7"
             />
 
-        <ImageView
-            android:id="@+id/cl3_im2"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginLeft="55dp"
-            app:layout_constraintLeft_toRightOf="@id/cl3_tv8"
-            app:layout_constraintBottom_toBottomOf="@id/cl3_tv7"
-            android:src="@drawable/refresh" />
+
 
         <TextView
+            android:id="@+id/cl3_tv12"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:text="换一换"
+            android:layout_height="wrap_content"
+            android:text="逛更多"
             android:textColor="#999999"
-            android:layout_marginLeft="2dp"
-            app:layout_constraintLeft_toRightOf="@id/cl3_im2"
-            app:layout_constraintBaseline_toBaselineOf="@id/cl3_tv7"
+            android:layout_marginRight="4dp"
+            app:layout_constraintRight_toLeftOf="@id/cl_ima1"
+            app:layout_constraintBottom_toBottomOf="@id/cl3_tv7"
+            app:layout_constraintTop_toTopOf="@id/cl3_tv7"
             android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/cl_ima1"
+            android:layout_width="5dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="12dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/cl3_tv12"
+            app:layout_constraintTop_toTopOf="@id/cl3_tv12"
+            android:src="@drawable/arrow" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view2"
@@ -614,31 +617,32 @@
             android:textColor="#999999"
             android:textSize="13sp"
             app:layout_constraintLeft_toRightOf="@id/cl4_tv7"
-            app:layout_constraintBaseline_toBaselineOf="@id/cl4_tv7"
+            app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toTopOf="@id/cl4_tv7"
             />
+
+        <ImageView
+            android:id="@+id/cl3_im2"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginRight="3dp"
+            app:layout_constraintRight_toLeftOf="@id/cl4_tv9"
+            app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toTopOf="@id/cl4_tv7"
+            android:src="@drawable/refresh" />
 
         <TextView
             android:id="@+id/cl4_tv9"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:text="逛更多"
+            android:layout_height="wrap_content"
+            android:text="换一换"
             android:textColor="#999999"
-            android:layout_marginLeft="63dp"
-            app:layout_constraintLeft_toRightOf="@id/cl4_tv8"
-            app:layout_constraintBaseline_toBaselineOf="@id/cl4_tv7"
+            android:layout_marginRight="15dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toTopOf="@id/cl4_tv7"
             android:textSize="12sp" />
 
-        <ImageView
-            android:id="@+id/cl4_im2"
-            android:layout_width="5dp"
-            android:layout_height="9dp"
-            android:layout_marginLeft="4dp"
-            android:src="@drawable/arrow"
-            android:textColor="#999999"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintLeft_toRightOf="@id/cl4_tv9"
-            app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
-            />
 
         <ImageView
             android:id="@+id/im_card1"

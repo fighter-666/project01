@@ -19,7 +19,6 @@
         app:imageWidth2="20dp"
         app:imageHeight="20dp"
         app:imageHeight2="20dp"
-        app:textSize="16sp"
         app:textColor="@android:color/white"
         app:textContent="查询余额"/>
 
@@ -32,7 +31,6 @@
         app:imageHeight3="20dp"
         app:title="评价"
         app:textContent="aaaaa"
-        app:textSize="16sp"
         app:back_src="@drawable/back"
         />
 
