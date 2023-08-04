@@ -6,18 +6,14 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.AnimatedImageDrawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
-import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -26,30 +22,38 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.example.myapplication.R
-import com.example.myapplication.components.RechargePage
 import com.gyf.immersionbar.ImmersionBar
+import java.util.Random
+
+private lateinit var card: ImageView
+class FlipPage : SlideRightBackActivity()  {
 
 
-class FlipPage : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flip_page)
-
-
-        val frameLayout = findViewById<ConstraintLayout>(R.id.fl)
-        /*frameLayout.setOnClickListener {
-            val intent = Intent(this,RechargePage::class.java)
-            startActivity(intent)
-        }*/
+        //沉浸式
+        ImmersionBar.with(this)
+            .transparentStatusBar()  //透明状态栏，不写默认透明色
+            .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
+            .init();
 
         val card = findViewById<ImageView>(R.id.card)
 
         val closeicon = findViewById<ImageView>(R.id.card3)
 
         val beam = findViewById<ImageView>(R.id.beam)
+
+        // 保存初始位置、大小、透明度
+        val initialX = card.x
+        val initialY = card.y
+        val initialWidth = card.width
+        val initialHeight = card.height
+        val initialAlpha = card.alpha
 
         val bottom = findViewById<ImageView>(R.id.bottom)
         beam.setImageResource(R.drawable.ic_flip_card_ray)
@@ -121,11 +125,13 @@ class FlipPage : AppCompatActivity() {
         rotation6.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation6结束后更换图片资源
-                card.setImageResource(R.drawable.winner)
+                selectRandomImage()
+// 设置到ImageView
+                card.setImageResource(randomImageRes)
             }
         })
 
-        //我的测试机density是2.75
+        //铁链的效果移除，我的测试机density是2.75
         val density = resources.displayMetrics.density
         val cameraDistance = density * 10000
         card.cameraDistance = cameraDistance
@@ -143,7 +149,7 @@ class FlipPage : AppCompatActivity() {
         scaleY7.duration = 200
         rotation7.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
-                // 在rotation6结束后更换图片资源
+                // 在rotation结束后添加图片资源
                 closeicon.setImageResource(R.drawable.closeicon)
             }
         })
@@ -182,7 +188,7 @@ class FlipPage : AppCompatActivity() {
             playTogether(rotation8)
             playSequentially(scaleX, rotation, rotation2, rotation3, rotation4,beamScaleX5, rotation6, rotation7, rotation8)
         }
-        /*card.setOnClickListener {
+        card.setOnClickListener {
             AnimatorSet().apply {
                 if (combinedAnimatorSet.isRunning) {
                     combinedAnimatorSet.end()
@@ -190,10 +196,22 @@ class FlipPage : AppCompatActivity() {
                 playSequentially(rotation7, rotation8)
                 start()
             }
-        }*/
+        }
+
+
 
         combinedAnimatorSet.start()
+        selectRandomImage()
 
+        combinedAnimatorSet.addListener(object: AnimatorListenerAdapter() {
+
+            override fun onAnimationEnd(animation: Animator) {
+
+                // 关闭动画
+
+
+            }
+        })
     }
 
     val options = RequestOptions()
@@ -201,7 +219,7 @@ class FlipPage : AppCompatActivity() {
         .skipMemoryCache(true)
         .diskCacheStrategy(DiskCacheStrategy.DATA)
     fun loadImage(imageView: ImageView) {
-        Glide.with(this)
+        Glide.with(getApplicationContext())
             .asGif()
             .load(R.drawable.cheer)
             .apply(options)
@@ -209,7 +227,7 @@ class FlipPage : AppCompatActivity() {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<GifDrawable>?,
+                    target: Target<GifDrawable>?,
                     isFirstResource: Boolean,
                 ): Boolean {
                     return false
@@ -218,7 +236,7 @@ class FlipPage : AppCompatActivity() {
                 override fun onResourceReady(
                     resource: GifDrawable?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<GifDrawable>?,
+                    target: Target<GifDrawable>?,
                     dataSource: DataSource?,
                     isFirstResource: Boolean,
                 ): Boolean {
@@ -228,5 +246,26 @@ class FlipPage : AppCompatActivity() {
                 }
             })
             .into(imageView)
+    }
+
+    // 随机图片资源id
+    var randomImageRes = 0
+
+    fun selectRandomImage() {
+
+        val imageArray = arrayOf(R.drawable.winner, R.drawable.card3)
+
+        val random = Random()
+        val index = random.nextInt(imageArray.size)
+
+        randomImageRes = imageArray[index]
+        val intent = Intent().apply {
+            putExtra("result",randomImageRes )
+        }
+        setResult(Activity.RESULT_OK, intent)
+    }
+
+    fun close(){
+
     }
 }

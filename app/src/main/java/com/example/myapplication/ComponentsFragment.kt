@@ -21,6 +21,7 @@ class ComponentsFragment : Fragment(){
     private  var _binding : ComponentsFragmentBinding? = null
     val binding get() = _binding!!
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = ComponentsFragmentBinding.inflate(inflater, container, false)
         val view = binding.root

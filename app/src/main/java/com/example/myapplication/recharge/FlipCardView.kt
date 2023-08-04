@@ -2,31 +2,29 @@ package com.example.myapplication.recharge
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.startActivity
 import com.example.myapplication.R
 
 
 class FlipCardView : ConstraintLayout {
-
-
     private lateinit var imageView: ImageView
     private lateinit var imageViewCopy: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var imageView3: ImageView
-    private lateinit var textView: TextView
+    private lateinit var textview: TextView
     private lateinit var rl: ConstraintLayout
 
     /**
@@ -58,6 +56,15 @@ class FlipCardView : ConstraintLayout {
     ) {
     }
 
+    private val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+        if (activityResult.resultCode == Activity.RESULT_OK) {
+            val result = activityResult.data?.getIntExtra("result",0)
+            val resources = context.resources
+            val drawable = result?.let { resources.getDrawable(it) }
+            imageView.setImageDrawable(drawable)
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RestrictedApi", "WrongViewCast")
     private fun initView(context: Context, attrs: AttributeSet) {
@@ -67,6 +74,7 @@ class FlipCardView : ConstraintLayout {
         imageViewCopy = findViewById<ImageView>(R.id.card1_copy)
         imageView2 = findViewById<ImageView>(R.id.card2)
         imageView3 = findViewById<ImageView>(R.id.card3)
+        textview = findViewById<TextView>(R.id.cl4_tv7)
         rl = findViewById(R.id.rl)
 
 
@@ -86,21 +94,28 @@ class FlipCardView : ConstraintLayout {
         imageView2.setImageDrawable(drawable2)
         imageView3.setImageDrawable(drawable3)
 
-        imageView.setImageResource(R.drawable.card1)
-        imageViewCopy.setImageResource(R.drawable.card1)
+        //imageView.setImageResource(R.drawable.card1)
+        //imageViewCopy.setImageResource(R.drawable.card1)
         imageView2.setImageResource(R.drawable.card2)
         imageView3.setImageResource(R.drawable.card3)
 
         //点击事件
         imageView.setOnClickListener {
-
             val intent = Intent(getContext(), FlipPage::class.java)
-            getContext().startActivity(intent)
+            myActivityLauncher.launch(intent)
             //传入动画资源id，这里的动画是视图动画中的补间动画
 //参数1:进入的Activity的动画
 //参数2:退出的Activity的动画
             (context as Activity).overridePendingTransition(R.anim.up, R.anim.down)
+
         }
+
+
+
+    }
+
+    fun setCardImageResource(@DrawableRes resId: Int) {
+        findViewById<ImageView>(R.id.card1)?.setImageResource(resId)
     }
 
 

@@ -30,7 +30,7 @@ class RechargePage : ComponentActivity() {
             .init();
 
 
-        //点击事件
+        binding.cl4.setCardImageResource(R.drawable.card1)
 
 
 
