@@ -10,7 +10,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.transition.Fade
 import android.view.View
+import android.view.Window
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
@@ -28,8 +31,14 @@ import com.gyf.immersionbar.ImmersionBar
 import java.util.Random
 
 private lateinit var card: ImageView
+@Suppress("DEPRECATION")
 class FlipPage : SlideRightBackActivity()  {
-
+    private lateinit var card: ImageView
+    private lateinit var closeicon: ImageView
+    private lateinit var prise: ImageView
+    private lateinit var beam: ImageView
+    private lateinit var bottom: ImageView
+    private lateinit var combinedAnimatorSet: AnimatorSet
 
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.P)
@@ -42,27 +51,25 @@ class FlipPage : SlideRightBackActivity()  {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
 
-        val card = findViewById<ImageView>(R.id.card)
+        card = findViewById<ImageView>(R.id.card)
 
-        val closeicon = findViewById<ImageView>(R.id.card3)
+        closeicon = findViewById<ImageView>(R.id.card3)
 
-        val beam = findViewById<ImageView>(R.id.beam)
+        beam = findViewById<ImageView>(R.id.beam)
 
-        // 保存初始位置、大小、透明度
-        val initialX = card.x
-        val initialY = card.y
-        val initialWidth = card.width
-        val initialHeight = card.height
-        val initialAlpha = card.alpha
+        prise = findViewById(R.id.card4)
 
-        val bottom = findViewById<ImageView>(R.id.bottom)
+        bottom = findViewById<ImageView>(R.id.bottom)
         beam.setImageResource(R.drawable.ic_flip_card_ray)
         card.setImageResource(R.drawable.card1)
+        prise.visibility = View.GONE
         bottom.setImageResource(R.drawable.cheer)
 
         closeicon.setOnClickListener {
-            finish()
+            onBackPressed()
         }
+
+
 
         val beamScaleX0 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.000000000000000001f)
         val beamScaleY0 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.000000000000000001f)
@@ -169,14 +176,15 @@ class FlipPage : SlideRightBackActivity()  {
         rotation8.repeatCount = ValueAnimator.INFINITE
         rotation8.interpolator = LinearInterpolator()
 
+        /*rotation8.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                selectRandomImage()
+                prise.setImageResource(R.drawable.prise)
+            }
+        })*/
 
 
-
-        val cardAnimatorSet = AnimatorSet().apply {
-
-        }
-
-        val combinedAnimatorSet = AnimatorSet().apply {
+        combinedAnimatorSet = AnimatorSet().apply {
             playTogether(scaleX, scaleY, beamScaleX0, beamScaleY0)
             playTogether(rotation, beamScaleX, beamScaleY)
             playTogether(rotation2, beamScaleX2, beamScaleY2)
@@ -188,32 +196,62 @@ class FlipPage : SlideRightBackActivity()  {
             playTogether(rotation8)
             playSequentially(scaleX, rotation, rotation2, rotation3, rotation4,beamScaleX5, rotation6, rotation7, rotation8)
         }
-        card.setOnClickListener {
-            AnimatorSet().apply {
-                if (combinedAnimatorSet.isRunning) {
-                    combinedAnimatorSet.end()
-                }
-                playSequentially(rotation7, rotation8)
-                start()
-            }
-        }
+
+        //卡片摇晃的时候，用户关闭弹窗，卡片要回到初始态，然后开始退场动画。
+
 
 
 
         combinedAnimatorSet.start()
         selectRandomImage()
 
-        combinedAnimatorSet.addListener(object: AnimatorListenerAdapter() {
 
-            override fun onAnimationEnd(animation: Animator) {
-
-                // 关闭动画
-
-
-            }
-        })
     }
 
+    override fun onBackPressed() {
+        // 在这里执行您的逻辑
+        // 例如，显示确认对话框或执行其他操作
+        // 调用父类的方法以执行默认的返回操作（关闭活动）
+
+        super.onBackPressed()
+        closeEarly()
+    }
+
+    fun closeEarly() {
+        AnimatorSet().apply {
+            if (combinedAnimatorSet.isRunning) {
+                combinedAnimatorSet.end()
+            }
+            val cardRotation = ObjectAnimator.ofFloat(card, View.ROTATION, 0f)
+            val cardScaleX = ObjectAnimator.ofFloat(card, View.SCALE_X, 1f)
+            val cardScaleY = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1f)
+            val beamScaleX = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0f)
+            val beamScaleY = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0f)
+
+            /*cardRotation.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    // 在rotation结束后添加图片资源
+                    card.setImageResource(R.drawable.card1)
+                }
+            })*/
+            closeicon.visibility = View.GONE
+            Glide.with(baseContext).clear(bottom)
+            val closeAnimatorSet = AnimatorSet().apply {
+                playTogether(cardRotation, cardScaleX,cardScaleY, beamScaleX,beamScaleY)
+                playSequentially(cardRotation)
+            }
+
+            closeAnimatorSet.start()
+            val handler = Handler()
+
+// 延迟3秒关闭Activity
+            /*handler.postDelayed({
+                finish()
+            }, 5000)*/
+        }
+    }
+
+    //让glide只加载一次gif图片
     val options = RequestOptions()
         .fitCenter()
         .skipMemoryCache(true)
@@ -248,7 +286,7 @@ class FlipPage : SlideRightBackActivity()  {
             .into(imageView)
     }
 
-    // 随机图片资源id
+    // 随机图片资源id,并回传imageview的id
     var randomImageRes = 0
 
     fun selectRandomImage() {
@@ -259,6 +297,19 @@ class FlipPage : SlideRightBackActivity()  {
         val index = random.nextInt(imageArray.size)
 
         randomImageRes = imageArray[index]
+
+        // 判断选中的是哪个资源
+        if (randomImageRes == R.drawable.winner) {
+            // 选中了 R.drawable.winner
+            // 执行相应的逻辑
+            prise.visibility = View.VISIBLE
+            // ...
+        } else{
+            // 选中了 R.drawable.card3
+            // 执行相应的逻辑
+            // ...
+        }
+
         val intent = Intent().apply {
             putExtra("result",randomImageRes )
         }

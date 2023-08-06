@@ -1,6 +1,8 @@
 package com.example.myapplication.components
 
 import android.os.Bundle
+import android.transition.Fade
+import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -19,7 +21,9 @@ class RechargePage : ComponentActivity() {
 
     private lateinit var binding: RechargePageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         binding = RechargePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //沉浸式
@@ -30,7 +34,7 @@ class RechargePage : ComponentActivity() {
             .init();
 
 
-        binding.cl4.setCardImageResource(R.drawable.card1)
+        //binding.cl4.setCardImageResource(R.drawable.card1)
 
 
 

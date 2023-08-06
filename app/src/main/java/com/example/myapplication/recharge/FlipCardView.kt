@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -16,7 +16,9 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityOptionsCompat
 import com.example.myapplication.R
+import androidx.core.util.Pair
 
 
 class FlipCardView : ConstraintLayout {
@@ -95,18 +97,28 @@ class FlipCardView : ConstraintLayout {
         imageView3.setImageDrawable(drawable3)
 
         //imageView.setImageResource(R.drawable.card1)
-        //imageViewCopy.setImageResource(R.drawable.card1)
+        imageViewCopy.setImageResource(R.drawable.card1)
         imageView2.setImageResource(R.drawable.card2)
         imageView3.setImageResource(R.drawable.card3)
 
         //点击事件
         imageView.setOnClickListener {
             val intent = Intent(getContext(), FlipPage::class.java)
-            myActivityLauncher.launch(intent)
+            //myActivityLauncher.launch(intent)
             //传入动画资源id，这里的动画是视图动画中的补间动画
 //参数1:进入的Activity的动画
 //参数2:退出的Activity的动画
-            (context as Activity).overridePendingTransition(R.anim.up, R.anim.down)
+
+            // 创建共享元素的 Pair 对象
+            val imagePair = Pair<View, String>(imageView, "transition_image")
+
+            // 创建 ActivityOptionsCompat，并设置共享元素转场动画
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
+
+            // 启动活动并应用转场动画
+            myActivityLauncher.launch(intent, options)
+
+            //(context as Activity).overridePendingTransition(R.anim.up, R.anim.down)
 
         }
 
