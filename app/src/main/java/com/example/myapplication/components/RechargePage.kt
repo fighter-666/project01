@@ -1,8 +1,6 @@
 package com.example.myapplication.components
 
 import android.os.Bundle
-import android.transition.Fade
-import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -26,6 +24,8 @@ class RechargePage : ComponentActivity() {
 
         binding = RechargePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         //沉浸式
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色

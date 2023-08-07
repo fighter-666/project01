@@ -105,9 +105,6 @@ class FlipCardView : ConstraintLayout {
         imageView.setOnClickListener {
             val intent = Intent(getContext(), FlipPage::class.java)
             //myActivityLauncher.launch(intent)
-            //传入动画资源id，这里的动画是视图动画中的补间动画
-//参数1:进入的Activity的动画
-//参数2:退出的Activity的动画
 
             // 创建共享元素的 Pair 对象
             val imagePair = Pair<View, String>(imageView, "transition_image")
@@ -118,7 +115,6 @@ class FlipCardView : ConstraintLayout {
             // 启动活动并应用转场动画
             myActivityLauncher.launch(intent, options)
 
-            //(context as Activity).overridePendingTransition(R.anim.up, R.anim.down)
 
         }
 
