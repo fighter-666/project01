@@ -25,11 +25,7 @@ class FirstAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : Bas
             lp?.height = lp.width
             binding.name.textSize = 14f
             binding.name2.textSize = 12f
-
-
             holder.itemView.layoutParams = lp
-
-
         } /*else {//0.7表示显示程度
             val lp = LinearLayout.LayoutParams(((context.getResources().getDisplayMetrics().widthPixels) / 4.7f).toInt(), ViewGroup.LayoutParams.MATCH_PARENT)
             holder.itemView.layoutParams = lp
