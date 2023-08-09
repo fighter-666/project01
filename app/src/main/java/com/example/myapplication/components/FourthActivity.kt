@@ -1,7 +1,9 @@
 package com.example.myapplication.components
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
@@ -14,11 +16,15 @@ class FourthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFourthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        division()
     }
-    fun rotate(view: View) {
-        val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        binding.imgview.animation = rotateAnimation
-        rotateAnimation.duration = 2000
-        binding.imgview.startAnimation(rotateAnimation)
+    fun division() {
+        val numerator = 60
+        var denominator = 5
+        repeat(5) {
+            Log.v(TAG, "${numerator / denominator}")
+            denominator--
+        }
     }
+
 }

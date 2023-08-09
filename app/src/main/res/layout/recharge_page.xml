@@ -141,7 +141,13 @@
         android:id="@+id/tv2_1tv"
         android:layout_width="160dp"
         android:layout_height="36dp"
-        android:text="继续充值"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:text="继续充值继续充值继续充值继续充值继续充值"
         android:textColor="#333333"
         android:layout_marginTop="27dp"
         android:textSize="16sp"
@@ -252,7 +258,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl2"
         android:layout_width="match_parent"
-        android:layout_height="147dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/shape_rectangle5"
         app:layout_constraintTop_toBottomOf="@id/cl1"
@@ -295,15 +301,17 @@
             app:layout_constraintBottom_toBottomOf="@id/cl2_tv1"
             android:src="@drawable/arrow" />
 
-        <androidx.recyclerview.widget.RecyclerView
+       <!-- <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/cl2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl2_tv1"
-            />
+            app:layout_constraintVertical_bias="0.0" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

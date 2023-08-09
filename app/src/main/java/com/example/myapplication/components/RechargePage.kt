@@ -42,18 +42,18 @@ class RechargePage : ComponentActivity() {
         piggies.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
         piggies.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
         piggies.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
+        /*piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
         piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-        piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-        piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
+        piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))*/
 
-        //创建适配器
+        /*//创建适配器
         val myAdapter = FirstAdapter(R.layout.first, piggies)
 
         //设置布局管理器
         binding.recyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
 
         //给RecycleView设置适配器
-       binding.recyclerView.setAdapter(myAdapter)
+       binding.recyclerView.setAdapter(myAdapter)*/
 
 
         //第二个

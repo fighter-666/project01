@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -19,6 +20,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import com.example.myapplication.R
 import androidx.core.util.Pair
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class FlipCardView : ConstraintLayout {
@@ -57,13 +62,17 @@ class FlipCardView : ConstraintLayout {
         defStyleAttr
     ) {
     }
-
+    //抽到的卡片回传到自定义View，(context as ComponentActivity)将 context 对象强制转换为 ComponentActivity 类型，以便可以调用 ComponentActivity 类中定义的方法和属性。
+    // 这样做可能是因为需要在 ComponentActivity 的上下文中执行一些特定的操作，或者需要使用 ComponentActivity 提供的特定功能。
     private val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-        if (activityResult.resultCode == Activity.RESULT_OK) {
-            val result = activityResult.data?.getIntExtra("result",0)
-            val resources = context.resources
-            val drawable = result?.let { resources.getDrawable(it) }
-            imageView.setImageDrawable(drawable)
+
+        CoroutineScope(Dispatchers.Main).launch {
+            if (activityResult.resultCode == Activity.RESULT_OK) {
+                val result = activityResult.data?.getIntExtra("result",0)
+                val resources = context.resources
+                val drawable = result?.let { resources.getDrawable(it) }
+                imageView.setImageDrawable(drawable)
+            }
         }
     }
 

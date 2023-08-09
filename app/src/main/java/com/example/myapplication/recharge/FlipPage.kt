@@ -29,6 +29,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivityFlipPageBinding
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,8 +37,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Random
 
-@Suppress("DEPRECATION")
 class FlipPage : SlideRightBackActivity()  {
+    private lateinit var binding: ActivityFlipPageBinding
     private lateinit var card: ImageView
     private lateinit var closeicon: ImageView
     private lateinit var prise: ImageView
@@ -51,9 +52,8 @@ class FlipPage : SlideRightBackActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_flip_page)
-
+        binding = ActivityFlipPageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //沉浸式
         ImmersionBar.with(this)
@@ -61,23 +61,22 @@ class FlipPage : SlideRightBackActivity()  {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
 
-        card = findViewById<ImageView>(R.id.card)
+        card = binding.card
+        closeicon = binding.card3
+        beam = binding.beam
+        prise = binding.card4
+        button = binding.card5
+        hint = binding.card6
+        bottom = binding.bottom
 
-        closeicon = findViewById<ImageView>(R.id.card3)
-
-        beam = findViewById<ImageView>(R.id.beam)
-
-        prise = findViewById(R.id.card4)
-        button = findViewById(R.id.card5)
-        hint = findViewById(R.id.card6)
-
-        bottom = findViewById<ImageView>(R.id.bottom)
         beam.setImageResource(R.drawable.ic_flip_card_ray)
         card.setImageResource(R.drawable.card1)
+        bottom.setImageResource(R.drawable.cheer)
+
         prise.visibility = View.GONE
         button.visibility = View.GONE
         hint.visibility = View.GONE
-        bottom.setImageResource(R.drawable.cheer)
+
 
 
         closeicon.setOnClickListener {
@@ -108,6 +107,15 @@ class FlipPage : SlideRightBackActivity()  {
         val beamScaleY = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.6f)
         beamScaleX.duration = 200
         beamScaleY.duration = 200
+        rotation.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                val intent2 = Intent().apply {
+                    putExtra("result",R.drawable.card1 )
+                }
+                setResult(Activity.RESULT_OK, intent2)
+            }
+        })
+
 
         val rotation2 = ObjectAnimator.ofFloat(card, View.ROTATION, 0f)
         rotation2.duration = 200
@@ -153,6 +161,10 @@ class FlipPage : SlideRightBackActivity()  {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation6结束后更换图片资源
                 selectRandomImage()
+                val intent1 = Intent().apply {
+                    putExtra("result",randomImageRes )
+                }
+                setResult(Activity.RESULT_OK, intent1)
                 // 判断选中的是哪个资源
                 if (randomImageRes == R.drawable.winner) {
                     // 选中了 R.drawable.winner
@@ -221,30 +233,37 @@ class FlipPage : SlideRightBackActivity()  {
             playSequentially(scaleX, rotation, rotation2, rotation3, rotation4,beamScaleX5, rotation6, rotation7, rotation8)
         }
 
+
         combinedAnimatorSet.start()
 
-        selectRandomImage()
+
+
 
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         // 在这里执行您的逻辑
         //卡片摇晃的时候，用户关闭弹窗，卡片要回到初始态，然后开始退场动画。
         if (combinedAnimatorSet.isRunning) {
                 combinedAnimatorSet.cancel()
-                val cardRotation = ObjectAnimator.ofFloat(card, View.ROTATION, 0f)
-                cardRotation.duration = 200
-                cardRotation.start()
+            val cardRotation = ObjectAnimator.ofFloat(card, View.ROTATION, 0f)
+            cardRotation.duration = 200
+            cardRotation.start()
 
-                //使用协程让返回键延迟2执行
+
+                //使用协程让返回键延迟执行
                 CoroutineScope(Dispatchers.Main).launch {
                     delay(200)
                     super.onBackPressed()
                 }
-        }else {
+        } else {
             super.onBackPressed()
         }
+
     }
+
+
 
     //让glide只加载一次gif图片
     val options = RequestOptions()
@@ -291,9 +310,6 @@ class FlipPage : SlideRightBackActivity()  {
 
         randomImageRes = imageArray[index]
 
-        val intent = Intent().apply {
-            putExtra("result",randomImageRes )
-        }
-        setResult(Activity.RESULT_OK, intent)
+
     }
 }
