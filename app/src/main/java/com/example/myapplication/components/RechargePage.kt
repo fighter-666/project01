@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
+import com.example.myapplication.recharge.ScrollTextView
 import com.example.recharge.Cards
 import com.example.recharge.FirstAdapter
 import com.example.recharge.FourthAdapter
@@ -36,6 +37,16 @@ class RechargePage : ComponentActivity() {
 
         //binding.cl4.setCardImageResource(R.drawable.card1)
 
+        val marqueeText: ScrollTextView = binding.tv2Tv2
+
+        val demographicsList: MutableList<String> = ArrayList()
+
+        demographicsList.add("今日测试股票 上市")
+        demographicsList.add("今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购")
+        demographicsList.add("今日中国平安 上市")
+
+        marqueeText.setList(demographicsList)
+        marqueeText.startScroll()
 
 
         val piggies = mutableListOf<Piggy>()
@@ -54,6 +65,22 @@ class RechargePage : ComponentActivity() {
 
         //给RecycleView设置适配器
        binding.recyclerView.setAdapter(myAdapter)
+
+        val piggiesCopy = mutableListOf<Piggy>()
+        piggiesCopy.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
+        piggiesCopy.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
+        piggiesCopy.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
+        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
+
+
+        //创建适配器
+        val myAdapterCopy = FirstAdapter(R.layout.first, piggiesCopy)
+
+        //设置布局管理器
+        binding.recyclerViewCopy.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+
+        //给RecycleView设置适配器
+        binding.recyclerViewCopy.setAdapter(myAdapterCopy)
 
 
         //第二个

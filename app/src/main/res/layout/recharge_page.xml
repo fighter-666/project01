@@ -194,9 +194,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/beans" />
 
-        <TextView
+        <com.example.myapplication.recharge.ScrollTextView
             android:id="@+id/tv2_tv2"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="充值奖励 "
             android:layout_marginLeft="6dp"
@@ -207,45 +207,24 @@
             app:layout_constraintLeft_toRightOf="@id/im1_im"
             />
 
-        <TextView
-            android:id="@+id/tv2_tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+80金豆"
-            android:textColor="#fe5561"
-            android:textSize="13sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv2_tv2"
-            />
 
-        <TextView
-            android:id="@+id/tv2_tv4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="，多充多得哦～"
-            android:textColor="#666666"
-            android:textSize="13sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv2_tv3"
-            />
 
         <TextView
             android:layout_width="52dp"
             android:layout_height="22dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
             android:text="兑好物"
             android:textColor="#ffffff"
             android:textSize="11sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/tv2_tv4"
+            app:layout_constraintRight_toLeftOf="@id/tv2_image"
             android:background="@drawable/shape_rectangle4"
             android:gravity="center"
             />
 
         <ImageView
+            android:id="@+id/tv2_image"
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_marginRight="13dp"
@@ -315,13 +294,73 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl2Copy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/shape_rectangle5"
+                app:layout_constraintTop_toBottomOf="@id/cl2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                tools:ignore="MissingConstraints"
+                >
+
+                <TextView
+                    android:id="@+id/cl2_tv1Copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="为您推荐以下服务"
+                    android:textColor="#333333"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginRight="6dp"
+                    app:layout_constraintRight_toLeftOf="@id/cl2_im1Copy"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/cl2_im1Copy"
+                    android:layout_width="5dp"
+                    android:layout_height="9dp"
+                    android:layout_marginRight="12dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cl2_tv1Copy"
+                    app:layout_constraintBottom_toBottomOf="@id/cl2_tv1Copy"
+                    android:src="@drawable/arrow" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_viewCopy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="15dp"
+                    app:layout_constraintBottom_toBottomOf="@id/cl2Copy"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl2_tv1Copy"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl3"
         android:layout_width="match_parent"
         android:layout_height="269dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/shape_rectangle5"
-        app:layout_constraintTop_toBottomOf="@id/cl2"
+        app:layout_constraintTop_toBottomOf="@id/cl2Copy"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="MissingConstraints"
         >
@@ -595,7 +634,7 @@
             <com.example.myapplication.recharge.FlipCardView
                 android:id="@+id/cl4"
                 android:layout_width="match_parent"
-                android:layout_height="151dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/shape_rectangle5"
                 app:layout_constraintTop_toBottomOf="@id/cl3"

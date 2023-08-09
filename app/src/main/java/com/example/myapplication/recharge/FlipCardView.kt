@@ -20,6 +20,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import com.example.myapplication.R
 import androidx.core.util.Pair
+import com.blankj.utilcode.util.ScreenUtils
+import com.example.recharge.DensityUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -87,7 +89,6 @@ class FlipCardView : ConstraintLayout {
         imageView3 = findViewById<ImageView>(R.id.card3)
         textview = findViewById<TextView>(R.id.cl4_tv7)
         rl = findViewById(R.id.rl)
-
 
 
 

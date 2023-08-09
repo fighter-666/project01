@@ -21,11 +21,14 @@ class FirstAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : Bas
 
         if (data.size <= 3) {//处理居中
             val lp = holder.itemView.layoutParams
-            lp?.width = (ScreenUtils.getScreenWidth() - DensityUtils.dpToPx(context, 65f)) / data.size
+            lp?.width = (ScreenUtils.getScreenWidth() - DensityUtils.dpToPx(context, 68f)) / data.size
+            val widthScale:Float = lp.width.toFloat() / 200
+            binding.ivImage.scaleX = widthScale
+            binding.ivImage.scaleY = widthScale
             lp?.height = lp.width
-            binding.name.textSize = 14f
-            binding.name2.textSize = 12f
             holder.itemView.layoutParams = lp
+            binding.name.textSize = 10f*widthScale
+            binding.name2.textSize = 7f*widthScale
         } /*else {//0.7表示显示程度
             val lp = LinearLayout.LayoutParams(((context.getResources().getDisplayMetrics().widthPixels) / 4.7f).toInt(), ViewGroup.LayoutParams.MATCH_PARENT)
             holder.itemView.layoutParams = lp
