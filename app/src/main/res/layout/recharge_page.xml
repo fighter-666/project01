@@ -209,19 +209,15 @@
 
 
 
-        <com.example.myapplication.recharge.ScrollTextView
+        <com.example.myapplication.recharge.ScrrollTextViewBackground
             android:id="@+id/tv2_tv3"
             android:layout_width="52dp"
             android:layout_height="22dp"
             android:layout_marginRight="10dp"
-            android:text="兑好物"
-            android:textColor="#ffffff"
-            android:textSize="11sp"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@id/tv2_image"
-            android:background="@drawable/shape_rectangle4"
-            android:gravity="center"
             />
 
         <ImageView

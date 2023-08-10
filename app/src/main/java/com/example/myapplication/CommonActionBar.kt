@@ -2,14 +2,21 @@ package com.example.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.activity.ComponentActivity
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.util.Pair
+import com.example.myapplication.recharge.FlipPage
 
 
 class CommonActionBar : RelativeLayout {
@@ -57,6 +64,20 @@ class CommonActionBar : RelativeLayout {
         textView = findViewById<TextView>(R.id.text)
         textView2 = findViewById<TextView>(R.id.right_text)
 
+        imageView.setOnClickListener {
+            val intent = Intent(getContext(), Return::class.java)
+            //myActivityLauncher.launch(intent)
+
+            // 创建共享元素的 Pair 对象
+            val imagePair = Pair<View, String>(imageView, "transition_image")
+
+            // 创建 ActivityOptionsCompat，并设置共享元素转场动画
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
+
+            // 启动活动并应用转场动画
+            startActivity(context,intent,options.toBundle())
+        }
+
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar)
         val drawable = typedArray.getDrawable(R.styleable.TitleBar_back_src)
         val drawable2 = typedArray.getDrawable(R.styleable.TitleBar_right_src)
@@ -82,6 +103,7 @@ class CommonActionBar : RelativeLayout {
         // 设置文本颜色、大小和内容
         textView.text = content
         textView2.text = content2
+
     }
 
 

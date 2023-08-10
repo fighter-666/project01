@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+
+    <com.example.myapplication.recharge.MarqueeTextView
+        android:id="@+id/tv_banner2"
+        android:layout_width="52dp"
+        android:layout_height="22dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/shape_rectangle4"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textSize="11sp" />
+
+    <com.example.myapplication.recharge.MarqueeTextView
+        android:id="@+id/tv_banner1"
+        android:layout_width="52dp"
+        android:layout_height="22dp"
+        android:layout_centerVertical="true"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/shape_rectangle4"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="-1"
+        android:textSize="11sp" />
+
+</RelativeLayout>
