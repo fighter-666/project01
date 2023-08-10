@@ -4,9 +4,12 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.myapplication.R
 import org.jetbrains.annotations.Nullable
@@ -16,14 +19,14 @@ import org.jetbrains.annotations.Nullable
  * 上下滚动的 textView
  */
 @SuppressLint("MissingInflatedId")
-class ScrollTextView @JvmOverloads constructor(
+class ScrollImageView @JvmOverloads constructor(
     context: Context?,
     @Nullable attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) :
-    LinearLayout(context, attrs, defStyleAttr) {
-    private val mBannerTV1: MarqueeTextView
-    private val mBannerTV2: MarqueeTextView
+    LinearLayout(context, attrs, defStyleAttr){
+    private val mBannerTV1: ImageView?
+    private val mBannerTV2: ImageView?
     private val handler: Handler
     private var isShow = false
     private var startY1 = 0
@@ -31,7 +34,7 @@ class ScrollTextView @JvmOverloads constructor(
     private var startY2 = 0
     private var endY2 = 0
     private lateinit var  runnable: Runnable
-    var list: List<String>? = null
+    var list: List<Int>? = null
         private set
     private var position = 0
     private val offsetY = 100
@@ -39,9 +42,9 @@ class ScrollTextView @JvmOverloads constructor(
 
     init {
         val view: View =
-            LayoutInflater.from(context).inflate(R.layout.widget_scroll_text_layout, this)
-        mBannerTV1 = view.findViewById(R.id.tv_banner1)
-        mBannerTV2 = view.findViewById(R.id.tv_banner2)
+            LayoutInflater.from(context).inflate(R.layout.widget_scroll_image_layout, this)
+        mBannerTV1 = view.findViewById(R.id.image)
+        mBannerTV2 = view.findViewById(R.id.image2)
         handler = Handler()
         runnable = Runnable {
             isShow = !isShow
@@ -49,11 +52,11 @@ class ScrollTextView @JvmOverloads constructor(
                 position = 0
             }
             if (isShow) {
-                mBannerTV1.text = list!![position++]
-                mBannerTV2.text = list!![position]
+                mBannerTV1?.setImageResource(list!![position++])
+                mBannerTV2?.setImageResource(list!![position])
             } else {
-                mBannerTV2.text = list!![position++]
-                mBannerTV1.text = list!![position]
+                mBannerTV2?.setImageResource(list!![position++])
+                mBannerTV1?.setImageResource(list!![position])
             }
             startY1 = if (isShow) 0 else offsetY
             endY1 = if (isShow) -offsetY else 0
@@ -69,7 +72,7 @@ class ScrollTextView @JvmOverloads constructor(
 
 
 
-        fun setList(list: MutableList<String>) {
+        fun setList(list: MutableList<Int>) {
         this.list = list
 
         //处理最后一条数据切换到第一条数据 太快的问题
@@ -79,7 +82,7 @@ class ScrollTextView @JvmOverloads constructor(
     }
 
     fun startScroll() {
-        mBannerTV1.text = list!![0]
+        mBannerTV1?.setImageResource(list!![0])
         if (list!!.size > 1) {
             if (!hasPostRunnable) {
                 hasPostRunnable = true
@@ -97,4 +100,6 @@ class ScrollTextView @JvmOverloads constructor(
         handler.removeCallbacks(runnable)
         hasPostRunnable = false
     }
+
+
 }

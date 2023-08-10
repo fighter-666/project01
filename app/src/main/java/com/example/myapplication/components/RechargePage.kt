@@ -1,11 +1,16 @@
 package com.example.myapplication.components
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
+import com.example.myapplication.recharge.ScrollImageView
 import com.example.myapplication.recharge.ScrollTextView
 import com.example.recharge.Cards
 import com.example.recharge.FirstAdapter
@@ -37,6 +42,20 @@ class RechargePage : ComponentActivity() {
 
         //binding.cl4.setCardImageResource(R.drawable.card1)
 
+        //右边textview跑马灯
+        val marqueeText3: ScrollImageView = binding.im1Im
+
+        val demographicsList3: MutableList<Int> = ArrayList()
+
+        demographicsList3.add(R.drawable.card3)
+        demographicsList3.add(R.drawable.beans)
+        demographicsList3.add(R.drawable.card2)
+
+
+        marqueeText3.setList(demographicsList3)
+        marqueeText3.startScroll()
+
+        //中间textview跑马灯
         val marqueeText: ScrollTextView = binding.tv2Tv2
 
         val demographicsList: MutableList<String> = ArrayList()
@@ -48,14 +67,26 @@ class RechargePage : ComponentActivity() {
         marqueeText.setList(demographicsList)
         marqueeText.startScroll()
 
+        //右边textview跑马灯
+        val marqueeText2: ScrollTextView = binding.tv2Tv3
+
+        val demographicsList2: MutableList<String> = ArrayList()
+
+        demographicsList2.add("    股票")
+        demographicsList2.add("    药业")
+        demographicsList2.add("    上市")
+
+
+        marqueeText2.setList(demographicsList2)
+        marqueeText2.startScroll()
+
+
 
         val piggies = mutableListOf<Piggy>()
         piggies.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
         piggies.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
         piggies.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
-        /*piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-        piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
-        piggies.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))*/
+
 
         //创建适配器
         val myAdapter = FirstAdapter(R.layout.first, piggies)
@@ -70,6 +101,9 @@ class RechargePage : ComponentActivity() {
         piggiesCopy.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
         piggiesCopy.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
         piggiesCopy.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
+        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
+        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
+        piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
         piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
 
 

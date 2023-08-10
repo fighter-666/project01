@@ -22,8 +22,7 @@
             android:gravity="center"
             app:imageWidth3="9dp"
             app:imageHeight3="15dp"
-            app:title="评价"
-            app:textContent="aaaaa"
+            app:right_title="评价"
             app:back_src="@drawable/back"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,12 +38,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:paddingLeft="13dp"
-            android:paddingRight="13dp"
-            android:layout_height="wrap_content"
-            >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:layout_height="wrap_content"
+        >
 
             <!-- 在这里添加你的约束布局内容 -->
 
@@ -56,9 +55,10 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:src="@drawable/tick"
-        android:layout_marginLeft="87dp"
         android:layout_marginTop="23dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tv_tv2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -66,12 +66,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="成功充值 100元"
-        android:layout_marginLeft="9dp"
         android:textColor="#333333"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toRightOf="@id/iv_iv1"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -184,7 +184,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv2_tv"
         tools:ignore="MissingConstraints">
 
-        <ImageView
+        <com.example.myapplication.recharge.ScrollImageView
             android:id="@+id/im1_im"
             android:layout_width="23dp"
             android:layout_height="18dp"
@@ -209,7 +209,8 @@
 
 
 
-        <TextView
+        <com.example.myapplication.recharge.ScrollTextView
+            android:id="@+id/tv2_tv3"
             android:layout_width="52dp"
             android:layout_height="22dp"
             android:layout_marginRight="10dp"
@@ -233,66 +234,64 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/shape_rectangle5"
-        app:layout_constraintTop_toBottomOf="@id/cl1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:ignore="MissingConstraints"
-        >
+                android:id="@+id/cl2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_rectangle5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl1"
+                tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/cl2_tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="为您推荐以下服务"
-            android:textColor="#333333"
-            android:layout_marginLeft="12dp"
-            android:textSize="16sp"
-            android:layout_marginTop="15dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+                <TextView
+                    android:id="@+id/cl2_tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="15dp"
+                    android:text="为您推荐以下服务"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="更多"
-            android:textColor="#999999"
-            android:textSize="12sp"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="6dp"
-            app:layout_constraintRight_toLeftOf="@id/cl2_im1"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginRight="6dp"
+                    android:text="更多"
+                    android:textColor="#999999"
+                    android:textSize="12sp"
+                    app:layout_constraintRight_toLeftOf="@id/cl2_im1"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/cl2_im1"
-            android:layout_width="5dp"
-            android:layout_height="9dp"
-            android:layout_marginRight="12dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cl2_tv1"
-            app:layout_constraintBottom_toBottomOf="@id/cl2_tv1"
-            android:src="@drawable/arrow" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="15dp"
-            app:layout_constraintBottom_toBottomOf="@id/cl2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl2_tv1"
-            app:layout_constraintVertical_bias="0.0" />
+                <ImageView
+                    android:id="@+id/cl2_im1"
+                    android:layout_width="5dp"
+                    android:layout_height="9dp"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/cl2_tv1"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cl2_tv1" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="15dp"
+                    app:layout_constraintBottom_toBottomOf="@id/cl2"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl2_tv1"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl2Copy"

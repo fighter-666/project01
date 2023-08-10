@@ -2,9 +2,8 @@ package com.example.myapplication.recharge
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.TextView
 
-class CustomTextView : androidx.appcompat.widget.AppCompatTextView {
+class MarqueeTextView : androidx.appcompat.widget.AppCompatTextView {
 
     constructor(context: Context) : super(context)
 
