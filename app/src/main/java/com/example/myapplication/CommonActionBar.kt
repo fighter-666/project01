@@ -1,22 +1,23 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.util.Pair
-import com.example.myapplication.recharge.FlipPage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class CommonActionBar : RelativeLayout {
@@ -54,6 +55,7 @@ class CommonActionBar : RelativeLayout {
     ) {
     }
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RestrictedApi", "WrongViewCast")
     private fun initView(context: Context, attrs: AttributeSet) {
@@ -64,18 +66,23 @@ class CommonActionBar : RelativeLayout {
         textView = findViewById<TextView>(R.id.text)
         textView2 = findViewById<TextView>(R.id.right_text)
 
+        val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { activityResult ->
+
+            CoroutineScope(Dispatchers.Main).launch {
+                if (activityResult.resultCode == Activity.RESULT_OK) {
+                    val result = activityResult.data?.getIntExtra("result",0)
+                    Log.d("aaaa",result.toString())
+                    if (result == 1){
+                        context.finish()
+                    }
+                }
+            }
+        }
+
         imageView.setOnClickListener {
             val intent = Intent(getContext(), Return::class.java)
-            //myActivityLauncher.launch(intent)
-
-            // 创建共享元素的 Pair 对象
-            val imagePair = Pair<View, String>(imageView, "transition_image")
-
-            // 创建 ActivityOptionsCompat，并设置共享元素转场动画
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
-
-            // 启动活动并应用转场动画
-            startActivity(context,intent,options.toBundle())
+            myActivityLauncher.launch(intent)
         }
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar)

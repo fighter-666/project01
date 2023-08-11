@@ -16,15 +16,7 @@ class FourthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFourthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        division()
     }
-    fun division() {
-        val numerator = 60
-        var denominator = 5
-        repeat(5) {
-            Log.v(TAG, "${numerator / denominator}")
-            denominator--
-        }
-    }
+
 
 }

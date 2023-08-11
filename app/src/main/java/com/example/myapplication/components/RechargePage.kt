@@ -37,8 +37,6 @@ class RechargePage : ComponentActivity() {
             .init();
 
 
-        //binding.cl4.setCardImageResource(R.drawable.card1)
-
 
         //右边textview跑马灯
         val marqueeText2: ScrrollTextViewBackground = binding.tv2Tv3

@@ -5,9 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fl">
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="300dp"
         android:layout_height="180dp"
+        android:background="@drawable/shape_rectangle21"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -16,8 +23,8 @@
 
         <ImageView
             android:id="@+id/tv2_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginRight="13dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/close"
@@ -29,6 +36,7 @@
             android:layout_height="wrap_content"
             android:text="您真的要放弃全部优惠吗？"
             android:layout_marginTop="50dp"
+            android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -39,6 +47,7 @@
             android:layout_height="40dp"
             android:text="放弃优惠"
             android:gravity="center"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/shape_rectangle20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -51,7 +60,9 @@
             android:layout_height="40dp"
             android:text="继续充值"
             android:gravity="center"
-            android:background="@drawable/shape_rectangle2"
+            android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_rectangle22"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/text1"
             app:layout_constraintRight_toRightOf="parent"/>
