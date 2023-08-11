@@ -1,11 +1,14 @@
 package com.example.myapplication.components
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
+import com.example.myapplication.recharge.ScratchCard
 import com.example.myapplication.recharge.ScrollImageView
 import com.example.myapplication.recharge.ScrollTextView
 import com.example.myapplication.recharge.ScrrollTextViewBackground
@@ -21,6 +24,7 @@ import com.gyf.immersionbar.ImmersionBar
 class RechargePage : ComponentActivity() {
 
     private lateinit var binding: RechargePageBinding
+    private lateinit var imageView: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -38,6 +42,7 @@ class RechargePage : ComponentActivity() {
 
 
 
+        //消息条
         //右边textview跑马灯
         val marqueeText2: ScrrollTextViewBackground = binding.tv2Tv3
 

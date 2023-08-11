@@ -635,6 +635,15 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 tools:ignore="MissingConstraints" />
 
+       <com.example.myapplication.recharge.ScratchCardView
+           android:id="@+id/cl6"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="12dp"
+           app:layout_constraintTop_toBottomOf="@id/cl4"
+           app:layout_constraintLeft_toLeftOf="parent"
+           android:background="@drawable/shape_rectangle5"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view4"
@@ -642,7 +651,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@id/cl4"
+                app:layout_constraintTop_toBottomOf="@id/cl6"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
 
