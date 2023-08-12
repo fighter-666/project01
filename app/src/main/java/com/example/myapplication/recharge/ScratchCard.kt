@@ -16,6 +16,7 @@ import android.view.View
 import androidx.core.widget.NestedScrollView
 import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.R
+import java.util.Random
 
 
 class ScratchCard : View {
@@ -31,6 +32,7 @@ class ScratchCard : View {
     var endX: Float = 0f
     var endY: Float = 0f
     private var shouldInterceptScroll = false
+    private var showFullResult = false
     private val scrollThreshold = 160
 
     constructor(context: Context?) : super(context) {
@@ -59,7 +61,14 @@ class ScratchCard : View {
         pathPaint!!.strokeJoin = Paint.Join.ROUND //线段之间连接处的样式
         pathPaint!!.strokeCap = Paint.Cap.ROUND //设置画笔的线冒样式
         path = Path()
-        mBitmapBackground = BitmapFactory.decodeResource(resources, R.drawable.scratch1)
+        val random = Random()
+        val randomNumber = random.nextInt(2)
+        val resourceId = if (randomNumber == 0) {
+            R.drawable.scratch1
+        } else {
+            R.drawable.scratch2
+        }
+        mBitmapBackground = BitmapFactory.decodeResource(resources, resourceId)
         mCanvas = Canvas()
         mPaintText = Paint()
         mPaintText!!.color = Color.WHITE
@@ -71,6 +80,13 @@ class ScratchCard : View {
     override fun onDraw(canvas: Canvas) {
         canvas.drawBitmap(mBitmapBackground, 0f, 0f, null)
         canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
+        if (showFullResult) {
+            // 绘制完整的刮奖结果
+            paint?.alpha = 0 // 设置不透明
+            canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
+        } else {
+            // 绘制刮动的路径线条
+        }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -86,9 +102,10 @@ class ScratchCard : View {
     }
 
 
-    var quarterWidth = 84
+    var quarterWidth = 190
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 path!!.reset()
@@ -109,11 +126,11 @@ class ScratchCard : View {
         } else {
             shouldInterceptScroll = false
         }
-        /*if ((endX - startX) > quarterWidth) {
-            // 滑动距离大于 quarterWidth
-            // 在这里添加你的逻辑代码
-
-        }*/
+        if ((endX - startX) > quarterWidth) {
+            showFullResult = true
+        } else {
+            showFullResult = false
+        }
         mCanvas!!.drawPath(path!!, pathPaint!!)
         invalidate()
 

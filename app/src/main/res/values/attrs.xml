@@ -3,6 +3,7 @@
 
     <declare-styleable name="ScratchCardView">
         <attr name="scratchSrc" format="reference"/>
+        <attr name="scratchSrc2" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="FlipCardView">
