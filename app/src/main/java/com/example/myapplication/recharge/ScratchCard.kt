@@ -13,6 +13,8 @@ import android.graphics.PorterDuffXfermode
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.widget.NestedScrollView
+import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.R
 
 
@@ -28,6 +30,8 @@ class ScratchCard : View {
     var startY: Float = 0f
     var endX: Float = 0f
     var endY: Float = 0f
+    private var shouldInterceptScroll = false
+    private val scrollThreshold = 160
 
     constructor(context: Context?) : super(context) {
         init()
@@ -66,20 +70,21 @@ class ScratchCard : View {
 
     override fun onDraw(canvas: Canvas) {
         canvas.drawBitmap(mBitmapBackground, 0f, 0f, null)
-        paint!!.color = Color.parseColor("#0000ff")
-        canvas.drawBitmap(mBitmapFront, 68f, 38f, paint)
+        canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         mBitmapBackground = getBitmap(mBitmapBackground, w, h)
         mBitmapFront = Bitmap.createBitmap(
-            mBitmapBackground.width - 126,
-            mBitmapBackground.height - 76 , Bitmap.Config.ARGB_8888
+            mBitmapBackground.width - 124,
+
+            mBitmapBackground.height - 72 , Bitmap.Config.ARGB_8888
         )
         mCanvas!!.setBitmap(mBitmapFront)
         drawText(mCanvas, w, h)
     }
+
 
     var quarterWidth = 84
 
@@ -99,18 +104,28 @@ class ScratchCard : View {
             }
 
         }
-        if ((endX - startX) > quarterWidth) {
+        if ((endY - startY) < scrollThreshold) {
+            shouldInterceptScroll = true
+        } else {
+            shouldInterceptScroll = false
+        }
+        /*if ((endX - startX) > quarterWidth) {
             // 滑动距离大于 quarterWidth
             // 在这里添加你的逻辑代码
-        }
+
+        }*/
         mCanvas!!.drawPath(path!!, pathPaint!!)
         invalidate()
+
+        if (shouldInterceptScroll) {
+            parent.requestDisallowInterceptTouchEvent(true)
+        }
         return true
     }
 
     private fun drawText(canvas: Canvas?, mWidth: Int, mHeight: Int) {
         val text = " "
-        canvas!!.drawColor(Color.GRAY)
+        canvas!!.drawColor(Color.parseColor("#FBECEB"))
         val fm = mPaintText!!.fontMetrics
         val mTxtWidth = mPaintText!!.measureText(text, 0, text.length).toInt()
         val mTxtHeight = Math.ceil((fm.descent - fm.ascent).toDouble()).toInt()
