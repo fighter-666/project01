@@ -100,21 +100,34 @@ class ScratchCardView : ConstraintLayout {
             imageView2.visibility = View.GONE
         }
 
-        val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 30f)
-        val translateY = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 30f)
-        val translateX2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 30f)
-        val translateY2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 30f)
+        val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f)
+        val translateY = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f)
 
         translateX.duration = 1800
         translateY.duration = 1800
-        translateX2.duration = 1800
-        translateY2.duration = 1800
         val combinedAnimatorSet = AnimatorSet().apply {
             playTogether(translateX, translateY)
-            playTogether(translateX2, translateY2)
-            playSequentially(translateX, translateY)
+            playSequentially(translateX)
         }
+
+        val translateX2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f,0f)
+        val translateY2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f,0f)
+
+        translateX2.duration = 1800
+        translateY2.duration = 1800
+        val combinedAnimatorSet2 = AnimatorSet().apply {
+            playTogether(translateX2, translateY2)
+            playSequentially(translateX2)
+        }
+
         combinedAnimatorSet.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                combinedAnimatorSet2.start() // 重新开始动画
+            }
+        })
+
+        combinedAnimatorSet2.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 combinedAnimatorSet.start() // 重新开始动画
@@ -122,6 +135,8 @@ class ScratchCardView : ConstraintLayout {
         })
 
         combinedAnimatorSet.start()
+
+
     }
 
     

@@ -33,6 +33,7 @@ class ScratchCard : View {
     var endY: Float = 0f
     private var shouldInterceptScroll = false
     private var showFullResult = false
+    private var viewpage2Scoll = false
     private val scrollThreshold = 160
 
     constructor(context: Context?) : super(context) {
@@ -103,6 +104,7 @@ class ScratchCard : View {
 
 
     var quarterWidth = 190
+    var halfWidth = 250
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
 
@@ -121,22 +123,39 @@ class ScratchCard : View {
             }
 
         }
+
+        //上下冲突
         if ((endY - startY) < scrollThreshold) {
             shouldInterceptScroll = true
         } else {
             shouldInterceptScroll = false
         }
+
+        //1/4时显示全部
         if ((endX - startX) > quarterWidth) {
             showFullResult = true
         } else {
             showFullResult = false
         }
+
+        if ((endX - startX) > halfWidth) {
+            viewpage2Scoll = true
+        } else {
+            viewpage2Scoll = false
+        }
+
         mCanvas!!.drawPath(path!!, pathPaint!!)
         invalidate()
 
         if (shouldInterceptScroll) {
             parent.requestDisallowInterceptTouchEvent(true)
         }
+
+        /*if (viewpage2Scoll) {
+            parent.requestDisallowInterceptTouchEvent(false)
+        }else{
+            parent.requestDisallowInterceptTouchEvent(true)
+        }*/
         return true
     }
 
