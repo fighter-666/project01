@@ -15,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import com.blankj.utilcode.util.LogUtils
+import com.example.myapplication.DisplayUtils
 import com.example.myapplication.R
 import java.util.Random
 
@@ -31,6 +32,8 @@ class ScratchCard : View {
     var startY: Float = 0f
     var endX: Float = 0f
     var endY: Float = 0f
+    var disX: Float = 0f
+    var disY: Float = 0f
     private var shouldInterceptScroll = false
     private var showFullResult = false
     private var viewpage2Scoll = false
@@ -83,7 +86,7 @@ class ScratchCard : View {
         canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
         if (showFullResult) {
             // 绘制完整的刮奖结果
-            paint?.alpha = 0 // 设置不透明
+            paint?.alpha = 0 // 设置透明
             canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
         } else {
             // 绘制刮动的路径线条
@@ -103,8 +106,8 @@ class ScratchCard : View {
     }
 
 
-    var quarterWidth = 190
-    var halfWidth = 250
+    var quarterWidth = DisplayUtils.getScreenWidth(context)/4
+    var halfWidth = DisplayUtils.getScreenWidth(context)/2
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
 
@@ -120,6 +123,8 @@ class ScratchCard : View {
                 path!!.lineTo(event.x, event.y)
                 endX = event.x
                 endY = event.y
+                disX = Math.abs(endX - startX)
+                disY = Math.abs(endY - startY)
             }
 
         }
@@ -150,6 +155,13 @@ class ScratchCard : View {
         if (shouldInterceptScroll) {
             parent.requestDisallowInterceptTouchEvent(true)
         }
+
+        /*if (disX > disY) {
+            //如果是纵向滑动，告知父布局不进行时间拦截，交由子布局消费，　requestDisallowInterceptTouchEvent(true)
+            parent.requestDisallowInterceptTouchEvent(canScrollHorizontally(startX - endX))
+        } else {
+            parent.requestDisallowInterceptTouchEvent(canScrollVertically(startX - endX))
+        }*/
 
         /*if (viewpage2Scoll) {
             parent.requestDisallowInterceptTouchEvent(false)
