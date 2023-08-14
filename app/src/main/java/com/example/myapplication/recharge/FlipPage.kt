@@ -36,7 +36,7 @@ import java.util.Random
  *
  * @param valueAnimator 要重置时长的ValueAnimator对象
  */
-@SuppressLint("DiscouragedPrivateApi")
+/*@SuppressLint("DiscouragedPrivateApi")
 fun resetDurationScale(valueAnimator: ValueAnimator) {
     try {
         val method: Method = ValueAnimator::class.java.getDeclaredMethod("setDurationScale", Float::class.javaPrimitiveType)
@@ -45,7 +45,7 @@ fun resetDurationScale(valueAnimator: ValueAnimator) {
     } catch (e: Exception) {
         e.printStackTrace()
     }
-}
+}*/
 
 class FlipPage : SlideRightBackActivity()  {
     private lateinit var binding: ActivityFlipPageBinding
@@ -83,9 +83,7 @@ class FlipPage : SlideRightBackActivity()  {
         card.setImageResource(R.drawable.card1)
         bottom.setImageResource(R.drawable.cheer)
 
-        prise.visibility = View.GONE
-        button.visibility = View.GONE
-        hint.visibility = View.GONE
+
 
         button.setOnClickListener {
             Toast.makeText(this, "点击了", Toast.LENGTH_SHORT).show()
@@ -110,7 +108,7 @@ class FlipPage : SlideRightBackActivity()  {
         val scaleY = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f)
         scaleX.duration = 400
         scaleY.duration = 400
-        resetDurationScale(beamScaleX0)
+        //resetDurationScale(beamScaleX0)
 
         val rotation = ObjectAnimator.ofFloat(card, View.ROTATION, 15f)
         rotation.duration = 200
@@ -182,12 +180,12 @@ class FlipPage : SlideRightBackActivity()  {
                     val index = random.nextInt(imageArray.size)
 
                     randomImageRes = imageArray[index]
-                    if (randomImageRes == R.drawable.winner) {
+                    if (randomImageRes == R.drawable.card3) {
                         // 选中了 R.drawable.winner
                         // 执行相应的逻辑
-                        prise.visibility = View.VISIBLE
-                        bottom.visibility = View.VISIBLE
-                        hint.visibility = View.VISIBLE
+                        prise.visibility = View.GONE
+                        button.visibility = View.GONE
+                        hint.visibility = View.GONE
                         // ...
                     } else{
                         // 选中了 R.drawable.card3

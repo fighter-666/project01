@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
@@ -30,6 +31,7 @@ import kotlinx.coroutines.launch
 
 class FlipCardView : ConstraintLayout {
     private lateinit var imageView: ImageView
+    private  var drawable: Drawable? = null
     private lateinit var imageViewCopy: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var imageView3: ImageView
@@ -72,12 +74,35 @@ class FlipCardView : ConstraintLayout {
             if (activityResult.resultCode == Activity.RESULT_OK) {
                 val result = activityResult.data?.getIntExtra("result",0)
                 val resources = context.resources
-                val drawable = result?.let { resources.getDrawable(it) }
+                drawable = result?.let { resources.getDrawable(it) }
                 imageView.setImageDrawable(drawable)
             }
         }
     }
 
+    private val myActivityLauncher2 = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+
+        CoroutineScope(Dispatchers.Main).launch {
+            if (activityResult.resultCode == Activity.RESULT_OK) {
+                val result = activityResult.data?.getIntExtra("result",0)
+                val resources = context.resources
+                drawable = result?.let { resources.getDrawable(it) }
+                imageView2.setImageDrawable(drawable)
+            }
+        }
+    }
+
+    private val myActivityLauncher3 = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+
+        CoroutineScope(Dispatchers.Main).launch {
+            if (activityResult.resultCode == Activity.RESULT_OK) {
+                val result = activityResult.data?.getIntExtra("result",0)
+                val resources = context.resources
+                drawable = result?.let { resources.getDrawable(it) }
+                imageView3.setImageDrawable(drawable)
+            }
+        }
+    }
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RestrictedApi", "WrongViewCast")
     private fun initView(context: Context, attrs: AttributeSet) {
@@ -108,8 +133,8 @@ class FlipCardView : ConstraintLayout {
 
         //imageView.setImageResource(R.drawable.card1)
         imageViewCopy.setImageResource(R.drawable.card1)
-        imageView2.setImageResource(R.drawable.card2)
-        imageView3.setImageResource(R.drawable.card3)
+        imageView2.setImageResource(R.drawable.card1)
+        imageView3.setImageResource(R.drawable.card1)
 
         //点击事件
         imageView.setOnClickListener {
@@ -124,6 +149,38 @@ class FlipCardView : ConstraintLayout {
 
             // 启动活动并应用转场动画
             myActivityLauncher.launch(intent, options)
+
+
+        }
+
+        imageView2.setOnClickListener {
+            val intent = Intent(getContext(), FlipPage::class.java)
+            //myActivityLauncher.launch(intent)
+
+            // 创建共享元素的 Pair 对象
+            val imagePair = Pair<View, String>(imageView2, "transition_image")
+
+            // 创建 ActivityOptionsCompat，并设置共享元素转场动画
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
+
+            // 启动活动并应用转场动画
+            myActivityLauncher2.launch(intent, options)
+
+
+        }
+
+        imageView3.setOnClickListener {
+            val intent = Intent(getContext(), FlipPage::class.java)
+            //myActivityLauncher.launch(intent)
+
+            // 创建共享元素的 Pair 对象
+            val imagePair = Pair<View, String>(imageView3, "transition_image")
+
+            // 创建 ActivityOptionsCompat，并设置共享元素转场动画
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
+
+            // 启动活动并应用转场动画
+            myActivityLauncher3.launch(intent, options)
 
 
         }

@@ -92,14 +92,41 @@
             app:layout_constraintTop_toBottomOf="@id/cl4_tv7" />
 
         <ImageView
+            android:id="@+id/card2_copy"
+            android:layout_width="97dp"
+            android:layout_height="98dp"
+            android:src="@drawable/card1"
+            android:layout_marginTop="8dp"
+            android:transitionName="transition_image"
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintLeft_toRightOf="@id/card1"
+            app:layout_constraintRight_toLeftOf="@id/card3"
+            />
+
+        <ImageView
             android:id="@+id/card2"
             android:layout_width="97dp"
             android:layout_height="98dp"
             android:src="@drawable/card2"
             android:layout_marginTop="8dp"
+            android:transitionName="transition_image"
             app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
             app:layout_constraintLeft_toRightOf="@id/card1"
             app:layout_constraintRight_toLeftOf="@id/card3"
+            />
+
+
+
+        <ImageView
+            android:id="@+id/card3_copy"
+            android:layout_width="97dp"
+            android:layout_height="98dp"
+            android:src="@drawable/card1"
+            android:layout_marginTop="8dp"
+            android:transitionName="transition_image"
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintLeft_toRightOf="@id/card2"
+            app:layout_constraintRight_toRightOf="parent"
             />
         <ImageView
             android:id="@+id/card3"
@@ -107,6 +134,7 @@
             android:layout_height="98dp"
             android:src="@drawable/card3"
             android:layout_marginTop="8dp"
+            android:transitionName="transition_image"
             app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
             app:layout_constraintLeft_toRightOf="@id/card2"
             app:layout_constraintRight_toRightOf="parent"

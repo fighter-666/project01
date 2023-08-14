@@ -13,6 +13,16 @@
        app:cardSrc="@drawable/card2"
        tools:ignore="MissingConstraints" />
 
+   <com.example.myapplication.recharge.FlipCardView
+       android:id="@+id/cl4"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="13dp"
+       android:background="@drawable/shape_rectangle5"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       tools:ignore="MissingConstraints" />
+
 
 
 
