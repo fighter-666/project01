@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -86,7 +87,9 @@ class FlipPage : SlideRightBackActivity()  {
         button.visibility = View.GONE
         hint.visibility = View.GONE
 
-
+        button.setOnClickListener {
+            Toast.makeText(this, "点击了", Toast.LENGTH_SHORT).show()
+        }
 
         closeicon.setOnClickListener {
             onBackPressed()
@@ -171,24 +174,34 @@ class FlipPage : SlideRightBackActivity()  {
         rotation6.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation6结束后更换图片资源
-                selectRandomImage()
+                var randomImageRes = 0
+
+
+                    val imageArray = arrayOf(R.drawable.winner, R.drawable.card3)
+                    val random = Random()
+                    val index = random.nextInt(imageArray.size)
+
+                    randomImageRes = imageArray[index]
+                    if (randomImageRes == R.drawable.winner) {
+                        // 选中了 R.drawable.winner
+                        // 执行相应的逻辑
+                        prise.visibility = View.VISIBLE
+                        bottom.visibility = View.VISIBLE
+                        hint.visibility = View.VISIBLE
+                        // ...
+                    } else{
+                        // 选中了 R.drawable.card3
+                        // 执行相应的逻辑
+                        // ...
+                    }
+
+
                 val intent1 = Intent().apply {
                     putExtra("result",randomImageRes )
                 }
                 setResult(Activity.RESULT_OK, intent1)
                 // 判断选中的是哪个资源
-                if (randomImageRes == R.drawable.winner) {
-                    // 选中了 R.drawable.winner
-                    // 执行相应的逻辑
-                    prise.visibility = View.VISIBLE
-                    bottom.visibility = View.VISIBLE
-                    hint.visibility = View.VISIBLE
-                    // ...
-                } else{
-                    // 选中了 R.drawable.card3
-                    // 执行相应的逻辑
-                    // ...
-                }
+
 // 设置到ImageView
                 card.setImageResource(randomImageRes)
             }
@@ -312,15 +325,5 @@ class FlipPage : SlideRightBackActivity()  {
     }
 
     // 随机图片资源id,并回传imageview的id
-    var randomImageRes = 0
 
-    fun selectRandomImage() {
-        val imageArray = arrayOf(R.drawable.winner, R.drawable.card3)
-        val random = Random()
-        val index = random.nextInt(imageArray.size)
-
-        randomImageRes = imageArray[index]
-
-
-    }
 }

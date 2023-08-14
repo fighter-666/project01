@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="360dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f4f4f4">
@@ -138,7 +138,7 @@
 
     <TextView
         android:id="@+id/tv2_1tv"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
         android:layout_height="36dp"
         android:singleLine="true"
         android:ellipsize="marquee"
@@ -146,12 +146,12 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:marqueeRepeatLimit="marquee_forever"
-        android:text="继续充值继续充值继续充值继续充值继续充值"
+        android:text="继续充值"
         android:textColor="#333333"
         android:layout_marginTop="27dp"
         android:textSize="16sp"
         android:gravity="center"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintTop_toBottomOf="@id/tv_tv6"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/tv2_tv"
@@ -160,8 +160,9 @@
         <com.example.myapplication.recharge.ImageTextLayoutView
             android:id="@+id/tv2_tv"
             android:layout_marginTop="27dp"
-            android:layout_width="160dp"
+            android:layout_width="0dp"
             android:layout_height="36dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/shape_rectangle2"
             app:layout_constraintLeft_toRightOf="@id/tv2_1tv"
             app:layout_constraintRight_toRightOf="parent"
@@ -193,20 +194,20 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/beans" />
 
+
         <com.example.myapplication.recharge.ScrollTextView
             android:id="@+id/tv2_tv2"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:text="充值奖励 "
-            android:layout_marginLeft="6dp"
             android:textColor="#666666"
+            android:layout_marginRight="10dp"
             android:textSize="13sp"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/im1_im"
-            />
-
-
+            app:layout_constraintRight_toLeftOf="@id/tv2_tv3"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.example.myapplication.recharge.ScrrollTextViewBackground
             android:id="@+id/tv2_tv3"
@@ -437,12 +438,12 @@
             android:text="去开启"
             android:textColor="#5b82ff"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="12dp"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="220dp"
+            app:layout_constraintLeft_toRightOf="@id/cl3_cl1"
             android:textSize="13sp" />
 
         <TextView
-            android:layout_width="310dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="70dp"
             android:layout_marginLeft="12dp"
@@ -527,13 +528,13 @@
             android:text="去看看"
             android:textColor="#5b82ff"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="12dp"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="220dp"
+            app:layout_constraintLeft_toRightOf="@id/cl3_cl2"
             android:textSize="13sp" />
 
         <TextView
             android:id="@+id/tv2"
-            android:layout_width="310dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="140dp"
             android:layout_marginLeft="12dp"

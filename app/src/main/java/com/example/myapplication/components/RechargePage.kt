@@ -75,7 +75,7 @@ class RechargePage : ComponentActivity() {
         val demographicsList: MutableList<String> = ArrayList()
 
         demographicsList.add("今日测试股票 上市")
-        demographicsList.add("今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购")
+        demographicsList.add("今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购")
         demographicsList.add("今日中国平安 上市")
 
         marqueeText.setList(demographicsList)

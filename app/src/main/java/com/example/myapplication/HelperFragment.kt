@@ -15,6 +15,7 @@ import com.example.myapplication.components.SisthActivity
 import com.example.myapplication.components.ThirdActivity
 import com.example.myapplication.databinding.FragmentHelperBinding
 import com.example.myapplication.components.RechargePage
+import com.gyf.immersionbar.ImmersionBar
 
 class HelperFragment : Fragment(){
     private  var _binding : FragmentHelperBinding? = null
@@ -23,6 +24,10 @@ class HelperFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHelperBinding.inflate(inflater, container, false)
         val view = binding.root
+        ImmersionBar.with(this)
+            .transparentStatusBar()  //透明状态栏，不写默认透明色
+            .titleBar(binding.toolbar)    //解决状态栏和布局重叠问题，任选其一
+            .init();
         return view
     }
 

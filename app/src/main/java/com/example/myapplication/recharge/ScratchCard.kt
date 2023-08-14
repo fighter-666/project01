@@ -21,6 +21,7 @@ import java.util.Random
 
 
 class ScratchCard : View {
+    private var customViewB: ScratchCardView? = null
     private lateinit var mBitmapBackground: Bitmap
     private lateinit var mBitmapFront: Bitmap
     private var mCanvas: Canvas? = null
@@ -35,9 +36,17 @@ class ScratchCard : View {
     var disX: Float = 0f
     var disY: Float = 0f
     private var shouldInterceptScroll = false
+    private var isOnceMore = false
     private var showFullResult = false
     private var viewpage2Scoll = false
     private val scrollThreshold = 160
+    private var isScratched = false
+
+    // 重置刮刮乐的状态
+    fun resetScratchCard() {
+        isScratched = true
+        invalidate()
+    }
 
     constructor(context: Context?) : super(context) {
         init()
@@ -91,6 +100,17 @@ class ScratchCard : View {
         } else {
             // 绘制刮动的路径线条
         }
+        /*if (isScratched){
+            paint?.alpha = 255 // 设置透明
+            canvas.drawBitmap(mBitmapFront, 62f, 36f, null)
+            if (showFullResult) {
+                // 绘制完整的刮奖结果
+                paint?.alpha = 0 // 设置透明
+                canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
+            } else {
+                // 绘制刮动的路径线条
+            }
+        }*/
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -114,15 +134,15 @@ class ScratchCard : View {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 path!!.reset()
-                path!!.moveTo(event.x, event.y) //原点移动至手指的触摸点
-                startX = event.x
-                startY = event.y
+                path!!.moveTo(event.x -62, event.y -36) //原点移动至手指的触摸点
+                startX = event.x -62
+                startY = event.y -36
             }
 
             MotionEvent.ACTION_MOVE -> {
-                path!!.lineTo(event.x, event.y)
-                endX = event.x
-                endY = event.y
+                path!!.lineTo(event.x - 62, event.y - 36)
+                endX = event.x -62
+                endY = event.y -36
                 disX = Math.abs(endX - startX)
                 disY = Math.abs(endY - startY)
             }
@@ -195,4 +215,24 @@ class ScratchCard : View {
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
     }
+
+    /*fun setCustomViewB(customViewB: ScratchCardView) {
+        this.customViewB = customViewB
+    }
+
+    fun getValueFromCustomViewB(): Boolean {
+        return customViewB?.getValue() ?: false
+    }
+
+    fun someFunction() {
+        // 在 CustomViewA 内部调用 setCustomViewB 和 getValueFromCustomViewB 方法
+        val scratchCardView = ScratchCardView(context)
+        this.setCustomViewB(scratchCardView)
+
+        isOnceMore = this.getValueFromCustomViewB()
+
+        // 使用获取到的 value 进行后续操作
+    }
+
+    //这个方法可以在外部调用，用于将自定义 View B 的实例传递给自定义 View A。*/
 }

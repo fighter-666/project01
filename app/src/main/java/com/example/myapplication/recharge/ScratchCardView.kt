@@ -17,6 +17,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
@@ -35,6 +36,7 @@ import kotlinx.coroutines.launch
 
 
 class ScratchCardView : ConstraintLayout {
+    private var isOnceMore: Boolean = false
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textview: TextView
@@ -70,6 +72,8 @@ class ScratchCardView : ConstraintLayout {
     }
 
 
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RestrictedApi", "WrongViewCast")
     private fun initView(context: Context, attrs: AttributeSet) {
@@ -77,6 +81,7 @@ class ScratchCardView : ConstraintLayout {
         LayoutInflater.from(context).inflate(R.layout.scratch_card, this)
         imageView = findViewById<ImageView>(R.id.image_hand)
         imageView2 = findViewById<ImageView>(R.id.image_hand2)
+        textview = findViewById(R.id.cl4_tv9)
         val container = findViewById<LinearLayout>(R.id.container)
         val customView = ScratchCard(getContext())
         container.addView(customView)
@@ -98,6 +103,11 @@ class ScratchCardView : ConstraintLayout {
         imageView.setOnClickListener {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
+        }
+
+        textview.setOnClickListener {
+            Toast.makeText(context, "再来一次", Toast.LENGTH_SHORT).show()
+            //customView.resetScratchCard()
         }
 
         val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f)
@@ -139,5 +149,9 @@ class ScratchCardView : ConstraintLayout {
 
     }
 
-    
+    fun getValue(): Boolean? {
+        return isOnceMore
+    }
+
+
 }
