@@ -150,12 +150,45 @@ class ScratchCard : View {
                 val diagonal = Math.sqrt((disX * disX + disY * disY).toDouble())
                 area = diagonal.toFloat() * 50f // 计算滑动的面积
                 sum += area
-                LogUtils.d(
-                    "area=" + area+"; disX=" + disX + "; disY=" + disY + "; sum=" + sum
-                )
+
             }
 
         }
+
+
+        val bitmap: Bitmap = mBitmapFront // 从某处获取位图对象
+        val w: Int = bitmap.width // 位图的宽度
+        val h: Int = bitmap.height // 位图的高度
+        val mPixels: IntArray = IntArray(w * h) // 创建一个整型数组来存储像素数据
+
+        bitmap.getPixels(mPixels, 0, w, 0, 0, w, h)
+        var wipeArea = 0f
+        val totalArea = w * h.toFloat()
+
+        for (i in 0 until w) {
+            for (j in 0 until h) {
+                val index = i + j * w
+                if (mPixels[index] == 0) {
+                    // 当 wipeArea > 30 时，说明文字全部刮出来了
+                    wipeArea++
+                }
+            }
+        }
+
+// 计算刮开区域的百分比
+        if (wipeArea > 0 && totalArea > 0) {
+            val percent = (wipeArea * 100 / totalArea).toInt()
+            // 处理刮开区域百分比的逻辑
+            if(percent>25){
+                showFullResult = true
+            }
+            LogUtils.d(
+                "totalArea=" + totalArea+"; wipeArea=" + wipeArea + "; percent=" + percent + "; showFullResult=" + showFullResult
+            )
+        }
+
+
+// 现在 mPixels 数组中存储了位图的像素数据
 
 
         //上下冲突
@@ -165,12 +198,12 @@ class ScratchCard : View {
             shouldInterceptScroll = false
         }
 
-        //1/4时显示全部
+        /*//1/4时显示全部
         if (sum > (area2/4)) {
             showFullResult = true
         } else {
             showFullResult = false
-        }
+        }*/
 
         if ((endX - startX) > halfWidth) {
             viewpage2Scoll = true
@@ -227,23 +260,5 @@ class ScratchCard : View {
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
     }
 
-    /*fun setCustomViewB(customViewB: ScratchCardView) {
-        this.customViewB = customViewB
-    }
 
-    fun getValueFromCustomViewB(): Boolean {
-        return customViewB?.getValue() ?: false
-    }
-
-    fun someFunction() {
-        // 在 CustomViewA 内部调用 setCustomViewB 和 getValueFromCustomViewB 方法
-        val scratchCardView = ScratchCardView(context)
-        this.setCustomViewB(scratchCardView)
-
-        isOnceMore = this.getValueFromCustomViewB()
-
-        // 使用获取到的 value 进行后续操作
-    }
-
-    //这个方法可以在外部调用，用于将自定义 View B 的实例传递给自定义 View A。*/
 }
