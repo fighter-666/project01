@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="151dp"
-
     android:id="@+id/rl"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
     tools:ignore="MissingDefaultResource">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,132 +13,132 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_rectangle5"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/cl4_tv7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="16dp"
+            android:gravity="left"
             android:text="赠送翻牌机会 1 次"
             android:textColor="#333333"
             android:textSize="14sp"
-            android:gravity="left"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="13dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/cl4_tv8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="累计剩余3次"
             android:paddingLeft="13dp"
+            android:text="累计剩余3次"
             android:textColor="#999999"
             android:textSize="13sp"
-            app:layout_constraintLeft_toRightOf="@id/cl4_tv7"
             app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
-            app:layout_constraintTop_toTopOf="@id/cl4_tv7"
-            />
+            app:layout_constraintLeft_toRightOf="@id/cl4_tv7"
+            app:layout_constraintTop_toTopOf="@id/cl4_tv7" />
 
         <ImageView
             android:id="@+id/cl3_im2"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginRight="3dp"
-            app:layout_constraintRight_toLeftOf="@id/cl4_tv9"
+            android:src="@drawable/refresh"
             app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
-            app:layout_constraintTop_toTopOf="@id/cl4_tv7"
-            android:src="@drawable/refresh" />
+            app:layout_constraintRight_toLeftOf="@id/cl4_tv9"
+            app:layout_constraintTop_toTopOf="@id/cl4_tv7" />
 
         <TextView
             android:id="@+id/cl4_tv9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
             android:text="换一换"
             android:textColor="#999999"
-            android:layout_marginRight="15dp"
-            app:layout_constraintRight_toRightOf="parent"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
-            app:layout_constraintTop_toTopOf="@id/cl4_tv7"
-            android:textSize="12sp" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cl4_tv7" />
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card1_copy"
-            android:layout_width="97dp"
-            android:layout_height="98dp"
-            android:src="@drawable/card1"
-            android:layout_marginTop="8dp"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
-            app:layout_constraintRight_toLeftOf="@id/card2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            />
-
-        <ImageView
-            android:id="@+id/card1"
-            android:layout_width="97dp"
-            android:layout_height="98dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/card1"
-            android:transitionName="transition_image"
-            app:layout_constraintHorizontal_chainStyle="spread"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/card2"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7" />
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:riv_corner_radius="10dp" />
 
-        <ImageView
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/card1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/card1"
+            android:layout_marginLeft="10dp"
+            android:transitionName="transition_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:riv_corner_radius="10dp" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card2_copy"
-            android:layout_width="97dp"
-            android:layout_height="98dp"
-            android:src="@drawable/card1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:src="@drawable/card1"
+            android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
             app:layout_constraintLeft_toRightOf="@id/card1"
-            app:layout_constraintRight_toLeftOf="@id/card3"
-            />
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:riv_corner_radius="10dp" />
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card2"
-            android:layout_width="97dp"
-            android:layout_height="98dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:src="@drawable/card2"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
             app:layout_constraintLeft_toRightOf="@id/card1"
-            app:layout_constraintRight_toLeftOf="@id/card3"
-            />
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:riv_corner_radius="10dp" />
 
 
-
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card3_copy"
-            android:layout_width="97dp"
-            android:layout_height="98dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:src="@drawable/card1"
-            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
             app:layout_constraintLeft_toRightOf="@id/card2"
-            app:layout_constraintRight_toRightOf="parent"
-            />
-        <ImageView
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:riv_corner_radius="10dp" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/card3"
-            android:layout_width="97dp"
-            android:layout_height="98dp"
-            android:src="@drawable/card3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:src="@drawable/card3"
+            android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
             app:layout_constraintLeft_toRightOf="@id/card2"
-            app:layout_constraintRight_toRightOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:riv_corner_radius="10dp" />
 
         <!--<androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view3"

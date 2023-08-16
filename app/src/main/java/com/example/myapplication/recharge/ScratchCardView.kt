@@ -27,8 +27,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import com.example.myapplication.R
 import androidx.core.util.Pair
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ScreenUtils
+import com.example.myapplication.GetScreenUtils
 import com.example.recharge.DensityUtils
+import com.example.recharge.DisplayUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -82,9 +85,45 @@ class ScratchCardView : ConstraintLayout {
         imageView = findViewById<ImageView>(R.id.image_hand)
         imageView2 = findViewById<ImageView>(R.id.image_hand2)
         textview = findViewById(R.id.cl4_tv9)
-        val container = findViewById<LinearLayout>(R.id.container)
+        //
+        val container = findViewById<ConstraintLayout>(R.id.container)
         val customView = ScratchCard(getContext())
         container.addView(customView)
+
+        //动态设置宽高
+        val screenWidth = GetScreenUtils.getScreenWidth(context)
+
+        val imageWidth = (screenWidth-DensityUtils.dpToPx(context, 46f))
+
+        LogUtils.d(
+            "screenWidth=" + GetScreenUtils.getScreenWidth(context) + "; imageWidth=" + imageWidth
+        )
+        val layoutParams1 = container.layoutParams
+        val initialWidth = layoutParams1.width
+        val initialHeighgt = layoutParams1.height
+        layoutParams1.width = imageWidth
+        val widthScale = layoutParams1.width.toFloat() / initialWidth.toFloat()
+        layoutParams1.height = initialHeighgt * widthScale.toInt()
+        container.layoutParams = layoutParams1
+
+
+        /*val layoutParams2 = imageView.layoutParams
+        val initialWidth2 = layoutParams2.width
+        val initialHeighgt2 = layoutParams2.height
+        layoutParams2.width = initialWidth2 * widthScale.toInt()
+        layoutParams2.height = initialHeighgt2 * widthScale.toInt()
+        imageView.layoutParams = layoutParams2
+
+        val layoutParams3 = imageView2.layoutParams
+        val initialWidth3 = layoutParams3.width
+        val initialHeighgt3 = layoutParams3.height
+        layoutParams3.width = initialWidth3 * widthScale.toInt()
+        layoutParams3.height = initialHeighgt3 * widthScale.toInt()
+        imageView2.layoutParams = layoutParams3*/
+
+        LogUtils.d(
+            "layoutParams1?.width=" + layoutParams1?.width+"; initialWidth=" + initialWidth + "; widthScale=" + widthScale
+        )
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ScratchCardView)
         val drawable = typedArray.getDrawable(R.styleable.ScratchCardView_scratchSrc)
@@ -108,6 +147,8 @@ class ScratchCardView : ConstraintLayout {
         textview.setOnClickListener {
             Toast.makeText(context, "再来一次", Toast.LENGTH_SHORT).show()
             //customView.resetScratchCard()
+            val customView = ScratchCard(getContext())
+            container.addView(customView)
         }
 
         val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f)
@@ -115,7 +156,7 @@ class ScratchCardView : ConstraintLayout {
 
         translateX.duration = 1800
         translateY.duration = 1800
-        val combinedAnimatorSet = AnimatorSet().apply {
+        val AnimatorSet = AnimatorSet().apply {
             playTogether(translateX, translateY)
             playSequentially(translateX)
         }
@@ -125,26 +166,26 @@ class ScratchCardView : ConstraintLayout {
 
         translateX2.duration = 1800
         translateY2.duration = 1800
-        val combinedAnimatorSet2 = AnimatorSet().apply {
+        val AnimatorSet2 = AnimatorSet().apply {
             playTogether(translateX2, translateY2)
             playSequentially(translateX2)
         }
 
-        combinedAnimatorSet.addListener(object : AnimatorListenerAdapter() {
+        AnimatorSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
-                combinedAnimatorSet2.start() // 重新开始动画
+                AnimatorSet2.start() // 重新开始动画
             }
         })
 
-        combinedAnimatorSet2.addListener(object : AnimatorListenerAdapter() {
+        AnimatorSet2.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
-                combinedAnimatorSet.start() // 重新开始动画
+                AnimatorSet.start() // 重新开始动画
             }
         })
 
-        combinedAnimatorSet.start()
+        AnimatorSet.start()
 
 
     }

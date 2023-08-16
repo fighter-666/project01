@@ -7,25 +7,23 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
-import com.example.myapplication.R
 import androidx.core.util.Pair
-import com.blankj.utilcode.util.ScreenUtils
+import com.blankj.utilcode.util.LogUtils
+import com.example.myapplication.R
+import com.example.myapplication.GetScreenUtils
 import com.example.recharge.DensityUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -33,6 +31,8 @@ class FlipCardView : ConstraintLayout {
     private lateinit var imageView: ImageView
     private  var drawable: Drawable? = null
     private lateinit var imageViewCopy: ImageView
+    private lateinit var imageView2Copy: ImageView
+    private lateinit var imageView3Copy: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var imageView3: ImageView
     private lateinit var textview: TextView
@@ -108,14 +108,50 @@ class FlipCardView : ConstraintLayout {
     private fun initView(context: Context, attrs: AttributeSet) {
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.flip_card, this)
-        imageView = findViewById<ImageView>(R.id.card1)
         imageViewCopy = findViewById<ImageView>(R.id.card1_copy)
+        imageView2Copy = findViewById<ImageView>(R.id.card2_copy)
+        imageView3Copy = findViewById<ImageView>(R.id.card3_copy)
+        imageView = findViewById<ImageView>(R.id.card1)
         imageView2 = findViewById<ImageView>(R.id.card2)
         imageView3 = findViewById<ImageView>(R.id.card3)
         textview = findViewById<TextView>(R.id.cl4_tv7)
         rl = findViewById(R.id.rl)
 
+        //动态设置图片宽高
 
+
+
+        val imageWidth = (GetScreenUtils.getScreenWidth(context) - DensityUtils.dpToPx(context, 66f) )/ 3
+        LogUtils.d(
+            "screenWidth=" + GetScreenUtils.getScreenWidth(context) + "; imageWidth=" + imageWidth
+        )
+
+        val layoutParams1 = imageView.layoutParams
+        layoutParams1.width = imageWidth
+        layoutParams1.height = imageWidth
+        imageView.layoutParams = layoutParams1
+        val layoutParams1Copy = imageViewCopy.layoutParams
+        layoutParams1Copy.width = imageWidth
+        layoutParams1Copy.height = imageWidth
+        imageViewCopy.layoutParams = layoutParams1Copy
+
+        val layoutParams2 = imageView2.layoutParams
+        layoutParams2.width = imageWidth
+        layoutParams2.height = imageWidth
+        imageView2.layoutParams = layoutParams2
+        val layoutParams2Copy = imageView2Copy.layoutParams
+        layoutParams2Copy.width = imageWidth
+        layoutParams2Copy.height = imageWidth
+        imageView2Copy.layoutParams = layoutParams2Copy
+
+        val layoutParams3 = imageView3.layoutParams
+        layoutParams3.width = imageWidth
+        layoutParams3.height = imageWidth
+        imageView3.layoutParams = layoutParams3
+        val layoutParams3Copy = imageView3Copy.layoutParams
+        layoutParams3Copy.width = imageWidth
+        layoutParams3Copy.height = imageWidth
+        imageView3Copy.layoutParams = layoutParams3Copy
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FlipCardView)
         val drawable = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc)
@@ -125,14 +161,15 @@ class FlipCardView : ConstraintLayout {
         typedArray.recycle()
 
 
+
         // 设置图片资源
         imageView.setImageDrawable(drawable)
-        imageViewCopy.setImageDrawable(drawableCopy)
+        //imageViewCopy.setImageDrawable(drawableCopy)
         imageView2.setImageDrawable(drawable2)
         imageView3.setImageDrawable(drawable3)
 
-        //imageView.setImageResource(R.drawable.card1)
-        imageViewCopy.setImageResource(R.drawable.card1)
+        imageView.setImageResource(R.drawable.card1)
+       // imageViewCopy.setImageResource(R.drawable.card1)
         imageView2.setImageResource(R.drawable.card1)
         imageView3.setImageResource(R.drawable.card1)
 
@@ -181,17 +218,6 @@ class FlipCardView : ConstraintLayout {
 
             // 启动活动并应用转场动画
             myActivityLauncher3.launch(intent, options)
-
-
         }
-
-
-
     }
-
-    fun setCardImageResource(@DrawableRes resId: Int) {
-        findViewById<ImageView>(R.id.card1)?.setImageResource(resId)
-    }
-
-
 }

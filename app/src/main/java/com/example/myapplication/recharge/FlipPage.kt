@@ -79,6 +79,7 @@ class FlipPage : SlideRightBackActivity()  {
         hint = binding.card6
         bottom = binding.bottom
 
+
         beam.setImageResource(R.drawable.ic_flip_card_ray)
         card.setImageResource(R.drawable.card1)
         bottom.setImageResource(R.drawable.cheer)
