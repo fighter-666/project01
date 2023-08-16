@@ -45,6 +45,8 @@ class ScratchCard : View {
     private var viewpage2Scoll = false
     private val scrollThreshold = 160
     private var isScratched = false
+    var scaleWidth :Float = 0f
+    var scaleHeight :Float = 0f
 
     // 重置刮刮乐的状态
     fun resetScratchCard() {
@@ -96,11 +98,11 @@ class ScratchCard : View {
 
     override fun onDraw(canvas: Canvas) {
         canvas.drawBitmap(mBitmapBackground, 0f, 0f, null)
-        canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
+        canvas.drawBitmap(mBitmapFront,  (mBitmapBackground.width*0.06).toFloat(), (mBitmapBackground.height*0.1).toFloat(), paint)
         if (showFullResult) {
             // 绘制完整的刮奖结果
             paint?.alpha = 0 // 设置透明
-            canvas.drawBitmap(mBitmapFront, 62f, 36f, paint)
+            canvas.drawBitmap(mBitmapFront, (mBitmapBackground.width*0.06).toFloat(), (mBitmapBackground.height*0.1).toFloat(), paint)
         } else {
             // 绘制刮动的路径线条
         }
@@ -110,9 +112,9 @@ class ScratchCard : View {
         super.onSizeChanged(w, h, oldw, oldh)
         mBitmapBackground = getBitmap(mBitmapBackground, w, h)
         mBitmapFront = Bitmap.createBitmap(
-            mBitmapBackground.width - 124,
+            (mBitmapBackground.width*0.88).toInt(),
 
-            mBitmapBackground.height - 72 , Bitmap.Config.ARGB_8888
+            (mBitmapBackground.height*0.8).toInt() , Bitmap.Config.ARGB_8888
         )
         area2 = (mBitmapFront.width * mBitmapFront.height).toFloat()
         LogUtils.d(
@@ -131,15 +133,15 @@ class ScratchCard : View {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 path!!.reset()
-                path!!.moveTo(event.x -62, event.y -36) //原点移动至手指的触摸点
-                startX = event.x -62
-                startY = event.y -36
+                path!!.moveTo(event.x -(mBitmapBackground.width*0.06).toFloat(), event.y -(mBitmapBackground.height*0.1).toFloat()) //原点移动至手指的触摸点
+                startX = event.x
+                startY = event.y
             }
 
             MotionEvent.ACTION_MOVE -> {
-                path!!.lineTo(event.x - 62, event.y - 36)
-                endX = event.x -62
-                endY = event.y -36
+                path!!.lineTo(event.x - (mBitmapBackground.width*0.06).toFloat(), event.y - (mBitmapBackground.height*0.1).toFloat())
+                endX = event.x
+                endY = event.y
 
             }
             MotionEvent.ACTION_UP -> {
@@ -251,8 +253,8 @@ class ScratchCard : View {
         val width = bm.width
         val height = bm.height
         // 计算缩放比例
-        val scaleWidth = newWidth.toFloat() / width
-        val scaleHeight = newHeight.toFloat() / height
+        scaleWidth = newWidth.toFloat() / width
+        scaleHeight = newHeight.toFloat() / height
         // 取得想要缩放的matrix参数
         val matrix = Matrix()
         matrix.postScale(scaleWidth, scaleHeight)
