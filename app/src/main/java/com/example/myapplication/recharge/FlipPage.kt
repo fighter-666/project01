@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.Toast
+import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -21,6 +21,7 @@ import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.example.myapplication.GetScreenUtils
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityFlipPageBinding
 import com.gyf.immersionbar.ImmersionBar
@@ -28,7 +29,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.reflect.Method
 import java.util.Random
 
 /**
@@ -93,6 +93,22 @@ class FlipPage : SlideRightBackActivity()  {
         closeicon.setOnClickListener {
             onBackPressed()
         }
+
+        val imageWidth = GetScreenUtils.getScreenWidth(this)
+
+
+        val layoutParams1 = bottom.layoutParams
+        val initialWidth = 720
+        val initialHeight = 377
+
+        layoutParams1.width = imageWidth
+        val widthScale1 = layoutParams1.width.toFloat() / 720
+        layoutParams1.height = (initialHeight * widthScale1).toInt()
+        bottom.layoutParams = layoutParams1
+        LogUtils.d(
+            "layoutParams1.width=" + layoutParams1.width + "; imageWidth=" + imageWidth+ "; initialWidth=" + initialWidth+ "; initialHeight=" + initialHeight
+                    + "; widthScale1=" + widthScale1+ "; layoutParams1.height=" + layoutParams1.height
+        )
 
         //铁链的效果移除，我的测试机density是2.75
         val density = resources.displayMetrics.density

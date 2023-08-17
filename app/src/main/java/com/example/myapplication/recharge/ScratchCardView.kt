@@ -4,38 +4,22 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityOptionsCompat
 import com.example.myapplication.R
-import androidx.core.util.Pair
 import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ScreenUtils
 import com.example.myapplication.GetScreenUtils
 import com.example.recharge.DensityUtils
-import com.example.recharge.DisplayUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 class ScratchCardView : ConstraintLayout {
@@ -43,6 +27,7 @@ class ScratchCardView : ConstraintLayout {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textview: TextView
+    private lateinit var close: ConstraintLayout
     private lateinit var rl: ConstraintLayout
 
     /**
@@ -85,6 +70,7 @@ class ScratchCardView : ConstraintLayout {
         imageView = findViewById<ImageView>(R.id.image_hand)
         imageView2 = findViewById<ImageView>(R.id.image_hand2)
         textview = findViewById(R.id.cl4_tv9)
+        close = findViewById(R.id.close)
         //
         val container = findViewById<ConstraintLayout>(R.id.container)
         val customView = ScratchCard(getContext())
@@ -139,7 +125,7 @@ class ScratchCardView : ConstraintLayout {
         imageView2.setImageResource(R.drawable.hand)
 
         //点击事件
-        imageView.setOnClickListener {
+        close.setOnClickListener {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
         }
@@ -186,6 +172,7 @@ class ScratchCardView : ConstraintLayout {
         })
 
         AnimatorSet.start()
+
 
 
     }

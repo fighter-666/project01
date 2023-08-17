@@ -28,8 +28,12 @@ class FirstAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : Bas
         lp1?.height = lp1.width
         holder.itemView.layoutParams = lp1
         val widthScale1 = lp1.width.toFloat() / initialWidth.toFloat()
-        binding.ivImage.scaleX = widthScale1
-        binding.ivImage.scaleY = widthScale1
+        val layoutParams1 = binding.ivImage.layoutParams
+        val initialImageWidth = layoutParams1.width
+        layoutParams1.width = (initialImageWidth * widthScale1).toInt()
+        layoutParams1.height = layoutParams1.width
+        binding.ivImage.layoutParams = layoutParams1
+
         lp1?.height = lp1.width
         holder.itemView.layoutParams = lp1
         binding.name.textSize = 13f*widthScale1
@@ -39,17 +43,23 @@ class FirstAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : Bas
         if (data.size <= 3) {//处理居中
             val lp = holder.itemView.layoutParams   //获取列表项视图（item view）的布局参数。
             lp?.width = (ScreenUtils.getScreenWidth() - DensityUtils.dpToPx(context, 68f)) / data.size
-            val widthScale = lp.width.toFloat() / initialWidth.toFloat()
-            LogUtils.d(
-                "ScreenUtils.getScreenWidth()= " + ScreenUtils.getScreenWidth()+"lp?.width=" + lp?.width+"; initialWidth=" + initialWidth + "; widthScale=" + widthScale
-                    )
 
-            binding.ivImage.scaleX = widthScale
-            binding.ivImage.scaleY = widthScale
+           /* val layoutParams = binding.ivImage.layoutParams
+            val initialImageWidth = layoutParams1.width
+            layoutParams1.width = (initialImageWidth * widthScale1).toInt()
+            val widthScale = layoutParams.width.toFloat() / initialImageWidth.toFloat()
+            layoutParams1.height = layoutParams1.width
+            binding.ivImage.layoutParams = layoutParams*/
+
+           /* LogUtils.d(
+                "ScreenUtils.getScreenWidth()= " + ScreenUtils.getScreenWidth()+"lp?.width=" + lp?.width+"; initialWidth=" + initialWidth + "; widthScale=" + widthScale
+            )*/
+
             lp?.height = lp.width
             holder.itemView.layoutParams = lp
-            binding.name.textSize = 13f*widthScale
-            binding.name2.textSize = 10f*widthScale
+
+            /*binding.name.textSize = 13f*widthScale
+            binding.name2.textSize = 10f*widthScale*/
         } /*else {//0.7表示显示程度
             val lp = LinearLayout.LayoutParams(((context.getResources().getDisplayMetrics().widthPixels) / 4.7f).toInt(), ViewGroup.LayoutParams.MATCH_PARENT)
             holder.itemView.layoutParams = lp

@@ -194,7 +194,7 @@ class ScratchCard : View {
 
 
         //上下冲突
-        if ((endY - startY) < scrollThreshold) {
+        if ((endY - startY) < mBitmapBackground.height) {
             shouldInterceptScroll = true
         } else {
             shouldInterceptScroll = false
@@ -207,10 +207,10 @@ class ScratchCard : View {
             showFullResult = false
         }*/
 
-        if ((endX - startX) > halfWidth) {
-            viewpage2Scoll = true
+        if ((endX - startX) > mBitmapBackground.width) {
+            parent.requestDisallowInterceptTouchEvent(true)
         } else {
-            viewpage2Scoll = false
+            parent.requestDisallowInterceptTouchEvent(false)
         }
 
         mCanvas!!.drawPath(path!!, pathPaint!!)
