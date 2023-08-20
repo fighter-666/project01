@@ -2,8 +2,24 @@ package com.example.myapplication.components
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StrikethroughSpan
+import android.text.style.StyleSpan
+import android.text.style.SubscriptSpan
+import android.text.style.SuperscriptSpan
+import android.text.style.URLSpan
+import android.text.style.UnderlineSpan
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivitySecondBinding
 import com.gyf.immersionbar.ImmersionBar
 
@@ -19,34 +35,74 @@ class SecondActivity : AppCompatActivity() {
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init();
 
-        binding.llAddAccount.setOnClickListener {
-            val objectAnimation = ObjectAnimator.ofFloat(binding.llAddAccount, "translationX", 0f, -270f)
-            objectAnimation.start()
-        }
-        binding.tvText.setOnClickListener {
-            val objectAnimation =ObjectAnimator.ofFloat(binding.tvText, "scaleX", 1f,2f)
-            objectAnimation.duration=3000
-            objectAnimation.repeatCount=2
-            objectAnimation.repeatMode= ValueAnimator.RESTART
-            objectAnimation.start()
-        }
-        binding.tvText.setOnClickListener {
-            val objectAnimation =ObjectAnimator.ofFloat(binding.tvText, "alpha", 1f,0f,1f)
-            objectAnimation.duration=3000
-            objectAnimation.start()
-        }
-        binding.tvText.setOnClickListener {
-            val objectAnimation =
-                ObjectAnimator.ofFloat(binding.tvText, "rotation", 0f,360f,0f)
-            objectAnimation.duration=5000
-            objectAnimation.repeatCount=ValueAnimator.INFINITE
-            objectAnimation.repeatMode= ValueAnimator.RESTART
-            objectAnimation.start()
-        }
+        val spannableString = SpannableString("设置文字的前景色为淡蓝色")
+        val colorSpan = ForegroundColorSpan(Color.parseColor("#9999EE"))
+        spannableString.setSpan(colorSpan, 9 , spannableString.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText.setText(spannableString)
 
+        val spannableString2 = SpannableString("设置文字的背景色为淡绿色")
+        val colorSpan1 = BackgroundColorSpan(Color.parseColor("#AC00FF30"))
+        spannableString2.setSpan(colorSpan1, 9 , spannableString2.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText2.setText(spannableString2)
 
+        val spannableString3 = SpannableString("万丈高楼平地起")
+        val sizeSpan = RelativeSizeSpan(1.2f)
+        val sizeSpan2 = RelativeSizeSpan(1.4f)
+        val sizeSpan3 = RelativeSizeSpan(1.6f)
+        val sizeSpan4 = RelativeSizeSpan(1.8f)
+        val sizeSpan5 = RelativeSizeSpan(1.6f)
+        val sizeSpan6 = RelativeSizeSpan(1.4f)
+        val sizeSpan7 = RelativeSizeSpan(1.2f)
+        spannableString3.setSpan(sizeSpan, 0 , 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString3.setSpan(sizeSpan2, 1 , 2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString3.setSpan(sizeSpan3, 2 , 3, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString3.setSpan(sizeSpan4, 3 , 4, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString3.setSpan(sizeSpan5, 4 , 5, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString3.setSpan(sizeSpan6, 5 , 6, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString3.setSpan(sizeSpan7, 6 , 7, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText3.setText(spannableString3)
 
+        val spannableString4 = SpannableString("为文字设置删除线")
+        val strikethroughSpan = StrikethroughSpan()
+        spannableString4.setSpan(strikethroughSpan, 5 , spannableString4.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText4.setText(spannableString4)
 
+        val spannableString5 = SpannableString("为文字设置下划线")
+        val underlineSpan = UnderlineSpan()
+        spannableString5.setSpan(underlineSpan, 5 , spannableString5.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText5.setText(spannableString5)
+
+        val spannableString6 = SpannableString("为文字设置上标")
+        val superscriptSpan = SuperscriptSpan()
+        spannableString6.setSpan(superscriptSpan, 5 , spannableString6.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText6.setText(spannableString6)
+
+        val spannableString6Copy = SpannableString("为文字设置下标")
+        val superscriptSpan2 = SubscriptSpan()
+        spannableString6.setSpan(superscriptSpan2, 5 , spannableString6.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText6Copy.setText(spannableString6Copy)
+
+        val spannableString7 = SpannableString("为文字设置粗体、斜体风格")
+        val styleSpan_B = StyleSpan(Typeface.BOLD)
+        val styleSpan_i = StyleSpan(Typeface.ITALIC)
+        spannableString7.setSpan(styleSpan_B, 5 , 7, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        spannableString7.setSpan(styleSpan_i, 7 , 10, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText7.setText(spannableString7)
+
+        val spannableString8 = SpannableString("在文本中添加表情（表情）")
+        val drawable = resources.getDrawable(R.drawable.beans)
+        drawable.setBounds(0, 0, 82, 82)
+        val imageSpan = ImageSpan(drawable)
+        spannableString8.setSpan(imageSpan, 6 , 8, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText8.setText(spannableString8)
+
+        val spannableString9 = SpannableString("在文字设置点击事件")
+        //val clickableSpan = MyClickableSpan("http://www.jianshu.com/users/dbae0ac95c78", this)
+        val clickableSpan = URLSpan("http://www.jianshu.com/users/dbae0ac95c78")
+        spannableString9.setSpan(clickableSpan, 5 , spannableString9.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        binding.tvText9.setMovementMethod(LinkMovementMethod.getInstance())
+        binding.tvText9.setHighlightColor(Color.parseColor("#36969696"))
+        binding.tvText9.setText(spannableString9)
 
     }
 }

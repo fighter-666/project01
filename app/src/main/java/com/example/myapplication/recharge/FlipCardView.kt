@@ -37,6 +37,8 @@ class FlipCardView : ConstraintLayout {
     private lateinit var imageView3: ImageView
     private lateinit var textview: TextView
     private lateinit var rl: ConstraintLayout
+    private  var screenWidth: Int = 0
+    private var customAttrs: AttributeSet? = null
 
     /**
      * 这个构造方法是在代码中new的时候调用的
@@ -51,7 +53,8 @@ class FlipCardView : ConstraintLayout {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        initView(context, attrs)
+        customAttrs = attrs
+        initView(context)
     }
 
     /**
@@ -65,6 +68,8 @@ class FlipCardView : ConstraintLayout {
         attrs,
         defStyleAttr
     ) {
+
+
     }
     //抽到的卡片回传到自定义View，(context as ComponentActivity)将 context 对象强制转换为 ComponentActivity 类型，以便可以调用 ComponentActivity 类中定义的方法和属性。
     // 这样做可能是因为需要在 ComponentActivity 的上下文中执行一些特定的操作，或者需要使用 ComponentActivity 提供的特定功能。
@@ -103,29 +108,17 @@ class FlipCardView : ConstraintLayout {
             }
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("RestrictedApi", "WrongViewCast")
-    private fun initView(context: Context, attrs: AttributeSet) {
-        //获取子控件
-        LayoutInflater.from(context).inflate(R.layout.flip_card, this)
-        imageViewCopy = findViewById<ImageView>(R.id.card1_copy)
-        imageView2Copy = findViewById<ImageView>(R.id.card2_copy)
-        imageView3Copy = findViewById<ImageView>(R.id.card3_copy)
-        imageView = findViewById<ImageView>(R.id.card1)
-        imageView2 = findViewById<ImageView>(R.id.card2)
-        imageView3 = findViewById<ImageView>(R.id.card3)
-        textview = findViewById<TextView>(R.id.cl4_tv7)
-        rl = findViewById(R.id.rl)
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        //动态设置图片宽高
+        screenWidth = measuredWidth
 
-
-
-        val imageWidth = (GetScreenUtils.getScreenWidth(context) - DensityUtils.dpToPx(context, 66f) )/ 3
+        val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f) )/ 3
         LogUtils.d(
-            "screenWidth=" + GetScreenUtils.getScreenWidth(context) + "; imageWidth=" + imageWidth
+            "screenWidth=" + screenWidth + "; px=" + imageWidth
         )
-
         val layoutParams1 = imageView.layoutParams
         layoutParams1.width = imageWidth
         layoutParams1.height = imageWidth
@@ -152,8 +145,43 @@ class FlipCardView : ConstraintLayout {
         layoutParams3Copy.width = imageWidth
         layoutParams3Copy.height = imageWidth
         imageView3Copy.layoutParams = layoutParams3Copy
+        // 请求重新布局
+        requestLayout()
+        post {
+            invalidate()
+        }
+        LogUtils.d(
+            "55screenWidth=" + screenWidth
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FlipCardView)
+        )
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("RestrictedApi", "WrongViewCast")
+    private fun initView(context: Context) {
+        //获取子控件
+        LayoutInflater.from(context).inflate(R.layout.flip_card, this)
+        imageViewCopy = findViewById<ImageView>(R.id.card1_copy)
+        imageView2Copy = findViewById<ImageView>(R.id.card2_copy)
+        imageView3Copy = findViewById<ImageView>(R.id.card3_copy)
+        imageView = findViewById<ImageView>(R.id.card1)
+        imageView2 = findViewById<ImageView>(R.id.card2)
+        imageView3 = findViewById<ImageView>(R.id.card3)
+        textview = findViewById<TextView>(R.id.cl4_tv7)
+        rl = findViewById(R.id.rl)
+
+        //动态设置图片宽高
+
+
+
+
+
+
+
+        val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.FlipCardView)
         val drawable = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc)
         val drawableCopy = typedArray.getDrawable(R.styleable.FlipCardView_cardSrcCopy)
         val drawable2 = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc2)

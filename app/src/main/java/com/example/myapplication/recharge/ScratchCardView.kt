@@ -16,9 +16,9 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.myapplication.R
 import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.GetScreenUtils
+import com.example.myapplication.R
 import com.example.recharge.DensityUtils
 
 
@@ -29,6 +29,9 @@ class ScratchCardView : ConstraintLayout {
     private lateinit var textview: TextView
     private lateinit var close: ConstraintLayout
     private lateinit var rl: ConstraintLayout
+    private  var screenWidth: Int = 0
+    private var customAttrs: AttributeSet? = null
+
 
     /**
      * 这个构造方法是在代码中new的时候调用的
@@ -43,7 +46,9 @@ class ScratchCardView : ConstraintLayout {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        initView(context, attrs)
+        customAttrs = attrs
+
+        initView()
     }
 
     /**
@@ -59,14 +64,31 @@ class ScratchCardView : ConstraintLayout {
     ) {
     }
 
+    init {
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        screenWidth = measuredWidth
+        LogUtils.d(
+            "screenWidth=" + screenWidth
+
+        )
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RestrictedApi", "WrongViewCast")
-    private fun initView(context: Context, attrs: AttributeSet) {
+    private fun initView() {
+
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.scratch_card, this)
+        /*val parentView = findViewById<View>(R.id.rl)
+        val screenWidth = parentView.measuredWidth*/
+
         imageView = findViewById<ImageView>(R.id.image_hand)
         imageView2 = findViewById<ImageView>(R.id.image_hand2)
         textview = findViewById(R.id.cl4_tv9)
@@ -77,20 +99,24 @@ class ScratchCardView : ConstraintLayout {
         container.addView(customView)
 
         //动态设置宽高
-        val screenWidth = GetScreenUtils.getScreenWidth(context)
 
-        val imageWidth = (screenWidth-DensityUtils.dpToPx(context, 46f))
+        //val screenWidth = (parent as? View)?.width ?: 0
+        val imageWidth = (GetScreenUtils.getScreenWidth(context)-DensityUtils.dpToPx(context, 46f))
 
         LogUtils.d(
-            "screenWidth=" + GetScreenUtils.getScreenWidth(context) + "; imageWidth=" + imageWidth
+            "screenWidth=" + screenWidth + "; imageWidth=" + imageWidth+ "; parentView.measuredWidth="
         )
         val layoutParams1 = container.layoutParams
+        val layoutParamsClose = close.layoutParams
         val initialWidth = layoutParams1.width
         val initialHeighgt = layoutParams1.height
         layoutParams1.width = imageWidth
+        layoutParamsClose.width = imageWidth
         val widthScale = layoutParams1.width.toFloat() / initialWidth.toFloat()
         layoutParams1.height = initialHeighgt * widthScale.toInt()
         container.layoutParams = layoutParams1
+        close.layoutParams = layoutParamsClose
+
 
 
         /*val layoutParams2 = imageView.layoutParams
@@ -111,7 +137,7 @@ class ScratchCardView : ConstraintLayout {
             "layoutParams1?.width=" + layoutParams1?.width+"; initialWidth=" + initialWidth + "; widthScale=" + widthScale
         )
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ScratchCardView)
+        val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.ScratchCardView)
         val drawable = typedArray.getDrawable(R.styleable.ScratchCardView_scratchSrc)
         val drawable2 = typedArray.getDrawable(R.styleable.ScratchCardView_scratchSrc2)
         typedArray.recycle()
@@ -180,6 +206,7 @@ class ScratchCardView : ConstraintLayout {
     fun getValue(): Boolean? {
         return isOnceMore
     }
+
 
 
 }

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -29,6 +30,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.reflect.Method
 import java.util.Random
 
 /**
@@ -36,7 +38,7 @@ import java.util.Random
  *
  * @param valueAnimator 要重置时长的ValueAnimator对象
  */
-/*@SuppressLint("DiscouragedPrivateApi")
+@SuppressLint("DiscouragedPrivateApi")
 fun resetDurationScale(valueAnimator: ValueAnimator) {
     try {
         val method: Method = ValueAnimator::class.java.getDeclaredMethod("setDurationScale", Float::class.javaPrimitiveType)
@@ -45,7 +47,7 @@ fun resetDurationScale(valueAnimator: ValueAnimator) {
     } catch (e: Exception) {
         e.printStackTrace()
     }
-}*/
+}
 
 class FlipPage : SlideRightBackActivity()  {
     private lateinit var binding: ActivityFlipPageBinding
@@ -94,6 +96,7 @@ class FlipPage : SlideRightBackActivity()  {
             onBackPressed()
         }
 
+
         val imageWidth = GetScreenUtils.getScreenWidth(this)
 
 
@@ -125,7 +128,7 @@ class FlipPage : SlideRightBackActivity()  {
         val scaleY = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f)
         scaleX.duration = 400
         scaleY.duration = 400
-        //resetDurationScale(beamScaleX0)
+        resetDurationScale(beamScaleX0)
 
         val rotation = ObjectAnimator.ofFloat(card, View.ROTATION, 15f)
         rotation.duration = 200

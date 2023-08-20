@@ -1,39 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-
-
-        <LinearLayout
-            android:id="@+id/llAddAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="70dp"
-        android:background="@drawable/shape_rectangle10">
-
-
-        <ImageView
-            android:id="@+id/ivMakeNote"
-            android:layout_width="35dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="2dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:src="@drawable/batman" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <TextView
             android:id="@+id/tvText"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:paddingRight="12dp"
-            android:background="@color/purple_200"
             android:text="添加账户"
-            android:textSize="24sp" />
-</LinearLayout>
-    </RelativeLayout>
+            android:layout_marginTop="30dp"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText4"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText6"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText5"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText6Copy"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText6"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText6Copy"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText7"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText8"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvText10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="添加账户"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tvText9"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+</androidx.constraintlayout.widget.ConstraintLayout>

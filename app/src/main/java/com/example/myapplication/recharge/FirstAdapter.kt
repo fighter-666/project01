@@ -22,6 +22,8 @@ class FirstAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : Bas
         binding.name.text = item.name
         binding.name2.text = item.name2
 
+
+
         val lp1 = holder.itemView.layoutParams   //获取列表项视图（item view）的布局参数。
         val initialWidth = lp1.width
         lp1?.width  = ((ScreenUtils.getScreenWidth() - DensityUtils.dpToPx(context, 68f)).toFloat() / 3.5).toInt()

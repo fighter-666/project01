@@ -120,7 +120,7 @@ class ScratchCard : View {
         LogUtils.d(
             "area2=" + area2+"; mBitmapFront.width=" + mBitmapFront.width + "; mBitmapFront.width=" + mBitmapFront.height
         )
-        mCanvas!!.setBitmap(mBitmapFront)
+        mCanvas?.setBitmap(mBitmapFront)
         drawText(mCanvas, w, h)
     }
 
@@ -258,6 +258,9 @@ class ScratchCard : View {
         // 取得想要缩放的matrix参数
         val matrix = Matrix()
         matrix.postScale(scaleWidth, scaleHeight)
+        LogUtils.d(
+            "111width=" + width + "; height=" + height+ "; newWidth=" + newWidth+ "; scaleHeight=" + scaleHeight+ "; scaleWidth=" + scaleWidth
+        )
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
     }

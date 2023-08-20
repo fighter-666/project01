@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,31 +7,12 @@
 
 
 
-    <com.example.myapplication.recharge.ImageTextLayoutView
-        android:id="@+id/tv2_tv"
-        android:layout_marginTop="27dp"
-        android:layout_width="160dp"
-        android:layout_height="36dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:background="@drawable/shape_rectangle2"
-        app:imageWidth="20dp"
-        app:imageWidth2="20dp"
-        app:imageHeight="20dp"
-        app:imageHeight2="20dp"
-        app:textColor="@android:color/white"
-        app:textContent="查询余额"/>
+   <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:src="@drawable/card2"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintLeft_toLeftOf="parent"
+       />
 
-    <com.example.myapplication.CommonActionBar
-        android:id="@+id/tv_tv1"
-        android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:gravity="center"
-        app:imageWidth3="20dp"
-        app:imageHeight3="20dp"
-        app:title="评价"
-        app:textContent="aaaaa"
-        app:back_src="@drawable/back"
-        />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
