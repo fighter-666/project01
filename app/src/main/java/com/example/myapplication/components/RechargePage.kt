@@ -1,12 +1,15 @@
 package com.example.myapplication.components
 
+import android.graphics.Rect
 import android.os.Bundle
-import android.widget.ImageView
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
+import com.example.myapplication.recharge.FirstDecoration
 import com.example.myapplication.recharge.ScrollImageView
 import com.example.myapplication.recharge.ScrollTextView
 import com.example.myapplication.recharge.ScrrollTextViewBackground
@@ -22,7 +25,6 @@ import com.gyf.immersionbar.ImmersionBar
 class RechargePage : ComponentActivity() {
 
     private lateinit var binding: RechargePageBinding
-    private lateinit var imageView: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -93,11 +95,27 @@ class RechargePage : ComponentActivity() {
         //创建适配器
         val myAdapter = FirstAdapter(R.layout.first, piggies)
 
-        //设置布局管理器
+
+
+       //设置布局管理器
         binding.recyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        /*binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+           override fun getItemOffsets(
+               outRect: Rect,
+               view: View,
+               parent: RecyclerView,
+               state: RecyclerView.State,
+           ) {
+               super.getItemOffsets(outRect, view, parent, state)
+               outRect.set(44, 44, 44, 44) // 设置 item 的偏移量
+           }
+       })*/
+
 
         //给RecycleView设置适配器
        binding.recyclerView.setAdapter(myAdapter)
+
+
 
         val piggiesCopy = mutableListOf<Piggy>()
         piggiesCopy.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))

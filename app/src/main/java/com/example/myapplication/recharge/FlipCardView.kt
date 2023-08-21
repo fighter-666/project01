@@ -20,7 +20,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.R
-import com.example.myapplication.GetScreenUtils
 import com.example.recharge.DensityUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -112,9 +111,20 @@ class FlipCardView : ConstraintLayout {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
+        //获取屏幕真实宽度
         screenWidth = measuredWidth
+        // 请求重新布局
+        requestLayout()
+        post {
+            invalidate()
+        }
+    }
 
+
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        // 三等分
         val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f) )/ 3
         LogUtils.d(
             "screenWidth=" + screenWidth + "; px=" + imageWidth
@@ -123,6 +133,7 @@ class FlipCardView : ConstraintLayout {
         layoutParams1.width = imageWidth
         layoutParams1.height = imageWidth
         imageView.layoutParams = layoutParams1
+
         val layoutParams1Copy = imageViewCopy.layoutParams
         layoutParams1Copy.width = imageWidth
         layoutParams1Copy.height = imageWidth
@@ -132,6 +143,7 @@ class FlipCardView : ConstraintLayout {
         layoutParams2.width = imageWidth
         layoutParams2.height = imageWidth
         imageView2.layoutParams = layoutParams2
+
         val layoutParams2Copy = imageView2Copy.layoutParams
         layoutParams2Copy.width = imageWidth
         layoutParams2Copy.height = imageWidth
@@ -141,23 +153,11 @@ class FlipCardView : ConstraintLayout {
         layoutParams3.width = imageWidth
         layoutParams3.height = imageWidth
         imageView3.layoutParams = layoutParams3
+
         val layoutParams3Copy = imageView3Copy.layoutParams
         layoutParams3Copy.width = imageWidth
         layoutParams3Copy.height = imageWidth
         imageView3Copy.layoutParams = layoutParams3Copy
-        // 请求重新布局
-        requestLayout()
-        post {
-            invalidate()
-        }
-        LogUtils.d(
-            "55screenWidth=" + screenWidth
-
-        )
-    }
-
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
     }
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("RestrictedApi", "WrongViewCast")
@@ -173,22 +173,12 @@ class FlipCardView : ConstraintLayout {
         textview = findViewById<TextView>(R.id.cl4_tv7)
         rl = findViewById(R.id.rl)
 
-        //动态设置图片宽高
-
-
-
-
-
-
-
         val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.FlipCardView)
         val drawable = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc)
         val drawableCopy = typedArray.getDrawable(R.styleable.FlipCardView_cardSrcCopy)
         val drawable2 = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc2)
         val drawable3 = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc3)
         typedArray.recycle()
-
-
 
         // 设置图片资源
         imageView.setImageDrawable(drawable)

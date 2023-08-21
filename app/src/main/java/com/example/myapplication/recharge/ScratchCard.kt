@@ -10,9 +10,6 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
-import android.os.Handler
-import android.os.Message
-import android.os.SystemClock
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -39,11 +36,8 @@ class ScratchCard : View {
     var area: Float = 0f
     var area2: Float = 0f
     var sum: Float = 0f
-    private lateinit var mPixels: IntArray
     private var shouldInterceptScroll = false
     private var showFullResult = false
-    private var viewpage2Scoll = false
-    private val scrollThreshold = 160
     private var isScratched = false
     var scaleWidth :Float = 0f
     var scaleHeight :Float = 0f
@@ -200,12 +194,6 @@ class ScratchCard : View {
             shouldInterceptScroll = false
         }
 
-        /*//1/4时显示全部
-        if (sum > (area2/4)) {
-            showFullResult = true
-        } else {
-            showFullResult = false
-        }*/
 
         if ((endX - startX) > mBitmapBackground.width) {
             parent.requestDisallowInterceptTouchEvent(true)
@@ -220,18 +208,7 @@ class ScratchCard : View {
             parent.requestDisallowInterceptTouchEvent(true)
         }
 
-        /*if (disX > disY) {
-            //如果是纵向滑动，告知父布局不进行时间拦截，交由子布局消费，　requestDisallowInterceptTouchEvent(true)
-            parent.requestDisallowInterceptTouchEvent(canScrollHorizontally(startX - endX))
-        } else {
-            parent.requestDisallowInterceptTouchEvent(canScrollVertically(startX - endX))
-        }*/
 
-        /*if (viewpage2Scoll) {
-            parent.requestDisallowInterceptTouchEvent(false)
-        }else{
-            parent.requestDisallowInterceptTouchEvent(true)
-        }*/
         return true
     }
 

@@ -59,7 +59,6 @@ class FourthAdapter(@LayoutRes layoutResId: Int, data: MutableList<Cards>?) : Ba
         } else {
             binding.name6.isGone = true
         }
-
         setCardView(holder, binding, item)
     }
 
