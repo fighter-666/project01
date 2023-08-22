@@ -21,11 +21,6 @@ import com.example.myapplication.databinding.FirstBinding
 
 class FirstAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
 
-    override fun getDefItemCount(): Int {
-        return super.getDefItemCount()
-        recyclerView.measuredWidth
-        recyclerView.invalidate()
-    }
     override fun convert(holder: BaseViewHolder, item: Piggy) {
         val binding = FirstBinding.bind(holder.itemView)
         binding.ivImage.setImageResource(item.image)

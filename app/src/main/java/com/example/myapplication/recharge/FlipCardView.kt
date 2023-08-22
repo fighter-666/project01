@@ -70,18 +70,19 @@ class FlipCardView : ConstraintLayout {
 
 
     }
-    //抽到的卡片回传到自定义View，(context as ComponentActivity)将 context 对象强制转换为 ComponentActivity 类型，以便可以调用 ComponentActivity 类中定义的方法和属性。
+    //抽到的卡片回传到自定义View，(context as ComponentActivity)将 context 对象强制转换为 ComponentActivity 类型，
+    // 以便可以调用 ComponentActivity 类中定义的方法和属性。
     // 这样做可能是因为需要在 ComponentActivity 的上下文中执行一些特定的操作，或者需要使用 ComponentActivity 提供的特定功能。
     private val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
 
-        CoroutineScope(Dispatchers.Main).launch {
+
             if (activityResult.resultCode == Activity.RESULT_OK) {
                 val result = activityResult.data?.getIntExtra("result",0)
                 val resources = context.resources
                 drawable = result?.let { resources.getDrawable(it) }
                 imageView.setImageDrawable(drawable)
             }
-        }
+
     }
 
     private val myActivityLauncher2 = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
@@ -111,7 +112,7 @@ class FlipCardView : ConstraintLayout {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        //获取屏幕真实宽度
+        //获取可用屏幕宽度
         screenWidth = measuredWidth
         // 请求重新布局
         requestLayout()
@@ -124,7 +125,7 @@ class FlipCardView : ConstraintLayout {
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-        // 三等分
+        // 卡片三等分
         val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f) )/ 3
         LogUtils.d(
             "screenWidth=" + screenWidth + "; px=" + imageWidth
@@ -134,26 +135,31 @@ class FlipCardView : ConstraintLayout {
         layoutParams1.height = imageWidth
         imageView.layoutParams = layoutParams1
 
+        //重叠的卡片当作背景
         val layoutParams1Copy = imageViewCopy.layoutParams
         layoutParams1Copy.width = imageWidth
         layoutParams1Copy.height = imageWidth
         imageViewCopy.layoutParams = layoutParams1Copy
 
+        //第二张卡片
         val layoutParams2 = imageView2.layoutParams
         layoutParams2.width = imageWidth
         layoutParams2.height = imageWidth
         imageView2.layoutParams = layoutParams2
 
+        //重叠的第二张卡片
         val layoutParams2Copy = imageView2Copy.layoutParams
         layoutParams2Copy.width = imageWidth
         layoutParams2Copy.height = imageWidth
         imageView2Copy.layoutParams = layoutParams2Copy
 
+        //第三张卡片
         val layoutParams3 = imageView3.layoutParams
         layoutParams3.width = imageWidth
         layoutParams3.height = imageWidth
         imageView3.layoutParams = layoutParams3
 
+        //重叠的卡片
         val layoutParams3Copy = imageView3Copy.layoutParams
         layoutParams3Copy.width = imageWidth
         layoutParams3Copy.height = imageWidth
@@ -186,13 +192,15 @@ class FlipCardView : ConstraintLayout {
         imageView2.setImageDrawable(drawable2)
         imageView3.setImageDrawable(drawable3)
 
+        //获取图片的资源
         imageView.setImageResource(R.drawable.card1)
        // imageViewCopy.setImageResource(R.drawable.card1)
         imageView2.setImageResource(R.drawable.card1)
         imageView3.setImageResource(R.drawable.card1)
 
-        //点击事件
+        //第一张卡片的点击事件
         imageView.setOnClickListener {
+            //跳转页面
             val intent = Intent(getContext(), FlipPage::class.java)
             //myActivityLauncher.launch(intent)
 
@@ -208,6 +216,7 @@ class FlipCardView : ConstraintLayout {
 
         }
 
+        //第二张卡片的点击事件
         imageView2.setOnClickListener {
             val intent = Intent(getContext(), FlipPage::class.java)
             //myActivityLauncher.launch(intent)
@@ -224,6 +233,7 @@ class FlipCardView : ConstraintLayout {
 
         }
 
+        ////第三张卡片的点击事件
         imageView3.setOnClickListener {
             val intent = Intent(getContext(), FlipPage::class.java)
             //myActivityLauncher.launch(intent)

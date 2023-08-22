@@ -10,7 +10,9 @@ class FirstDecoration : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
 
+        //获取item的个数
         val itemCount = parent.adapter?.itemCount ?: 0
+
         if (itemCount <= 3) {
             val layoutParams = view.layoutParams   //获取列表项视图（item view）的布局参数。
             val itemWidth = (parent.measuredWidth - DensityUtils.dpToPx(view.context, 30f)) / 3
