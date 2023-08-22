@@ -236,7 +236,7 @@ class ScratchCard : View {
         val matrix = Matrix()
         matrix.postScale(scaleWidth, scaleHeight)
         LogUtils.d(
-            "111width=" + width + "; height=" + height+ "; newWidth=" + newWidth+ "; scaleHeight=" + scaleHeight+ "; scaleWidth=" + scaleWidth
+            "111width=" + width + "; height=" + height+ "; newWidth=" + newWidth+ "; bm=" + bm+ "; scaleWidth=" + scaleWidth
         )
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
