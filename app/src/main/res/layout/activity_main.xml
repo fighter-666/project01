@@ -29,7 +29,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00ffff"
+            android:background="@drawable/shape_rectangle6"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/Theme.AppCompat"
             app:tabIndicatorHeight="0dp"

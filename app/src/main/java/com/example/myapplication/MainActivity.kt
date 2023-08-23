@@ -22,23 +22,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //沉浸式处理
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
             .init();
 
 
 
-        val tabs = arrayOf("  Components", " Helper", "Lab", "Waterfall")
+        val tabs = arrayOf("Components", "Helper", "Lab", "Waterfall")
         val pics = arrayOf(
             R.mipmap.icon_tabbar_component_selected,
             R.mipmap.icon_tabbar_util_selected,
             R.mipmap.icon_tabbar_lab_selected,
             R.mipmap.icon_tabbar_lab_selected
         )
+
+        //设置默认的丽萍页面限制
         binding.viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
-        
-        binding.viewPager.adapter = object : FragmentStateAdapter(supportFragmentManager,lifecycle) {
+        //使用FragmentStateAdapter的匿名子类为ViewPager2设置适配器
+       /* binding.viewPager.adapter = object : FragmentStateAdapter(supportFragmentManager,lifecycle) {
             override fun getItemCount(): Int {
+                //返回标签页的数量
                 return tabs.size
             }
 
@@ -48,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 tab?.setIcon(pics[position])
                 return fragment
             }
-        }
+        }*/
 
         val adapter = DynamicFragmentAdapter(supportFragmentManager,lifecycle)
         binding.viewPager.adapter = adapter
@@ -60,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             tabTitle.text = tabs[position]
             tabIcon.setImageResource(pics[position])
             tab.customView = tabView
-            tab.setIcon(pics[position])
+            //tab.setIcon(pics[position])
         }
         mediator.attach()
     }

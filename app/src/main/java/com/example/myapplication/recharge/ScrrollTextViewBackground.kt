@@ -67,8 +67,6 @@ class ScrrollTextViewBackground @JvmOverloads constructor(
         }
     }
 
-
-
         fun setList(list: MutableList<String>) {
         this.list = list
 

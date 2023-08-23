@@ -71,36 +71,34 @@ class ScratchCardView : ConstraintLayout {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
         screenWidth = measuredWidth
         requestLayout()
         post {
             invalidate()
         }
-        LogUtils.d(
-            "screenWidth=" + screenWidth
-
-        )
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-        val imageWidth = (screenWidth-DensityUtils.dpToPx(context, 20f))
 
-        LogUtils.d(
-            "screenWidth=" + screenWidth + "; imageWidth=" + imageWidth+ "; parentView.measuredWidth="
-        )
+        //获取图片宽度
+        val imageWidth = (screenWidth-DensityUtils.dpToPx(context, 20f))
         val layoutParams1 = container.layoutParams
         val layoutParamsClose = close.layoutParams
+
+        //获取初始宽高
         val initialWidth = layoutParams1.width
         val initialHeighgt = layoutParams1.height
+
         layoutParams1.width = imageWidth
         layoutParamsClose.width = imageWidth
+
+        //缩放比例
         val widthScale = layoutParams1.width.toFloat() / initialWidth.toFloat()
+
         layoutParams1.height = initialHeighgt * widthScale.toInt()
         container.layoutParams = layoutParams1
         close.layoutParams = layoutParamsClose
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -109,15 +107,11 @@ class ScratchCardView : ConstraintLayout {
 
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.scratch_card, this)
-        /*val parentView = findViewById<View>(R.id.rl)
-        val screenWidth = parentView.measuredWidth*/
-
         imageView = findViewById<ImageView>(R.id.image_hand)
         imageView2 = findViewById<ImageView>(R.id.image_hand2)
         textview = findViewById(R.id.cl4_tv9)
         close = findViewById(R.id.close)
-        //
-         container = findViewById<ConstraintLayout>(R.id.container)
+        container = findViewById<ConstraintLayout>(R.id.container)
         val customView = ScratchCard(getContext())
         container.addView(customView)
 
@@ -135,18 +129,21 @@ class ScratchCardView : ConstraintLayout {
         imageView.setImageResource(R.drawable.button2)
         imageView2.setImageResource(R.drawable.hand)
 
-        //点击事件
+        //让按钮和手指消失
         close.setOnClickListener {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
         }
 
+        //再刮一次
         textview.setOnClickListener {
             Toast.makeText(context, "再来一次", Toast.LENGTH_SHORT).show()
             //customView.resetScratchCard()
             val customView = ScratchCard(getContext())
             container.addView(customView)
         }
+
+        //手指动画
 
         val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f)
         val translateY = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f)
@@ -183,15 +180,9 @@ class ScratchCardView : ConstraintLayout {
         })
 
         AnimatorSet.start()
-
-
-
     }
 
     fun getValue(): Boolean? {
         return isOnceMore
     }
-
-
-
 }

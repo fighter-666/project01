@@ -24,6 +24,8 @@ class HelperFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHelperBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        //沉浸式处理
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
             .titleBar(binding.toolbar)    //解决状态栏和布局重叠问题，任选其一
@@ -31,7 +33,7 @@ class HelperFragment : Fragment(){
         return view
     }
 
-    companion object {
+  /*  companion object {
         fun newInstance(text: String): HelperFragment {
             val args = Bundle()
             args.putString("text", text)
@@ -39,10 +41,12 @@ class HelperFragment : Fragment(){
             fragment.arguments = args
             return fragment
         }
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //创建了一个包含多个 Piggy 对象的可变列表 piggies，
+        // 每个 Piggy 对象都包含了一个图片资源 ID 和一个帮助文本
         val piggies = listOf(
             Pair(R.mipmap.icon_grid_color_helper, "QMUIColorHelper2"),
             Pair(R.mipmap.icon_grid_device_helper, "QMUIDeviceHelper"),
@@ -53,11 +57,17 @@ class HelperFragment : Fragment(){
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
+
+        //创建适配器
         val myAdapter = HelperAdapter(R.layout.components, piggies)
+
+        //设置布局管理器和给recyclerView 设置设配器
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = myAdapter
         }
+
+        //设置点击事件监听器
         myAdapter.setOnItemClickListener { piggy ->
             // 处理列表项点击事件
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()

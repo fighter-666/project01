@@ -15,41 +15,54 @@ class CustomView(context: Context?) : View(context) {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
+        //创建了一个 Paint 对象，并设置了抗锯齿标志（ANTI_ALIAS_FLAG）
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         //canvas.drawColor(Color.YELLOW)
+
+        //画圆
         canvas.drawCircle(200f,200f,100f,paint)
 
+        //画线模式的圆
         paint.style=Paint.Style.STROKE
         paint.strokeWidth = 20f
         canvas.drawCircle(400f,200f,100f,paint)
 
+        //填充模式的圆
         paint.style = Paint.Style.FILL
         paint.setColor(Color.BLUE)
         canvas.drawCircle(200f,400f,100f,paint)
 
+        //画矩形
         canvas.drawRect(300f,300f,500f,500f,paint)
 
+        //线条断电的粗细和形状
         paint.strokeWidth = 40f
-        paint.strokeCap=Paint.Cap.ROUND
+        paint.strokeCap=Paint.Cap.ROUND     //圆形
         canvas.drawPoint(550f,200f,paint)
-        paint.strokeCap=Paint.Cap.SQUARE
+        paint.strokeCap=Paint.Cap.SQUARE    //方形
         canvas.drawPoint(650f,200f,paint)
 
+        //画椭圆
         paint.strokeWidth = 20f
         canvas.drawOval(500f,300f,700f,400f,paint)
         paint.style = Paint.Style.STROKE
         canvas.drawOval(500f,400f,700f,500f,paint)
 
+        //画线
         canvas.drawLine(700f,100f,900f,300f,paint)
 
+        //画圆角矩形
         canvas.drawRoundRect(700f,300f,900f,500f,50f,50f,paint)
 
+        //绘制弧形或扇形
         paint.style = Paint.Style.FILL
         canvas.drawArc(200f,500f,800f,1000f,-110f,100f,true,paint)
         canvas.drawArc(200f,500f,800f,1000f,20f,140f,false,paint)
         paint.style = Paint.Style.STROKE
         canvas.drawArc(200f,500f,800f,1000f,180f,60f,false,paint)
 
+        //画心形
         val path = Path()
         paint.style = Paint.Style.FILL
         paint.setColor(Color.RED)

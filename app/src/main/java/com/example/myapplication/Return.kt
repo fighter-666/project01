@@ -30,8 +30,7 @@ class Return : AppCompatActivity()  {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
 
-
-
+        //返回值并退出
         binding.text1.setOnClickListener {
             val intent1 = Intent().apply {
                 putExtra("result",1 )
@@ -39,23 +38,5 @@ class Return : AppCompatActivity()  {
             setResult(Activity.RESULT_OK, intent1)
             onBackPressed()
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
 }

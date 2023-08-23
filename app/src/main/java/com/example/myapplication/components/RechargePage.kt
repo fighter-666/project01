@@ -23,12 +23,9 @@ class RechargePage : ComponentActivity() {
 
     private lateinit var binding: RechargePageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         binding = RechargePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         //沉浸式
         ImmersionBar.with(this)
@@ -37,57 +34,39 @@ class RechargePage : ComponentActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
 
-
-
         //消息条
         //右边textview跑马灯
         val marqueeText2: ScrrollTextViewBackground = binding.tv2Tv3
-
         val demographicsList2: MutableList<String> = ArrayList()
-
         demographicsList2.add("股票")
         demographicsList2.add("药业")
         demographicsList2.add("上市")
-
-
         marqueeText2.setList(demographicsList2)
         marqueeText2.startScroll()
 
         //imageview跑马灯
         val marqueeText3: ScrollImageView = binding.im1Im
-
         val demographicsList3: MutableList<Int> = ArrayList()
-
         demographicsList3.add(R.drawable.card3)
         demographicsList3.add(R.drawable.beans)
         demographicsList3.add(R.drawable.card2)
-
-
         marqueeText3.setList(demographicsList3)
         marqueeText3.startScroll()
 
         //中间textview跑马灯
         val marqueeText: ScrollTextView = binding.tv2Tv2
-
         val demographicsList: MutableList<String> = ArrayList()
-
         demographicsList.add("今日测试股票 上市")
         demographicsList.add("今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购")
         demographicsList.add("今日中国平安 上市")
-
         marqueeText.setList(demographicsList)
         marqueeText.startScroll()
 
-
-
-
-
-
+        //第一个 recyclerView 3个item 的时候
         val piggies = mutableListOf<Piggy>()
         piggies.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
         piggies.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
         piggies.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
-
 
         //创建适配器
         val myAdapter = FirstAdapter(R.layout.first, piggies)
@@ -97,10 +76,11 @@ class RechargePage : ComponentActivity() {
 
         //给RecycleView设置适配器
         binding.recyclerView.setAdapter(myAdapter)
-        binding.recyclerView.addItemDecoration(FirstDecoration())
 
+        //添加装饰器
+        //binding.recyclerView.addItemDecoration(FirstDecoration())
 
-
+        //第一个 recyclerViewCopy 页面超过3个，显示3.5个item 的时候
         val piggiesCopy = mutableListOf<Piggy>()
         piggiesCopy.add(Piggy(R.drawable.image1, "充流量", "流量告急速订购"))
         piggiesCopy.add(Piggy(R.drawable.image2, "开通自动充", "专治忘充值"))
@@ -110,7 +90,6 @@ class RechargePage : ComponentActivity() {
         piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
         piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
 
-
         //创建适配器
         val myAdapterCopy = FirstAdapter(R.layout.first, piggiesCopy)
 
@@ -119,7 +98,9 @@ class RechargePage : ComponentActivity() {
 
         //给RecycleView设置适配器
         binding.recyclerViewCopy.setAdapter(myAdapterCopy)
-        binding.recyclerViewCopy.addItemDecoration(FirstDecoration())
+
+        //添加装饰器
+        //binding.recyclerViewCopy.addItemDecoration(FirstDecoration())
 
 
         //第二个

@@ -67,45 +67,35 @@ class FlipCardView : ConstraintLayout {
         attrs,
         defStyleAttr
     ) {
-
-
     }
+
     //抽到的卡片回传到自定义View，(context as ComponentActivity)将 context 对象强制转换为 ComponentActivity 类型，
     // 以便可以调用 ComponentActivity 类中定义的方法和属性。
     // 这样做可能是因为需要在 ComponentActivity 的上下文中执行一些特定的操作，或者需要使用 ComponentActivity 提供的特定功能。
     private val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-
-
-            if (activityResult.resultCode == Activity.RESULT_OK) {
-                val result = activityResult.data?.getIntExtra("result",0)
-                val resources = context.resources
-                drawable = result?.let { resources.getDrawable(it) }
-                imageView.setImageDrawable(drawable)
-            }
-
+        if (activityResult.resultCode == Activity.RESULT_OK) {
+            val result = activityResult.data?.getIntExtra("result",0)
+            val resources = context.resources
+            drawable = result?.let { resources.getDrawable(it) }
+            imageView.setImageDrawable(drawable)
+        }
     }
 
     private val myActivityLauncher2 = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-
-        CoroutineScope(Dispatchers.Main).launch {
-            if (activityResult.resultCode == Activity.RESULT_OK) {
-                val result = activityResult.data?.getIntExtra("result",0)
-                val resources = context.resources
-                drawable = result?.let { resources.getDrawable(it) }
-                imageView2.setImageDrawable(drawable)
-            }
+        if (activityResult.resultCode == Activity.RESULT_OK) {
+            val result = activityResult.data?.getIntExtra("result",0)
+            val resources = context.resources
+            drawable = result?.let { resources.getDrawable(it) }
+            imageView2.setImageDrawable(drawable)
         }
     }
 
     private val myActivityLauncher3 = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-
-        CoroutineScope(Dispatchers.Main).launch {
-            if (activityResult.resultCode == Activity.RESULT_OK) {
-                val result = activityResult.data?.getIntExtra("result",0)
-                val resources = context.resources
-                drawable = result?.let { resources.getDrawable(it) }
-                imageView3.setImageDrawable(drawable)
-            }
+        if (activityResult.resultCode == Activity.RESULT_OK) {
+            val result = activityResult.data?.getIntExtra("result",0)
+            val resources = context.resources
+            drawable = result?.let { resources.getDrawable(it) }
+            imageView3.setImageDrawable(drawable)
         }
     }
 
@@ -120,8 +110,6 @@ class FlipCardView : ConstraintLayout {
             invalidate()
         }
     }
-
-
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
@@ -198,6 +186,7 @@ class FlipCardView : ConstraintLayout {
         imageView2.setImageResource(R.drawable.card1)
         imageView3.setImageResource(R.drawable.card1)
 
+
         //第一张卡片的点击事件
         imageView.setOnClickListener {
             //跳转页面
@@ -212,8 +201,6 @@ class FlipCardView : ConstraintLayout {
 
             // 启动活动并应用转场动画
             myActivityLauncher.launch(intent, options)
-
-
         }
 
         //第二张卡片的点击事件

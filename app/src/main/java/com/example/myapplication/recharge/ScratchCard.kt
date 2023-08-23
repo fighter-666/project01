@@ -195,7 +195,7 @@ class ScratchCard : View {
         }
 
 
-        if ((endX - startX) > mBitmapBackground.width) {
+        if (disX < mBitmapBackground.width) {
             parent.requestDisallowInterceptTouchEvent(true)
         } else {
             parent.requestDisallowInterceptTouchEvent(false)

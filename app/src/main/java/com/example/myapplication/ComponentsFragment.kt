@@ -26,6 +26,8 @@ class ComponentsFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = ComponentsFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        //沉浸式处理
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
             .titleBar(binding.toolbar)    //解决状态栏和布局重叠问题，任选其一
@@ -34,7 +36,7 @@ class ComponentsFragment : Fragment(){
 
     }
 
-    companion object {
+  /*  companion object {
         fun newInstance(text: String): ComponentsFragment {
             val args = Bundle()
             args.putString("text", text)
@@ -42,10 +44,12 @@ class ComponentsFragment : Fragment(){
             fragment.arguments = args
             return fragment
         }
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //创建了一个包含多个 Piggy 对象的可变列表 piggies，
+        // 每个 Piggy 对象都包含了一个图片资源 ID 和一个帮助文本
         val piggies = listOf(
             Pair(R.mipmap.icon_grid_color_helper, "QMUIColorHelper"),
             Pair(R.mipmap.icon_grid_device_helper, "QMUIDeviceHelper"),
@@ -56,7 +60,11 @@ class ComponentsFragment : Fragment(){
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
+
+        //创建适配器
         val myAdapter = ComponentsAdapter(R.layout.components, piggies)
+
+        //设置布局管理器和给recyclerView设置适配器
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = myAdapter

@@ -66,21 +66,21 @@ class CommonActionBar : RelativeLayout {
         textView = findViewById<TextView>(R.id.text)
         textView2 = findViewById<TextView>(R.id.right_text)
 
+        //在组件活动（ComponentActivity）中注册一个用于启动活动并接收结果的活动结果协议（ActivityResultContract）
         val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { activityResult ->
-
-            CoroutineScope(Dispatchers.Main).launch {
-                if (activityResult.resultCode == Activity.RESULT_OK) {
-                    val result = activityResult.data?.getIntExtra("result",0)
-                    Log.d("aaaa",result.toString())
-                    if (result == 1){
-                        context.finish()
-                    }
+            if (activityResult.resultCode == Activity.RESULT_OK) {
+                val result = activityResult.data?.getIntExtra("result",0)
+                if (result == 1){
+                    //退出
+                    context.finish()
                 }
             }
         }
 
+        //有返回值的跳转页面
         imageView.setOnClickListener {
+            //getContext() 获取上下文
             val intent = Intent(getContext(), Return::class.java)
             myActivityLauncher.launch(intent)
         }
@@ -110,8 +110,5 @@ class CommonActionBar : RelativeLayout {
         // 设置文本颜色、大小和内容
         textView.text = content
         textView2.text = content2
-
     }
-
-
 }

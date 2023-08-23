@@ -15,6 +15,7 @@ class MarqueeTextView : androidx.appcompat.widget.AppCompatTextView {
         defStyleAttr
     )
 
+    //获取焦点
     override fun isFocused(): Boolean {
         return true
     }

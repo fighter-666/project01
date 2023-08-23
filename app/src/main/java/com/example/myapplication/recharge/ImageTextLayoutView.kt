@@ -22,8 +22,6 @@ import kotlinx.coroutines.launch
 
 
 class ImageTextLayoutView : ConstraintLayout {
-
-
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textView: TextView
@@ -68,9 +66,6 @@ class ImageTextLayoutView : ConstraintLayout {
         textView = findViewById<TextView>(R.id.bottom_text)
         rl = findViewById(R.id.rl)
 
-
-
-
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImageTextCustomView)
         val xmlImageWidth = typedArray.getDimensionPixelSize(R.styleable.ImageTextCustomView_imageWidth, 30)
         val xmlImageWidth2 = typedArray.getDimensionPixelSize(R.styleable.ImageTextCustomView_imageWidth2, 30)
@@ -97,16 +92,12 @@ class ImageTextLayoutView : ConstraintLayout {
         textView.setTextColor(xmlTextColor)
         textView.text = content
 
-
-
 // 声明一个全局的 Animation 对象
         var animation: Animation? = null
-
 
 // 初始时隐藏图片
         imageView.visibility = View.GONE
         imageView2.visibility = View.GONE
-
 
         rl.setOnClickListener {
             // 取消之前的动画
@@ -121,6 +112,7 @@ class ImageTextLayoutView : ConstraintLayout {
             // 设置文本居中显示
 
             // 创建并开始属性动画
+            //Animation.RELATIVE_TO_SELF, 0.5f 表示旋转的中心点相对于自身的横向和纵向位置为 0.5，即图片的中心点。
             animation = RotateAnimation(0f, 720f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
             animation?.duration = 3000
             imageView.startAnimation(animation)
