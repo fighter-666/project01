@@ -22,10 +22,10 @@ import java.util.Random
 class ScratchCard : View {
     private lateinit var mBitmapBackground: Bitmap
     private lateinit var mBitmapFront: Bitmap
-    private var mCanvas: Canvas? = null
-    private var pathPaint: Paint? = null
-    private var paint: Paint? = null
-    private var path: Path? = null
+    private lateinit var mCanvas: Canvas
+    private lateinit var pathPaint: Paint
+    private lateinit var paint: Paint
+    private lateinit var path: Path
     private var mPaintText: Paint? = null
     var startX: Float = 0f
     var startY: Float = 0f
@@ -33,20 +33,10 @@ class ScratchCard : View {
     var endY: Float = 0f
     var disX: Float = 0f
     var disY: Float = 0f
-    var area: Float = 0f
     var area2: Float = 0f
-    var sum: Float = 0f
-    private var shouldInterceptScroll = false
     private var showFullResult = false
-    private var isScratched = false
     var scaleWidth :Float = 0f
     var scaleHeight :Float = 0f
-
-    // 重置刮刮乐的状态
-    fun resetScratchCard() {
-        isScratched = true
-        invalidate()
-    }
 
     constructor(context: Context?) : super(context) {
         init()
@@ -67,13 +57,15 @@ class ScratchCard : View {
     private fun init() {
         pathPaint = Paint()
         paint = Paint()
-        pathPaint!!.alpha = 0
-        pathPaint!!.style = Paint.Style.STROKE
-        pathPaint!!.strokeWidth = 50f
-        pathPaint!!.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN) //混合模式
-        pathPaint!!.strokeJoin = Paint.Join.ROUND //线段之间连接处的样式
-        pathPaint!!.strokeCap = Paint.Cap.ROUND //设置画笔的线冒样式
+        pathPaint.alpha = 0
+        pathPaint.style = Paint.Style.STROKE
+        pathPaint.strokeWidth = 50f
+        pathPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN) //混合模式
+        pathPaint.strokeJoin = Paint.Join.ROUND //线段之间连接处的样式
+        pathPaint.strokeCap = Paint.Cap.ROUND //设置画笔的线冒样式
         path = Path()
+
+        //生成随机事件
         val random = Random()
         val randomNumber = random.nextInt(2)
         val resourceId = if (randomNumber == 0) {
@@ -82,12 +74,12 @@ class ScratchCard : View {
             R.drawable.scratch2
         }
         mBitmapBackground = BitmapFactory.decodeResource(resources, resourceId)
+
         mCanvas = Canvas()
         mPaintText = Paint()
         mPaintText!!.color = Color.WHITE
         mPaintText!!.textSize = 100f
         mPaintText!!.strokeWidth = 20f
-
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -95,14 +87,32 @@ class ScratchCard : View {
         canvas.drawBitmap(mBitmapFront,  (mBitmapBackground.width*0.06).toFloat(), (mBitmapBackground.height*0.1).toFloat(), paint)
         if (showFullResult) {
             // 绘制完整的刮奖结果
-            paint?.alpha = 0 // 设置透明
+            paint.alpha = 0 // 设置透明
             canvas.drawBitmap(mBitmapFront, (mBitmapBackground.width*0.06).toFloat(), (mBitmapBackground.height*0.1).toFloat(), paint)
         } else {
             // 绘制刮动的路径线条
         }
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val w = MeasureSpec.getSize(widthMeasureSpec)
+        val h = MeasureSpec.getSize(heightMeasureSpec)
+
+        mBitmapBackground = getBitmap(mBitmapBackground, w, h)
+        mBitmapFront = Bitmap.createBitmap((mBitmapBackground.width * 0.88).toInt(),
+            (mBitmapBackground.height * 0.8).toInt(), Bitmap.Config.ARGB_8888)
+        area2 = (mBitmapFront.width * mBitmapFront.height).toFloat()
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+
+        mCanvas.setBitmap(mBitmapFront)
+        drawText(mCanvas, width, height)
+    }
+/*    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         mBitmapBackground = getBitmap(mBitmapBackground, w, h)
         mBitmapFront = Bitmap.createBitmap(
@@ -111,29 +121,21 @@ class ScratchCard : View {
             (mBitmapBackground.height*0.8).toInt() , Bitmap.Config.ARGB_8888
         )
         area2 = (mBitmapFront.width * mBitmapFront.height).toFloat()
-        LogUtils.d(
-            "area2=" + area2+"; mBitmapFront.width=" + mBitmapFront.width + "; mBitmapFront.width=" + mBitmapFront.height
-        )
-        mCanvas?.setBitmap(mBitmapFront)
+        mCanvas.setBitmap(mBitmapFront)
         drawText(mCanvas, w, h)
-    }
-
-
-    var quarterWidth = GetScreenUtils.getScreenWidth(context)/4
-    var halfWidth = GetScreenUtils.getScreenWidth(context)/2
+    }*/
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                path!!.reset()
-                path!!.moveTo(event.x -(mBitmapBackground.width*0.06).toFloat(), event.y -(mBitmapBackground.height*0.1).toFloat()) //原点移动至手指的触摸点
+                path.reset()
+                path.moveTo(event.x -(mBitmapBackground.width*0.06).toFloat(), event.y -(mBitmapBackground.height*0.1).toFloat()) //原点移动至手指的触摸点
                 startX = event.x
                 startY = event.y
             }
 
             MotionEvent.ACTION_MOVE -> {
-                path!!.lineTo(event.x - (mBitmapBackground.width*0.06).toFloat(), event.y - (mBitmapBackground.height*0.1).toFloat())
+                path.lineTo(event.x - (mBitmapBackground.width*0.06).toFloat(), event.y - (mBitmapBackground.height*0.1).toFloat())
                 endX = event.x
                 endY = event.y
 
@@ -143,14 +145,8 @@ class ScratchCard : View {
                 // 进行其他操作或处理滑动面积
                 disX = Math.abs(endX - startX)
                 disY = Math.abs(endY - startY)
-                val diagonal = Math.sqrt((disX * disX + disY * disY).toDouble())
-                area = diagonal.toFloat() * 50f // 计算滑动的面积
-                sum += area
-
             }
-
         }
-
 
         val bitmap: Bitmap = mBitmapFront // 从某处获取位图对象
         val w: Int = bitmap.width // 位图的宽度
@@ -178,41 +174,26 @@ class ScratchCard : View {
             if(percent>25){
                 showFullResult = true
             }
-            LogUtils.d(
-                "totalArea=" + totalArea+"; wipeArea=" + wipeArea + "; percent=" + percent + "; showFullResult=" + showFullResult
-            )
         }
-
-
-// 现在 mPixels 数组中存储了位图的像素数据
-
 
         //上下冲突
         if ((endY - startY) < mBitmapBackground.height) {
-            shouldInterceptScroll = true
+            parent.requestDisallowInterceptTouchEvent(true)
         } else {
-            shouldInterceptScroll = false
+            parent.requestDisallowInterceptTouchEvent(false)
         }
 
-
+        //左右冲突
         if (disX < mBitmapBackground.width) {
             parent.requestDisallowInterceptTouchEvent(true)
         } else {
             parent.requestDisallowInterceptTouchEvent(false)
         }
 
-        mCanvas!!.drawPath(path!!, pathPaint!!)
+        mCanvas.drawPath(path, pathPaint)
         invalidate()
-
-        if (shouldInterceptScroll) {
-            parent.requestDisallowInterceptTouchEvent(true)
-        }
-
-
         return true
     }
-
-
 
     private fun drawText(canvas: Canvas?, mWidth: Int, mHeight: Int) {
         val text = " "
@@ -235,12 +216,15 @@ class ScratchCard : View {
         // 取得想要缩放的matrix参数
         val matrix = Matrix()
         matrix.postScale(scaleWidth, scaleHeight)
+
+
         LogUtils.d(
-            "111width=" + width + "; height=" + height+ "; newWidth=" + newWidth+ "; bm=" + bm+ "; scaleWidth=" + scaleWidth
+            "bm.width= " + bm.width + "; bm.height= " + bm.height+
+            " width= " + width + "; height=" + height+
+            " scaleWidth=" + scaleWidth + "; newWidth=" + newWidth+
+            " scaleHeight=" + scaleHeight + "; newHeight=" + newHeight
         )
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
     }
-
-
 }

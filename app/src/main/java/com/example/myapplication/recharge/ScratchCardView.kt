@@ -32,7 +32,6 @@ class ScratchCardView : ConstraintLayout {
     private  var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
 
-
     /**
      * 这个构造方法是在代码中new的时候调用的
      * @param context
@@ -47,7 +46,6 @@ class ScratchCardView : ConstraintLayout {
     @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         customAttrs = attrs
-
         initView()
     }
 
@@ -62,10 +60,6 @@ class ScratchCardView : ConstraintLayout {
         attrs,
         defStyleAttr
     ) {
-    }
-
-    init {
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -112,6 +106,7 @@ class ScratchCardView : ConstraintLayout {
         textview = findViewById(R.id.cl4_tv9)
         close = findViewById(R.id.close)
         container = findViewById<ConstraintLayout>(R.id.container)
+
         val customView = ScratchCard(getContext())
         container.addView(customView)
 

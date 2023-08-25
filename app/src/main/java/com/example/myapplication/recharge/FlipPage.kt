@@ -81,25 +81,20 @@ class FlipPage : SlideRightBackActivity()  {
         hint = binding.card6
         bottom = binding.bottom
 
-
+        //获取图片资源
         beam.setImageResource(R.drawable.ic_flip_card_ray)
         card.setImageResource(R.drawable.card1)
         bottom.setImageResource(R.drawable.cheer)
 
-
-
-        button.setOnClickListener {
-            Toast.makeText(this, "点击了", Toast.LENGTH_SHORT).show()
-        }
-
+        //关闭动画页面
         closeicon.setOnClickListener {
             onBackPressed()
         }
 
-
+        //获取屏幕宽度
         val imageWidth = GetScreenUtils.getScreenWidth(this)
 
-
+        //动态设置底部动效的宽高
         val layoutParams1 = bottom.layoutParams
         val initialWidth = 720
         val initialHeight = 377
@@ -108,18 +103,13 @@ class FlipPage : SlideRightBackActivity()  {
         val widthScale1 = layoutParams1.width.toFloat() / 720
         layoutParams1.height = (initialHeight * widthScale1).toInt()
         bottom.layoutParams = layoutParams1
-        LogUtils.d(
-            "layoutParams1.width=" + layoutParams1.width + "; imageWidth=" + imageWidth+ "; initialWidth=" + initialWidth+ "; initialHeight=" + initialHeight
-                    + "; widthScale1=" + widthScale1+ "; layoutParams1.height=" + layoutParams1.height
-        )
 
-        //铁链的效果移除，我的测试机density是2.75
+        //贴脸的效果移除，我的测试机density是2.75
         val density = resources.displayMetrics.density
         val cameraDistance = density * 10000
         card.cameraDistance = cameraDistance
 
-
-
+        //卡片缩放从100%放大到150%（缩放时间：0.2s）
         val beamScaleX0 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.000000000000000001f)
         val beamScaleY0 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.000000000000000001f)
         beamScaleX0.duration = 1
@@ -129,7 +119,16 @@ class FlipPage : SlideRightBackActivity()  {
         scaleX.duration = 400
         scaleY.duration = 400
         resetDurationScale(beamScaleX0)
+        beamScaleX0.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                prise.visibility = View.GONE
+                button.visibility = View.GONE
+                hint.visibility = View.GONE
+            }
+        })
 
+        //2、卡片旋转由0度转向+15度（旋转时间0.2s）
+        //    光束出场从0%缩放至60%（缩放时间0.2s）
         val rotation = ObjectAnimator.ofFloat(card, View.ROTATION, 15f)
         rotation.duration = 200
 
@@ -137,6 +136,8 @@ class FlipPage : SlideRightBackActivity()  {
         val beamScaleY = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.6f)
         beamScaleX.duration = 200
         beamScaleY.duration = 200
+
+        //卡片摇晃的时候，用户关闭弹窗，卡片要回到初始态，然后开始退场动画
         rotation.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 val intent2 = Intent().apply {
@@ -146,9 +147,8 @@ class FlipPage : SlideRightBackActivity()  {
             }
         })
 
-
-
-
+        //3、卡片旋转由+15度转向0度（旋转时间0.2s）
+        //   光束从60%缩放至50%（缩放时间0.2s）
         val rotation2 = ObjectAnimator.ofFloat(card, View.ROTATION, 0f)
         rotation2.duration = 200
 
@@ -157,6 +157,8 @@ class FlipPage : SlideRightBackActivity()  {
         beamScaleX2.duration = 200
         beamScaleY2.duration = 200
 
+        //4、卡片旋转由0度转向-15度（旋转时间0.2s）
+        //   光束从50%缩放至60%（缩放时间0.2s）
         val rotation3 = ObjectAnimator.ofFloat(card, View.ROTATION, -15f)
         rotation3.duration = 200
 
@@ -165,6 +167,8 @@ class FlipPage : SlideRightBackActivity()  {
         beamScaleX3.duration = 200
         beamScaleY3.duration = 200
 
+        //5、卡片旋转由-15度转向0度（旋转时间0.2s）
+        //   光束从60%缩放至50%（缩放时间0.2s）
         val rotation4 = ObjectAnimator.ofFloat(card, View.ROTATION, 0f)
         rotation4.duration = 200
 
@@ -173,11 +177,15 @@ class FlipPage : SlideRightBackActivity()  {
         beamScaleX4.duration = 200
         beamScaleY4.duration = 200
 
+        //6、光束从50%缩放至60%（缩放时间0.2s）
         val beamScaleX5 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.5f)
         val beamScaleY5 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.5f)
         beamScaleX5.duration = 200
         beamScaleY5.duration = 200
 
+        //7、卡片绕y轴旋转由0度旋转至270度（旋转时间0.4s）
+        //   卡片缩放由150%放大至300%（缩放时间0.4s）
+        //   光束消失透明度由100%变至0%（变化时间0.2s）
         val rotation6 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 0f, 270f)
         rotation6.duration = 400
         rotation6.interpolator = LinearInterpolator()
@@ -189,44 +197,50 @@ class FlipPage : SlideRightBackActivity()  {
 
         val alpha6 = ObjectAnimator.ofFloat(beam, View.ALPHA, 1f, 0f)
         alpha6.duration = 400
+
+        //把抽到的卡片回传到上一个页面点击的那一项并显示出来
         rotation6.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation6结束后更换图片资源
+                //生成一个随机的图片资源ID
                 var randomImageRes = 0
+                val imageArray = arrayOf(R.drawable.winner, R.drawable.card3)
+                val random = Random()
+                val index = random.nextInt(imageArray.size)
+                randomImageRes = imageArray[index]
 
-
-                    val imageArray = arrayOf(R.drawable.winner, R.drawable.card3)
-                    val random = Random()
-                    val index = random.nextInt(imageArray.size)
-
-                    randomImageRes = imageArray[index]
-                    if (randomImageRes == R.drawable.card3) {
-                        // 选中了 R.drawable.winner
-                        // 执行相应的逻辑
-                        prise.visibility = View.GONE
-                        button.visibility = View.GONE
-                        hint.visibility = View.GONE
-                        // ...
-                    } else{
-                        // 选中了 R.drawable.card3
-                        // 执行相应的逻辑
-                        // ...
+                //给对应图片添加相应的点击事件监听器
+                if (randomImageRes == R.drawable.winner) {
+                    // 选中了 R.drawable.winner
+                    // 执行相应的逻辑
+                    prise.visibility = View.VISIBLE
+                    button.visibility = View.VISIBLE
+                    hint.visibility = View.VISIBLE
+                    //按钮的点击事件
+                    button.setOnClickListener {
+                        Toast.makeText(this@FlipPage, "点击了", Toast.LENGTH_SHORT).show()
                     }
+                } else{
+                    // 选中了 R.drawable.card3
+                    // 执行相应的逻辑
+                    // ...
+                }
 
-
+                //设置一个带有结果数据的Intent并将其作为结果返回给调用方
                 val intent1 = Intent().apply {
                     putExtra("result",randomImageRes )
                 }
                 setResult(Activity.RESULT_OK, intent1)
                 // 判断选中的是哪个资源
 
-// 设置到ImageView
+                // 设置到ImageView
                 card.setImageResource(randomImageRes)
             }
         })
 
-
-
+        //8、弹窗绕y轴翻转由-90度转至0度（旋转时间0.2s）
+        //   光束出现透明度由0%变至100%（变化时间0.2s）
+        //光束从60%缩放至100%
         val rotation7 = ObjectAnimator.ofFloat(card, View.ROTATION_Y, 270f, 360f)
         rotation7.duration = 400
 
@@ -244,8 +258,6 @@ class FlipPage : SlideRightBackActivity()  {
             }
         })
 
-
-
 // 底部动效出现动画
         rotation7.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
@@ -254,13 +266,12 @@ class FlipPage : SlideRightBackActivity()  {
             }
         })
 
-
-        // 光束旋转动画
+        //9、光束以4s一圈的速度进行旋转
+        //   底部动效出现
         val rotation8 = ObjectAnimator.ofFloat(beam, View.ROTATION, 0f, 360f)
         rotation8.duration = 4000
         rotation8.repeatCount = ValueAnimator.INFINITE
         rotation8.interpolator = LinearInterpolator()
-
 
         combinedAnimatorSet = AnimatorSet().apply {
             playTogether(scaleX, scaleY, beamScaleX0, beamScaleY0)
@@ -274,13 +285,7 @@ class FlipPage : SlideRightBackActivity()  {
             playTogether(rotation8)
             playSequentially(scaleX, rotation, rotation2, rotation3, rotation4,beamScaleX5, rotation6, rotation7, rotation8)
         }
-
-
         combinedAnimatorSet.start()
-
-
-
-
     }
 
     @Deprecated("Deprecated in Java")
@@ -288,26 +293,26 @@ class FlipPage : SlideRightBackActivity()  {
         // 在这里执行您的逻辑
         //卡片摇晃的时候，用户关闭弹窗，卡片要回到初始态，然后开始退场动画。
         if (combinedAnimatorSet.isRunning) {
-                combinedAnimatorSet.cancel()
+            combinedAnimatorSet.cancel()
             val cardRotation = ObjectAnimator.ofFloat(card, View.ROTATION, 0f)
             cardRotation.duration = 200
             cardRotation.start()
 
-
-                //使用协程让返回键延迟执行
-                CoroutineScope(Dispatchers.Main).launch {
-                    delay(200)
-                    super.onBackPressed()
-                }
+            //使用协程让返回键延迟执行
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(200)
+                super.onBackPressed()
+            }
         } else {
             super.onBackPressed()
         }
 
     }
 
-
-
     //让glide只加载一次gif图片
+    //定义了一个options对象，用于配置Glide的选项。这里设置了图片的
+    // 缩放方式为fitCenter()，跳过内存缓存（skipMemoryCache(true)），
+    // 并将磁盘缓存策略设置为DiskCacheStrategy.DATA，表示只缓存原始数据。
     val options = RequestOptions()
         .fitCenter()
         .skipMemoryCache(true)
@@ -341,7 +346,4 @@ class FlipPage : SlideRightBackActivity()  {
             })
             .into(imageView)
     }
-
-    // 随机图片资源id,并回传imageview的id
-
 }

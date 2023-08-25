@@ -27,14 +27,7 @@ class FourthActivity : AppCompatActivity() {
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init();
 
-        imageView = findViewById(R.id.image)
-        val container = findViewById<LinearLayout>(R.id.container)
-        val customView = ScratchCard(this)
-        container.addView(customView)
 
-        imageView.setOnClickListener {
-            imageView.visibility = View.GONE
-        }
     }
 
 
