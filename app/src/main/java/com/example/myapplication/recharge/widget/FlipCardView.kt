@@ -49,7 +49,6 @@ class FlipCardView : ConstraintLayout {
      * @param context
      * @param attrs            View的xml属性
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         customAttrs = attrs
         initView(context)
@@ -99,7 +98,6 @@ class FlipCardView : ConstraintLayout {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         //获取可用屏幕宽度
@@ -153,8 +151,7 @@ class FlipCardView : ConstraintLayout {
         layoutParams3Copy.height = imageWidth
         imageView3Copy.layoutParams = layoutParams3Copy
     }
-    @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("RestrictedApi", "WrongViewCast")
+
     private fun initView(context: Context) {
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.flip_card, this)

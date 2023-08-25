@@ -16,18 +16,20 @@ import android.view.View
  */
 class CustomView(context: Context?) : View(context) {
 
-    private lateinit var paint: Paint
-    private lateinit var path: Path
+    private  var paint: Paint
+    private  var path: Path
+    private  var rectf: RectF
+    private  var rectf2: RectF
 
     init {
         //创建了一个 Paint 对象，并设置了抗锯齿标志（ANTI_ALIAS_FLAG）
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
         path = Path()
+        rectf = RectF(200f, 1200f, 400f, 1400f)
+        rectf2 = RectF(400f, 1200f, 600f, 1400f)
     }
-    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
 
         paint.setAntiAlias(true)
         //canvas.drawColor(Color.YELLOW)
@@ -75,11 +77,10 @@ class CustomView(context: Context?) : View(context) {
         canvas.drawArc(200f,500f,800f,1000f,180f,60f,false,paint)
 
         //画心形
-
         paint.style = Paint.Style.FILL
         paint.setColor(Color.RED)
-        path.addArc(RectF(200f, 1200f, 400f, 1400f), -225f, 225f)
-        path.arcTo(RectF(400f, 1200f, 600f, 1400f), -180f, 225f, false)
+        path.addArc(rectf, -225f, 225f)
+        path.arcTo(rectf2, -180f, 225f, false)
         path.lineTo(400f, 1542f)
         canvas.drawPath(path,paint)
 
@@ -105,7 +106,5 @@ class CustomView(context: Context?) : View(context) {
             // 使用 drawRect 方法绘制柱状图
             canvas.drawRect(left, top, right, bottom, paint)
         }
-
     }
-
 }

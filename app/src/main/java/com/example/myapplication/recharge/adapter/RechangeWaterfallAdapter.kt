@@ -25,6 +25,7 @@ class RechangeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Ca
         binding.name5.text = item.name5
         binding.name6.text = item.name6
 
+        //判断显示与掩藏
         if (item.name2 != "0") {
             binding.name2.setText(item.name2)
             binding.name2.isGone = false

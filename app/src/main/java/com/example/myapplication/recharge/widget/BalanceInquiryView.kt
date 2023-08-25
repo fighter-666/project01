@@ -56,8 +56,6 @@ class BalanceInquiryView : ConstraintLayout {
     ) {
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("RestrictedApi", "WrongViewCast", "SetTextI18n")
     private fun initView(context: Context, attrs: AttributeSet) {
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.image_text_view_layout, this)

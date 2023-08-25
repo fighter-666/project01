@@ -34,7 +34,6 @@ class TitleBar : RelativeLayout {
      * @param context
      * @param attrs            View的xml属性
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         initView(context, attrs)
     }
@@ -52,8 +51,6 @@ class TitleBar : RelativeLayout {
     ) {
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("RestrictedApi", "WrongViewCast", "CustomViewStyleable")
     private fun initView(context: Context, attrs: AttributeSet) {
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.view_titlebar, this)

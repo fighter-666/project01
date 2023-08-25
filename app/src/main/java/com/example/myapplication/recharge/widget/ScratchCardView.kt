@@ -41,7 +41,6 @@ class ScratchCardView : ConstraintLayout {
      * @param context
      * @param attrs            View的xml属性
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         customAttrs = attrs
         initView()
@@ -60,7 +59,6 @@ class ScratchCardView : ConstraintLayout {
     ) {
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         screenWidth = measuredWidth
@@ -72,7 +70,6 @@ class ScratchCardView : ConstraintLayout {
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-
         //获取图片宽度
         val imageWidth = (screenWidth- DensityUtils.dpToPx(context, 20f))
         val layoutParams1 = container.layoutParams
@@ -95,15 +92,10 @@ class ScratchCardView : ConstraintLayout {
         val layoutParamsClose = close.layoutParams
 
         //获取初始宽高
-
         layoutParamsClose.width = imageWidth
-
-
         close.layoutParams = layoutParamsClose
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("RestrictedApi", "WrongViewCast")
     private fun initView() {
 
         //获取子控件
@@ -114,9 +106,9 @@ class ScratchCardView : ConstraintLayout {
         close = findViewById(R.id.close)
         container = findViewById<ConstraintLayout>(R.id.container)
 
+        //绑定刮卡view
         val customView = ScratchCard(getContext())
         container.addView(customView)
-
 
         val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.ScratchCardView)
         val drawable = typedArray.getDrawable(R.styleable.ScratchCardView_scratchSrc)
@@ -146,10 +138,8 @@ class ScratchCardView : ConstraintLayout {
         }
 
         //手指动画
-
         val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f)
         val translateY = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f)
-
         translateX.duration = 1800
         translateY.duration = 1800
         val AnimatorSet = AnimatorSet().apply {
@@ -159,7 +149,6 @@ class ScratchCardView : ConstraintLayout {
 
         val translateX2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f,0f)
         val translateY2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f,0f)
-
         translateX2.duration = 1800
         translateY2.duration = 1800
         val AnimatorSet2 = AnimatorSet().apply {
@@ -167,20 +156,20 @@ class ScratchCardView : ConstraintLayout {
             playSequentially(translateX2)
         }
 
+        //当AnimatorSet结束时运行AnimatorSet2
         AnimatorSet.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 AnimatorSet2.start() // 重新开始动画
             }
         })
-
+        //当AnimatorSet2结束时运行AnimatorSet
         AnimatorSet2.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 AnimatorSet.start() // 重新开始动画
             }
         })
-
         AnimatorSet.start()
     }
 }

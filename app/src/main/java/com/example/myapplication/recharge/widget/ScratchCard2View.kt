@@ -81,7 +81,6 @@ class ScratchCard2View(context: Context?, attrs: AttributeSet?) :
         canvas.restoreToCount(layerId)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -102,7 +101,13 @@ class ScratchCard2View(context: Context?, attrs: AttributeSet?) :
             else -> {}
         }
         postInvalidate()
+        performClick()
         return super.onTouchEvent(event)
     }
 
+    override fun performClick(): Boolean {
+        // 处理点击事件的逻辑
+        super.performClick() // 调用父类的 performClick 方法，包含默认的点击行为
+        return true
+    }
 }
