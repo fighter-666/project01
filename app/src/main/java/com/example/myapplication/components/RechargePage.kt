@@ -10,11 +10,11 @@ import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrrollTextViewBackground
 import com.example.myapplication.recharge.property.Cards
-import com.example.myapplication.recharge.adapter.FirstAdapter
-import com.example.myapplication.recharge.adapter.FourthAdapter
+import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
+import com.example.myapplication.recharge.adapter.RechangeWaterfallAdapter
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
-import com.example.myapplication.recharge.adapter.SecondAdapter
+import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
 import com.gyf.immersionbar.ImmersionBar
 
 
@@ -68,7 +68,7 @@ class RechargePage : ComponentActivity() {
         piggies.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
 
         //创建适配器
-        val myAdapter = FirstAdapter(R.layout.first, piggies)
+        val myAdapter = RecommendationServiceAdapteer(R.layout.first, piggies)
 
        //设置布局管理器
         binding.recyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
@@ -90,7 +90,7 @@ class RechargePage : ComponentActivity() {
         piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
 
         //创建适配器
-        val myAdapterCopy = FirstAdapter(R.layout.first, piggiesCopy)
+        val myAdapterCopy = RecommendationServiceAdapteer(R.layout.first, piggiesCopy)
 
         //设置布局管理器
         binding.recyclerViewCopy.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
@@ -130,7 +130,7 @@ class RechargePage : ComponentActivity() {
         )
 
         //创建适配器
-        val secondAdapter = SecondAdapter(R.layout.second, piggies2)
+        val secondAdapter = CrossExchengeAdapter(R.layout.second, piggies2)
 
         //设置布局管理器
         binding.recyclerView2.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
@@ -165,7 +165,7 @@ class RechargePage : ComponentActivity() {
         //piggies4.add(Cards(R.drawable.falls4, "15GB定向流量+腾讯视频月会员卡", "可查全网记录","0","0","0","0", 0, 0))
 
         //创建适配器
-        val fourthAdapter = FourthAdapter(R.layout.fourth, piggies4)
+        val fourthAdapter = RechangeWaterfallAdapter(R.layout.fourth, piggies4)
 
         //设置布局管理器
         binding.recyclerView4.setLayoutManager(StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL))

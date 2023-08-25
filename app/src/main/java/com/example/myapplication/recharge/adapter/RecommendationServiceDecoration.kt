@@ -5,7 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.util.DensityUtils
 
-class FirstDecoration : RecyclerView.ItemDecoration() {
+class RecommendationServiceDecoration : RecyclerView.ItemDecoration() {
 
     //outRect：用于指定目标项的四个方向的偏移量（上、下、左、右）。
     //view：当前的目标项 View。

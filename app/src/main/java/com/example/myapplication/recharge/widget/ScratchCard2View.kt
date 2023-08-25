@@ -17,7 +17,7 @@ import android.view.View
 import com.example.myapplication.R
 
 
-class GuaCardView(context: Context?, attrs: AttributeSet?) :
+class ScratchCard2View(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
     private val mSrcText: Bitmap
     private val mSrcBitmap: Bitmap

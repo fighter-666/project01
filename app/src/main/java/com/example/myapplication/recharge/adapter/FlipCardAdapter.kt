@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.ThirdBinding
 import com.example.myapplication.recharge.property.Change
 
-class ThirdAdapter(@LayoutRes layoutResId: Int, data: MutableList<Change>?) : BaseQuickAdapter<Change, BaseViewHolder>(layoutResId, data) {
+class FlipCardAdapter(@LayoutRes layoutResId: Int, data: MutableList<Change>?) : BaseQuickAdapter<Change, BaseViewHolder>(layoutResId, data) {
 
     override fun convert(holder: BaseViewHolder, item: Change) {
         val binding = ThirdBinding.bind(holder.itemView)

@@ -8,7 +8,7 @@ import com.example.myapplication.util.DensityUtils
 import com.example.myapplication.recharge.property.Piggy
 
 
-class FirstAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
+class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
 
     override fun convert(holder: BaseViewHolder, item: Piggy) {
         val binding = FirstBinding.bind(holder.itemView)
