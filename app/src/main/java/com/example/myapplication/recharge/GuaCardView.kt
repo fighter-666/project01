@@ -56,7 +56,6 @@ class GuaCardView(context: Context?, attrs: AttributeSet?) :
         val c = Canvas(mDstBitmap)
         c.drawPath(mPath, mPaint)
         //利用SRC_OUT绘制原图
-
         canvas.drawBitmap(mDstBitmap, 0f, 0f, mPaint)
         mPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OUT)
 

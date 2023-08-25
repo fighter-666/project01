@@ -14,6 +14,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import com.blankj.utilcode.util.LogUtils
+import com.example.myapplication.DensityUtils
 import com.example.myapplication.GetScreenUtils
 import com.example.myapplication.R
 import java.util.Random
@@ -212,7 +213,7 @@ class ScratchCard : View {
         val height = bm.height
         // 计算缩放比例
         scaleWidth = newWidth.toFloat() / width
-        scaleHeight = newHeight.toFloat() / height
+        scaleHeight = (newWidth.toFloat()- DensityUtils.dpToPx(context, 25f))/668*214.toFloat() / height
         // 取得想要缩放的matrix参数
         val matrix = Matrix()
         matrix.postScale(scaleWidth, scaleHeight)
@@ -222,7 +223,7 @@ class ScratchCard : View {
             "bm.width= " + bm.width + "; bm.height= " + bm.height+
             " width= " + width + "; height=" + height+
             " scaleWidth=" + scaleWidth + "; newWidth=" + newWidth+
-            " scaleHeight=" + scaleHeight + "; newHeight=" + newHeight
+            " scaleHeight=" + scaleHeight + "; newHeight=" + newWidth/668*214
         )
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)

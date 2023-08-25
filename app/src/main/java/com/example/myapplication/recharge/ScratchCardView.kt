@@ -75,23 +75,33 @@ class ScratchCardView : ConstraintLayout {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
 
+
         //获取图片宽度
         val imageWidth = (screenWidth-DensityUtils.dpToPx(context, 20f))
         val layoutParams1 = container.layoutParams
-        val layoutParamsClose = close.layoutParams
-
-        //获取初始宽高
         val initialWidth = layoutParams1.width
-        val initialHeighgt = layoutParams1.height
+        val initialHeighgt = (((initialWidth-DensityUtils.dpToPx(context, 25f)).toFloat()/668)*214).toInt()
 
         layoutParams1.width = imageWidth
-        layoutParamsClose.width = imageWidth
 
         //缩放比例
         val widthScale = layoutParams1.width.toFloat() / initialWidth.toFloat()
 
         layoutParams1.height = initialHeighgt * widthScale.toInt()
         container.layoutParams = layoutParams1
+        LogUtils.d(
+            "initialWidth= " + initialWidth + "; initialHeighgt= " + initialHeighgt+
+                    " imageWidth= " + imageWidth + "; widthScale=" + widthScale+
+                    " layoutParams1.height=" + layoutParams1.height
+        )
+
+        val layoutParamsClose = close.layoutParams
+
+        //获取初始宽高
+
+        layoutParamsClose.width = imageWidth
+
+
         close.layoutParams = layoutParamsClose
     }
 
