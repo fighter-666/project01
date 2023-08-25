@@ -24,7 +24,7 @@
         <attr name="right_imageHeight3" format="dimension"/>
     </declare-styleable>
 
-    <declare-styleable name="ImageTextCustomView">
+    <declare-styleable name="BalanceInquiryView">
     <attr name="imageWidth" format="dimension"/>
     <attr name="imageWidth2" format="dimension"/>
     <attr name="imageHeight" format="dimension"/>

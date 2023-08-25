@@ -6,7 +6,7 @@
 
 
 
-    <com.example.myapplication.recharge.MarqueeTextView
+    <com.example.myapplication.recharge.widget.MarqueeTextView
         android:id="@+id/tv_banner2"
         android:layout_width="52dp"
         android:layout_height="22dp"
@@ -23,7 +23,7 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:textSize="11sp" />
 
-    <com.example.myapplication.recharge.MarqueeTextView
+    <com.example.myapplication.recharge.widget.MarqueeTextView
         android:id="@+id/tv_banner1"
         android:layout_width="52dp"
         android:layout_height="22dp"

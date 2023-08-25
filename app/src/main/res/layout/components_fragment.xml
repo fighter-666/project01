@@ -29,7 +29,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -39,12 +39,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         app:layout_constraintLeft_toLeftOf="parent">
 
-        <com.example.myapplication.recharge.ScratchCardView
+        <com.example.myapplication.recharge.widget.ScratchCardView
             android:id="@+id/cl6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,6 +52,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:background="@drawable/shape_rectangle5"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

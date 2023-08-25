@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/item_image"
+        android:id="@+id/itemImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/jetpack"
@@ -16,7 +16,7 @@
 
 
     <TextView
-        android:id="@+id/item_title"
+        android:id="@+id/itemTitle"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"

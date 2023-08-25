@@ -6,44 +6,42 @@
     android:layout_height="36dp"
     android:id="@+id/rl">
 
+    <ImageView
+        android:id="@+id/topImage"
+        android:layout_width="16dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="9dp"
+        android:src="@drawable/refresh2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/bottomText"
+        />
 
-        <ImageView
-            android:id="@+id/top_image"
-            android:layout_width="16dp"
-            android:layout_height="17dp"
-            android:layout_marginTop="9dp"
-            android:src="@drawable/refresh2"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/bottom_text"
-            />
-
-        <TextView
-            android:id="@+id/bottom_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:gravity="center"
-            app:layout_constrainedWidth="true"
-            android:autoSizeMaxTextSize="16sp"
-            android:autoSizeMinTextSize="1sp"
-            android:autoSizeTextType="uniform"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/top_image"
-            app:layout_constraintRight_toLeftOf="@id/top_image2"
-            android:maxLines="1"
-            android:text="查询余额"
-            />
-
+    <TextView
+        android:id="@+id/bottomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constrainedWidth="true"
+        android:autoSizeMaxTextSize="16sp"
+        android:autoSizeMinTextSize="1sp"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/topImage"
+        app:layout_constraintRight_toLeftOf="@id/topImage2"
+        android:maxLines="1"
+        android:text="查询余额"
+        />
 
     <ImageView
-        android:id="@+id/top_image2"
+        android:id="@+id/topImage2"
         android:layout_width="16dp"
         android:layout_height="14dp"
         android:layout_marginTop="11dp"
-        app:layout_constraintLeft_toRightOf="@id/bottom_text"
+        app:layout_constraintLeft_toRightOf="@id/bottomText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/refresh2"

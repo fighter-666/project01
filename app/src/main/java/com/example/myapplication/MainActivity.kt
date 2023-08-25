@@ -11,6 +11,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.fragment.ComponentsFragment
+import com.example.myapplication.fragment.HelperFragment
+import com.example.myapplication.fragment.LabFragment
+import com.example.myapplication.fragment.WaterfallFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gyf.immersionbar.ImmersionBar
 

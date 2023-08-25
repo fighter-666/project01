@@ -1,6 +1,6 @@
 package com.example.myapplication.components
 
-import CustomView
+import com.example.myapplication.widget.CustomView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.databinding.ActivitySixthBinding

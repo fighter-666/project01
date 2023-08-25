@@ -13,11 +13,11 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".Return"
+            android:name=".activity.Return"
             android:theme="@style/TranslucentStyle"
             android:exported="false" />
         <activity
-            android:name=".recharge.FlipPage"
+            android:name=".recharge.activity.FlipPage"
             android:theme="@style/TranslucentStyle"
             android:exported="false" />
         <activity

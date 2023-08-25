@@ -1,17 +1,9 @@
 package com.example.myapplication.components
 
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.RotateAnimation
 import android.widget.ImageView
-import android.widget.LinearLayout
-import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityFourthBinding
-import com.example.myapplication.recharge.ScratchCard
 import com.gyf.immersionbar.ImmersionBar
 
 class FourthActivity : AppCompatActivity() {

@@ -22,7 +22,7 @@
         >
 
         <ImageView
-            android:id="@+id/tv2_image"
+            android:id="@+id/tv2Image"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginRight="13dp"

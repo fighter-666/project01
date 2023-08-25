@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <com.example.myapplication.recharge.MarqueeTextView
-        android:id="@+id/tv_banner1"
+    <com.example.myapplication.recharge.widget.MarqueeTextView
+        android:id="@+id/tvBanner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -17,8 +17,8 @@
         android:marqueeRepeatLimit="-1"
         android:textSize="12sp" />
 
-    <com.example.myapplication.recharge.MarqueeTextView
-        android:id="@+id/tv_banner2"
+    <com.example.myapplication.recharge.widget.MarqueeTextView
+        android:id="@+id/tvBanner2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

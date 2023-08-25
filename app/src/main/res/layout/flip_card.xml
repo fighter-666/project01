@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/cl4_tv7"
+            android:id="@+id/cl4Tv7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="13dp"
@@ -29,41 +29,41 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/cl4_tv8"
+            android:id="@+id/cl4Tv8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="13dp"
             android:text="累计剩余3次"
             android:textColor="#999999"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
-            app:layout_constraintLeft_toRightOf="@id/cl4_tv7"
-            app:layout_constraintTop_toTopOf="@id/cl4_tv7" />
+            app:layout_constraintBottom_toBottomOf="@id/cl4Tv7"
+            app:layout_constraintLeft_toRightOf="@id/cl4Tv7"
+            app:layout_constraintTop_toTopOf="@id/cl4Tv7" />
 
         <ImageView
-            android:id="@+id/cl3_im2"
+            android:id="@+id/cl3Im2"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginRight="3dp"
             android:src="@drawable/refresh"
-            app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
-            app:layout_constraintRight_toLeftOf="@id/cl4_tv9"
-            app:layout_constraintTop_toTopOf="@id/cl4_tv7" />
+            app:layout_constraintBottom_toBottomOf="@id/cl4Tv7"
+            app:layout_constraintRight_toLeftOf="@id/cl4Tv9"
+            app:layout_constraintTop_toTopOf="@id/cl4Tv7" />
 
         <TextView
-            android:id="@+id/cl4_tv9"
+            android:id="@+id/cl4Tv9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:text="换一换"
             android:textColor="#999999"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintBottom_toBottomOf="@id/cl4Tv7"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cl4_tv7" />
+            app:layout_constraintTop_toTopOf="@id/cl4Tv7" />
 
         <ImageView
-            android:id="@+id/card1_copy"
+            android:id="@+id/card1Copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -72,7 +72,7 @@
             android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
             />
 
         <ImageView
@@ -86,11 +86,11 @@
             android:transitionName="transition_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
             />
 
         <ImageView
-            android:id="@+id/card2_copy"
+            android:id="@+id/card2Copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -98,7 +98,7 @@
             android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
             app:layout_constraintLeft_toRightOf="@id/card1"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
             />
 
         <ImageView
@@ -110,12 +110,12 @@
             android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
             app:layout_constraintLeft_toRightOf="@id/card1"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
             />
 
 
         <ImageView
-            android:id="@+id/card3_copy"
+            android:id="@+id/card3Copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -123,7 +123,7 @@
             android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
             app:layout_constraintLeft_toRightOf="@id/card2"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
             />
 
         <ImageView
@@ -135,7 +135,7 @@
             android:layout_marginLeft="10dp"
             android:transitionName="transition_image"
             app:layout_constraintLeft_toRightOf="@id/card2"
-            app:layout_constraintTop_toBottomOf="@id/cl4_tv7"
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

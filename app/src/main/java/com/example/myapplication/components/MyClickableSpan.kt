@@ -12,13 +12,9 @@ import androidx.core.content.ContextCompat.startActivity
 import java.security.AccessController.getContext
 
 class MyClickableSpan(private val content: String,private val context: Context) : ClickableSpan() {
-
-
     override fun updateDrawState(ds: TextPaint) {
         ds.setUnderlineText(false)
     }
-
-
 
     override fun onClick(widget: View) {
         val intent = Intent(context,SisthActivity::class.java)

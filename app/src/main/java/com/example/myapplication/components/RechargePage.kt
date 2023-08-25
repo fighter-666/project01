@@ -6,16 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
-import com.example.myapplication.recharge.FirstDecoration
-import com.example.myapplication.recharge.ScrollImageView
-import com.example.myapplication.recharge.ScrollTextView
-import com.example.myapplication.recharge.ScrrollTextViewBackground
-import com.example.recharge.Cards
-import com.example.recharge.FirstAdapter
-import com.example.recharge.FourthAdapter
-import com.example.recharge.Piggy
-import com.example.recharge.Second
-import com.example.recharge.SecondAdapter
+import com.example.myapplication.recharge.widget.ScrollImageView
+import com.example.myapplication.recharge.widget.ScrollTextView
+import com.example.myapplication.recharge.widget.ScrrollTextViewBackground
+import com.example.myapplication.recharge.property.Cards
+import com.example.myapplication.recharge.adapter.FirstAdapter
+import com.example.myapplication.recharge.adapter.FourthAdapter
+import com.example.myapplication.recharge.property.Piggy
+import com.example.myapplication.recharge.property.Second
+import com.example.myapplication.recharge.adapter.SecondAdapter
 import com.gyf.immersionbar.ImmersionBar
 
 

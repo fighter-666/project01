@@ -7,7 +7,7 @@
     android:layout_height="98dp">
 
     <LinearLayout
-        android:id="@+id/ll_bg1"
+        android:id="@+id/llBg1"
         android:layout_width="97dp"
         android:layout_height="98dp"
         android:background="@drawable/square2"
@@ -16,13 +16,11 @@
         >
 
         <LinearLayout
-            android:id="@+id/ll_bg2"
+            android:id="@+id/llBg2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center">
-
-
 
         <TextView
             android:id="@+id/name1"
@@ -60,14 +58,6 @@
                 android:text="去使用"
                 android:textSize="15sp"
                 android:gravity="center" />
-
-
-
-
-
-
         </LinearLayout>
-
     </LinearLayout>
-
 </LinearLayout>

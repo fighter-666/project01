@@ -6,14 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f4f4f4">
 
-   <com.example.myapplication.recharge.FlipCardView
+   <com.example.myapplication.recharge.widget.FlipCardView
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        app:cardSrcCopy="@drawable/card2"
        app:cardSrc="@drawable/card2"
        tools:ignore="MissingConstraints" />
 
-   <com.example.myapplication.recharge.FlipCardView
+   <com.example.myapplication.recharge.widget.FlipCardView
        android:id="@+id/cl4"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
