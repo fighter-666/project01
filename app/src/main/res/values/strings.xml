@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">百宝箱</string>
+    <string name="textview">哈哈哈</string>
+    <string name="textview1">display</string>
+    <string name="button1">左</string>
+    <string name="button2">右</string>
+    <string name="switch1">开关</string>
+    <string name="editText">确定</string>
+    <string name="hint">请输入数值</string>
+    <string name="radiobutton">Android</string>
+    <string name="radiobutton2">IOS</string>
+    <string name="todo">TODO</string>
+    <string name="checkbox1">语文</string>
+    <string name="checkbox2">英语</string>
+    <string name="checkbox3">数学</string>
+    <string name="rantongBar">评价</string>
 </resources>

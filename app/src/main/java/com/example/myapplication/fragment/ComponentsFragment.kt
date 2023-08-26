@@ -10,12 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.property.Piggy
 import com.example.myapplication.R
+import com.example.myapplication.activity.components.bilibili.activity.ViewModelTest
+import com.example.myapplication.activity.components.bilibili.activity.NineActivity
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.components.FifthActivity
 import com.example.myapplication.components.FourthActivity
-import com.example.myapplication.components.SecondActivity
-import com.example.myapplication.components.SisthActivity
-import com.example.myapplication.components.ThirdActivity
+import com.example.myapplication.activity.components.SecondActivity
+import com.example.myapplication.activity.components.bilibili.activity.ServeActivity
+import com.example.myapplication.activity.components.SisthActivity
+import com.example.myapplication.activity.components.bilibili.activity.TenActivity
+import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.databinding.ComponentsFragmentBinding
 import com.example.myapplication.components.RechargePage
 import com.gyf.immersionbar.ImmersionBar
@@ -59,7 +63,12 @@ class ComponentsFragment : Fragment(){
             Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "QMUIStatusBarHelper"),
             Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper")
+            Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "7"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "8"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "9"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "10"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "11"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -104,6 +113,26 @@ class ComponentsFragment : Fragment(){
                 }
                 "QMUINotchHelper" -> {
                     val intent = Intent(context, SisthActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "7" -> {
+                    val intent = Intent(context, ServeActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "8" -> {
+                    val intent = Intent(context, ViewModelTest::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "9" -> {
+                    val intent = Intent(context, NineActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "10" -> {
+                    val intent = Intent(context, TenActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

@@ -14,9 +14,9 @@ import com.example.myapplication.adapter.WaterfallAdapter
 import com.example.myapplication.components.FifthActivity
 import com.example.myapplication.components.FourthActivity
 import com.example.myapplication.components.RechargePage
-import com.example.myapplication.components.SecondActivity
-import com.example.myapplication.components.SisthActivity
-import com.example.myapplication.components.ThirdActivity
+import com.example.myapplication.activity.components.SecondActivity
+import com.example.myapplication.activity.components.SisthActivity
+import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.databinding.WaterfallFragmentBinding
 import com.gyf.immersionbar.ImmersionBar
 

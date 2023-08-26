@@ -1,4 +1,4 @@
-package com.example.myapplication.components
+package com.example.myapplication.activity.components
 
 import android.content.Context
 import android.content.Intent
@@ -17,7 +17,7 @@ class MyClickableSpan(private val content: String,private val context: Context) 
     }
 
     override fun onClick(widget: View) {
-        val intent = Intent(context,SisthActivity::class.java)
+        val intent = Intent(context, SisthActivity::class.java)
         val bundle = Bundle()
         bundle.putString("content",content)
         intent.putExtra("bundle", bundle)

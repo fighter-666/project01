@@ -1,4 +1,4 @@
-package com.example.myapplication.components
+package com.example.myapplication.activity.components
 
 import android.graphics.Color
 import android.graphics.Typeface
