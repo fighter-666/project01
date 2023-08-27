@@ -14,4 +14,7 @@
     <string name="checkbox2">英语</string>
     <string name="checkbox3">数学</string>
     <string name="rantongBar">评价</string>
+    <string name="button">点击</string>
+    <string name="scoreA" >0</string>
+    <string name="scoreB">0</string>
 </resources>

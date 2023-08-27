@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.property.Piggy
 import com.example.myapplication.R
 import com.example.myapplication.activity.components.bilibili.activity.ViewModelTest
-import com.example.myapplication.activity.components.bilibili.activity.NineActivity
+import com.example.myapplication.activity.components.bilibili.activity.LiveData
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.components.FifthActivity
 import com.example.myapplication.components.FourthActivity
 import com.example.myapplication.activity.components.SecondActivity
 import com.example.myapplication.activity.components.bilibili.activity.ServeActivity
 import com.example.myapplication.activity.components.SisthActivity
-import com.example.myapplication.activity.components.bilibili.activity.TenActivity
+import com.example.myapplication.activity.components.bilibili.activity.DataBinding
 import com.example.myapplication.activity.components.ThirdActivity
+import com.example.myapplication.activity.components.bilibili.activity.ScoreActivity
 import com.example.myapplication.databinding.ComponentsFragmentBinding
 import com.example.myapplication.components.RechargePage
 import com.gyf.immersionbar.ImmersionBar
@@ -68,7 +69,23 @@ class ComponentsFragment : Fragment(){
             Pair(R.mipmap.icon_grid_tip_dialog, "8"),
             Pair(R.mipmap.icon_grid_tip_dialog, "9"),
             Pair(R.mipmap.icon_grid_tip_dialog, "10"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "11"),
+            Pair(R.mipmap.icon_grid_view_helper, "ScoreActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "12"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "13"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "14"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "15"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "16"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "17"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -127,12 +144,42 @@ class ComponentsFragment : Fragment(){
                     startActivity(intent)
                 }
                 "9" -> {
-                    val intent = Intent(context, NineActivity::class.java)
+                    val intent = Intent(context, LiveData::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
                 "10" -> {
-                    val intent = Intent(context, TenActivity::class.java)
+                    val intent = Intent(context, DataBinding::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "ScoreActivity" -> {
+                    val intent = Intent(context, ScoreActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "12" -> {
+                    val intent = Intent(context, DataBinding::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "13" -> {
+                    val intent = Intent(context, DataBinding::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "14" -> {
+                    val intent = Intent(context, ScoreActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "15" -> {
+                    val intent = Intent(context, ScoreActivity::class.java)
+                    intent.putExtra("piggyName", piggy.name)
+                    startActivity(intent)
+                }
+                "16" -> {
+                    val intent = Intent(context, ScoreActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

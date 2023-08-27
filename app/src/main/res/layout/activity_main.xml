@@ -25,6 +25,7 @@
             android:layout_weight="1"
             android:orientation="horizontal" />
 
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -36,6 +37,7 @@
             app:tabMaxWidth="200dp"
             app:tabMinWidth="100dp"
             app:tabMode="fixed"/>
+
 
 
     </LinearLayout>

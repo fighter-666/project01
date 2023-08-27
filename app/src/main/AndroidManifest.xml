@@ -13,10 +13,13 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".activity.components.bilibili.activity.TenActivity"
+            android:name=".activity.components.bilibili.activity.ScoreActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.components.bilibili.activity.NineActivity"
+            android:name=".activity.components.bilibili.activity.DataBinding"
+            android:exported="false" />
+        <activity
+            android:name=".activity.components.bilibili.activity.LiveData"
             android:exported="false" />
         <activity
             android:name=".activity.components.bilibili.activity.ViewModelTest"
