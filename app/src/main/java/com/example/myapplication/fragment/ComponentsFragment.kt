@@ -18,8 +18,8 @@ import com.example.myapplication.components.FourthActivity
 import com.example.myapplication.activity.components.SecondActivity
 import com.example.myapplication.activity.components.bilibili.activity.ServeActivity
 import com.example.myapplication.activity.components.SisthActivity
-import com.example.myapplication.activity.components.bilibili.activity.DataBindingActivity
 import com.example.myapplication.activity.components.ThirdActivity
+import com.example.myapplication.activity.components.bilibili.activity.DataBindingActivity
 import com.example.myapplication.activity.components.bilibili.activity.ScoreActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
 import com.example.myapplication.components.RechargePageActivity

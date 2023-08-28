@@ -185,15 +185,11 @@ class ScratchCardView : View {
         //上下冲突
         if (disY < mBitmapBackground.height) {
             parent.requestDisallowInterceptTouchEvent(true)
-        } else {
-            parent.requestDisallowInterceptTouchEvent(false)
         }
 
         //左右冲突
         if (disX < mBitmapBackground.width) {
             parent.requestDisallowInterceptTouchEvent(true)
-        } else {
-            parent.requestDisallowInterceptTouchEvent(false)
         }
 
         mCanvas.drawPath(path, pathPaint)
