@@ -11,9 +11,9 @@ class ViewModelWithData : ViewModel() {
         MutableLiveData<Int>().apply { value = 0 }
     }
 
-   /* fun getLikedNumber(): MutableLiveData<Int> {
-        return likedNumber
-    }*/
+    /* fun getLikedNumber(): MutableLiveData<Int> {
+         return likedNumber
+     }*/
 
     fun addLikedNumber(n: Int) {
         likedNumber.value = likedNumber.value?.plus(n)

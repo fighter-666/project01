@@ -10,7 +10,6 @@ class ViewModelWithDataBinding : ViewModel() {
         //使用 apply 函数对 MutableLiveData 进行初始化，并设置初始值为 0。
         MutableLiveData<Int>().apply { value = 0 }
     }
-
     fun add() {
         number.value = number.value?.plus(1)
     }

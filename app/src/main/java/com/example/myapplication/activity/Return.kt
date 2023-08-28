@@ -8,9 +8,8 @@ import com.example.myapplication.databinding.ReturnPageBinding
 import com.gyf.immersionbar.ImmersionBar
 
 
-class Return : AppCompatActivity()  {
+class Return : AppCompatActivity() {
     private lateinit var binding: ReturnPageBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ReturnPageBinding.inflate(layoutInflater)
@@ -25,7 +24,7 @@ class Return : AppCompatActivity()  {
         //返回值并退出
         binding.text1.setOnClickListener {
             val intent1 = Intent().apply {
-                putExtra("result",1 )
+                putExtra("result", 1)
             }
             setResult(Activity.RESULT_OK, intent1)
             onBackPressed()

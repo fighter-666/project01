@@ -11,7 +11,12 @@ class RecommendationServiceDecoration : RecyclerView.ItemDecoration() {
     //view：当前的目标项 View。
     //parent：RecyclerView 的父容器。
     //state：RecyclerView 的状态。
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State,
+    ) {
         super.getItemOffsets(outRect, view, parent, state)
 
         //获取item的个数
@@ -25,7 +30,7 @@ class RecommendationServiceDecoration : RecyclerView.ItemDecoration() {
             layoutParams.width = itemWidth
             layoutParams.height = layoutParams.width
             view.layoutParams = layoutParams
-        } else{
+        } else {
             val layoutParams = view.layoutParams   //获取列表项视图（item view）的布局参数。
             val itemWidth = (parent.measuredWidth - DensityUtils.dpToPx(view.context, 30f)) / 3.5
             layoutParams.width = itemWidth.toInt()

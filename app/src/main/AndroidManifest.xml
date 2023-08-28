@@ -39,7 +39,7 @@
             android:name=".activity.components.SecondActivity"
             android:exported="false" />
         <activity
-            android:name=".components.RechargePage"
+            android:name=".components.RechargePageActivity"
             android:exported="false" />
         <activity android:name=".activity.components.ThirdActivity" />
         <activity android:name=".components.FourthActivity" />

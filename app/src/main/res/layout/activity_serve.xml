@@ -38,7 +38,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <Button
-        android:id="@+id/buttonleft"
+        android:id="@+id/buttonLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button1"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <Button
-        android:id="@+id/buttonright"
+        android:id="@+id/buttonRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button2"

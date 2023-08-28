@@ -3,7 +3,7 @@ package com.example.myapplication.activity.components.bilibili.util
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ViewModelWithScore: ViewModel() {
+class ViewModelWithScore : ViewModel() {
     //使用 by lazy 委托属性来延迟初始化的 MutableLiveData 对象。
     // 这样可以确保在第一次访问 likedNumber 时进行初始化
     val aTeamScore: MutableLiveData<Int> by lazy {

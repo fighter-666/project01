@@ -1,79 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/rl">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_rectangle5"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/cl4Tv7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="16dp"
+            android:gravity="left"
             android:text="赠送刮奖机会 1 次"
             android:textColor="#333333"
             android:textSize="14sp"
-            android:gravity="left"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="13dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/cl4Tv8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="累计剩余3次"
             android:paddingLeft="13dp"
+            android:text="累计剩余3次"
             android:textColor="#999999"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/cl4Tv7"
             app:layout_constraintBottom_toBottomOf="@id/cl4Tv7"
-            app:layout_constraintTop_toTopOf="@id/cl4Tv7"
-            />
+            app:layout_constraintLeft_toRightOf="@id/cl4Tv7"
+            app:layout_constraintTop_toTopOf="@id/cl4Tv7" />
 
         <ImageView
             android:id="@+id/cl3Im2"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:layout_marginRight="3dp"
-            app:layout_constraintRight_toLeftOf="@id/cl4Tv9"
+            android:src="@drawable/refresh"
             app:layout_constraintBottom_toBottomOf="@id/cl4Tv7"
-            app:layout_constraintTop_toTopOf="@id/cl4Tv7"
-            android:src="@drawable/refresh" />
+            app:layout_constraintRight_toLeftOf="@id/cl4Tv9"
+            app:layout_constraintTop_toTopOf="@id/cl4Tv7" />
 
         <TextView
             android:id="@+id/cl4Tv9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
             android:text="再刮一次"
             android:textColor="#999999"
-            android:layout_marginRight="15dp"
-            app:layout_constraintRight_toRightOf="parent"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/cl4Tv7"
-            app:layout_constraintTop_toTopOf="@id/cl4Tv7"
-            android:textSize="12sp" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cl4Tv7" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container"
             android:layout_width="310dp"
             android:layout_height="107dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:orientation="horizontal" >
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7">
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -84,41 +81,33 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintTop_toBottomOf="@id/cl4Tv7"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:orientation="horizontal" >
+            app:layout_constraintTop_toBottomOf="@id/cl4Tv7">
 
             <ImageView
                 android:id="@+id/imageHand"
                 android:layout_width="132dp"
                 android:layout_height="43dp"
                 android:src="@drawable/button2"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageHand2"
                 android:layout_width="43dp"
                 android:layout_height="43dp"
-                android:src="@drawable/hand"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="25dp"
                 android:layout_marginLeft="120dp"
-                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/hand"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

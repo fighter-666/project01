@@ -65,13 +65,18 @@ class BalanceInquiryView : ConstraintLayout {
         rl = findViewById(R.id.rl)
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BalanceInquiryView)
-        val xmlImageWidth = typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageWidth, 30)
-        val xmlImageWidth2 = typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageWidth2, 30)
-        val xmlImageHeight = typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageHeight, 30)
-        val xmlImageHeight2 = typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageHeight2, 30)
+        val xmlImageWidth =
+            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageWidth, 30)
+        val xmlImageWidth2 =
+            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageWidth2, 30)
+        val xmlImageHeight =
+            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageHeight, 30)
+        val xmlImageHeight2 =
+            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageHeight2, 30)
         val drawable = typedArray.getDrawable(R.styleable.BalanceInquiryView_imageSrc)
         val drawable2 = typedArray.getDrawable(R.styleable.BalanceInquiryView_imageSrc2)
-        val xmlTextColor = typedArray.getColor(R.styleable.BalanceInquiryView_textColor, Color.BLACK)
+        val xmlTextColor =
+            typedArray.getColor(R.styleable.BalanceInquiryView_textColor, Color.BLACK)
         val content = typedArray.getString(R.styleable.BalanceInquiryView_textContent)
         typedArray.recycle()
 
@@ -111,7 +116,14 @@ class BalanceInquiryView : ConstraintLayout {
 
             // 创建并开始属性动画
             //Animation.RELATIVE_TO_SELF, 0.5f 表示旋转的中心点相对于自身的横向和纵向位置为 0.5，即图片的中心点。
-            animation = RotateAnimation(0f, 720f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            animation = RotateAnimation(
+                0f,
+                720f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f,
+                Animation.RELATIVE_TO_SELF,
+                0.5f
+            )
             animation?.duration = 3000
             imageView.startAnimation(animation)
             //implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
@@ -122,16 +134,8 @@ class BalanceInquiryView : ConstraintLayout {
                 imageView.visibility = View.GONE
                 imageView2.visibility = View.VISIBLE
                 imageView2.setImageResource(R.drawable.refresh2)
-
-                // 设置文本居中显示
-                //textView.gravity = Gravity.CENTER_VERTICAL
-
-// 设置文本内容
                 textView.text = "余额：10000000000.00元"
-
             }
         }
     }
-
-
 }

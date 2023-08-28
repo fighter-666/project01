@@ -12,7 +12,6 @@ object GetScreenUtils {
         return displayMetrics.widthPixels
     }
 
-
     fun getScreenHeight(context: Context): Int {
         val displayMetrics = context.resources.displayMetrics
         (context as Activity).windowManager.defaultDisplay.getRealMetrics(displayMetrics)

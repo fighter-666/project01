@@ -30,7 +30,7 @@ class ScrollImageView @JvmOverloads constructor(
     private var endY1 = 0
     private var startY2 = 0
     private var endY2 = 0
-    private lateinit var  runnable: Runnable
+    private lateinit var runnable: Runnable
     var list: List<Int>? = null
         private set
     private var position = 0

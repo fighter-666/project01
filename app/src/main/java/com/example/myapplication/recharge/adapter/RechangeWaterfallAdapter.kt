@@ -9,7 +9,8 @@ import com.example.myapplication.databinding.FourthBinding
 import com.example.myapplication.recharge.property.Cards
 import com.example.myapplication.util.DensityUtils
 
-class RechangeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Cards>?) : BaseQuickAdapter<Cards, BaseViewHolder>(layoutResId, data) {
+class RechangeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Cards>?) :
+    BaseQuickAdapter<Cards, BaseViewHolder>(layoutResId, data) {
 
     private val SCALE = 3 * 1.0f / 3 //图片缩放比例
 

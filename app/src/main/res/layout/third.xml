@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="97dp"
-    android:background="@drawable/shape_rectangle6"
+    android:layout_height="98dp"
     android:layout_marginRight="10dp"
-    android:layout_height="98dp">
+    android:background="@drawable/shape_rectangle6"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/llBg1"
@@ -12,52 +12,51 @@
         android:layout_height="98dp"
         android:background="@drawable/square2"
         android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/llBg2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
-
-        <TextView
-            android:id="@+id/name1"
-            android:layout_width="55dp"
-            android:layout_height="20dp"
             android:gravity="center"
-            android:layout_marginTop="0dp"
-            android:text="无门槛"
-            android:textColor="#c88f56"
-            android:textSize="10sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ff5a59"
-            android:text="爱奇艺"
-            android:textSize="15sp"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/name1"
+                android:layout_width="55dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="无门槛"
+                android:textColor="#c88f56"
+                android:textSize="10sp" />
 
-        <TextView
-            android:id="@+id/name3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#bb6f42"
-            android:text="会员优惠券"
-            android:textSize="15sp"
-            android:gravity="center" />
+            <TextView
+                android:id="@+id/name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="爱奇艺"
+                android:textColor="#ff5a59"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/name3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="会员优惠券"
+                android:textColor="#bb6f42"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/name4"
                 android:layout_width="61dp"
                 android:layout_height="22dp"
-                android:textColor="#bb6f42"
+                android:gravity="center"
                 android:text="去使用"
-                android:textSize="15sp"
-                android:gravity="center" />
+                android:textColor="#bb6f42"
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

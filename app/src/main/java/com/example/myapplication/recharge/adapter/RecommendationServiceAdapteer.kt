@@ -8,7 +8,8 @@ import com.example.myapplication.util.DensityUtils
 import com.example.myapplication.recharge.property.Piggy
 
 
-class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
+class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) :
+    BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
 
     override fun convert(holder: BaseViewHolder, item: Piggy) {
         val binding = FirstBinding.bind(holder.itemView)
@@ -46,7 +47,10 @@ class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableLi
             val initialWidth = lp1.width
 
             //3.5等分的item的宽度
-            lp1?.width  = ((recyclerView.measuredWidth  - DensityUtils.dpToPx(context, 30f)).toFloat() / 3.5).toInt()
+            lp1?.width = ((recyclerView.measuredWidth - DensityUtils.dpToPx(
+                context,
+                30f
+            )).toFloat() / 3.5).toInt()
             lp1?.height = lp1.width
             holder.itemView.layoutParams = lp1
 
@@ -60,8 +64,8 @@ class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableLi
             binding.ivImage.layoutParams = layoutParams1
 
             //字体大小自适应
-            binding.name.textSize = 13f*widthScale1
-            binding.name2.textSize = 10f*widthScale1
+            binding.name.textSize = 13f * widthScale1
+            binding.name2.textSize = 10f * widthScale1
         }
 
     }

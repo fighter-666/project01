@@ -27,7 +27,7 @@ class ScratchCardView : ConstraintLayout {
     private lateinit var textview: TextView
     private lateinit var close: ConstraintLayout
     private lateinit var container: ConstraintLayout
-    private  var screenWidth: Int = 0
+    private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
 
     /**
@@ -71,10 +71,10 @@ class ScratchCardView : ConstraintLayout {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         //获取图片宽度
-        val imageWidth = (screenWidth- DensityUtils.dpToPx(context, 20f))
+        val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 20f))
         val layoutParams1 = container.layoutParams
         val initialWidth = layoutParams1.width
-        val initialHeighgt = (((initialWidth).toFloat()/668)*214).toInt()
+        val initialHeighgt = (((initialWidth).toFloat() / 668) * 214).toInt()
 
         layoutParams1.width = imageWidth
 
@@ -84,8 +84,8 @@ class ScratchCardView : ConstraintLayout {
         layoutParams1.height = initialHeighgt * widthScale.toInt()
         container.layoutParams = layoutParams1
         LogUtils.d(
-            "initialWidth= " + initialWidth + "; initialHeighgt= " + initialHeighgt+
-                    " imageWidth= " + imageWidth + "; widthScale=" + widthScale+
+            "initialWidth= " + initialWidth + "; initialHeighgt= " + initialHeighgt +
+                    " imageWidth= " + imageWidth + "; widthScale=" + widthScale +
                     " layoutParams1.height=" + layoutParams1.height
         )
 
@@ -147,8 +147,8 @@ class ScratchCardView : ConstraintLayout {
             playSequentially(translateX)
         }
 
-        val translateX2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f,0f)
-        val translateY2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f,0f)
+        val translateX2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f, 0f)
+        val translateY2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f, 0f)
         translateX2.duration = 1800
         translateY2.duration = 1800
         val AnimatorSet2 = AnimatorSet().apply {

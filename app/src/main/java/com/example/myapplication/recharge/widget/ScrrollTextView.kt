@@ -29,7 +29,7 @@ class ScrollTextView @JvmOverloads constructor(
     private var endY1 = 0
     private var startY2 = 0
     private var endY2 = 0
-    private lateinit var  runnable: Runnable
+    private lateinit var runnable: Runnable
     var list: List<String>? = null
         private set
     private var position = 0
@@ -76,8 +76,7 @@ class ScrollTextView @JvmOverloads constructor(
     }
 
 
-
-        fun setList(list: MutableList<String>) {
+    fun setList(list: MutableList<String>) {
         this.list = list
 
         //处理最后一条数据切换到第一条数据 太快的问题

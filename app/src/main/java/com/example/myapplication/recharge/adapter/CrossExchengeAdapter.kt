@@ -7,7 +7,8 @@ import com.example.myapplication.databinding.SecondBinding
 import com.example.myapplication.recharge.property.Second
 
 
-class CrossExchengeAdapter(@LayoutRes layoutResId: Int, data: MutableList<Second>?) : BaseQuickAdapter<Second, BaseViewHolder>(layoutResId, data) {
+class CrossExchengeAdapter(@LayoutRes layoutResId: Int, data: MutableList<Second>?) :
+    BaseQuickAdapter<Second, BaseViewHolder>(layoutResId, data) {
 
     override fun convert(holder: BaseViewHolder, item: Second) {
         val binding = SecondBinding.bind(holder.itemView)

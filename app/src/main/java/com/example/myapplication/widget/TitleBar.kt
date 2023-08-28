@@ -61,10 +61,11 @@ class TitleBar : RelativeLayout {
 
         //在组件活动（ComponentActivity）中注册一个用于启动活动并接收结果的活动结果协议（ActivityResultContract）
         val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            ActivityResultContracts.StartActivityForResult()
+        ) { activityResult ->
             if (activityResult.resultCode == Activity.RESULT_OK) {
-                val result = activityResult.data?.getIntExtra("result",0)
-                if (result == 1){
+                val result = activityResult.data?.getIntExtra("result", 0)
+                if (result == 1) {
                     //退出
                     context.finish()
                 }
@@ -84,9 +85,11 @@ class TitleBar : RelativeLayout {
         val content = typedArray.getString(R.styleable.TitleBar_title)
         val content2 = typedArray.getString(R.styleable.TitleBar_right_title)
         val barImageWidth = typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageWidth3, 20)
-        val right_ImageWidth = typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageWidth3, 20)
+        val right_ImageWidth =
+            typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageWidth3, 20)
         val barImageHeight = typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageHeight3, 20)
-        val right_ImageHeight = typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageHeight3, 20)
+        val right_ImageHeight =
+            typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageHeight3, 20)
         typedArray.recycle()
 
         // 将获取到的属性值应用到您的视图或逻辑中

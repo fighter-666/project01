@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="97dp"
+    android:layout_height="98dp"
     android:background="@drawable/square2"
-    android:layout_height="98dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="85dp"
         android:layout_height="90dp"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_gravity="center"
-        >
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/name1"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="很遗憾
      未抽中奖品"
             android:textColor="#bb6f42"
-            android:textSize="15sp"
-            android:gravity="center" />
+            android:textSize="15sp" />
     </LinearLayout>
-
-
 </LinearLayout>

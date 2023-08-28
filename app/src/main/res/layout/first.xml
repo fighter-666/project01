@@ -2,28 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="85dp"
-    android:background="@drawable/shape_rectangle6"
-    android:layout_marginRight="10dp"
     android:layout_height="90dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/shape_rectangle6"
+    android:orientation="horizontal"
     tools:ignore="MissingDefaultResource">
-
-
-
 
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="21dp"
         android:layout_height="24dp"
         android:layout_marginBottom="6dp"
-        app:layout_constraintVertical_weight="2"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/bean"
+        app:layout_constraintBottom_toTopOf="@id/name"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/name"
-        android:src="@drawable/bean"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_weight="2" />
 
     <TextView
         android:id="@+id/name"
@@ -32,12 +29,11 @@
         android:text="充流量"
         android:textColor="#333333"
         android:textSize="13sp"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@id/ivImage"
         app:layout_constraintBottom_toTopOf="@id/name2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/ivImage"
+        app:layout_constraintVertical_weight="1" />
 
     <TextView
         android:id="@+id/name2"
@@ -46,11 +42,10 @@
         android:text="流量告急速订购"
         android:textColor="#999999"
         android:textSize="10sp"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintVertical_weight="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

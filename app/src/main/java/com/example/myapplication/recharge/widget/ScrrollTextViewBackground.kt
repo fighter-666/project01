@@ -29,7 +29,7 @@ class ScrrollTextViewBackground @JvmOverloads constructor(
     private var endY1 = 0
     private var startY2 = 0
     private var endY2 = 0
-    private lateinit var  runnable: Runnable
+    private lateinit var runnable: Runnable
     var list: List<String>? = null
         private set
     private var position = 0
@@ -38,7 +38,8 @@ class ScrrollTextViewBackground @JvmOverloads constructor(
 
     init {
         val view: View =
-            LayoutInflater.from(context).inflate(R.layout.widget_scroll_text_background_layout, this)
+            LayoutInflater.from(context)
+                .inflate(R.layout.widget_scroll_text_background_layout, this)
         mBannerTV1 = view.findViewById(R.id.tv_banner1)
         mBannerTV2 = view.findViewById(R.id.tv_banner2)
         handler = Handler()
@@ -75,7 +76,7 @@ class ScrrollTextViewBackground @JvmOverloads constructor(
         }
     }
 
-        fun setList(list: MutableList<String>) {
+    fun setList(list: MutableList<String>) {
         this.list = list
 
         //处理最后一条数据切换到第一条数据 太快的问题

@@ -7,13 +7,11 @@
     <ImageView
         android:id="@+id/image1"
         android:layout_width="23dp"
-        android:layout_height="18dp"
-        />
+        android:layout_height="18dp" />
 
     <ImageView
         android:id="@+id/image2"
         android:layout_width="23dp"
-        android:layout_height="18dp"
-        />
+        android:layout_height="18dp" />
 
 </RelativeLayout>

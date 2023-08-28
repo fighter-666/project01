@@ -6,19 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.RechargePageBinding
+import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
+import com.example.myapplication.recharge.adapter.RechangeWaterfallAdapter
+import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
+import com.example.myapplication.recharge.property.Cards
+import com.example.myapplication.recharge.property.Piggy
+import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrrollTextViewBackground
-import com.example.myapplication.recharge.property.Cards
-import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
-import com.example.myapplication.recharge.adapter.RechangeWaterfallAdapter
-import com.example.myapplication.recharge.property.Piggy
-import com.example.myapplication.recharge.property.Second
-import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
 import com.gyf.immersionbar.ImmersionBar
 
 
-class RechargePage : ComponentActivity() {
+class RechargePageActivity : ComponentActivity() {
 
     private lateinit var binding: RechargePageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,7 @@ class RechargePage : ComponentActivity() {
         setContentView(binding.root)
 
         //沉浸式
-        ImmersionBar.with(this)
-            .transparentStatusBar()  //透明状态栏，不写默认透明色
+        ImmersionBar.with(this).transparentStatusBar()  //透明状态栏，不写默认透明色
             .titleBar(binding.tvTv1)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
@@ -70,8 +69,12 @@ class RechargePage : ComponentActivity() {
         //创建适配器
         val myAdapter = RecommendationServiceAdapteer(R.layout.first, piggies)
 
-       //设置布局管理器
-        binding.recyclerView.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        //设置布局管理器
+        binding.recyclerView.setLayoutManager(
+            LinearLayoutManager(
+                this, LinearLayoutManager.HORIZONTAL, false
+            )
+        )
 
         //给RecycleView设置适配器
         binding.recyclerView.setAdapter(myAdapter)
@@ -93,7 +96,11 @@ class RechargePage : ComponentActivity() {
         val myAdapterCopy = RecommendationServiceAdapteer(R.layout.first, piggiesCopy)
 
         //设置布局管理器
-        binding.recyclerViewCopy.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        binding.recyclerViewCopy.setLayoutManager(
+            LinearLayoutManager(
+                this, LinearLayoutManager.HORIZONTAL, false
+            )
+        )
 
         //给RecycleView设置适配器
         binding.recyclerViewCopy.setAdapter(myAdapterCopy)
@@ -105,35 +112,48 @@ class RechargePage : ComponentActivity() {
         //第二个
         val piggies2 = mutableListOf<Second>()
         piggies2.add(
-            Second(R.drawable.tengxun, "腾讯视频会员\n" +
-                "周卡", "1000金豆",0)
+            Second(
+                R.drawable.tengxun, "腾讯视频会员\n" + "周卡", "1000金豆", 0
+            )
         )
         piggies2.add(
-            Second(R.drawable.youku, "优酷视频会员\n" +
-                "周卡", "1500金豆",R.drawable.shape_rectangle16)
+            Second(
+                R.drawable.youku,
+                "优酷视频会员\n" + "周卡",
+                "1500金豆",
+                R.drawable.shape_rectangle16
+            )
         )
         piggies2.add(
-            Second(R.drawable.youku, "腾讯视频会员\n" +
-                "周卡", "1000金豆",0)
+            Second(
+                R.drawable.youku, "腾讯视频会员\n" + "周卡", "1000金豆", 0
+            )
         )
         piggies2.add(
-            Second(R.drawable.youku, "腾讯视频会员\n" +
-                "周卡", "1000金豆",0)
+            Second(
+                R.drawable.youku, "腾讯视频会员\n" + "周卡", "1000金豆", 0
+            )
         )
         piggies2.add(
-            Second(R.drawable.tengxun, "腾讯视频会员\n" +
-                "周卡", "1000金豆",0)
+            Second(
+                R.drawable.tengxun, "腾讯视频会员\n" + "周卡", "1000金豆", 0
+            )
         )
         piggies2.add(
-            Second(R.drawable.tengxun, "腾讯视频会员\n" +
-                "周卡", "1000金豆",0)
+            Second(
+                R.drawable.tengxun, "腾讯视频会员\n" + "周卡", "1000金豆", 0
+            )
         )
 
         //创建适配器
         val secondAdapter = CrossExchengeAdapter(R.layout.second, piggies2)
 
         //设置布局管理器
-        binding.recyclerView2.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
+        binding.recyclerView2.setLayoutManager(
+            LinearLayoutManager(
+                this, LinearLayoutManager.HORIZONTAL, false
+            )
+        )
 
         //给RecycleView设置适配器
         binding.recyclerView2.setAdapter(secondAdapter)
@@ -157,10 +177,56 @@ class RechargePage : ComponentActivity() {
 
         //第三个
         val piggies4 = mutableListOf<Cards>()
-        piggies4.add(Cards(0,0,R.drawable.falls1, "电信关爱版-为老年人架桥", "0","0","0","0","0", 0, 0))
-        piggies4.add(Cards(R.drawable.shape_rectangle18,R.drawable.shape_rectangle18,R.drawable.falls8,  "加装【副卡】，一份套餐全家用 ", "赠新人礼包","赠美团神券","￥","10","/月", 0, 0))
-        piggies4.add(Cards(R.drawable.shape_rectangle18,R.drawable.shape_rectangle18,R.drawable.fall,  "iPhone12 128GB 红色 双卡双待", "免运费","送配件","0","0","0", 0, 0))
-        piggies4.add(Cards(R.drawable.shape_rectangle18,0,R.drawable.falls4,  "15GB定向流量+腾讯视频月会员卡", "0","0","0","0","0", 0, 0))
+        piggies4.add(
+            Cards(
+                0, 0, R.drawable.falls1, "电信关爱版-为老年人架桥", "0", "0", "0", "0", "0", 0, 0
+            )
+        )
+        piggies4.add(
+            Cards(
+                R.drawable.shape_rectangle18,
+                R.drawable.shape_rectangle18,
+                R.drawable.falls8,
+                "加装【副卡】，一份套餐全家用 ",
+                "赠新人礼包",
+                "赠美团神券",
+                "￥",
+                "10",
+                "/月",
+                0,
+                0
+            )
+        )
+        piggies4.add(
+            Cards(
+                R.drawable.shape_rectangle18,
+                R.drawable.shape_rectangle18,
+                R.drawable.fall,
+                "iPhone12 128GB 红色 双卡双待",
+                "免运费",
+                "送配件",
+                "0",
+                "0",
+                "0",
+                0,
+                0
+            )
+        )
+        piggies4.add(
+            Cards(
+                R.drawable.shape_rectangle18,
+                0,
+                R.drawable.falls4,
+                "15GB定向流量+腾讯视频月会员卡",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                0,
+                0
+            )
+        )
         //piggies4.add(Cards(R.drawable.falls3, "iPhone12 128GB 红色 双卡双待", "免运费","0","0","0","0", 0, 0))
         //piggies4.add(Cards(R.drawable.falls4, "15GB定向流量+腾讯视频月会员卡", "可查全网记录","0","0","0","0", 0, 0))
 
@@ -168,12 +234,13 @@ class RechargePage : ComponentActivity() {
         val fourthAdapter = RechangeWaterfallAdapter(R.layout.fourth, piggies4)
 
         //设置布局管理器
-        binding.recyclerView4.setLayoutManager(StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL))
-
+        binding.recyclerView4.setLayoutManager(
+            StaggeredGridLayoutManager(
+                2, StaggeredGridLayoutManager.VERTICAL
+            )
+        )
         //给RecycleView设置适配器
         binding.recyclerView4.setAdapter(fourthAdapter)
     }
-
-
 }
 

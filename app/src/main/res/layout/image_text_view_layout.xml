@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/rl"
     android:layout_width="match_parent"
     android:layout_height="36dp"
-    android:id="@+id/rl">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/topImage"
@@ -13,37 +13,34 @@
         android:layout_marginTop="9dp"
         android:src="@drawable/refresh2"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/bottomText"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/bottomText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:gravity="center"
-        app:layout_constrainedWidth="true"
         android:autoSizeMaxTextSize="16sp"
         android:autoSizeMinTextSize="1sp"
         android:autoSizeTextType="uniform"
-        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="查询余额"
+        android:textSize="16sp"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/topImage"
         app:layout_constraintRight_toLeftOf="@id/topImage2"
-        android:maxLines="1"
-        android:text="查询余额"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/topImage2"
         android:layout_width="16dp"
         android:layout_height="14dp"
         android:layout_marginTop="11dp"
-        app:layout_constraintLeft_toRightOf="@id/bottomText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/refresh2"
-        />
+        app:layout_constraintLeft_toRightOf="@id/bottomText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

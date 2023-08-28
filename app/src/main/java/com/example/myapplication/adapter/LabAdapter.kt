@@ -6,7 +6,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.property.Piggy
 import com.example.myapplication.databinding.LabBinding
 
-class LabAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
+class LabAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) :
+    BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
     //一个可为空的类型变量，用于包保存点击事件监听器
     private var onItemClickListener: ((Piggy) -> Unit)? = null
 

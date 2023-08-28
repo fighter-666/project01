@@ -8,7 +8,8 @@ import com.example.myapplication.recharge.property.MultipleItem.Companion.IMG
 import com.example.myapplication.recharge.property.MultipleItem.Companion.IMG2
 import com.example.myapplication.recharge.property.MultipleItem.Companion.TEXT
 
-class MultipleItemQuickAdapter(data: MutableList<MultipleItem>) : BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder>(data) {
+class MultipleItemQuickAdapter(data: MutableList<MultipleItem>) :
+    BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder>(data) {
 
     init {
         addItemType(TEXT, R.layout.image_view)
@@ -21,6 +22,7 @@ class MultipleItemQuickAdapter(data: MutableList<MultipleItem>) : BaseMultiItemQ
             TEXT -> {
 
             }
+
             IMG -> {
 
             }

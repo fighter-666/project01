@@ -17,14 +17,18 @@ import com.example.myapplication.activity.components.SecondActivity
 import com.example.myapplication.activity.components.SisthActivity
 import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.databinding.FragmentHelperBinding
-import com.example.myapplication.components.RechargePage
+import com.example.myapplication.components.RechargePageActivity
 import com.gyf.immersionbar.ImmersionBar
 
-class HelperFragment : Fragment(){
-    private  var _binding : FragmentHelperBinding? = null
+class HelperFragment : Fragment() {
+    private var _binding: FragmentHelperBinding? = null
     val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = FragmentHelperBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -36,15 +40,15 @@ class HelperFragment : Fragment(){
         return view
     }
 
-  /*  companion object {
-        fun newInstance(text: String): HelperFragment {
-            val args = Bundle()
-            args.putString("text", text)
-            val fragment = HelperFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }*/
+    /*  companion object {
+          fun newInstance(text: String): HelperFragment {
+              val args = Bundle()
+              args.putString("text", text)
+              val fragment = HelperFragment()
+              fragment.arguments = args
+              return fragment
+          }
+      }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,30 +80,35 @@ class HelperFragment : Fragment(){
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
             when (piggy.name) {
                 "QMUIColorHelper" -> {
-                    val intent = Intent(context, RechargePage::class.java)
+                    val intent = Intent(context, RechargePageActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUIDeviceHelper" -> {
                     val intent = Intent(context, SecondActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QWUIDrawableHelper" -> {
                     val intent = Intent(context, ThirdActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUIStatusBarHelper" -> {
                     val intent = Intent(context, FourthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUIViewHelper" -> {
                     val intent = Intent(context, FifthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUINotchHelper" -> {
                     val intent = Intent(context, SisthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
@@ -109,7 +118,7 @@ class HelperFragment : Fragment(){
 
                 else -> {
                     // 默认的页面跳转逻辑
-                    val intent = Intent(context, RechargePage::class.java)
+                    val intent = Intent(context, RechargePageActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
@@ -117,7 +126,7 @@ class HelperFragment : Fragment(){
         }
     }
 
-    override fun onDestroyView(){
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

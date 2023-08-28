@@ -8,7 +8,6 @@ import com.gyf.immersionbar.ImmersionBar
 
 class FourthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFourthBinding
-    private lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,9 +17,5 @@ class FourthActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init();
-
-
     }
-
-
 }

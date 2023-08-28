@@ -7,7 +7,8 @@ import com.example.myapplication.property.Card
 import com.example.myapplication.databinding.WaterfallBinding
 import com.example.myapplication.util.DensityUtils
 
-class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) : BaseQuickAdapter<Card, BaseViewHolder>(layoutResId, data) {
+class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :
+    BaseQuickAdapter<Card, BaseViewHolder>(layoutResId, data) {
     private var onItemClickListener: ((Card) -> Unit)? = null
 
     private val SCALE = 4 * 1.0f / 3 //图片缩放比例
@@ -26,9 +27,11 @@ class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) : B
 
         setCardView(holder, binding, item)
     }
+
     fun setOnItemClickListener(listener: (Card) -> Unit) {
         onItemClickListener = listener
     }
+
     private fun setCardView(holder: BaseViewHolder, binding: WaterfallBinding, card: Card) {
 
         //计算图片宽高

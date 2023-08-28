@@ -14,10 +14,10 @@ import org.jetbrains.annotations.Nullable
  */
 class RecyclerViewAtViewPager2 : RecyclerView {
     constructor(context: Context) : super(context) {}
-    constructor(context: Context, @Nullable attrs: AttributeSet?) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {}
     constructor(
         context: Context,
-        @Nullable attrs: AttributeSet?,
+        attrs: AttributeSet?,
         defStyleAttr: Int,
     ) : super(context, attrs, defStyleAttr) {
     }

@@ -10,19 +10,18 @@ import com.example.myapplication.databinding.ActivityServeBinding
 
 class ServeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityServeBinding
-    private  var Chinese: String = ""
-    private  var English: String = ""
-    private  var Math: String = ""
-
+    private var Chinese: String = ""
+    private var English: String = ""
+    private var Math: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityServeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonleft.setOnClickListener {
+        binding.buttonLeft.setOnClickListener {
             binding.display.setText(R.string.button1)
         }
-        binding.buttonright.setOnClickListener {
+        binding.buttonRight.setOnClickListener {
             binding.display.setText(R.string.button2)
         }
         binding.switch1.setOnCheckedChangeListener { compoundButton, isChecked ->
@@ -41,7 +40,7 @@ class ServeActivity : AppCompatActivity() {
             binding.display.text = s
         }
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            if (checkedId == R.id.radioButton){
+            if (checkedId == R.id.radioButton) {
                 binding.imageView3.setImageResource(R.drawable.card1)
             } else {
                 binding.imageView3.setImageResource(R.drawable.card2)
@@ -67,7 +66,7 @@ class ServeActivity : AppCompatActivity() {
             } else {
                 Chinese = ""
             }
-            binding.display.text = Chinese+English+Math
+            binding.display.text = Chinese + English + Math
         }
         binding.checkBox2.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -75,7 +74,7 @@ class ServeActivity : AppCompatActivity() {
             } else {
                 English = ""
             }
-            binding.display.text = Chinese+English+Math
+            binding.display.text = Chinese + English + Math
         }
         binding.checkBox3.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -83,11 +82,12 @@ class ServeActivity : AppCompatActivity() {
             } else {
                 Math = ""
             }
-            binding.display.text = Chinese+English+Math
+            binding.display.text = Chinese + English + Math
         }
         binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
             // 在这里处理评分条值的变化
-            Toast.makeText(applicationContext,rating.toString() + "星评价！", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, rating.toString() + "星评价！", Toast.LENGTH_SHORT)
+                .show()
         }
 
 

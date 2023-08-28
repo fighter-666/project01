@@ -40,7 +40,10 @@ import java.util.Random
 @SuppressLint("DiscouragedPrivateApi")
 fun resetDurationScale(valueAnimator: ValueAnimator) {
     try {
-        val method: Method = ValueAnimator::class.java.getDeclaredMethod("setDurationScale", Float::class.javaPrimitiveType)
+        val method: Method = ValueAnimator::class.java.getDeclaredMethod(
+            "setDurationScale",
+            Float::class.javaPrimitiveType
+        )
         method.isAccessible = true
         method.invoke(valueAnimator, 1f)
     } catch (e: Exception) {
@@ -48,7 +51,7 @@ fun resetDurationScale(valueAnimator: ValueAnimator) {
     }
 }
 
-class FlipPage : SlideRightBackActivity()  {
+class FlipPage : SlideRightBackActivity() {
     private lateinit var binding: ActivityFlipPageBinding
     private lateinit var card: ImageView
     private lateinit var closeicon: ImageView
@@ -140,7 +143,7 @@ class FlipPage : SlideRightBackActivity()  {
         rotation.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 val intent2 = Intent().apply {
-                    putExtra("result",R.drawable.card1 )
+                    putExtra("result", R.drawable.card1)
                 }
                 setResult(Activity.RESULT_OK, intent2)
             }
@@ -219,7 +222,7 @@ class FlipPage : SlideRightBackActivity()  {
                     button.setOnClickListener {
                         Toast.makeText(this@FlipPage, "点击了", Toast.LENGTH_SHORT).show()
                     }
-                } else{
+                } else {
                     // 选中了 R.drawable.card3
                     // 执行相应的逻辑
                     // ...
@@ -227,7 +230,7 @@ class FlipPage : SlideRightBackActivity()  {
 
                 //设置一个带有结果数据的Intent并将其作为结果返回给调用方
                 val intent1 = Intent().apply {
-                    putExtra("result",randomImageRes )
+                    putExtra("result", randomImageRes)
                 }
                 setResult(Activity.RESULT_OK, intent1)
                 // 判断选中的是哪个资源
@@ -282,7 +285,17 @@ class FlipPage : SlideRightBackActivity()  {
             playTogether(rotation6, scaleX6, scaleY6, alpha6)
             playTogether(rotation7, alpha7, scaleX7, scaleY7)
             playTogether(rotation8)
-            playSequentially(scaleX, rotation, rotation2, rotation3, rotation4,beamScaleX5, rotation6, rotation7, rotation8)
+            playSequentially(
+                scaleX,
+                rotation,
+                rotation2,
+                rotation3,
+                rotation4,
+                beamScaleX5,
+                rotation6,
+                rotation7,
+                rotation8
+            )
         }
         combinedAnimatorSet.start()
     }
@@ -316,6 +329,7 @@ class FlipPage : SlideRightBackActivity()  {
         .fitCenter()
         .skipMemoryCache(true)
         .diskCacheStrategy(DiskCacheStrategy.DATA)
+
     fun loadImage(imageView: ImageView) {
         Glide.with(getApplicationContext())
             .asGif()

@@ -11,7 +11,6 @@ import com.example.myapplication.databinding.ActivityScoreBinding
 class ScoreActivity : AppCompatActivity() {
     private lateinit var viewModelWithScore: ViewModelWithScore
     private lateinit var binding: ActivityScoreBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_score)

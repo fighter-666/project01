@@ -22,16 +22,20 @@ import com.example.myapplication.activity.components.bilibili.activity.DataBindi
 import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.activity.components.bilibili.activity.ScoreActivity
 import com.example.myapplication.databinding.ComponentsFragmentBinding
-import com.example.myapplication.components.RechargePage
+import com.example.myapplication.components.RechargePageActivity
 import com.gyf.immersionbar.ImmersionBar
 
 
-class ComponentsFragment : Fragment(){
-    private  var _binding : ComponentsFragmentBinding? = null
+class ComponentsFragment : Fragment() {
+    private var _binding: ComponentsFragmentBinding? = null
     val binding get() = _binding!!
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = ComponentsFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -44,15 +48,15 @@ class ComponentsFragment : Fragment(){
 
     }
 
-  /*  companion object {
-        fun newInstance(text: String): ComponentsFragment {
-            val args = Bundle()
-            args.putString("text", text)
-            val fragment = ComponentsFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }*/
+    /*  companion object {
+          fun newInstance(text: String): ComponentsFragment {
+              val args = Bundle()
+              args.putString("text", text)
+              val fragment = ComponentsFragment()
+              fragment.arguments = args
+              return fragment
+          }
+      }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -104,80 +108,95 @@ class ComponentsFragment : Fragment(){
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
             when (piggy.name) {
                 "QMUIColorHelper" -> {
-                    val intent = Intent(context, RechargePage::class.java)
+                    val intent = Intent(context, RechargePageActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUIDeviceHelper" -> {
                     val intent = Intent(context, SecondActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QWUIDrawableHelper" -> {
                     val intent = Intent(context, ThirdActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUIStatusBarHelper" -> {
                     val intent = Intent(context, FourthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUIViewHelper" -> {
                     val intent = Intent(context, FifthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "QMUINotchHelper" -> {
                     val intent = Intent(context, SisthActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "7" -> {
                     val intent = Intent(context, ServeActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "8" -> {
                     val intent = Intent(context, ViewModelTest::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "9" -> {
                     val intent = Intent(context, LiveData::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "10" -> {
                     val intent = Intent(context, DataBinding::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "ScoreActivity" -> {
                     val intent = Intent(context, ScoreActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "12" -> {
                     val intent = Intent(context, DataBinding::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "13" -> {
                     val intent = Intent(context, DataBinding::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "14" -> {
                     val intent = Intent(context, ScoreActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "15" -> {
                     val intent = Intent(context, ScoreActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
+
                 "16" -> {
                     val intent = Intent(context, ScoreActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
@@ -187,7 +206,7 @@ class ComponentsFragment : Fragment(){
 
                 else -> {
                     // 默认的页面跳转逻辑
-                    val intent = Intent(context, RechargePage::class.java)
+                    val intent = Intent(context, RechargePageActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
@@ -196,7 +215,7 @@ class ComponentsFragment : Fragment(){
 
     }
 
-    override fun onDestroyView(){
+    override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

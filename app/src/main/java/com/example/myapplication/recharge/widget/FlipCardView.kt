@@ -27,7 +27,7 @@ import com.example.myapplication.util.DensityUtils
 
 class FlipCardView : ConstraintLayout {
     private lateinit var imageView: ImageView
-    private  var drawable: Drawable? = null
+    private var drawable: Drawable? = null
     private lateinit var imageViewCopy: ImageView
     private lateinit var imageView2Copy: ImageView
     private lateinit var imageView3Copy: ImageView
@@ -35,7 +35,7 @@ class FlipCardView : ConstraintLayout {
     private lateinit var imageView3: ImageView
     private lateinit var textview: TextView
     private lateinit var rl: ConstraintLayout
-    private  var screenWidth: Int = 0
+    private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
 
     /**
@@ -70,33 +70,35 @@ class FlipCardView : ConstraintLayout {
     //抽到的卡片回传到自定义View，(context as ComponentActivity)将 context 对象强制转换为 ComponentActivity 类型，
     // 以便可以调用 ComponentActivity 类中定义的方法和属性。
     // 这样做可能是因为需要在 ComponentActivity 的上下文中执行一些特定的操作，或者需要使用 ComponentActivity 提供的特定功能。
-    private val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-        if (activityResult.resultCode == Activity.RESULT_OK) {
-            val result = activityResult.data?.getIntExtra("result", 0)
-            val drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
-            imageView.setImageDrawable(drawable)
+    private val myActivityLauncher =
+        (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            if (activityResult.resultCode == Activity.RESULT_OK) {
+                val result = activityResult.data?.getIntExtra("result", 0)
+                val drawable =
+                    result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
+                imageView.setImageDrawable(drawable)
+            }
         }
-    }
 
     //第二张卡片
-    private val myActivityLauncher2 = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-        if (activityResult.resultCode == Activity.RESULT_OK) {
-            val result = activityResult.data?.getIntExtra("result",0)
-            val resources = context.resources
-            drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
-            imageView2.setImageDrawable(drawable)
+    private val myActivityLauncher2 =
+        (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            if (activityResult.resultCode == Activity.RESULT_OK) {
+                val result = activityResult.data?.getIntExtra("result", 0)
+                drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
+                imageView2.setImageDrawable(drawable)
+            }
         }
-    }
 
     //第三张卡片
-    private val myActivityLauncher3 = (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-        if (activityResult.resultCode == Activity.RESULT_OK) {
-            val result = activityResult.data?.getIntExtra("result",0)
-            val resources = context.resources
-            drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
-            imageView3.setImageDrawable(drawable)
+    private val myActivityLauncher3 =
+        (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+            if (activityResult.resultCode == Activity.RESULT_OK) {
+                val result = activityResult.data?.getIntExtra("result", 0)
+                drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
+                imageView3.setImageDrawable(drawable)
+            }
         }
-    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -112,7 +114,7 @@ class FlipCardView : ConstraintLayout {
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
         // 卡片三等分
-        val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f) )/ 3
+        val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f)) / 3
         LogUtils.d(
             "screenWidth=" + screenWidth + "; px=" + imageWidth
         )
@@ -179,7 +181,7 @@ class FlipCardView : ConstraintLayout {
 
         //获取图片的资源
         imageView.setImageResource(R.drawable.card1)
-       // imageViewCopy.setImageResource(R.drawable.card1)
+        // imageViewCopy.setImageResource(R.drawable.card1)
         imageView2.setImageResource(R.drawable.card1)
         imageView3.setImageResource(R.drawable.card1)
 
@@ -194,7 +196,10 @@ class FlipCardView : ConstraintLayout {
             val imagePair = Pair<View, String>(imageView, "transition_image")
 
             // 创建 ActivityOptionsCompat，并设置共享元素转场动画
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                context as ComponentActivity,
+                imagePair
+            )
 
             // 启动活动并应用转场动画
             myActivityLauncher.launch(intent, options)
@@ -209,7 +214,10 @@ class FlipCardView : ConstraintLayout {
             val imagePair = Pair<View, String>(imageView2, "transition_image")
 
             // 创建 ActivityOptionsCompat，并设置共享元素转场动画
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                context as ComponentActivity,
+                imagePair
+            )
 
             // 启动活动并应用转场动画
             myActivityLauncher2.launch(intent, options)
@@ -226,7 +234,10 @@ class FlipCardView : ConstraintLayout {
             val imagePair = Pair<View, String>(imageView3, "transition_image")
 
             // 创建 ActivityOptionsCompat，并设置共享元素转场动画
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context as ComponentActivity, imagePair)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                context as ComponentActivity,
+                imagePair
+            )
 
             // 启动活动并应用转场动画
             myActivityLauncher3.launch(intent, options)

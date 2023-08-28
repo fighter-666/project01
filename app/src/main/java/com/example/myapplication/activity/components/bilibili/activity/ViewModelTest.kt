@@ -9,7 +9,6 @@ import com.example.myapplication.databinding.ActivityViewModelTestBinding
 class ViewModelTest : AppCompatActivity() {
     private lateinit var binding: ActivityViewModelTestBinding
     private lateinit var myViewModel: MyViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewModelTestBinding.inflate(layoutInflater)

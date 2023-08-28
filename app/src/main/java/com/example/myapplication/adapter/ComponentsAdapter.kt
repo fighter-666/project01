@@ -6,7 +6,8 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.property.Piggy
 import com.example.myapplication.databinding.ComponentsBinding
 
-class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>) : BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
+class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>) :
+    BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
     //一个可为空的函数类型变量，用于保存点击事件的监听器
     private var onItemClickListener: ((Piggy) -> Unit)? = null
 
@@ -24,6 +25,7 @@ class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>) :
             onItemClickListener?.invoke(item)
         }
     }
+
     //它接受一个函数类型的参数 listener，该函数类型接受一个 Piggy 对象作为参数，并不返回任何结果
     fun setOnItemClickListener(listener: (Piggy) -> Unit) {
         //onItemClickListener 被赋值为传入的 listener，

@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
             .init();
-
 
 
         val tabs = arrayOf("Components", "Helper", "Lab", "Waterfall")
@@ -44,27 +45,28 @@ class MainActivity : AppCompatActivity() {
         //设置默认的丽萍页面限制
         binding.viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
         //使用FragmentStateAdapter的匿名子类为ViewPager2设置适配器
-       /* binding.viewPager.adapter = object : FragmentStateAdapter(supportFragmentManager,lifecycle) {
-            override fun getItemCount(): Int {
-                //返回标签页的数量
-                return tabs.size
-            }
+        /* binding.viewPager.adapter = object : FragmentStateAdapter(supportFragmentManager,lifecycle) {
+             override fun getItemCount(): Int {
+                 //返回标签页的数量
+                 return tabs.size
+             }
 
-            override fun createFragment(position: Int): Fragment {
-                val fragment = ComponentsFragment.newInstance(tabs[position])
-                val tab = binding.tabLayout.getTabAt(position)
-                tab?.setIcon(pics[position])
-                return fragment
-            }
-        }*/
+             override fun createFragment(position: Int): Fragment {
+                 val fragment = ComponentsFragment.newInstance(tabs[position])
+                 val tab = binding.tabLayout.getTabAt(position)
+                 tab?.setIcon(pics[position])
+                 return fragment
+             }
+         }*/
 
-        val adapter = DynamicFragmentAdapter(supportFragmentManager,lifecycle)
+        val adapter = DynamicFragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
-        
-        val mediator = TabLayoutMediator(binding.tabLayout,binding.viewPager) { tab,position ->
-            val tabView = LayoutInflater.from(this@MainActivity).inflate(R.layout.custom_tab_view, null)
-            val tabIcon = tabView.findViewById<ImageView>(R.id.tab_icon)
-            val tabTitle = tabView.findViewById<TextView>(R.id.tab_title)
+
+        val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            val tabView =
+                LayoutInflater.from(this@MainActivity).inflate(R.layout.custom_tab_view, null)
+            val tabIcon = tabView.findViewById<ImageView>(R.id.tabIcon)
+            val tabTitle = tabView.findViewById<TextView>(R.id.tabTitle)
             tabTitle.text = tabs[position]
             tabIcon.setImageResource(pics[position])
             tab.customView = tabView
@@ -73,7 +75,8 @@ class MainActivity : AppCompatActivity() {
         mediator.attach()
     }
 
-    class DynamicFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
+    class DynamicFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+        FragmentStateAdapter(fragmentManager, lifecycle) {
         private val fragments = listOf(
             ComponentsFragment(),
             HelperFragment(),
