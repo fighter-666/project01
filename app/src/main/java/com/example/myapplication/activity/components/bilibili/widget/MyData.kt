@@ -16,10 +16,11 @@ class MyData(private  var context: Context) {
         editor.apply()
     }
 
-    fun load() {
+    fun load(): Int {
         val name = context.resources.getString((R.string.MY_DATA))
         val shp = context.getSharedPreferences(name, Context.MODE_PRIVATE)
         val key = context.resources.getString(R.string.MY_KEY)
-        //shp.getInt(key, context.resources.getInteger(R.))
+        val x: Int = shp.getInt(key, context.resources.getInteger(R.integer.defaultValue))
+        return x
     }
 }
