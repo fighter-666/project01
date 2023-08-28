@@ -31,7 +31,7 @@
             android:name=".activity.components.bilibili.activity.ServeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.Return"
+            android:name=".activity.ReturnActivity"
             android:exported="false"
             android:theme="@style/TranslucentStyle" />
         <activity

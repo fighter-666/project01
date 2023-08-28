@@ -8,7 +8,7 @@ import com.example.myapplication.databinding.ActivityReturnPageBinding
 import com.gyf.immersionbar.ImmersionBar
 
 
-class Return : AppCompatActivity() {
+class ReturnActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReturnPageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

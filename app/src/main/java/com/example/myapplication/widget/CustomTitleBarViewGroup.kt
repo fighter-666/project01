@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapplication.R
-import com.example.myapplication.activity.Return
+import com.example.myapplication.activity.ReturnActivity
 
 
 class CustomTitleBarViewGroup : RelativeLayout {
@@ -72,7 +72,7 @@ class CustomTitleBarViewGroup : RelativeLayout {
         //有返回值的跳转页面
         imageView.setOnClickListener {
             //getContext() 获取上下文
-            val intent = Intent(getContext(), Return::class.java)
+            val intent = Intent(getContext(), ReturnActivity::class.java)
             myActivityLauncher.launch(intent)
         }
 
