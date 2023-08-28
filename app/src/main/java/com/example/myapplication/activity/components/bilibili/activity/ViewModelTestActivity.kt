@@ -3,10 +3,10 @@ package com.example.myapplication.activity.components.bilibili.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.activity.components.bilibili.util.MyViewModel
+import com.example.myapplication.activity.components.bilibili.widget.MyViewModel
 import com.example.myapplication.databinding.ActivityViewModelTestBinding
 
-class ViewModelTest : AppCompatActivity() {
+class ViewModelTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityViewModelTestBinding
     private lateinit var myViewModel: MyViewModel
     override fun onCreate(savedInstanceState: Bundle?) {

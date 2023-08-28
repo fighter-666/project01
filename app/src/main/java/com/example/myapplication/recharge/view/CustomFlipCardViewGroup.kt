@@ -1,40 +1,27 @@
-package com.example.myapplication.recharge.widget
+package com.example.myapplication.recharge.view
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.Nullable
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.util.Pair
-import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ViewGroupCustomFlipCardBinding
 import com.example.myapplication.recharge.activity.FlipPage
 import com.example.myapplication.util.DensityUtils
 
 
-class FlipCardView : ConstraintLayout {
-    private lateinit var imageView: ImageView
+class CustomFlipCardViewGroup : ConstraintLayout {
+    private lateinit var binding: ViewGroupCustomFlipCardBinding
     private var drawable: Drawable? = null
-    private lateinit var imageViewCopy: ImageView
-    private lateinit var imageView2Copy: ImageView
-    private lateinit var imageView3Copy: ImageView
-    private lateinit var imageView2: ImageView
-    private lateinit var imageView3: ImageView
-    private lateinit var textview: TextView
-    private lateinit var rl: ConstraintLayout
     private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
 
@@ -76,7 +63,7 @@ class FlipCardView : ConstraintLayout {
                 val result = activityResult.data?.getIntExtra("result", 0)
                 val drawable =
                     result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
-                imageView.setImageDrawable(drawable)
+                binding.ivFirstCard.setImageDrawable(drawable)
             }
         }
 
@@ -86,7 +73,7 @@ class FlipCardView : ConstraintLayout {
             if (activityResult.resultCode == Activity.RESULT_OK) {
                 val result = activityResult.data?.getIntExtra("result", 0)
                 drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
-                imageView2.setImageDrawable(drawable)
+                binding.ivSecondCard.setImageDrawable(drawable)
             }
         }
 
@@ -96,7 +83,7 @@ class FlipCardView : ConstraintLayout {
             if (activityResult.resultCode == Activity.RESULT_OK) {
                 val result = activityResult.data?.getIntExtra("result", 0)
                 drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
-                imageView3.setImageDrawable(drawable)
+                binding.ivThirdCard.setImageDrawable(drawable)
             }
         }
 
@@ -115,85 +102,69 @@ class FlipCardView : ConstraintLayout {
         super.onLayout(changed, left, top, right, bottom)
         // 卡片三等分
         val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f)) / 3
-        LogUtils.d(
-            "screenWidth=" + screenWidth + "; px=" + imageWidth
-        )
-        val layoutParams1 = imageView.layoutParams
+        val layoutParams1 =  binding.ivFirstCard.layoutParams
         layoutParams1.width = imageWidth
         layoutParams1.height = imageWidth
-        imageView.layoutParams = layoutParams1
+        binding.ivFirstCard.layoutParams = layoutParams1
 
         //重叠的卡片当作背景
-        val layoutParams1Copy = imageViewCopy.layoutParams
+        val layoutParams1Copy =  binding.ivFirstCardBackground.layoutParams
         layoutParams1Copy.width = imageWidth
         layoutParams1Copy.height = imageWidth
-        imageViewCopy.layoutParams = layoutParams1Copy
+        binding.ivFirstCardBackground.layoutParams = layoutParams1Copy
 
         //第二张卡片
-        val layoutParams2 = imageView2.layoutParams
+        val layoutParams2 =  binding.ivSecondCard.layoutParams
         layoutParams2.width = imageWidth
         layoutParams2.height = imageWidth
-        imageView2.layoutParams = layoutParams2
+        binding.ivSecondCard.layoutParams = layoutParams2
 
         //重叠的第二张卡片
-        val layoutParams2Copy = imageView2Copy.layoutParams
+        val layoutParams2Copy =  binding.ivSecondCardBackground.layoutParams
         layoutParams2Copy.width = imageWidth
         layoutParams2Copy.height = imageWidth
-        imageView2Copy.layoutParams = layoutParams2Copy
+        binding.ivSecondCardBackground.layoutParams = layoutParams2Copy
 
         //第三张卡片
-        val layoutParams3 = imageView3.layoutParams
+        val layoutParams3 = binding.ivThirdCard.layoutParams
         layoutParams3.width = imageWidth
         layoutParams3.height = imageWidth
-        imageView3.layoutParams = layoutParams3
+        binding.ivThirdCard.layoutParams = layoutParams3
 
         //重叠的卡片
-        val layoutParams3Copy = imageView3Copy.layoutParams
+        val layoutParams3Copy = binding.ivThirdCardBackground.layoutParams
         layoutParams3Copy.width = imageWidth
         layoutParams3Copy.height = imageWidth
-        imageView3Copy.layoutParams = layoutParams3Copy
+        binding.ivThirdCardBackground.layoutParams = layoutParams3Copy
     }
 
     private fun initView(context: Context) {
         //获取子控件
-        LayoutInflater.from(context).inflate(R.layout.flip_card, this)
-        imageViewCopy = findViewById<ImageView>(R.id.card1Copy)
-        imageView2Copy = findViewById<ImageView>(R.id.card2Copy)
-        imageView3Copy = findViewById<ImageView>(R.id.card3Copy)
-        imageView = findViewById<ImageView>(R.id.card1)
-        imageView2 = findViewById<ImageView>(R.id.card2)
-        imageView3 = findViewById<ImageView>(R.id.card3)
-        textview = findViewById<TextView>(R.id.cl4Tv7)
-        rl = findViewById(R.id.rl)
-
-        val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.FlipCardView)
-        val drawable = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc)
-        val drawableCopy = typedArray.getDrawable(R.styleable.FlipCardView_cardSrcCopy)
-        val drawable2 = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc2)
-        val drawable3 = typedArray.getDrawable(R.styleable.FlipCardView_cardSrc3)
+        binding = ViewGroupCustomFlipCardBinding.inflate(LayoutInflater.from(context), this, true)
+        val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.CustomFlipCardViewGroup)
+        val drawable = typedArray.getDrawable(R.styleable.CustomFlipCardViewGroup_cardSrc)
+        val drawable2 = typedArray.getDrawable(R.styleable.CustomFlipCardViewGroup_cardSrc2)
+        val drawable3 = typedArray.getDrawable(R.styleable.CustomFlipCardViewGroup_cardSrc3)
         typedArray.recycle()
 
         // 设置图片资源
-        imageView.setImageDrawable(drawable)
-        //imageViewCopy.setImageDrawable(drawableCopy)
-        imageView2.setImageDrawable(drawable2)
-        imageView3.setImageDrawable(drawable3)
+        binding.ivFirstCard.setImageDrawable(drawable)
+        binding.ivSecondCard.setImageDrawable(drawable2)
+        binding.ivThirdCard.setImageDrawable(drawable3)
 
         //获取图片的资源
-        imageView.setImageResource(R.drawable.card1)
-        // imageViewCopy.setImageResource(R.drawable.card1)
-        imageView2.setImageResource(R.drawable.card1)
-        imageView3.setImageResource(R.drawable.card1)
+        binding.ivFirstCard.setImageResource(R.drawable.card1)
+        binding.ivSecondCard.setImageResource(R.drawable.card1)
+        binding.ivThirdCard.setImageResource(R.drawable.card1)
 
 
         //第一张卡片的点击事件
-        imageView.setOnClickListener {
+        binding.ivFirstCard.setOnClickListener {
             //跳转页面
             val intent = Intent(getContext(), FlipPage::class.java)
-            //myActivityLauncher.launch(intent)
 
             // 创建共享元素的 Pair 对象
-            val imagePair = Pair<View, String>(imageView, "transition_image")
+            val imagePair = Pair<View, String>(binding.ivFirstCard, "transition_image")
 
             // 创建 ActivityOptionsCompat，并设置共享元素转场动画
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -206,12 +177,11 @@ class FlipCardView : ConstraintLayout {
         }
 
         //第二张卡片的点击事件
-        imageView2.setOnClickListener {
+        binding.ivSecondCard.setOnClickListener {
             val intent = Intent(getContext(), FlipPage::class.java)
-            //myActivityLauncher.launch(intent)
 
             // 创建共享元素的 Pair 对象
-            val imagePair = Pair<View, String>(imageView2, "transition_image")
+            val imagePair = Pair<View, String>(binding.ivSecondCard, "transition_image")
 
             // 创建 ActivityOptionsCompat，并设置共享元素转场动画
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -226,12 +196,11 @@ class FlipCardView : ConstraintLayout {
         }
 
         ////第三张卡片的点击事件
-        imageView3.setOnClickListener {
+        binding.ivThirdCard.setOnClickListener {
             val intent = Intent(getContext(), FlipPage::class.java)
-            //myActivityLauncher.launch(intent)
 
             // 创建共享元素的 Pair 对象
-            val imagePair = Pair<View, String>(imageView3, "transition_image")
+            val imagePair = Pair<View, String>(binding.ivThirdCard, "transition_image")
 
             // 创建 ActivityOptionsCompat，并设置共享元素转场动画
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(

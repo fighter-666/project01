@@ -5,7 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.example.myapplication.databinding.FourthBinding
+import com.example.myapplication.databinding.AdapterRechargeWaterfallBinding
 import com.example.myapplication.recharge.property.Cards
 import com.example.myapplication.util.DensityUtils
 
@@ -15,7 +15,7 @@ class RechangeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Ca
     private val SCALE = 3 * 1.0f / 3 //图片缩放比例
 
     override fun convert(holder: BaseViewHolder, item: Cards) {
-        val binding = FourthBinding.bind(holder.itemView)
+        val binding = AdapterRechargeWaterfallBinding.bind(holder.itemView)
         binding.ivImage.setImageResource(item.image)
         binding.name2.setBackgroundResource(item.backGround)
         binding.name3.setBackgroundResource(item.backGround2)
@@ -68,7 +68,7 @@ class RechangeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Ca
         binding.ivImage.layoutParams = layoutParams*/
     }
 
-    private fun setCardView(holder: BaseViewHolder, binding: FourthBinding, card: Cards) {
+    private fun setCardView(holder: BaseViewHolder, binding: AdapterRechargeWaterfallBinding, card: Cards) {
         //计算图片宽高
         val layoutParams = binding.ivImage.layoutParams as ConstraintLayout.LayoutParams
         val space = DensityUtils.dpToPx(context, 18f)

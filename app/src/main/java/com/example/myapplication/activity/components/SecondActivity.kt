@@ -1,6 +1,5 @@
 package com.example.myapplication.activity.components
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -20,8 +19,8 @@ import android.text.style.UnderlineSpan
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.myapplication.R
-import com.example.myapplication.widget.MyClickableSpan
 import com.example.myapplication.databinding.ActivitySecondBinding
+import com.example.myapplication.widget.MyClickableSpan
 import com.gyf.immersionbar.ImmersionBar
 
 

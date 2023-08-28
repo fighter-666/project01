@@ -1,4 +1,4 @@
-package com.example.myapplication.activity.components.bilibili.util
+package com.example.myapplication.activity.components.bilibili.widget
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

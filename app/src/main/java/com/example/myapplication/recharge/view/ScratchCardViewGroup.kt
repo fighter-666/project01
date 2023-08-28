@@ -1,27 +1,23 @@
-package com.example.myapplication.recharge.widget
+package com.example.myapplication.recharge.view
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.Nullable
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.R
 import com.example.myapplication.util.DensityUtils
 
 
-class ScratchCardView : ConstraintLayout {
+class ScratchCardViewGroup : ConstraintLayout {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textview: TextView
@@ -99,20 +95,20 @@ class ScratchCardView : ConstraintLayout {
     private fun initView() {
 
         //获取子控件
-        LayoutInflater.from(context).inflate(R.layout.scratch_card, this)
+        LayoutInflater.from(context).inflate(R.layout.view_group_custom_scratch_card, this)
         imageView = findViewById<ImageView>(R.id.imageHand)
         imageView2 = findViewById<ImageView>(R.id.imageHand2)
-        textview = findViewById(R.id.cl4Tv9)
+        textview = findViewById(R.id.tvFlipCardChange)
         close = findViewById(R.id.close)
         container = findViewById<ConstraintLayout>(R.id.container)
 
         //绑定刮卡view
-        val customView = ScratchCard(getContext())
+        val customView = ScratchCardView(getContext())
         container.addView(customView)
 
-        val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.ScratchCardView)
-        val drawable = typedArray.getDrawable(R.styleable.ScratchCardView_scratchSrc)
-        val drawable2 = typedArray.getDrawable(R.styleable.ScratchCardView_scratchSrc2)
+        val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.ScratchCardViewGroup)
+        val drawable = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc)
+        val drawable2 = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc2)
         typedArray.recycle()
 
         // 设置图片资源
@@ -133,7 +129,7 @@ class ScratchCardView : ConstraintLayout {
         textview.setOnClickListener {
             Toast.makeText(context, "再来一次", Toast.LENGTH_SHORT).show()
             //customView.resetScratchCard()
-            val customView2 = ScratchCard(getContext())
+            val customView2 = ScratchCardView(getContext())
             container.addView(customView2)
         }
 

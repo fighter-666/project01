@@ -13,8 +13,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.myapplication.widget.TitleBar
-            android:id="@+id/tvTv1"
+        <com.example.myapplication.widget.CustomTitleBarViewGroup
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="39dp"
             android:gravity="center"
@@ -42,18 +42,18 @@
 
             <!-- 在这里添加你的约束布局内容 -->
             <ImageView
-                android:id="@+id/ivIv1"
+                android:id="@+id/ivTick"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginTop="23dp"
                 android:src="@drawable/tick"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/tvTv2"
+                app:layout_constraintRight_toLeftOf="@id/tvRechargeResult"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvTv2"
+                android:id="@+id/tvRechargeResult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -61,12 +61,12 @@
                 android:textColor="#333333"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@id/ivIv1"
+                app:layout_constraintLeft_toRightOf="@id/ivTick"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvTv3"
+                android:id="@+id/tvRechargeNumber"
                 android:layout_width="189dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -75,7 +75,7 @@
                 android:textColor="#999999"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTv2" />
+                app:layout_constraintTop_toBottomOf="@id/tvRechargeResult" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -84,11 +84,11 @@
                 android:text="173 666 99999"
                 android:textColor="#333333"
                 android:textSize="14sp"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvTv3"
-                app:layout_constraintTop_toBottomOf="@id/tvTv2" />
+                app:layout_constraintBaseline_toBaselineOf="@id/tvRechargeNumber"
+                app:layout_constraintTop_toBottomOf="@id/tvRechargeResult" />
 
             <TextView
-                android:id="@+id/tvTv4"
+                android:id="@+id/tvRechargeAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -98,10 +98,10 @@
                 android:textColor="#999999"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTv3" />
+                app:layout_constraintTop_toBottomOf="@id/tvRechargeNumber" />
 
             <TextView
-                android:id="@+id/tvTv5"
+                android:id="@+id/tvDiscount"
                 android:layout_width="52dp"
                 android:layout_height="15dp"
                 android:layout_marginTop="14dp"
@@ -111,11 +111,11 @@
                 android:text="官方-0.5元"
                 android:textColor="#fe5561"
                 android:textSize="9sp"
-                app:layout_constraintRight_toLeftOf="@id/tvTv6"
-                app:layout_constraintTop_toBottomOf="@id/tvTv3" />
+                app:layout_constraintRight_toLeftOf="@id/tvActualAmount"
+                app:layout_constraintTop_toBottomOf="@id/tvRechargeNumber" />
 
             <TextView
-                android:id="@+id/tvTv6"
+                android:id="@+id/tvActualAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -123,12 +123,12 @@
                 android:text="99.5元"
                 android:textColor="#333333"
                 android:textSize="14sp"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvTv4"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvRechargeAmount"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTv3" />
+                app:layout_constraintTop_toBottomOf="@id/tvRechargeNumber" />
 
             <TextView
-                android:id="@+id/tv21tv"
+                android:id="@+id/tvContinueRecharge"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="27dp"
@@ -139,38 +139,38 @@
                 android:textSize="16sp"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/tv2Tv"
-                app:layout_constraintTop_toBottomOf="@id/tvTv6" />
+                app:layout_constraintRight_toLeftOf="@id/tvBalanceInquiry"
+                app:layout_constraintTop_toBottomOf="@id/tvActualAmount" />
 
-            <com.example.myapplication.recharge.widget.BalanceInquiryView
-                android:id="@+id/tv2Tv"
+            <com.example.myapplication.recharge.view.CustomBalanceInquiryViewGroup
+                android:id="@+id/tvBalanceInquiry"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="27dp"
                 android:background="@drawable/shape_rectangle2"
-                app:imageHeight="17dp"
-                app:imageHeight2="14dp"
-                app:imageWidth="16dp"
-                app:imageWidth2="16dp"
-                app:layout_constraintLeft_toRightOf="@id/tv21tv"
+                app:ivLoadHeight="17dp"
+                app:ivReLoadHeight="14dp"
+                app:ivLoadWidth="16dp"
+                app:ivReLoadWidth="16dp"
+                app:layout_constraintLeft_toRightOf="@id/tvContinueRecharge"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTv6"
-                app:textColor="@android:color/white"
-                app:textContent="查询余额" />
+                app:layout_constraintTop_toBottomOf="@id/tvActualAmount"
+                app:tvChecktextColor="@android:color/white"
+                app:tvChecktextContent="查询余额" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl1"
+                android:id="@+id/clScrollBar"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_rectangle3"
-                app:layout_constraintTop_toBottomOf="@id/tv2Tv"
+                app:layout_constraintTop_toBottomOf="@id/tvBalanceInquiry"
                 tools:ignore="MissingConstraints">
 
                 <com.example.myapplication.recharge.widget.ScrollImageView
-                    android:id="@+id/im1Im"
+                    android:id="@+id/imScroll"
                     android:layout_width="23dp"
                     android:layout_height="18dp"
                     android:layout_marginLeft="10dp"
@@ -181,7 +181,7 @@
 
 
                 <com.example.myapplication.recharge.widget.ScrollTextView
-                    android:id="@+id/tv2Tv2"
+                    android:id="@+id/tvScroll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -190,21 +190,21 @@
                     android:textColor="#666666"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/im1Im"
-                    app:layout_constraintRight_toLeftOf="@id/tv2Tv3"
+                    app:layout_constraintLeft_toRightOf="@id/imScroll"
+                    app:layout_constraintRight_toLeftOf="@id/tvScrollBackground"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.example.myapplication.recharge.widget.ScrrollTextViewBackground
-                    android:id="@+id/tv2Tv3"
+                    android:id="@+id/tvScrollBackground"
                     android:layout_width="52dp"
                     android:layout_height="22dp"
                     android:layout_marginRight="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/tv2Image"
+                    app:layout_constraintRight_toLeftOf="@id/imClose"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/tv2Image"
+                    android:id="@+id/imClose"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_marginRight="13dp"
@@ -215,17 +215,17 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl2"
+                android:id="@+id/clRecommendationService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/shape_rectangle5"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl1"
+                app:layout_constraintTop_toBottomOf="@id/clScrollBar"
                 tools:ignore="MissingConstraints">
 
                 <TextView
-                    android:id="@+id/cl2Tv1"
+                    android:id="@+id/tvRecommendationService"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -244,46 +244,46 @@
                     android:text="更多"
                     android:textColor="#999999"
                     android:textSize="12sp"
-                    app:layout_constraintRight_toLeftOf="@id/cl2Im1"
+                    app:layout_constraintRight_toLeftOf="@id/ivRecommendationServiceClose"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/cl2Im1"
+                    android:id="@+id/ivRecommendationServiceClose"
                     android:layout_width="5dp"
                     android:layout_height="9dp"
                     android:layout_marginRight="12dp"
                     android:src="@drawable/arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/cl2Tv1"
+                    app:layout_constraintBottom_toBottomOf="@id/tvRecommendationService"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/cl2Tv1" />
+                    app:layout_constraintTop_toTopOf="@id/tvRecommendationService" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/rvRecommendationService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="15dp"
-                    app:layout_constraintBottom_toBottomOf="@id/cl2"
+                    app:layout_constraintBottom_toBottomOf="@id/clRecommendationService"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl2Tv1"
+                    app:layout_constraintTop_toBottomOf="@id/tvRecommendationService"
                     app:layout_constraintVertical_bias="0.0" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl2Copy"
+                android:id="@+id/clRecommendationServiceCopy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_rectangle5"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl2"
+                app:layout_constraintTop_toBottomOf="@id/clRecommendationService"
                 tools:ignore="MissingConstraints">
 
                 <TextView
-                    android:id="@+id/cl2Tv1Copy"
+                    android:id="@+id/tvRecommendationServiceCopy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -302,70 +302,54 @@
                     android:text="更多"
                     android:textColor="#999999"
                     android:textSize="12sp"
-                    app:layout_constraintRight_toLeftOf="@id/cl2Im1Copy"
+                    app:layout_constraintRight_toLeftOf="@id/ivRecommendationServiceCloseCopy"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/cl2Im1Copy"
+                    android:id="@+id/ivRecommendationServiceCloseCopy"
                     android:layout_width="5dp"
                     android:layout_height="9dp"
                     android:layout_marginRight="12dp"
                     android:src="@drawable/arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/cl2Tv1Copy"
+                    app:layout_constraintBottom_toBottomOf="@id/tvRecommendationServiceCopy"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/cl2Tv1Copy" />
+                    app:layout_constraintTop_toTopOf="@id/tvRecommendationServiceCopy" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewCopy"
+                    android:id="@+id/rvRecommendationServiceCopy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="15dp"
-                    app:layout_constraintBottom_toBottomOf="@id/cl2Copy"
+                    app:layout_constraintBottom_toBottomOf="@id/clRecommendationServiceCopy"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl2Tv1Copy"
+                    app:layout_constraintTop_toBottomOf="@id/tvRecommendationServiceCopy"
                     app:layout_constraintVertical_bias="0.0" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl3"
+                android:id="@+id/clCrossExchange"
                 android:layout_width="match_parent"
                 android:layout_height="269dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_rectangle5"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl2Copy"
+                app:layout_constraintTop_toBottomOf="@id/clRecommendationServiceCopy"
                 tools:ignore="MissingConstraints">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl3Cl1"
+                <ImageView
+                    android:id="@+id/ivAutoRecharge"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_gravity="center"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/ellipse"
-                    android:gravity="center"
+                    android:src="@drawable/auto_recharge"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/cl3_cl1Im"
-                        android:layout_width="21dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="9dp"
-                        android:src="@drawable/image5"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/cl3Tv1"
+                    android:id="@+id/tvAutoRecharge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
@@ -373,28 +357,28 @@
                     android:text="开启自动充值得金豆"
                     android:textColor="#333333"
                     android:textSize="14sp"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Cl1"
+                    app:layout_constraintLeft_toRightOf="@id/ivAutoRecharge"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/cl3Tv2"
+                    android:id="@+id/tvFirstOpen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="首次开启得"
                     android:textColor="#999999"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Cl1"
-                    app:layout_constraintLeft_toLeftOf="@id/cl3Tv1" />
+                    app:layout_constraintBottom_toBottomOf="@id/ivAutoRecharge"
+                    app:layout_constraintLeft_toLeftOf="@id/tvAutoRecharge" />
 
                 <ImageView
-                    android:id="@+id/cl3Tv3"
+                    android:id="@+id/ivAutoRechargeBean"
                     android:layout_width="13dp"
                     android:layout_height="13dp"
                     android:layout_marginLeft="4dp"
                     android:src="@drawable/bean"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Cl1"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Tv2"
-                    app:layout_constraintTop_toTopOf="@id/cl3Tv2" />
+                    app:layout_constraintBottom_toBottomOf="@id/ivAutoRecharge"
+                    app:layout_constraintLeft_toRightOf="@id/tvFirstOpen"
+                    app:layout_constraintTop_toTopOf="@id/tvFirstOpen" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -402,8 +386,8 @@
                     android:text="10金豆"
                     android:textColor="#f3bb62"
                     android:textSize="12sp"
-                    app:layout_constraintBaseline_toBaselineOf="@id/cl3Tv2"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Tv3" />
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvFirstOpen"
+                    app:layout_constraintLeft_toRightOf="@id/ivAutoRechargeBean" />
 
                 <TextView
                     android:layout_width="50dp"
@@ -415,10 +399,10 @@
                     android:text="去开启"
                     android:textColor="#5b82ff"
                     android:textSize="13sp"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Cl1"
+                    app:layout_constraintLeft_toRightOf="@id/ivAutoRecharge"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginLeft="12dp"
@@ -429,60 +413,49 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl3Cl2"
+
+                <ImageView
+                    android:id="@+id/ivWatchVideo"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_gravity="center"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="86dp"
-                    android:background="@drawable/ellipse"
-                    android:gravity="center"
+                    android:src="@drawable/watch_video"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/cl3Cl2Im"
-                        android:layout_width="21dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="9dp"
-                        android:src="@drawable/image6"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/cl3Tv4"
+                    android:id="@+id/tvWatchVideo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:text="看科普视频得金豆"
                     android:textColor="#333333"
                     android:textSize="14sp"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Cl1"
-                    app:layout_constraintTop_toTopOf="@id/cl3Cl2" />
+                    app:layout_constraintLeft_toRightOf="@id/ivWatchVideo"
+                    app:layout_constraintTop_toTopOf="@id/ivWatchVideo" />
 
                 <TextView
-                    android:id="@+id/cl3Tv5"
+                    android:id="@+id/tvWatchVideoNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="多看多得浏览15s得多看多得..."
                     android:textColor="#999999"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Cl2"
-                    app:layout_constraintLeft_toLeftOf="@id/cl3Tv4" />
+                    app:layout_constraintBottom_toBottomOf="@id/ivWatchVideo"
+                    app:layout_constraintLeft_toLeftOf="@id/tvWatchVideo" />
 
                 <ImageView
-                    android:id="@+id/cl3Tv6"
+                    android:id="@+id/ivWatchVideoBean"
                     android:layout_width="13dp"
                     android:layout_height="13dp"
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/bean"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Tv5"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Tv5"
-                    app:layout_constraintTop_toTopOf="@id/cl3Tv5" />
+                    app:layout_constraintBottom_toBottomOf="@id/tvWatchVideoNote"
+                    app:layout_constraintLeft_toRightOf="@id/tvWatchVideoNote"
+                    app:layout_constraintTop_toTopOf="@id/tvWatchVideoNote" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -490,8 +463,8 @@
                     android:text="5金豆"
                     android:textColor="#f3bb62"
                     android:textSize="12sp"
-                    app:layout_constraintBaseline_toBaselineOf="@id/cl3Tv5"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Tv6" />
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvWatchVideoNote"
+                    app:layout_constraintLeft_toRightOf="@id/ivWatchVideoBean" />
 
                 <TextView
                     android:layout_width="50dp"
@@ -503,11 +476,10 @@
                     android:text="去看看"
                     android:textColor="#5b82ff"
                     android:textSize="13sp"
-                    app:layout_constraintLeft_toRightOf="@id/cl3Cl2"
+                    app:layout_constraintLeft_toRightOf="@id/ivWatchVideo"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tv2"
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginLeft="12dp"
@@ -519,7 +491,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/cl3Tv7"
+                    android:id="@+id/tvCrossExchange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="13dp"
@@ -532,105 +504,104 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/cl3Tv8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:text="共有"
                     android:textColor="#999999"
                     android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Tv7"
-                    app:layout_constraintRight_toLeftOf="@id/cl3Tv9"
-                    app:layout_constraintTop_toTopOf="@id/cl3Tv7" />
+                    app:layout_constraintBottom_toBottomOf="@id/tvCrossExchange"
+                    app:layout_constraintRight_toLeftOf="@id/ivCrossExchangeBean"
+                    app:layout_constraintTop_toTopOf="@id/tvCrossExchange" />
 
                 <ImageView
-                    android:id="@+id/cl3Tv9"
+                    android:id="@+id/ivCrossExchangeBean"
                     android:layout_width="13dp"
                     android:layout_height="13dp"
                     android:src="@drawable/bean"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Tv7"
-                    app:layout_constraintRight_toLeftOf="@id/cl3Tv11"
-                    app:layout_constraintTop_toTopOf="@id/cl3Tv7" />
+                    app:layout_constraintBottom_toBottomOf="@id/tvCrossExchange"
+                    app:layout_constraintRight_toLeftOf="@id/tvCrossExchangeBeanNumber"
+                    app:layout_constraintTop_toTopOf="@id/tvCrossExchange" />
 
                 <TextView
-                    android:id="@+id/cl3Tv11"
+                    android:id="@+id/tvCrossExchangeBeanNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="14dp"
                     android:text="1356金豆"
                     android:textColor="#f3bb62"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Tv7"
-                    app:layout_constraintRight_toLeftOf="@id/cl3Tv12"
-                    app:layout_constraintTop_toTopOf="@id/cl3Tv7" />
+                    app:layout_constraintBottom_toBottomOf="@id/tvCrossExchange"
+                    app:layout_constraintRight_toLeftOf="@id/tvCrossExchangeMore"
+                    app:layout_constraintTop_toTopOf="@id/tvCrossExchange" />
 
 
                 <TextView
-                    android:id="@+id/cl3Tv12"
+                    android:id="@+id/tvCrossExchangeMore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:text="逛更多"
                     android:textColor="#999999"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Tv7"
-                    app:layout_constraintRight_toLeftOf="@id/clIma1"
-                    app:layout_constraintTop_toTopOf="@id/cl3Tv7" />
+                    app:layout_constraintBottom_toBottomOf="@id/tvCrossExchange"
+                    app:layout_constraintRight_toLeftOf="@id/ivCrossExchangeMore"
+                    app:layout_constraintTop_toTopOf="@id/tvCrossExchange" />
 
                 <ImageView
-                    android:id="@+id/clIma1"
+                    android:id="@+id/ivCrossExchangeMore"
                     android:layout_width="5dp"
                     android:layout_height="9dp"
                     android:layout_marginRight="12dp"
                     android:src="@drawable/arrow"
-                    app:layout_constraintBottom_toBottomOf="@id/cl3Tv12"
+                    app:layout_constraintBottom_toBottomOf="@id/tvCrossExchangeMore"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/cl3Tv12" />
+                    app:layout_constraintTop_toTopOf="@id/tvCrossExchangeMore" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView2"
+                    android:id="@+id/rvCrossExchange"
                     android:layout_width="match_parent"
                     android:layout_height="75dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl3Tv7" />
+                    app:layout_constraintTop_toBottomOf="@id/tvCrossExchange" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.example.myapplication.recharge.widget.FlipCardView
-                android:id="@+id/cl4"
+            <com.example.myapplication.recharge.view.CustomFlipCardViewGroup
+                android:id="@+id/rechargeFlipCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/shape_rectangle5"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl3"
+                app:layout_constraintTop_toBottomOf="@id/clCrossExchange"
                 tools:ignore="MissingConstraints" />
 
-            <com.example.myapplication.recharge.widget.ScratchCardView
-                android:id="@+id/cl6"
+            <com.example.myapplication.recharge.view.ScratchCardViewGroup
+                android:id="@+id/rechargeScratchCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/shape_rectangle5"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl4" />
+                app:layout_constraintTop_toBottomOf="@id/rechargeFlipCard" />
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView4"
+                android:id="@+id/rvWaterfall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl6" />
+                app:layout_constraintTop_toBottomOf="@id/rechargeScratchCard" />
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recyclerView4" />
+                app:layout_constraintTop_toBottomOf="@id/rvWaterfall" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

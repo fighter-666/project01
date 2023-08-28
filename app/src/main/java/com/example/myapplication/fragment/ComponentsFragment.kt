@@ -10,24 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.property.Piggy
 import com.example.myapplication.R
-import com.example.myapplication.activity.components.bilibili.activity.ViewModelTest
-import com.example.myapplication.activity.components.bilibili.activity.LiveData
+import com.example.myapplication.activity.components.bilibili.activity.ViewModelTestActivity
+import com.example.myapplication.activity.components.bilibili.activity.LiveDataActivity
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.components.FifthActivity
 import com.example.myapplication.components.FourthActivity
 import com.example.myapplication.activity.components.SecondActivity
 import com.example.myapplication.activity.components.bilibili.activity.ServeActivity
 import com.example.myapplication.activity.components.SisthActivity
-import com.example.myapplication.activity.components.bilibili.activity.DataBinding
+import com.example.myapplication.activity.components.bilibili.activity.DataBindingActivity
 import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.activity.components.bilibili.activity.ScoreActivity
-import com.example.myapplication.databinding.ComponentsFragmentBinding
+import com.example.myapplication.databinding.FragmentComponentsBinding
 import com.example.myapplication.components.RechargePageActivity
 import com.gyf.immersionbar.ImmersionBar
 
 
 class ComponentsFragment : Fragment() {
-    private var _binding: ComponentsFragmentBinding? = null
+    private var _binding: FragmentComponentsBinding? = null
     val binding get() = _binding!!
 
 
@@ -36,7 +36,7 @@ class ComponentsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = ComponentsFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentComponentsBinding.inflate(inflater, container, false)
         val view = binding.root
 
         //沉浸式处理
@@ -95,10 +95,10 @@ class ComponentsFragment : Fragment() {
         }.toMutableList()
 
         //创建适配器
-        val myAdapter = ComponentsAdapter(R.layout.components, piggies)
+        val myAdapter = ComponentsAdapter(R.layout.adapter_components, piggies)
 
         //设置布局管理器和给recyclerView设置适配器
-        binding.recyclerView.apply {
+        binding.rvComponents.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = myAdapter
         }
@@ -150,19 +150,19 @@ class ComponentsFragment : Fragment() {
                 }
 
                 "8" -> {
-                    val intent = Intent(context, ViewModelTest::class.java)
+                    val intent = Intent(context, ViewModelTestActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
                 "9" -> {
-                    val intent = Intent(context, LiveData::class.java)
+                    val intent = Intent(context, LiveDataActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
                 "10" -> {
-                    val intent = Intent(context, DataBinding::class.java)
+                    val intent = Intent(context, DataBindingActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
@@ -174,13 +174,13 @@ class ComponentsFragment : Fragment() {
                 }
 
                 "12" -> {
-                    val intent = Intent(context, DataBinding::class.java)
+                    val intent = Intent(context, DataBindingActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
                 "13" -> {
-                    val intent = Intent(context, DataBinding::class.java)
+                    val intent = Intent(context, DataBindingActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

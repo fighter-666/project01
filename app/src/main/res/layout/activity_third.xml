@@ -6,15 +6,14 @@
     android:layout_height="match_parent"
     android:background="#f4f4f4">
 
-    <com.example.myapplication.recharge.widget.FlipCardView
+    <com.example.myapplication.recharge.view.CustomFlipCardViewGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardSrc="@drawable/card2"
         app:cardSrcCopy="@drawable/card2"
         tools:ignore="MissingConstraints" />
 
-    <com.example.myapplication.recharge.widget.FlipCardView
-        android:id="@+id/cl4"
+    <com.example.myapplication.recharge.view.CustomFlipCardViewGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"

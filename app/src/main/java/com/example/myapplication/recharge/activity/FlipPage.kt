@@ -75,21 +75,21 @@ class FlipPage : SlideRightBackActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
 
-        card = binding.card
-        closeicon = binding.card3
-        beam = binding.beam
-        prise = binding.card4
-        button = binding.card5
-        hint = binding.card6
-        bottom = binding.bottom
+        card = binding.ivCard
+        closeicon = binding.ivFlipPageClose
+        beam = binding.ivBeam
+        prise = binding.ivFlipPagePrise
+        button = binding.ivFlipPageCloseButton
+        hint = binding.ivFlipPageHint
+        bottom = binding.ivFlipPageButtom
 
         //获取图片资源
         beam.setImageResource(R.drawable.ic_flip_card_ray)
         card.setImageResource(R.drawable.card1)
-        bottom.setImageResource(R.drawable.cheer)
+        binding.ivFlipPageButtom.setImageResource(R.drawable.cheer)
 
         //关闭动画页面
-        closeicon.setOnClickListener {
+        binding.ivFlipPageClose.setOnClickListener {
             onBackPressed()
         }
 
@@ -97,14 +97,14 @@ class FlipPage : SlideRightBackActivity() {
         val imageWidth = GetScreenUtils.getScreenWidth(this)
 
         //动态设置底部动效的宽高
-        val layoutParams1 = bottom.layoutParams
+        val layoutParams1 = binding.ivFlipPageButtom.layoutParams
         val initialWidth = 720
         val initialHeight = 377
 
         layoutParams1.width = imageWidth
         val widthScale1 = layoutParams1.width.toFloat() / 720
         layoutParams1.height = (initialHeight * widthScale1).toInt()
-        bottom.layoutParams = layoutParams1
+        binding.ivFlipPageButtom.layoutParams = layoutParams1
 
         //贴脸的效果移除，我的测试机density是2.75
         val density = resources.displayMetrics.density

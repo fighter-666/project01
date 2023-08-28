@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="ScratchCardView">
+    <declare-styleable name="ScratchCardViewGroup">
         <attr name="scratchSrc" format="reference"/>
         <attr name="scratchSrc2" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="FlipCardView">
+    <declare-styleable name="CustomFlipCardViewGroup">
         <attr name="cardSrc" format="reference"/>
         <attr name="cardSrcCopy" format="reference"/>
         <attr name="cardSrc2" format="reference"/>
         <attr name="cardSrc3" format="reference"/>
     </declare-styleable>
 
-    <declare-styleable name="TitleBar">
+    <declare-styleable name="CustomTitleBarViewGroup">
         <attr name="title" format="string" />
         <attr name="right_title" format="string" />
         <attr name="back_src" format="reference" />
@@ -24,17 +24,17 @@
         <attr name="right_imageHeight3" format="dimension"/>
     </declare-styleable>
 
-    <declare-styleable name="BalanceInquiryView">
-    <attr name="imageWidth" format="dimension"/>
-    <attr name="imageWidth2" format="dimension"/>
-    <attr name="imageHeight" format="dimension"/>
-    <attr name="imageHeight2" format="dimension"/>
-    <attr name="imageSrc" format="reference"/>
-    <attr name="imageSrc2" format="reference"/>
-    <attr name="textColor" format="color|reference"/>
-    <attr name="textWidth" format="dimension"/>
-    <attr name="textHeight" format="dimension"/>
-    <attr name="textContent" format="string"/>
+    <declare-styleable name="CustomBalanceInquiryViewGroup">
+    <attr name="ivLoadWidth" format="dimension"/>
+    <attr name="ivReLoadWidth" format="dimension"/>
+    <attr name="ivLoadHeight" format="dimension"/>
+    <attr name="ivReLoadHeight" format="dimension"/>
+    <attr name="ivLoadSrc" format="reference"/>
+    <attr name="ivReLoadSrc" format="reference"/>
+    <attr name="tvChecktextColor" format="color|reference"/>
+    <attr name="tvChecktextWidth" format="dimension"/>
+    <attr name="tvChecktextHeight" format="dimension"/>
+    <attr name="tvChecktextContent" format="string"/>
     </declare-styleable>
 
 

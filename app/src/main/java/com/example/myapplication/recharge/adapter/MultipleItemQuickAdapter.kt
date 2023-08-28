@@ -12,9 +12,9 @@ class MultipleItemQuickAdapter(data: MutableList<MultipleItem>) :
     BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder>(data) {
 
     init {
-        addItemType(TEXT, R.layout.image_view)
-        addItemType(IMG, R.layout.text_view)
-        addItemType(IMG2, R.layout.text_view2)
+        addItemType(TEXT, R.layout.widget_multiple_item_image_view)
+        addItemType(IMG, R.layout.widget_multiple_item_text_view)
+        addItemType(IMG2, R.layout.widget_multiple_item_text_view2)
     }
 
     override fun convert(helper: BaseViewHolder, item: MultipleItem) {

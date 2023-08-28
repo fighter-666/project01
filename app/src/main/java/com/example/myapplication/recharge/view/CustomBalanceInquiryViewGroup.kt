@@ -1,6 +1,5 @@
-package com.example.myapplication.recharge.widget
+package com.example.myapplication.recharge.view
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
@@ -11,17 +10,17 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ViewGroupCustomBalanceInquiryBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class BalanceInquiryView : ConstraintLayout {
+class CustomBalanceInquiryViewGroup : ConstraintLayout {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textView: TextView
@@ -58,60 +57,56 @@ class BalanceInquiryView : ConstraintLayout {
 
     private fun initView(context: Context, attrs: AttributeSet) {
         //获取子控件
-        LayoutInflater.from(context).inflate(R.layout.image_text_view_layout, this)
-        imageView = findViewById<ImageView>(R.id.topImage)
-        imageView2 = findViewById<ImageView>(R.id.topImage2)
-        textView = findViewById<TextView>(R.id.bottomText)
-        rl = findViewById(R.id.rl)
+        val binding= ViewGroupCustomBalanceInquiryBinding.inflate(LayoutInflater.from(context), this, true)
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BalanceInquiryView)
-        val xmlImageWidth =
-            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageWidth, 30)
-        val xmlImageWidth2 =
-            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageWidth2, 30)
-        val xmlImageHeight =
-            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageHeight, 30)
-        val xmlImageHeight2 =
-            typedArray.getDimensionPixelSize(R.styleable.BalanceInquiryView_imageHeight2, 30)
-        val drawable = typedArray.getDrawable(R.styleable.BalanceInquiryView_imageSrc)
-        val drawable2 = typedArray.getDrawable(R.styleable.BalanceInquiryView_imageSrc2)
-        val xmlTextColor =
-            typedArray.getColor(R.styleable.BalanceInquiryView_textColor, Color.BLACK)
-        val content = typedArray.getString(R.styleable.BalanceInquiryView_textContent)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomBalanceInquiryViewGroup)
+        val ivLoadWidth =
+            typedArray.getDimensionPixelSize(R.styleable.CustomBalanceInquiryViewGroup_ivLoadWidth, 30)
+        val ivReLoadWidth =
+            typedArray.getDimensionPixelSize(R.styleable.CustomBalanceInquiryViewGroup_ivReLoadWidth, 30)
+        val ivLoadHeight =
+            typedArray.getDimensionPixelSize(R.styleable.CustomBalanceInquiryViewGroup_ivLoadHeight, 30)
+        val ivReLoadHeight =
+            typedArray.getDimensionPixelSize(R.styleable.CustomBalanceInquiryViewGroup_ivReLoadHeight, 30)
+        val ivLoadSrc = typedArray.getDrawable(R.styleable.CustomBalanceInquiryViewGroup_ivLoadSrc)
+        val ivLoadSrc2 = typedArray.getDrawable(R.styleable.CustomBalanceInquiryViewGroup_ivReLoadSrc)
+        val tvChecktextColor =
+            typedArray.getColor(R.styleable.CustomBalanceInquiryViewGroup_tvChecktextColor, Color.BLACK)
+        val tvChecktextContent = typedArray.getString(R.styleable.CustomBalanceInquiryViewGroup_tvChecktextContent)
         typedArray.recycle()
 
         // 将获取到的属性值应用到您的视图或逻辑中
         // 例如，设置图片的宽度和高度
-        imageView.layoutParams.width = xmlImageWidth
-        imageView2.layoutParams.width = xmlImageWidth2
-        imageView.layoutParams.height = xmlImageHeight
-        imageView2.layoutParams.height = xmlImageHeight2
+        binding.ivLoad.layoutParams.width = ivLoadWidth
+        binding.ivReLoad.layoutParams.width = ivReLoadWidth
+        binding.ivLoad.layoutParams.height = ivLoadHeight
+        binding.ivReLoad.layoutParams.height = ivReLoadHeight
 
         // 设置图片资源
-        imageView.setImageDrawable(drawable)
-        imageView2.setImageDrawable(drawable2)
+        binding.ivLoad.setImageDrawable(ivLoadSrc)
+        binding.ivReLoad.setImageDrawable(ivLoadSrc2)
 
         // 设置文本颜色、大小和内容
-        textView.setTextColor(xmlTextColor)
-        textView.text = content
+        binding.tvCheck.setTextColor(tvChecktextColor)
+        binding.tvCheck.text = tvChecktextContent
 
 // 声明一个全局的 Animation 对象
         var animation: Animation? = null
 
 // 初始时隐藏图片
-        imageView.visibility = View.GONE
-        imageView2.visibility = View.GONE
+        binding.ivLoad.visibility = View.GONE
+        binding.ivReLoad.visibility = View.GONE
 
-        rl.setOnClickListener {
+        binding.cl.setOnClickListener {
             // 取消之前的动画
-            imageView.clearAnimation()
+            binding.ivLoad.clearAnimation()
 
             // 设置ImageView的图片资源
-            imageView.setImageResource(R.drawable.upload1)
-            imageView.visibility = View.VISIBLE
-            imageView2.visibility = GONE
-            textView.setTextSize(16f)
-            textView.text = "查询中..."
+            binding.ivLoad.setImageResource(R.drawable.upload1)
+            binding.ivLoad.visibility = View.VISIBLE
+            binding.ivReLoad.visibility = GONE
+            binding.tvCheck.setTextSize(16f)
+            binding.tvCheck.text = "查询中..."
             // 设置文本居中显示
 
             // 创建并开始属性动画
@@ -125,16 +120,16 @@ class BalanceInquiryView : ConstraintLayout {
                 0.5f
             )
             animation?.duration = 3000
-            imageView.startAnimation(animation)
+            binding.ivLoad.startAnimation(animation)
             //implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
             // 使用协程延迟三秒并隐藏图片
             CoroutineScope(Dispatchers.Main).launch {
                 delay(3000)
                 // 隐藏左边的图片
-                imageView.visibility = View.GONE
-                imageView2.visibility = View.VISIBLE
-                imageView2.setImageResource(R.drawable.refresh2)
-                textView.text = "余额：10000000000.00元"
+                binding.ivLoad.visibility = View.GONE
+                binding.ivReLoad.visibility = View.VISIBLE
+                binding.ivReLoad.setImageResource(R.drawable.refresh2)
+                binding.tvCheck.text = "余额：10000000000.00元"
             }
         }
     }

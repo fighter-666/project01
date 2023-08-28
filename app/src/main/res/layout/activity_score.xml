@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.example.myapplication.activity.components.bilibili.util.ViewModelWithScore" />
+            type="com.example.myapplication.activity.components.bilibili.widget.ViewModelWithScore" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -25,7 +25,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rvComponentsWaterfall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -35,6 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@id/rvComponentsWaterfall" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

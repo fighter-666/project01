@@ -17,12 +17,12 @@ import com.example.myapplication.components.RechargePageActivity
 import com.example.myapplication.activity.components.SecondActivity
 import com.example.myapplication.activity.components.SisthActivity
 import com.example.myapplication.activity.components.ThirdActivity
-import com.example.myapplication.databinding.WaterfallFragmentBinding
+import com.example.myapplication.databinding.FragmentWaterfallBinding
 import com.gyf.immersionbar.ImmersionBar
 
 
 class WaterfallFragment : Fragment() {
-    private var _binding: WaterfallFragmentBinding? = null
+    private var _binding: FragmentWaterfallBinding? = null
     val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class WaterfallFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = WaterfallFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentWaterfallBinding.inflate(inflater, container, false)
         val view = binding.root
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
@@ -54,8 +54,8 @@ class WaterfallFragment : Fragment() {
         ).map { (imageResId, helperText) ->
             Card(imageResId, helperText, 0, 0)
         }.toMutableList()
-        val myAdapter = WaterfallAdapter(R.layout.components, piggies)
-        binding.recyclerView.apply {
+        val myAdapter = WaterfallAdapter(R.layout.adapter_waterfall, piggies)
+        binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }

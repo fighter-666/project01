@@ -54,10 +54,10 @@ class LabFragment : Fragment() {
         }.toMutableList()
 
         //创建适配器
-        val myAdapter = LabAdapter(R.layout.lab, piggies)
+        val myAdapter = LabAdapter(R.layout.adapter_lab, piggies)
 
         //设置布局管理器和给 recyclerView设置适配器
-        binding.recyclerView.apply {
+        binding.rvLab.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = myAdapter
         }

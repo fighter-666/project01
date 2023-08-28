@@ -1,10 +1,8 @@
 package com.example.myapplication.widget
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageView
@@ -12,12 +10,11 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import com.example.myapplication.R
 import com.example.myapplication.activity.Return
 
 
-class TitleBar : RelativeLayout {
+class CustomTitleBarViewGroup : RelativeLayout {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textView: TextView
@@ -53,11 +50,11 @@ class TitleBar : RelativeLayout {
 
     private fun initView(context: Context, attrs: AttributeSet) {
         //获取子控件
-        LayoutInflater.from(context).inflate(R.layout.view_titlebar, this)
-        imageView = findViewById<ImageView>(R.id.image)
-        imageView2 = findViewById<ImageView>(R.id.image2)
-        textView = findViewById<TextView>(R.id.text)
-        textView2 = findViewById<TextView>(R.id.rightText)
+        LayoutInflater.from(context).inflate(R.layout.view_group_custom_title_bar, this)
+        imageView = findViewById<ImageView>(R.id.ivLeft)
+        imageView2 = findViewById<ImageView>(R.id.ivRight)
+        textView = findViewById<TextView>(R.id.tvTitleBar)
+        textView2 = findViewById<TextView>(R.id.tvRightBar)
 
         //在组件活动（ComponentActivity）中注册一个用于启动活动并接收结果的活动结果协议（ActivityResultContract）
         val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(
@@ -79,17 +76,17 @@ class TitleBar : RelativeLayout {
             myActivityLauncher.launch(intent)
         }
 
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBar)
-        val drawable = typedArray.getDrawable(R.styleable.TitleBar_back_src)
-        val drawable2 = typedArray.getDrawable(R.styleable.TitleBar_right_src)
-        val content = typedArray.getString(R.styleable.TitleBar_title)
-        val content2 = typedArray.getString(R.styleable.TitleBar_right_title)
-        val barImageWidth = typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageWidth3, 20)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomTitleBarViewGroup)
+        val drawable = typedArray.getDrawable(R.styleable.CustomTitleBarViewGroup_back_src)
+        val drawable2 = typedArray.getDrawable(R.styleable.CustomTitleBarViewGroup_right_src)
+        val content = typedArray.getString(R.styleable.CustomTitleBarViewGroup_title)
+        val content2 = typedArray.getString(R.styleable.CustomTitleBarViewGroup_right_title)
+        val barImageWidth = typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageWidth3, 20)
         val right_ImageWidth =
-            typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageWidth3, 20)
-        val barImageHeight = typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageHeight3, 20)
+            typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageWidth3, 20)
+        val barImageHeight = typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageHeight3, 20)
         val right_ImageHeight =
-            typedArray.getDimensionPixelSize(R.styleable.TitleBar_imageHeight3, 20)
+            typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageHeight3, 20)
         typedArray.recycle()
 
         // 将获取到的属性值应用到您的视图或逻辑中

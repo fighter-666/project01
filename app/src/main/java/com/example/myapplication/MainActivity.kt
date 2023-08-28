@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             val tabView =
-                LayoutInflater.from(this@MainActivity).inflate(R.layout.custom_tab_view, null)
+                LayoutInflater.from(this@MainActivity).inflate(R.layout.view_custom_tab, null)
             val tabIcon = tabView.findViewById<ImageView>(R.id.tabIcon)
             val tabTitle = tabView.findViewById<TextView>(R.id.tabTitle)
             tabTitle.text = tabs[position]

@@ -3,12 +3,10 @@ package com.example.myapplication.activity.components.bilibili.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
-import com.example.myapplication.R
-import com.example.myapplication.activity.components.bilibili.util.ViewModelWithData
+import com.example.myapplication.activity.components.bilibili.widget.ViewModelWithData
 import com.example.myapplication.databinding.ActivityLiveDataBinding
 
-class LiveData : AppCompatActivity() {
+class LiveDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLiveDataBinding
     private lateinit var viewModelWithData: ViewModelWithData
 

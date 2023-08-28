@@ -13,16 +13,19 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".activity.components.bilibili.activity.SharedPreferencesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.components.bilibili.activity.ScoreActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.components.bilibili.activity.DataBinding"
+            android:name=".activity.components.bilibili.activity.DataBindingActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.components.bilibili.activity.LiveData"
+            android:name=".activity.components.bilibili.activity.LiveDataActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.components.bilibili.activity.ViewModelTest"
+            android:name=".activity.components.bilibili.activity.ViewModelTestActivity"
             android:exported="false" />
         <activity
             android:name=".activity.components.bilibili.activity.ServeActivity"

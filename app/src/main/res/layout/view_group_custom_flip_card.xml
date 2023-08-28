@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rectangle5"
+    tools:ignore="MissingDefaultResource">
+
+    <TextView
+        android:id="@+id/tvFlipCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="16dp"
+        android:gravity="left"
+        android:text="赠送翻牌机会 1 次"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="13dp"
+        android:text="累计剩余3次"
+        android:textColor="#999999"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvFlipCard"
+        app:layout_constraintLeft_toRightOf="@id/tvFlipCard"
+        app:layout_constraintTop_toTopOf="@id/tvFlipCard" />
+
+    <ImageView
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginRight="3dp"
+        android:src="@drawable/refresh"
+        app:layout_constraintBottom_toBottomOf="@id/tvFlipCard"
+        app:layout_constraintRight_toLeftOf="@id/tvFlipCardChange"
+        app:layout_constraintTop_toTopOf="@id/tvFlipCard" />
+
+    <TextView
+        android:id="@+id/tvFlipCardChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:text="换一换"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvFlipCard"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvFlipCard" />
+
+    <ImageView
+        android:id="@+id/ivFirstCardBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/card1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFlipCard" />
+
+    <ImageView
+        android:id="@+id/ivFirstCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:transitionName="transition_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFlipCard" />
+
+    <ImageView
+        android:id="@+id/ivSecondCardBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/card1"
+        android:transitionName="transition_image"
+        app:layout_constraintLeft_toRightOf="@id/ivFirstCard"
+        app:layout_constraintTop_toBottomOf="@id/tvFlipCard" />
+
+    <ImageView
+        android:id="@+id/ivSecondCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:transitionName="transition_image"
+        app:layout_constraintLeft_toRightOf="@id/ivFirstCard"
+        app:layout_constraintTop_toBottomOf="@id/tvFlipCard" />
+
+
+    <ImageView
+        android:id="@+id/ivThirdCardBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/card1"
+        android:transitionName="transition_image"
+        app:layout_constraintLeft_toRightOf="@id/ivSecondCard"
+        app:layout_constraintTop_toBottomOf="@id/tvFlipCard" />
+
+    <ImageView
+        android:id="@+id/ivThirdCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:transitionName="transition_image"
+        app:layout_constraintLeft_toRightOf="@id/ivSecondCard"
+        app:layout_constraintTop_toBottomOf="@id/tvFlipCard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

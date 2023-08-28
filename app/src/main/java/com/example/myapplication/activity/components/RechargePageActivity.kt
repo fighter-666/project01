@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
-import com.example.myapplication.databinding.RechargePageBinding
+import com.example.myapplication.databinding.ActivityRechargePageBinding
 import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
 import com.example.myapplication.recharge.adapter.RechangeWaterfallAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
@@ -20,21 +20,21 @@ import com.gyf.immersionbar.ImmersionBar
 
 class RechargePageActivity : ComponentActivity() {
 
-    private lateinit var binding: RechargePageBinding
+    private lateinit var binding: ActivityRechargePageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = RechargePageBinding.inflate(layoutInflater)
+        binding = ActivityRechargePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //沉浸式
         ImmersionBar.with(this).transparentStatusBar()  //透明状态栏，不写默认透明色
-            .titleBar(binding.tvTv1)    //解决状态栏和布局重叠问题，任选其一
+            .titleBar(binding.tvTitle)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
 
         //消息条
         //右边textview跑马灯
-        val marqueeText2: ScrrollTextViewBackground = binding.tv2Tv3
+        val marqueeText2: ScrrollTextViewBackground = binding.tvScrollBackground
         val demographicsList2: MutableList<String> = ArrayList()
         demographicsList2.add("股票")
         demographicsList2.add("药业")
@@ -43,7 +43,7 @@ class RechargePageActivity : ComponentActivity() {
         marqueeText2.startScroll()
 
         //imageview跑马灯
-        val marqueeText3: ScrollImageView = binding.im1Im
+        val marqueeText3: ScrollImageView = binding.imScroll
         val demographicsList3: MutableList<Int> = ArrayList()
         demographicsList3.add(R.drawable.card3)
         demographicsList3.add(R.drawable.beans)
@@ -52,7 +52,7 @@ class RechargePageActivity : ComponentActivity() {
         marqueeText3.startScroll()
 
         //中间textview跑马灯
-        val marqueeText: ScrollTextView = binding.tv2Tv2
+        val marqueeText: ScrollTextView = binding.tvScroll
         val demographicsList: MutableList<String> = ArrayList()
         demographicsList.add("今日测试股票 上市")
         demographicsList.add("今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购今日科伦药业 中国人保 可申购")
@@ -67,20 +67,20 @@ class RechargePageActivity : ComponentActivity() {
         piggies.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
 
         //创建适配器
-        val myAdapter = RecommendationServiceAdapteer(R.layout.first, piggies)
+        val myAdapter = RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggies)
 
         //设置布局管理器
-        binding.recyclerView.setLayoutManager(
+        binding.rvRecommendationService.setLayoutManager(
             LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL, false
             )
         )
 
         //给RecycleView设置适配器
-        binding.recyclerView.setAdapter(myAdapter)
+        binding.rvRecommendationService.setAdapter(myAdapter)
 
         //添加装饰器
-        //binding.recyclerView.addItemDecoration(FirstDecoration())
+        //binding.rvRecommendationService.addItemDecoration(FirstDecoration())
 
         //第一个 recyclerViewCopy 页面超过3个，显示3.5个item 的时候
         val piggiesCopy = mutableListOf<Piggy>()
@@ -93,20 +93,20 @@ class RechargePageActivity : ComponentActivity() {
         piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
 
         //创建适配器
-        val myAdapterCopy = RecommendationServiceAdapteer(R.layout.first, piggiesCopy)
+        val myAdapterCopy = RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggiesCopy)
 
         //设置布局管理器
-        binding.recyclerViewCopy.setLayoutManager(
+        binding.rvRecommendationServiceCopy.setLayoutManager(
             LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL, false
             )
         )
 
         //给RecycleView设置适配器
-        binding.recyclerViewCopy.setAdapter(myAdapterCopy)
+        binding.rvRecommendationServiceCopy.setAdapter(myAdapterCopy)
 
         //添加装饰器
-        //binding.recyclerViewCopy.addItemDecoration(FirstDecoration())
+        //binding.rvRecommendationServiceCopy.addItemDecoration(FirstDecoration())
 
 
         //第二个
@@ -146,17 +146,17 @@ class RechargePageActivity : ComponentActivity() {
         )
 
         //创建适配器
-        val secondAdapter = CrossExchengeAdapter(R.layout.second, piggies2)
+        val secondAdapter = CrossExchengeAdapter(R.layout.adapter_cross_exchenge, piggies2)
 
         //设置布局管理器
-        binding.recyclerView2.setLayoutManager(
+        binding.rvCrossExchange.setLayoutManager(
             LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL, false
             )
         )
 
         //给RecycleView设置适配器
-        binding.recyclerView2.setAdapter(secondAdapter)
+        binding.rvCrossExchange.setAdapter(secondAdapter)
 
 
         /*//第三个
@@ -231,16 +231,16 @@ class RechargePageActivity : ComponentActivity() {
         //piggies4.add(Cards(R.drawable.falls4, "15GB定向流量+腾讯视频月会员卡", "可查全网记录","0","0","0","0", 0, 0))
 
         //创建适配器
-        val fourthAdapter = RechangeWaterfallAdapter(R.layout.fourth, piggies4)
+        val fourthAdapter = RechangeWaterfallAdapter(R.layout.adapter_recharge_waterfall, piggies4)
 
         //设置布局管理器
-        binding.recyclerView4.setLayoutManager(
+        binding.rvWaterfall.setLayoutManager(
             StaggeredGridLayoutManager(
                 2, StaggeredGridLayoutManager.VERTICAL
             )
         )
         //给RecycleView设置适配器
-        binding.recyclerView4.setAdapter(fourthAdapter)
+        binding.rvWaterfall.setAdapter(fourthAdapter)
     }
 }
 

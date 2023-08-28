@@ -66,10 +66,10 @@ class HelperFragment : Fragment() {
         }.toMutableList()
 
         //创建适配器
-        val myAdapter = HelperAdapter(R.layout.components, piggies)
+        val myAdapter = HelperAdapter(R.layout.adapter_helper, piggies)
 
         //设置布局管理器和给recyclerView 设置设配器
-        binding.recyclerView.apply {
+        binding.rvHelper.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = myAdapter
         }

@@ -7,13 +7,13 @@
 
         <variable
             name="data"
-            type="com.example.myapplication.activity.components.bilibili.util.ViewModelWithDataBinding" />
+            type="com.example.myapplication.activity.components.bilibili.widget.ViewModelWithDataBinding" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.components.bilibili.activity.DataBinding">
+        tools:context=".activity.components.bilibili.activity.DataBindingActivity">
 
         <TextView
             android:id="@+id/textView3"

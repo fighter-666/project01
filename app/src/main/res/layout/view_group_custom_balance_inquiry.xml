@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rl"
+    android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="36dp"
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/topImage"
+        android:id="@+id/ivLoad"
         android:layout_width="16dp"
         android:layout_height="17dp"
         android:layout_marginTop="9dp"
         android:src="@drawable/refresh2"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/bottomText"
+        app:layout_constraintRight_toLeftOf="@id/tvCheck"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/bottomText"
+        android:id="@+id/tvCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoSizeMaxTextSize="16sp"
@@ -30,17 +30,17 @@
         android:textSize="16sp"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/topImage"
-        app:layout_constraintRight_toLeftOf="@id/topImage2"
+        app:layout_constraintLeft_toRightOf="@id/ivLoad"
+        app:layout_constraintRight_toLeftOf="@id/ivReLoad"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/topImage2"
+        android:id="@+id/ivReLoad"
         android:layout_width="16dp"
         android:layout_height="14dp"
         android:layout_marginTop="11dp"
         android:src="@drawable/refresh2"
-        app:layout_constraintLeft_toRightOf="@id/bottomText"
+        app:layout_constraintLeft_toRightOf="@id/tvCheck"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

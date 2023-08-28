@@ -1,7 +1,6 @@
 package com.example.myapplication.recharge.widget
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.util.AttributeSet
@@ -9,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.example.myapplication.R
-import org.jetbrains.annotations.Nullable
+import com.example.myapplication.recharge.widget.MarqueeTextView
 
 
 /**

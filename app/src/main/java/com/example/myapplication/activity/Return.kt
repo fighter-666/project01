@@ -4,15 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.databinding.ReturnPageBinding
+import com.example.myapplication.databinding.ActivityReturnPageBinding
 import com.gyf.immersionbar.ImmersionBar
 
 
 class Return : AppCompatActivity() {
-    private lateinit var binding: ReturnPageBinding
+    private lateinit var binding: ActivityReturnPageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ReturnPageBinding.inflate(layoutInflater)
+        binding = ActivityReturnPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //沉浸式
@@ -22,7 +22,7 @@ class Return : AppCompatActivity() {
             .init();
 
         //返回值并退出
-        binding.text1.setOnClickListener {
+        binding.tvAbandon.setOnClickListener {
             val intent1 = Intent().apply {
                 putExtra("result", 1)
             }

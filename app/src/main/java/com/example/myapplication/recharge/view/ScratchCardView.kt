@@ -1,11 +1,9 @@
-package com.example.myapplication.recharge.widget
+package com.example.myapplication.recharge.view
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
@@ -14,13 +12,11 @@ import android.graphics.PorterDuffXfermode
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.blankj.utilcode.util.LogUtils
-import com.example.myapplication.util.DensityUtils
 import com.example.myapplication.R
 import java.util.Random
 
 
-class ScratchCard : View {
+class ScratchCardView : View {
     private lateinit var mBitmapBackground: Bitmap
     private lateinit var mBitmapFront: Bitmap
     private lateinit var mCanvas: Canvas
@@ -32,6 +28,7 @@ class ScratchCard : View {
     var endX: Float = 0f
     var endY: Float = 0f
     var disX: Float = 0f
+    var disY: Float = 0f
     var mBitmapFrontWidth: Float = 0f
     var w: Int = 0
     var h: Int = 0
@@ -135,6 +132,8 @@ class ScratchCard : View {
                 path.lineTo(event.x - mBitmapFrontWidth, event.y - mBitmapFrontHeight)
                 endX = event.x
                 endY = event.y
+                disX = Math.abs(endX - startX)
+                disY = Math.abs(endY - startY)
 
             }
 
@@ -184,14 +183,14 @@ class ScratchCard : View {
         }
 
         //上下冲突
-        if ((endY - startY) < mBitmapBackground.height) {
+        if (disY < mBitmapBackground.height) {
             parent.requestDisallowInterceptTouchEvent(true)
         } else {
             parent.requestDisallowInterceptTouchEvent(false)
         }
 
         //左右冲突
-        if ((endX - startX) < mBitmapBackground.width) {
+        if (disX < mBitmapBackground.width) {
             parent.requestDisallowInterceptTouchEvent(true)
         } else {
             parent.requestDisallowInterceptTouchEvent(false)

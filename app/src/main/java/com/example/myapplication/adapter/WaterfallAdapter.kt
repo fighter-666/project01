@@ -3,8 +3,8 @@ package com.example.myapplication.adapter
 import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.myapplication.databinding.AdapterWaterfallBinding
 import com.example.myapplication.property.Card
-import com.example.myapplication.databinding.WaterfallBinding
 import com.example.myapplication.util.DensityUtils
 
 class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :
@@ -16,10 +16,10 @@ class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :
     override fun convert(holder: BaseViewHolder, item: Card) {
         //将 holder.itemView（列表项的根视图）与生成的绑定类 WaterfallBinding 进行绑定。
         // 通过调用 bind() 方法，你可以获取到生成的绑定类的实例 binding。
-        val binding = WaterfallBinding.bind(holder.itemView)
+        val binding = AdapterWaterfallBinding.bind(holder.itemView)
 
         //设置图片和标题
-        binding.itemImage.setImageResource(item.image)
+        binding.ivWaterfallAdapter.setImageResource(item.image)
         //设置点击事件监听器
         holder.itemView.setOnClickListener {
             onItemClickListener?.invoke(item)
@@ -32,11 +32,11 @@ class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :
         onItemClickListener = listener
     }
 
-    private fun setCardView(holder: BaseViewHolder, binding: WaterfallBinding, card: Card) {
+    private fun setCardView(holder: BaseViewHolder, binding: AdapterWaterfallBinding, card: Card) {
 
         //计算图片宽高
         //获取名为 itemImage 的 ImageView 的布局参数（LayoutParams）
-        val layoutParams = binding.itemImage.layoutParams
+        val layoutParams = binding.ivWaterfallAdapter.layoutParams
 
         //获取边距
         val space = DensityUtils.dpToPx(context, 20f)
@@ -60,6 +60,6 @@ class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :
             //采用1:1显示
             layoutParams.height = itemWidth.toInt()
         }
-        binding.itemImage.setLayoutParams(layoutParams)
+        binding.ivWaterfallAdapter.setLayoutParams(layoutParams)
     }
 }

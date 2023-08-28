@@ -3,8 +3,8 @@ package com.example.myapplication.adapter
 import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.myapplication.databinding.AdapterHelperBinding
 import com.example.myapplication.property.Piggy
-import com.example.myapplication.databinding.HelperBinding
 
 class HelperAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) :
     BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
@@ -14,13 +14,13 @@ class HelperAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) :
 
         //将 holder.itemView（列表项的根视图）与生成的绑定类 HelperBinding 进行绑定。
         // 通过调用 bind() 方法，你可以获取到生成的绑定类的实例 binding。
-        val binding = HelperBinding.bind(holder.itemView)
+        val binding = AdapterHelperBinding.bind(holder.itemView)
 
         //设置图片资源为item.image
-        binding.itemImage.setImageResource(item.image)
+        binding.ivHelper.setImageResource(item.image)
 
         //设置文本为item.name
-        binding.itemTitle.text = item.name
+        binding.tvHelper.text = item.name
 
         //设置点击事件
         holder.itemView.setOnClickListener {
