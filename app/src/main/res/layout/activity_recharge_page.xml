@@ -609,8 +609,9 @@
                     app:tabIndicator="@drawable/shape_tab_indicator"
                     app:tabIndicatorColor="#1990ff"
                     app:tabMaxWidth="200dp"
-                    app:tabMinWidth="100dp"
-                    app:tabMode="fixed" />
+                    app:tabMinWidth="50dp"
+                    app:tabMode="scrollable"
+                    />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager2"

@@ -2,24 +2,32 @@ package com.example.myapplication.recharge.data
 
 import java.io.Serializable
 
+/*
 class GetFeedTabData : Serializable {
-    /**
+    */
+/**
      * 10.3新增，是否显示副标题：1：不带副标题样式 2：带副标题样式
-     */
+     *//*
+
     var isShowSubTitle = ""
 
-    /**
+    */
+/**
      * feed流tab列表
-     */
+     *//*
+
     var tabList: List<TabListBean> = ArrayList()
 
-    /**
+    */
+/**
      * 10.3新增，跳转引导条
-     */
+     *//*
+
     var jumpGuideBar = JumpGuideBarBean()
 
     class TabListBean : Serializable {
-        /**
+        */
+/**
          * isDefault : 10.0新增是否默认选中（0：否，1：是） string
          * link : wap页面跳转链接 string
          * linkType : wap页面跳转链接类型 string
@@ -32,7 +40,8 @@ class GetFeedTabData : Serializable {
          * timestamp : 时间戳（yyyyMMddHHmmss） string
          * tagList : 10.4新增,标签列表 [{"tagID": "string","tagIcon": "string","tagName": "string","tagType": "string"}]
          * type : tab栏显示内容类型：1.显示feed流原生列表 2：显示wap页面 3：10.0新增显示原生关注页 string
-         */
+         *//*
+
         var isDefault = ""
         var link = ""
         var linkType = ""
@@ -47,12 +56,14 @@ class GetFeedTabData : Serializable {
         var tagList: List<TagListBean> = ArrayList()
 
         class TagListBean : Serializable {
-            /**
+            */
+/**
              * tagID : 标签ID string
              * tagIcon : 图标 string
              * tagName : 标题 string
              * tagType : 类型（1：普通类型 2：强调类型） string
-             */
+             *//*
+
             var tagID = ""
             var tagIcon = ""
             var tagName = ""
@@ -61,13 +72,15 @@ class GetFeedTabData : Serializable {
     }
 
     class JumpGuideBarBean : Serializable {
-        /**
+        */
+/**
          * iconUrl : 图标地址 string
          * provinceCode : 大数据省编码 string
          * recommender : 大数据插码推荐码 string
          * sceneId : 大数据场景id string
          * title : 标题 string
-         */
+         *//*
+
         var iconUrl = ""
         var provinceCode = ""
         var recommender = ""
@@ -75,52 +88,64 @@ class GetFeedTabData : Serializable {
         var title = ""
     }
 
-    /**
+    */
+/**
      * 是否默认选中（0：否，1：是）
-     */
+     *//*
+
     object IS_DEFAULT {
         const val NO = "0"
         const val YES = "1"
     }
 
-    /**
+    */
+/**
      * 是否显示红点：0否 1是
-     */
+     *//*
+
     object RED_FLAG {
         const val NO = "0"
         const val YES = "1"
     }
 
-    /**
+    */
+/**
      * tab栏显示类型：1：显示标题 2：显示图标
-     */
+     *//*
+
     object TAB_TYPE {
         const val TITLE = "1"
         const val ICON = "2"
     }
 
-    /**
+    */
+/**
      * tab栏显示内容类型：1.显示feed流原生列表 2：显示wap页面 3：10.0新增显示原生关注页
-     */
+     *//*
+
     object TYPE {
         const val LIST = "1"
         const val WAP = "2"
         const val FOCUS = "3"
     }
 
-    /**
+    */
+/**
      * 是否显示副标题：1：不带副标题样式 2：带副标题样式
-     */
+     *//*
+
     object IS_SHOW_SUB_TITLE {
         const val NO = "1"
         const val YES = "2"
     }
 
-    /**
+    */
+/**
      * tag标签类型：（1：普通类型 2：强调类型）
-     */
+     *//*
+
     object TAG_TYPE {
         const val NORMAL = "1"
         const val EMPHASIS = "2"
     }
-}
+}*/

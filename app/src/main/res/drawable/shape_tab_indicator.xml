@@ -2,9 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Style for "630" -->
     <!-- Add this snippet to layer-list xml in drawable. -->
-    <item android:width="19dp" android:height="4dp">
+    <item android:width="5dp" android:height="4dp">
         <shape android:shape="rectangle">
             <corners android:radius="2dp" />
+            <size android:width="5dp" />
         </shape>
     </item>
 </selector>

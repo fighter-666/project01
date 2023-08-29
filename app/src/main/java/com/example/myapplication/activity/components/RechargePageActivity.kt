@@ -385,6 +385,9 @@ class RechargePageActivity : AppCompatActivity() {
             RechargeWaterfallFragment(),
             RechargeWaterfallFragment(),
             RechargeWaterfallFragment(),
+            RechargeWaterfallFragment(),
+            RechargeWaterfallFragment(),
+            RechargeWaterfallFragment(),
             //加载更多的 Fragment 实例
         )
 
