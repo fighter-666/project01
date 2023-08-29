@@ -588,20 +588,51 @@
                 app:layout_constraintTop_toBottomOf="@id/rechargeFlipCard" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
+            <LinearLayout
+                android:id="@+id/llWaterfall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rechargeScratchCard"
+                >
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_rectangle6"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="@style/Theme.AppCompat"
+                    app:tabIndicatorHeight="4dp"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicator="@drawable/shape_tab_indicator"
+                    app:tabIndicatorColor="#1990ff"
+                    app:tabMaxWidth="200dp"
+                    app:tabMinWidth="100dp"
+                    app:tabMode="fixed" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+            <!--<androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvWaterfall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rechargeScratchCard" />
+                app:layout_constraintTop_toBottomOf="@id/rechargeScratchCard" />-->
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvWaterfall" />
+                app:layout_constraintTop_toBottomOf="@id/llWaterfall" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

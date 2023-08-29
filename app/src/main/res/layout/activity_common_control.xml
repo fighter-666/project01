@@ -13,7 +13,7 @@
         app:layout_constraintGuide_percent="0.23" />
 
     <TextView
-        android:id="@+id/display"
+        android:id="@+id/tvDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/textview1"
@@ -38,7 +38,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <Button
-        android:id="@+id/buttonLeft"
+        android:id="@+id/btShowLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button1"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <Button
-        android:id="@+id/buttonRight"
+        android:id="@+id/btShowRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button2"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switchControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
@@ -168,7 +168,7 @@
         app:layout_constraintGuide_percent="0.56" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/rgSwitchPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
@@ -177,7 +177,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline9">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/rbAndroid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
@@ -185,7 +185,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/rbIOS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"

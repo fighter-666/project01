@@ -19,10 +19,11 @@ import com.example.myapplication.activity.components.bilibili.activity.CommonCon
 import com.example.myapplication.activity.components.bilibili.activity.SharedPreferencesActivity
 import com.example.myapplication.activity.components.bilibili.activity.ViewModelTestActivity
 import com.example.myapplication.adapter.ComponentsAdapter
-import com.example.myapplication.components.FifthActivity
-import com.example.myapplication.components.FourthActivity
-import com.example.myapplication.components.RechargePageActivity
+import com.example.myapplication.activity.components.FifthActivity
+import com.example.myapplication.activity.components.FourthActivity
+import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
+import com.example.myapplication.feed.activity.FeedStreamHomePageActivity
 import com.example.myapplication.property.Piggy
 import com.gyf.immersionbar.ImmersionBar
 
@@ -67,7 +68,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_color_helper, "RechargePageActivity"),
             Pair(R.mipmap.icon_grid_device_helper, "VariousTextviewActivity"),
             Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "QMUIStatusBarHelper"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "FeedStreamHomePageActivity"),
             Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "CustomActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "CommonControlActivity"),
@@ -126,8 +127,8 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                "QMUIStatusBarHelper" -> {
-                    val intent = Intent(context, FourthActivity::class.java)
+                "FeedStreamHomePageActivity" -> {
+                    val intent = Intent(context, FeedStreamHomePageActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

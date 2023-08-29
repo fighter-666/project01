@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.property.Piggy
 import com.example.myapplication.R
 import com.example.myapplication.adapter.LabAdapter
-import com.example.myapplication.components.FifthActivity
-import com.example.myapplication.components.FourthActivity
+import com.example.myapplication.activity.components.FifthActivity
+import com.example.myapplication.activity.components.FourthActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
 import com.example.myapplication.activity.components.CustomActivity
 import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.databinding.FragmentLabBinding
-import com.example.myapplication.components.RechargePageActivity
+import com.example.myapplication.activity.components.RechargePageActivity
 import com.gyf.immersionbar.ImmersionBar
 
 class LabFragment : Fragment() {

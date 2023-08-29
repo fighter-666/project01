@@ -1,12 +1,7 @@
-package com.example.myapplication.components
+package com.example.myapplication.activity.components
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.RotateAnimation
-import android.widget.Toast
-import com.example.myapplication.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityFifthBinding
 
 class FifthActivity : AppCompatActivity() {

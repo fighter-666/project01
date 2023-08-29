@@ -18,17 +18,17 @@ class CommonControlActivity : AppCompatActivity() {
         binding = ActivityCommonControlBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonLeft.setOnClickListener {
-            binding.display.setText(R.string.button1)
+        binding.btShowLeft.setOnClickListener {
+            binding.tvDisplay.setText(R.string.button1)
         }
-        binding.buttonRight.setOnClickListener {
-            binding.display.setText(R.string.button2)
+        binding.btShowRight.setOnClickListener {
+            binding.tvDisplay.setText(R.string.button2)
         }
-        binding.switch1.setOnCheckedChangeListener { compoundButton, isChecked ->
+        binding.switchControl.setOnCheckedChangeListener { compoundButton, isChecked ->
             if (isChecked) {
-                binding.display.text = "开"
+                binding.tvDisplay.text = "开"
             } else {
-                binding.display.text = "关"
+                binding.tvDisplay.text = "关"
             }
         }
         binding.button3.setOnClickListener {
@@ -37,10 +37,10 @@ class CommonControlActivity : AppCompatActivity() {
                 s = "0"
             }
             binding.progressBar2.setProgress(s.toInt())
-            binding.display.text = s
+            binding.tvDisplay.text = s
         }
-        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            if (checkedId == R.id.radioButton) {
+        binding.rgSwitchPicture.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.rbAndroid) {
                 binding.imageView3.setImageResource(R.drawable.card1)
             } else {
                 binding.imageView3.setImageResource(R.drawable.card2)
@@ -49,7 +49,7 @@ class CommonControlActivity : AppCompatActivity() {
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 // 在这里处理进度条值的变化
-                binding.display.text = progress.toString()
+                binding.tvDisplay.text = progress.toString()
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -66,7 +66,7 @@ class CommonControlActivity : AppCompatActivity() {
             } else {
                 Chinese = ""
             }
-            binding.display.text = Chinese + English + Math
+            binding.tvDisplay.text = Chinese + English + Math
         }
         binding.checkBox2.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -74,7 +74,7 @@ class CommonControlActivity : AppCompatActivity() {
             } else {
                 English = ""
             }
-            binding.display.text = Chinese + English + Math
+            binding.tvDisplay.text = Chinese + English + Math
         }
         binding.checkBox3.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -82,7 +82,7 @@ class CommonControlActivity : AppCompatActivity() {
             } else {
                 Math = ""
             }
-            binding.display.text = Chinese + English + Math
+            binding.tvDisplay.text = Chinese + English + Math
         }
         binding.ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
             // 在这里处理评分条值的变化

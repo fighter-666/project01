@@ -1,24 +1,33 @@
-package com.example.myapplication.components
+package com.example.myapplication.activity.components
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.view.LayoutInflater
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRechargePageBinding
+import com.example.myapplication.recharge.fragment.RechargeWaterfallFragment
 import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
-import com.example.myapplication.recharge.adapter.RechangeWaterfallAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
+import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.property.Cards
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrrollTextViewBackground
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
 
 
-class RechargePageActivity : ComponentActivity() {
+class RechargePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +40,132 @@ class RechargePageActivity : ComponentActivity() {
             .titleBar(binding.tvTitle)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
+
+        val tabs = arrayOf("推荐", "年货节", "直播", "本地")
+        val json = """
+        {
+        "tabList": [
+            {
+                "tabName": "推荐",
+                "tabIcon": "",
+                "redFlag": "",
+                "timestamp": "20230427152925",
+                "tabType": "1",
+                "order": "1",
+                "link": "",
+                "linkType": "",
+                "type": "1",
+                "isDefault": "1",
+                "subTitle": "大家在看"
+            },
+            {
+                "tabName": "百度",
+                "tabIcon": "",
+                "redFlag": "",
+                "timestamp": "20230427152943",
+                "tabType": "1",
+                "order": "2",
+                "link": "https://www.baidu.com/",
+                "linkType": "",
+                "type": "2",
+                "isDefault": "",
+                "subTitle": "最新动态"
+            },
+            {
+                "tabName": "商城",
+                "tabIcon": "",
+                "redFlag": "",
+                "timestamp": "20230427153051",
+                "tabType": "1",
+                "order": "4",
+                "link": "",
+                "linkType": "",
+                "type": "1",
+                "isDefault": "0",
+                "subTitle": "3C数码"
+            },
+            {
+                "tabName": "视频",
+                "tabIcon": "",
+                "redFlag": "0",
+                "timestamp": "20230427153129",
+                "tabType": "1",
+                "order": "5",
+                "link": "",
+                "linkType": "",
+                "type": "1",
+                "isDefault": "0",
+                "subTitle": "高清影视"
+            },
+            {
+                "tabName": "彩铃",
+                "tabIcon": "",
+                "redFlag": "0",
+                "timestamp": "20230510142539",
+                "tabType": "1",
+                "order": "6",
+                "link": "",
+                "linkType": "",
+                "type": "1",
+                "isDefault": "0",
+                "subTitle": "视频彩铃"
+            },
+            {
+                "tabName": "直播",
+                "tabIcon": "",
+                "redFlag": "0",
+                "timestamp": "20230711142241",
+                "tabType": "1",
+                "order": "8",
+                "link": "",
+                "linkType": "",
+                "type": "1",
+                "isDefault": "0",
+                "subTitle": "精彩直播"
+            },
+            {
+                "tabName": "二手",
+                "tabIcon": "",
+                "redFlag": "0",
+                "timestamp": "20230619170238",
+                "tabType": "1",
+                "order": "9",
+                "link": "",
+                "linkType": "",
+                "type": "1",
+                "isDefault": "0",
+                "subTitle": "手机换新"
+            }
+        ],
+        "jumpGuideBar": {
+            "title": "更多精彩等你发现",
+            "iconUrl": "https://w.189.cn/bigdata/2023/5/8/111683532549514962.png",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_cxbl_fc.fd-2.od-1.eoc-0517500057",
+            "sceneId": "hg_cxbl_fc##2786##default##0517500057##010001002000##3##N##16347400001##1##N##N##05175"
+        },
+        "isShowSubTitle": "2"
+    }""".trimIndent()
+
+        val gson = Gson()
+        val tabList= gson.fromJson(json, GetFeedTabData::class.java)
+        //设置默认的丽萍页面限制
+        binding.viewPager2.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+
+        val adapter = RechargeFragmentAdapter(supportFragmentManager, lifecycle)
+        binding.viewPager2.adapter = adapter
+
+        val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            val tabView =
+                LayoutInflater.from(this).inflate(R.layout.view_custom_recharge_waterfall_tab, null)
+            //val tabIcon = tabView.findViewById<ImageView>(R.id.tabIcon)
+            val tabTitle = tabView.findViewById<TextView>(R.id.tabTitle)
+            tabTitle.text = tabList.tabList[position].tabName
+            //tabIcon.setImageResource(pics[position])
+            tab.customView = tabView
+            //tab.setIcon(pics[position])
+        }
+        mediator.attach()
 
         //消息条
         //右边textview跑马灯
@@ -230,7 +365,7 @@ class RechargePageActivity : ComponentActivity() {
         //piggies4.add(Cards(R.drawable.falls3, "iPhone12 128GB 红色 双卡双待", "免运费","0","0","0","0", 0, 0))
         //piggies4.add(Cards(R.drawable.falls4, "15GB定向流量+腾讯视频月会员卡", "可查全网记录","0","0","0","0", 0, 0))
 
-        //创建适配器
+        /*//创建适配器
         val fourthAdapter = RechangeWaterfallAdapter(R.layout.adapter_recharge_waterfall, piggies4)
 
         //设置布局管理器
@@ -240,7 +375,26 @@ class RechargePageActivity : ComponentActivity() {
             )
         )
         //给RecycleView设置适配器
-        binding.rvWaterfall.setAdapter(fourthAdapter)
+        binding.rvWaterfall.setAdapter(fourthAdapter)*/
+    }
+
+    class RechargeFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+        FragmentStateAdapter(fragmentManager, lifecycle) {
+        private val fragments = listOf(
+            RechargeWaterfallFragment(),
+            RechargeWaterfallFragment(),
+            RechargeWaterfallFragment(),
+            RechargeWaterfallFragment(),
+            //加载更多的 Fragment 实例
+        )
+
+        override fun getItemCount(): Int {
+            return fragments.size
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]
+        }
     }
 }
 

@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         mediator.attach()
     }
 
-    class DynamicFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    private class DynamicFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
         FragmentStateAdapter(fragmentManager, lifecycle) {
         private val fragments = listOf(
             ComponentsFragment(),
