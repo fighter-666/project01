@@ -1,21 +1,21 @@
 package com.example.myapplication.activity.components.bilibili.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityServeBinding
+import com.example.myapplication.databinding.ActivityCommonControlBinding
 
-class ServeActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityServeBinding
+class CommonControlActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCommonControlBinding
     private var Chinese: String = ""
     private var English: String = ""
     private var Math: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityServeBinding.inflate(layoutInflater)
+        binding = ActivityCommonControlBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.buttonLeft.setOnClickListener {

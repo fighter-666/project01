@@ -13,7 +13,6 @@ class DataBindingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDataBindingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_data_binding)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_data_binding)
         viewModelWithDataBinding = ViewModelProvider(this).get(ViewModelWithDataBinding::class.java)
         binding.setData(viewModelWithDataBinding)

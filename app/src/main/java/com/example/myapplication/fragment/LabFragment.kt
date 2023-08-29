@@ -13,8 +13,8 @@ import com.example.myapplication.R
 import com.example.myapplication.adapter.LabAdapter
 import com.example.myapplication.components.FifthActivity
 import com.example.myapplication.components.FourthActivity
-import com.example.myapplication.activity.components.SecondActivity
-import com.example.myapplication.activity.components.SisthActivity
+import com.example.myapplication.activity.components.VariousTextviewActivity
+import com.example.myapplication.activity.components.CustomActivity
 import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.databinding.FragmentLabBinding
 import com.example.myapplication.components.RechargePageActivity
@@ -75,7 +75,7 @@ class LabFragment : Fragment() {
                 }
 
                 "2" -> {
-                    val intent = Intent(context, SecondActivity::class.java)
+                    val intent = Intent(context, VariousTextviewActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
@@ -99,7 +99,7 @@ class LabFragment : Fragment() {
                 }
 
                 "6" -> {
-                    val intent = Intent(context, SisthActivity::class.java)
+                    val intent = Intent(context, CustomActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

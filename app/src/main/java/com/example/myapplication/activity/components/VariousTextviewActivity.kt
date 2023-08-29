@@ -19,16 +19,16 @@ import android.text.style.UnderlineSpan
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivitySecondBinding
+import com.example.myapplication.databinding.ActivityVariousTextviewBinding
 import com.example.myapplication.widget.MyClickableSpan
 import com.gyf.immersionbar.ImmersionBar
 
 
-class SecondActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySecondBinding
+class VariousTextviewActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityVariousTextviewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySecondBinding.inflate(layoutInflater)
+        binding = ActivityVariousTextviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ImmersionBar.with(this)
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色

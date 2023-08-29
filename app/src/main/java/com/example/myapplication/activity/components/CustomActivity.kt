@@ -1,17 +1,17 @@
 package com.example.myapplication.activity.components
 
-import com.example.myapplication.widget.CustomView
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myapplication.databinding.ActivitySixthBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.databinding.ActivityCustomBinding
+import com.example.myapplication.widget.CustomView
 import com.gyf.immersionbar.ImmersionBar
 
-class SisthActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySixthBinding
+class CustomActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCustomBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySixthBinding.inflate(layoutInflater)
+        binding = ActivityCustomBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //沉浸式
         ImmersionBar.with(this)

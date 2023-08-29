@@ -8,22 +8,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.myapplication.property.Piggy
 import com.example.myapplication.R
-import com.example.myapplication.activity.components.bilibili.activity.ViewModelTestActivity
+import com.example.myapplication.activity.components.VariousTextviewActivity
+import com.example.myapplication.activity.components.CustomActivity
+import com.example.myapplication.activity.components.ThirdActivity
+import com.example.myapplication.activity.components.bilibili.activity.DataBindingActivity
 import com.example.myapplication.activity.components.bilibili.activity.LiveDataActivity
+import com.example.myapplication.activity.components.bilibili.activity.ScoreActivity
+import com.example.myapplication.activity.components.bilibili.activity.CommonControlActivity
+import com.example.myapplication.activity.components.bilibili.activity.SharedPreferencesActivity
+import com.example.myapplication.activity.components.bilibili.activity.ViewModelTestActivity
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.components.FifthActivity
 import com.example.myapplication.components.FourthActivity
-import com.example.myapplication.activity.components.SecondActivity
-import com.example.myapplication.activity.components.bilibili.activity.ServeActivity
-import com.example.myapplication.activity.components.SisthActivity
-import com.example.myapplication.activity.components.ThirdActivity
-import com.example.myapplication.activity.components.bilibili.activity.DataBindingActivity
-import com.example.myapplication.activity.components.bilibili.activity.ScoreActivity
-import com.example.myapplication.activity.components.bilibili.activity.SharedPreferencesActivity
-import com.example.myapplication.databinding.FragmentComponentsBinding
 import com.example.myapplication.components.RechargePageActivity
+import com.example.myapplication.databinding.FragmentComponentsBinding
+import com.example.myapplication.property.Piggy
 import com.gyf.immersionbar.ImmersionBar
 
 
@@ -64,16 +64,16 @@ class ComponentsFragment : Fragment() {
         //创建了一个包含多个 Piggy 对象的可变列表 piggies，
         // 每个 Piggy 对象都包含了一个图片资源 ID 和一个帮助文本
         val piggies = listOf(
-            Pair(R.mipmap.icon_grid_color_helper, "QMUIColorHelper"),
-            Pair(R.mipmap.icon_grid_device_helper, "QMUIDeviceHelper"),
+            Pair(R.mipmap.icon_grid_color_helper, "RechargePageActivity"),
+            Pair(R.mipmap.icon_grid_device_helper, "VariousTextviewActivity"),
             Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
             Pair(R.mipmap.icon_grid_tip_dialog, "QMUIStatusBarHelper"),
             Pair(R.mipmap.icon_grid_view_helper, "QMUIViewHelper"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "QMUINotchHelper"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "7"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "8"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "9"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "10"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "CustomActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "CommonControlActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "ViewModelTestActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "LiveDataActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "DataBindingActivity"),
             Pair(R.mipmap.icon_grid_view_helper, "ScoreActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "SharedPreferencesActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "13"),
@@ -108,14 +108,14 @@ class ComponentsFragment : Fragment() {
             // 处理列表项点击事件
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
             when (piggy.name) {
-                "QMUIColorHelper" -> {
+                "RechargePageActivity" -> {
                     val intent = Intent(context, RechargePageActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
-                "QMUIDeviceHelper" -> {
-                    val intent = Intent(context, SecondActivity::class.java)
+                "VariousTextviewActivity" -> {
+                    val intent = Intent(context, VariousTextviewActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
@@ -138,31 +138,31 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                "QMUINotchHelper" -> {
-                    val intent = Intent(context, SisthActivity::class.java)
+                "CustomActivity" -> {
+                    val intent = Intent(context, CustomActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
-                "7" -> {
-                    val intent = Intent(context, ServeActivity::class.java)
+                "CommonControlActivity" -> {
+                    val intent = Intent(context, CommonControlActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
-                "8" -> {
+                "ViewModelTestActivity" -> {
                     val intent = Intent(context, ViewModelTestActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
-                "9" -> {
+                "LiveDataActivity" -> {
                     val intent = Intent(context, LiveDataActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
 
-                "10" -> {
+                "DataBindingActivity" -> {
                     val intent = Intent(context, DataBindingActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)

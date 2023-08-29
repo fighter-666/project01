@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
-import com.example.myapplication.activity.components.SisthActivity
+import com.example.myapplication.activity.components.CustomActivity
 
 class MyClickableSpan(private val content: String, private val context: Context) : ClickableSpan() {
     override fun updateDrawState(ds: TextPaint) {
@@ -14,7 +14,7 @@ class MyClickableSpan(private val content: String, private val context: Context)
     }
 
     override fun onClick(widget: View) {
-        val intent = Intent(context, SisthActivity::class.java)
+        val intent = Intent(context, CustomActivity::class.java)
         val bundle = Bundle()
         bundle.putString("content", content)
         intent.putExtra("bundle", bundle)

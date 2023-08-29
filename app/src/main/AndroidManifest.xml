@@ -28,7 +28,7 @@
             android:name=".activity.components.bilibili.activity.ViewModelTestActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.components.bilibili.activity.ServeActivity"
+            android:name=".activity.components.bilibili.activity.CommonControlActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ReturnActivity"
@@ -39,7 +39,7 @@
             android:exported="false"
             android:theme="@style/TranslucentStyle" />
         <activity
-            android:name=".activity.components.SecondActivity"
+            android:name=".activity.components.VariousTextviewActivity"
             android:exported="false" />
         <activity
             android:name=".components.RechargePageActivity"
@@ -47,7 +47,7 @@
         <activity android:name=".activity.components.ThirdActivity" />
         <activity android:name=".components.FourthActivity" />
         <activity android:name=".components.FifthActivity" />
-        <activity android:name=".activity.components.SisthActivity" />
+        <activity android:name=".activity.components.CustomActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
