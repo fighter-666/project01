@@ -141,20 +141,23 @@ class FeedStreamHomePageActivity : AppCompatActivity() {
         val gson = Gson()
         val tabList= gson.fromJson(json, GetFeedTabData::class.java)
 
+        val tag = "TAG"
+        Log.d(tag,"标签名称")
         for (tab in tabList.tabList) {
-            Log.d("1","标签名称: ${tab.tabName}")
-            Log.d("1","标签图标: ${tab.tabIcon}")
-            Log.d("1","红旗: ${tab.redFlag}")
-            Log.d("1","时间戳: ${tab.timestamp}")
-            Log.d("1","标签类型: ${tab.tabType}")
-            Log.d("1","顺序: ${tab.order}")
-            Log.d("1","链接: ${tab.link}")
-            Log.d("1","链接类型: ${tab.linkType}")
-            Log.d("1","类型: ${tab.type}")
-            Log.d("1","是否默认: ${tab.isDefault}")
-            Log.d("1","子标题: ${tab.subTitle}")
-            Log.d("1"," ")
+            Log.d(tag,"标签名称: ${tab.tabName}")
+            Log.d(tag,"标签图标: ${tab.tabIcon}")
+            Log.d(tag,"红旗: ${tab.redFlag}")
+            Log.d(tag,"时间戳: ${tab.timestamp}")
+            Log.d(tag,"标签类型: ${tab.tabType}")
+            Log.d(tag,"顺序: ${tab.order}")
+            Log.d(tag,"链接: ${tab.link}")
+            Log.d(tag,"链接类型: ${tab.linkType}")
+            Log.d(tag,"类型: ${tab.type}")
+            Log.d(tag,"是否默认: ${tab.isDefault}")
+            Log.d(tag,"子标题: ${tab.subTitle}")
+            Log.d(tag," ")
         }
+
 
         val tabs = arrayOf("Components", "Helper", "Lab", "Waterfall")
         val pics = arrayOf(

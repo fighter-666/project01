@@ -1,6 +1,7 @@
 package com.example.myapplication.recharge.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.recharge.adapter.RechargeWaterfallAdapter
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
+import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.property.Cards
+import com.google.gson.Gson
 
 
 class RechargeWaterfallFragment : Fragment() {
@@ -79,11 +82,27 @@ class RechargeWaterfallFragment : Fragment() {
             )
         )
 
-        val json = """
-        {
-        "tabList": [
-            
-    }""".trimIndent()
+        val json: String = requireContext().assets.open("waterfalldata.json").bufferedReader().use { it.readText() }
+        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+        val gson = Gson()
+        val tabList= gson.fromJson(json, GetFeedTabData::class.java)
+        val tag = "TAG"
+        Log.d(tag,"标签名称")
+        for (tab in tabList.tabList) {
+            Log.d(tag,"标签名称: ${tab.tabName}")
+            Log.d(tag,"标签图标: ${tab.tabIcon}")
+            Log.d(tag,"红旗: ${tab.redFlag}")
+            Log.d(tag,"时间戳: ${tab.timestamp}")
+            Log.d(tag,"标签类型: ${tab.tabType}")
+            Log.d(tag,"顺序: ${tab.order}")
+            Log.d(tag,"链接: ${tab.link}")
+            Log.d(tag,"链接类型: ${tab.linkType}")
+            Log.d(tag,"类型: ${tab.type}")
+            Log.d(tag,"是否默认: ${tab.isDefault}")
+            Log.d(tag,"子标题: ${tab.subTitle}")
+            Log.d(tag," ")
+        }
+
         val myAdapter = RechargeWaterfallAdapter(R.layout.adapter_recharge_tab_waterfall, piggies4)
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)

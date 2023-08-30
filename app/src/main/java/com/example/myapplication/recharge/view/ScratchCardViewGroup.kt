@@ -79,11 +79,11 @@ class ScratchCardViewGroup : ConstraintLayout {
 
         layoutParams1.height = initialHeighgt * widthScale.toInt()
         container.layoutParams = layoutParams1
-        LogUtils.d(
+        /*LogUtils.d(
             "initialWidth= " + initialWidth + "; initialHeighgt= " + initialHeighgt +
                     " imageWidth= " + imageWidth + "; widthScale=" + widthScale +
                     " layoutParams1.height=" + layoutParams1.height
-        )
+        )*/
 
         val layoutParamsClose = close.layoutParams
 
