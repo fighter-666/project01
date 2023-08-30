@@ -1,7 +1,11 @@
 package com.example.myapplication.activity.components
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,10 +16,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRechargePageBinding
-import com.example.myapplication.recharge.fragment.RechargeWaterfallFragment
 import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
+import com.example.myapplication.recharge.fragment.RechargeWaterfallFragment
 import com.example.myapplication.recharge.property.Cards
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
@@ -74,7 +78,7 @@ class RechargePageActivity : AppCompatActivity() {
             {
                 "tabName": "商城",
                 "tabIcon": "",
-                "redFlag": "",
+                "redFlag": "1",
                 "timestamp": "20230427153051",
                 "tabType": "1",
                 "order": "4",
@@ -86,10 +90,10 @@ class RechargePageActivity : AppCompatActivity() {
             },
             {
                 "tabName": "视频",
-                "tabIcon": "",
+                "tabIcon": "R.drawable.tengxun",
                 "redFlag": "0",
                 "timestamp": "20230427153129",
-                "tabType": "1",
+                "tabType": "2",
                 "order": "5",
                 "link": "",
                 "linkType": "",
@@ -99,10 +103,10 @@ class RechargePageActivity : AppCompatActivity() {
             },
             {
                 "tabName": "彩铃",
-                "tabIcon": "",
+                "tabIcon": "R.drawable.recharge_tab_new_years_shopping_festival",
                 "redFlag": "0",
                 "timestamp": "20230510142539",
-                "tabType": "1",
+                "tabType": "2",
                 "order": "6",
                 "link": "",
                 "linkType": "",
@@ -147,6 +151,7 @@ class RechargePageActivity : AppCompatActivity() {
         "isShowSubTitle": "2"
     }""".trimIndent()
 
+
         val gson = Gson()
         val tabList= gson.fromJson(json, GetFeedTabData::class.java)
         //设置默认的丽萍页面限制
@@ -158,14 +163,61 @@ class RechargePageActivity : AppCompatActivity() {
         val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             val tabView =
                 LayoutInflater.from(this).inflate(R.layout.view_custom_recharge_waterfall_tab, null)
-            //val tabIcon = tabView.findViewById<ImageView>(R.id.tabIcon)
-            val tabTitle = tabView.findViewById<TextView>(R.id.tabTitle)
-            tabTitle.text = tabList.tabList[position].tabName
+            val tabIcon = tabView.findViewById<ImageView>(R.id.tabIcon)
+            val tabTitle = tabView.findViewById<TextView>(R.id.tabName)
+            val subTitle = tabView.findViewById<TextView>(R.id.subTitle)
+            val redFlag = tabView.findViewById<ImageView>(R.id.redFlag)
+
+            val tabItem = tabList.tabList[position]
+            tabTitle.text = tabItem.tabName
+            subTitle.text = tabItem.subTitle
+
+
             //tabIcon.setImageResource(pics[position])
             tab.customView = tabView
-            //tab.setIcon(pics[position])
+
+            //tabIcon : tab栏图标 string
+            if (tabItem.tabIcon != "") {
+                val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
+                val resourceId = resources.getIdentifier(tabIconResourceName, "drawable", packageName)
+                tabIcon.setImageResource(resourceId)
+            }
+
+            //tabType : tab栏显示类型：1：显示标题 2：显示图标 string
+            if (tabItem.tabType == "1") {
+                tabIcon.visibility = View.GONE
+            } else {
+                subTitle.visibility = View.GONE
+            }
+
+            //redFlag : 是否显示红点：0否 1是 string
+            if (tabItem.redFlag == "1") {
+                redFlag.visibility = View.VISIBLE // 显示红点
+            } else {
+                redFlag.visibility = View.GONE // 隐藏红点
+            }
+
+            // link : wap页面跳转链接 string
+
+            if (tabItem.type == "2") {
+                tabView.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tabItem.link))
+                    startActivity(intent)
+                }
+            } else {
+                // 处理链接为空的情况
+                // 可以显示一个提示或执行其他逻辑
+            }
+
+
+            //isDefault : 10.0新增是否默认选中（0：否，1：是） string
+            if (tabItem.isDefault == "1") {
+                binding.viewPager2.setCurrentItem(2, false) // 设置默认选中项
+            }
+
         }
         mediator.attach()
+
 
         //消息条
         //右边textview跑马灯
