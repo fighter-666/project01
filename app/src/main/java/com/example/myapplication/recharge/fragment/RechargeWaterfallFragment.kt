@@ -78,6 +78,12 @@ class RechargeWaterfallFragment : Fragment() {
                 0
             )
         )
+
+        val json = """
+        {
+        "tabList": [
+            
+    }""".trimIndent()
         val myAdapter = RechargeWaterfallAdapter(R.layout.adapter_recharge_tab_waterfall, piggies4)
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)

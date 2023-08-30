@@ -1,7 +1,5 @@
 package com.example.myapplication.activity.components
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +17,7 @@ import com.example.myapplication.databinding.ActivityRechargePageBinding
 import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
+import com.example.myapplication.recharge.fragment.RechargeWaterfallBaiduFragment
 import com.example.myapplication.recharge.fragment.RechargeWaterfallFragment
 import com.example.myapplication.recharge.property.Cards
 import com.example.myapplication.recharge.property.Piggy
@@ -45,8 +44,7 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
 
-        val tabs = arrayOf("推荐", "年货节", "直播", "本地")
-        val json = """
+        /*val json = """
         {
         "tabList": [
             {
@@ -133,7 +131,7 @@ class RechargePageActivity : AppCompatActivity() {
                 "redFlag": "0",
                 "timestamp": "20230619170238",
                 "tabType": "1",
-                "order": "9",
+                "order": "7",
                 "link": "",
                 "linkType": "",
                 "type": "1",
@@ -149,17 +147,21 @@ class RechargePageActivity : AppCompatActivity() {
             "sceneId": "hg_cxbl_fc##2786##default##0517500057##010001002000##3##N##16347400001##1##N##N##05175"
         },
         "isShowSubTitle": "2"
-    }""".trimIndent()
+    }""".trimIndent()*/
 
-
+        val json: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
+            application.assets.open("tab.json").bufferedReader().use { it.readText() }
+        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         val tabList= gson.fromJson(json, GetFeedTabData::class.java)
-        //设置默认的丽萍页面限制
+        //设置默认的预加载页面限制
         binding.viewPager2.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 
+        //将适配器对象与ViewPager2绑定，以便在ViewPager2中显示相应的页面内容
         val adapter = RechargeFragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager2.adapter = adapter
 
+        //创建了一个TabLayoutMediator对象，并将其与TabLayout和ViewPager2进行关联。
         val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             val tabView =
                 LayoutInflater.from(this).inflate(R.layout.view_custom_recharge_waterfall_tab, null)
@@ -168,12 +170,16 @@ class RechargePageActivity : AppCompatActivity() {
             val subTitle = tabView.findViewById<TextView>(R.id.subTitle)
             val redFlag = tabView.findViewById<ImageView>(R.id.redFlag)
 
+            // 排序tabList
+            tabList.tabList.sortBy { it.order }
+
+            // 重新按照排序后的tabList获取tabItem
             val tabItem = tabList.tabList[position]
+
             tabTitle.text = tabItem.tabName
             subTitle.text = tabItem.subTitle
 
-
-            //tabIcon.setImageResource(pics[position])
+            // 设置tab的自定义视图
             tab.customView = tabView
 
             //tabIcon : tab栏图标 string
@@ -197,27 +203,21 @@ class RechargePageActivity : AppCompatActivity() {
                 redFlag.visibility = View.GONE // 隐藏红点
             }
 
+            //type : tab栏显示内容类型：1.显示feed流原生列表 2：显示wap页面 3：10.0新增显示原生关注页 string
             // link : wap页面跳转链接 string
-
             if (tabItem.type == "2") {
-                tabView.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tabItem.link))
-                    startActivity(intent)
-                }
+                link = tabItem.link
             } else {
                 // 处理链接为空的情况
                 // 可以显示一个提示或执行其他逻辑
             }
 
-
             //isDefault : 10.0新增是否默认选中（0：否，1：是） string
             if (tabItem.isDefault == "1") {
                 binding.viewPager2.setCurrentItem(2, false) // 设置默认选中项
             }
-
         }
         mediator.attach()
-
 
         //消息条
         //右边textview跑马灯
@@ -434,7 +434,7 @@ class RechargePageActivity : AppCompatActivity() {
         FragmentStateAdapter(fragmentManager, lifecycle) {
         private val fragments = listOf(
             RechargeWaterfallFragment(),
-            RechargeWaterfallFragment(),
+            RechargeWaterfallBaiduFragment(),
             RechargeWaterfallFragment(),
             RechargeWaterfallFragment(),
             RechargeWaterfallFragment(),
@@ -450,6 +450,10 @@ class RechargePageActivity : AppCompatActivity() {
         override fun createFragment(position: Int): Fragment {
             return fragments[position]
         }
+    }
+
+    companion object {
+        lateinit var link: String
     }
 }
 
