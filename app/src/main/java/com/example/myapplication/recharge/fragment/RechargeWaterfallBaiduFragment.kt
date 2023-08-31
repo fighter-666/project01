@@ -37,13 +37,7 @@ class RechargeWaterfallBaiduFragment : Fragment() {
                 return true
             }
         })
-
-
-
-
     }
-
-
 }
 
 

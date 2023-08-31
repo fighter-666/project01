@@ -53,7 +53,7 @@
             android:exported="false" />
         <activity android:name=".activity.components.ThirdActivity" />
         <activity android:name=".activity.components.FourthActivity" />
-        <activity android:name=".activity.components.FifthActivity" />
+        <activity android:name=".activity.components.WebViewActivity" />
         <activity android:name=".activity.components.CustomActivity" />
         <activity
             android:name=".MainActivity"

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.property.Piggy
 import com.example.myapplication.R
 import com.example.myapplication.adapter.HelperAdapter
-import com.example.myapplication.activity.components.FifthActivity
+import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.FourthActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
 import com.example.myapplication.activity.components.CustomActivity
@@ -104,7 +104,7 @@ class HelperFragment : Fragment() {
                 }
 
                 "QMUIViewHelper" -> {
-                    val intent = Intent(context, FifthActivity::class.java)
+                    val intent = Intent(context, WebViewActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

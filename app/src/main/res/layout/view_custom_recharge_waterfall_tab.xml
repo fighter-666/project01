@@ -1,59 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?><!-- custom_tab_view.xml -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/tabIcon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="45dp"
+        android:layout_height="14dp"
         android:scaleType="fitCenter"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tabName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/tabName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#111111"
-        android:textSize="17sp"
         android:gravity="start"
         android:text="555"
-        app:layout_constraintTop_toBottomOf="@id/tabIcon"
+        android:textColor="#111111"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@id/subTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tabIcon" />
 
     <TextView
         android:id="@+id/subTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#111111"
-        android:textSize="8sp"
         android:gravity="start"
         android:text="555"
-        app:layout_constraintTop_toBottomOf="@id/tabName"
+        android:textColor="#111111"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tabName" />
 
     <ImageView
         android:id="@+id/redFlag"
         android:layout_width="7dp"
         android:layout_height="7dp"
-        android:layout_marginBottom="-5dp"
         android:layout_marginLeft="-2dp"
+        android:layout_marginBottom="-5dp"
         android:src="@drawable/recharge_tab_red_dot"
         app:layout_constraintBottom_toTopOf="@id/tabName"
-        app:layout_constraintLeft_toRightOf="@id/tabName"
-        />
+        app:layout_constraintLeft_toRightOf="@id/tabName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

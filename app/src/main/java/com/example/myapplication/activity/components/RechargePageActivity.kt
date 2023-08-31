@@ -12,6 +12,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRechargePageBinding
 import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
@@ -48,7 +50,9 @@ class RechargePageActivity : AppCompatActivity() {
             application.assets.open("tab.json").bufferedReader().use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
-        val tabList= gson.fromJson(json, GetFeedTabData::class.java)
+        val tabList = gson.fromJson(json, GetFeedTabData::class.java)
+
+
         //设置默认的预加载页面限制
         binding.viewPager2.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 
@@ -61,7 +65,7 @@ class RechargePageActivity : AppCompatActivity() {
             val tabView =
                 LayoutInflater.from(this).inflate(R.layout.view_custom_recharge_waterfall_tab, null)
             val tabIcon = tabView.findViewById<ImageView>(R.id.tabIcon)
-            val tabTitle = tabView.findViewById<TextView>(R.id.tabName)
+            val tabName = tabView.findViewById<TextView>(R.id.tabName)
             val subTitle = tabView.findViewById<TextView>(R.id.subTitle)
             val redFlag = tabView.findViewById<ImageView>(R.id.redFlag)
 
@@ -71,31 +75,42 @@ class RechargePageActivity : AppCompatActivity() {
             // 重新按照排序后的tabList获取tabItem
             val tabItem = tabList.tabList[position]
 
-            tabTitle.text = tabItem.tabName
+            tabName.text = tabItem.tabName
             subTitle.text = tabItem.subTitle
 
             // 设置tab的自定义视图
             tab.customView = tabView
-
-            //tabIcon : tab栏图标 string
-            if (tabItem.tabIcon != "") {
-                val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
-                val resourceId = resources.getIdentifier(tabIconResourceName, "drawable", packageName)
-                tabIcon.setImageResource(resourceId)
-            }
-
-            //tabType : tab栏显示类型：1：显示标题 2：显示图标 string
-            if (tabItem.tabType == "1") {
-                tabIcon.visibility = View.GONE
-            } else {
-                subTitle.visibility = View.GONE
-            }
 
             //redFlag : 是否显示红点：0否 1是 string
             if (tabItem.redFlag == "1") {
                 redFlag.visibility = View.VISIBLE // 显示红点
             } else {
                 redFlag.visibility = View.GONE // 隐藏红点
+            }
+
+            //tabType : tab栏显示类型：1：显示标题 2：显示图标 string
+            if (tabItem.tabType == "1") {
+                tabIcon.visibility = View.GONE
+            } else {
+                subTitle.visibility = View.INVISIBLE
+                tabName.visibility = View.GONE
+                //tabIcon : tab栏图标 string
+
+                if (tabItem.tabIcon != "") {
+                    //使用 Glide 的 with() 方法传入一个上下文对象 context 来初始化 Glide
+                    Glide.with(application)
+                        .load(tabItem.tabIcon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(tabIcon)
+
+                    /*val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
+                    //使用 resources.getIdentifier(tabIconResourceName, "drawable", packageName)，
+                    // 我们通过资源名称、资源类型（这里是 "drawable"）和包名来获取资源的标识符
+                    val resourceId =
+                        resources.getIdentifier(tabIconResourceName, "drawable", packageName)
+                    tabIcon.setImageResource(resourceId)*/
+                }
             }
 
             //type : tab栏显示内容类型：1.显示feed流原生列表 2：显示wap页面 3：10.0新增显示原生关注页 string
@@ -109,7 +124,8 @@ class RechargePageActivity : AppCompatActivity() {
 
             //isDefault : 10.0新增是否默认选中（0：否，1：是） string
             if (tabItem.isDefault == "1") {
-                binding.viewPager2.setCurrentItem(2, false) // 设置默认选中项
+                //通过 tabList.tabList.indexOf(tabItem) 获取 tabItem 在 tabList.tabList 中的索引
+                binding.viewPager2.setCurrentItem(tabList.tabList.indexOf(tabItem), false) // 设置默认选中项
             }
         }
         mediator.attach()
@@ -149,7 +165,8 @@ class RechargePageActivity : AppCompatActivity() {
         piggies.add(Piggy(R.drawable.image3, "电子发票", "批量开票不排队"))
 
         //创建适配器
-        val myAdapter = RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggies)
+        val myAdapter =
+            RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggies)
 
         //设置布局管理器
         binding.rvRecommendationService.setLayoutManager(
@@ -175,7 +192,8 @@ class RechargePageActivity : AppCompatActivity() {
         piggiesCopy.add(Piggy(R.drawable.image4, "充值记录", "可查全网记录"))
 
         //创建适配器
-        val myAdapterCopy = RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggiesCopy)
+        val myAdapterCopy =
+            RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggiesCopy)
 
         //设置布局管理器
         binding.rvRecommendationServiceCopy.setLayoutManager(

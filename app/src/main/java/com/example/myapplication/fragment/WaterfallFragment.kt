@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.property.Card
 import com.example.myapplication.R
 import com.example.myapplication.adapter.WaterfallAdapter
-import com.example.myapplication.activity.components.FifthActivity
+import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.FourthActivity
 import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
@@ -89,7 +89,7 @@ class WaterfallFragment : Fragment() {
                 }
 
                 "QMUIViewHelper" -> {
-                    val intent = Intent(context, FifthActivity::class.java)
+                    val intent = Intent(context, WebViewActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_rectangle19">
+
+    <ImageView
+        android:id="@+id/ivPicAreaImageUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/falls1"
+        app:layout_constraintBottom_toTopOf="@id/tvMainTitleTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMainTitleTitle"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="9dp"
+        android:text="加装【副卡】，一份套餐全家用"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvSaleTipList"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPicAreaImageUrl" />
+
+
+    <TextView
+        android:id="@+id/tvSaleTipList"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="11dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/shape_rectangle18"
+        android:text="赠新人礼包"
+        android:textColor="#ea5858"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/tvPriceDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvMainTitleTitle" />
+
+    <TextView
+        android:id="@+id/tvSaleTipListCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="赠美团神券"
+        android:background="@drawable/shape_rectangle18"
+        android:textColor="#ea5858"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvSaleTipList"
+        app:layout_constraintLeft_toRightOf="@id/tvSaleTipList" />
+
+
+    <TextView
+        android:id="@+id/name4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥"
+        android:textColor="#ea5858"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvPriceDecimal"
+        app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle" />
+
+    <TextView
+        android:id="@+id/tvPriceInteger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textColor="#ea5858"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tvPriceDecimal"
+        app:layout_constraintLeft_toRightOf="@id/name4" />
+
+    <TextView
+        android:id="@+id/tvPriceDecimal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="/月"
+        android:textColor="#ea5858"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tvPriceInteger"
+        app:layout_constraintTop_toBottomOf="@id/tvSaleTipList" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

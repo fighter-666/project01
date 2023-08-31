@@ -13,7 +13,7 @@ class MultipleItemQuickAdapter(data: MutableList<MultipleItem>) :
 
     init {
         addItemType(TEXT, R.layout.widget_multiple_item_image_view)
-        addItemType(IMG, R.layout.widget_multiple_item_text_view)
+        addItemType(IMG, R.layout.widget_multiple_item_common)
         addItemType(IMG2, R.layout.widget_multiple_item_text_view2)
     }
 
