@@ -12,7 +12,6 @@
         android:id="@+id/ivPicAreaImageUrl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/falls1"
@@ -21,57 +20,151 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvStockout"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/shape_recharge_commentlist"
+        android:text="无货"
+        android:textColor="#fff8f6"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPicAreaImageUrl"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvCommentList"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/shape_recharge_commentlist"
+        android:text="操作简单"
+        android:textColor="#fff8f6"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/tvStockout"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvCommentListSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="9dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/shape_recharge_commentlist_second"
+        android:text="库存紧张"
+        android:textColor="#fff8f6"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/tvCommentList"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <TextView
         android:id="@+id/tvMainTitleTitle"
         android:layout_width="136dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="9dp"
         android:text="加装【副卡】，一份套餐全家用"
         android:textColor="#333333"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/tvSaleTipList"
+        app:layout_constraintBottom_toTopOf="@id/horizontalScrollView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivPicAreaImageUrl" />
 
-
-    <TextView
-        android:id="@+id/tvSaleTipList"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="11dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:background="@drawable/shape_rectangle18"
-        android:text="赠新人礼包"
-        android:textColor="#ea5858"
-        android:textSize="11sp"
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="0dp"
         app:layout_constraintBottom_toTopOf="@id/tvPriceDecimal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMainTitleTitle" />
+        app:layout_constraintTop_toBottomOf="@id/tvMainTitleTitle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="11dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <!-- 在这里添加您希望横向滑动的内容 -->
+            <TextView
+                android:id="@+id/tvSaleTipList"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/shape_tvsaletiplist_rextangle"
+                android:text="赠新人礼包"
+                android:textColor="#5faef7"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvSaleTipListSecond"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvSaleTipListSecond"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="赠美团神券"
+                android:background="@drawable/shape_tvsaletiplist_rextangle"
+                android:textColor="#5faef7"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvSaleTipList"
+                app:layout_constraintRight_toLeftOf="@id/tvSaleTipListThird"
+                app:layout_constraintLeft_toRightOf="@id/tvSaleTipList" />
+
+            <TextView
+                android:id="@+id/tvSaleTipListThird"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="赠美团神券"
+                android:background="@drawable/shape_tvsaletiplist_rextangle"
+                android:textColor="#5faef7"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvSaleTipList"
+                app:layout_constraintLeft_toRightOf="@id/tvSaleTipListSecond" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </HorizontalScrollView>
 
     <TextView
-        android:id="@+id/tvSaleTipListCopy"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginLeft="5dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="赠美团神券"
-        android:background="@drawable/shape_rectangle18"
-        android:textColor="#ea5858"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@id/tvSaleTipList"
-        app:layout_constraintLeft_toRightOf="@id/tvSaleTipList" />
-
-
-    <TextView
-        android:id="@+id/name4"
+        android:id="@+id/tvDollar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="￥"
@@ -89,7 +182,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/tvPriceDecimal"
-        app:layout_constraintLeft_toRightOf="@id/name4" />
+        app:layout_constraintLeft_toRightOf="@id/tvDollar"
+        />
 
     <TextView
         android:id="@+id/tvPriceDecimal"
@@ -101,6 +195,20 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tvPriceInteger"
-        app:layout_constraintTop_toBottomOf="@id/tvSaleTipList" />
+        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView"
+        />
+
+    <TextView
+        android:id="@+id/tvOriginalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="58dp"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tvPriceInteger"
+        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
