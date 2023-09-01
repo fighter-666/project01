@@ -73,6 +73,77 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
+    <ImageView
+        android:id="@+id/ivContentAreaListPicListFirst"
+        android:layout_width="110dp"
+        android:layout_height="28dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/label"
+        app:layout_constraintBottom_toTopOf="@id/ivContentAreaListPicListSecond"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivPicAreaImageUrl" />
+
+    <ImageView
+        android:id="@+id/ivContentAreaListPicListSecond"
+        android:layout_width="110dp"
+        android:layout_height="28dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/label"
+        app:layout_constraintBottom_toTopOf="@id/ivContentAreaListPicListThird"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivContentAreaListPicListFirst" />
+
+    <ImageView
+        android:id="@+id/ivContentAreaListPicListThird"
+        android:layout_width="110dp"
+        android:layout_height="28dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/label"
+        app:layout_constraintBottom_toTopOf="@id/ivContentAreaListPicListFourth"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivContentAreaListPicListSecond" />
+
+    <ImageView
+        android:id="@+id/ivContentAreaListPicListFourth"
+        android:layout_width="110dp"
+        android:layout_height="28dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/label"
+        app:layout_constraintBottom_toTopOf="@id/ivContentAreaListPicListFifth"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivContentAreaListPicListThird" />
+
+    <ImageView
+        android:id="@+id/ivContentAreaListPicListFifth"
+        android:layout_width="110dp"
+        android:layout_height="28dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivContentAreaListPicListFourth" />
+
     <TextView
         android:id="@+id/tvMainTitleTitle"
         android:layout_width="136dp"
@@ -80,7 +151,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="9dp"
-        android:text="加装【副卡】，一份套餐全家用"
         android:textColor="#333333"
         android:textSize="14sp"
         android:textStyle="bold"

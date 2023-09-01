@@ -138,6 +138,76 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 if (item.contentAreaList != null) {
                     //遍历item.contentAreaList中的元素
                     for (tab in item.contentAreaList) {
+                        //7：配图：一行一个
+                        if (tab.picList != null) {
+                            binding.tvMainTitleTitle.isGone = true
+                            binding.tvSaleTipList.isGone = true
+                            binding.tvSaleTipListSecond.isGone = true
+                            binding.tvSaleTipListThird.isGone = true
+                            binding.tvPriceInteger.isGone = true
+                            binding.tvPriceDecimal.isGone = true
+                            binding.tvDollar.isGone = true
+                            binding.tvOriginalPrice.isGone = true
+                            CoroutineScope(Dispatchers.Main).launch {
+                                // 设置圆角半径
+                                val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                Glide.with(context)
+                                    .load(item.contentAreaList[0].picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                    .transition(DrawableTransitionOptions.withCrossFade())
+                                    .apply(requestOptions)
+                                    .into(binding.ivContentAreaListPicListFirst)
+                            }
+                            CoroutineScope(Dispatchers.Main).launch {
+                                // 设置圆角半径
+                                val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                Glide.with(context)
+                                    .load(item.contentAreaList[1].picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                    .transition(DrawableTransitionOptions.withCrossFade())
+                                    .apply(requestOptions)
+                                    .into(binding.ivContentAreaListPicListFirst)
+                            }
+                           /* CoroutineScope(Dispatchers.Main).launch {
+                                // 设置圆角半径
+                                val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                Glide.with(context)
+                                    .load(item.contentAreaList[2].picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                    .transition(DrawableTransitionOptions.withCrossFade())
+                                    .apply(requestOptions)
+                                    .into(binding.ivContentAreaListPicListFirst)
+                            }
+                            CoroutineScope(Dispatchers.Main).launch {
+                                // 设置圆角半径
+                                val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                Glide.with(context)
+                                    .load(item.contentAreaList[3].picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                    .transition(DrawableTransitionOptions.withCrossFade())
+                                    .apply(requestOptions)
+                                    .into(binding.ivContentAreaListPicListFirst)
+                            }
+                            if (item.contentAreaList.size > 4) {
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    // 设置圆角半径
+                                    val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                    Glide.with(context)
+                                        .load(item.contentAreaList[4].picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                        .transition(DrawableTransitionOptions.withCrossFade())
+                                        .apply(requestOptions)
+                                        .into(binding.ivContentAreaListPicListFirst)
+                                }
+                            }*/
+                        } else {
+                            binding.ivContentAreaListPicListFirst.isGone = true
+                            binding.ivContentAreaListPicListSecond.isGone = true
+                            binding.ivContentAreaListPicListThird.isGone = true
+                            binding.ivContentAreaListPicListFourth.isGone = true
+                            binding.ivContentAreaListPicListFifth.isGone = true
+                        }
+
                         //mainTitle : 主标题
                         if (tab.mainTitle != null) {
                             if (tab.mainTitle.title != "") {
@@ -183,6 +253,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     binding.tvDollar.isGone = true
                     binding.tvOriginalPrice.isGone = true
                 }
+
             }
 
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.NULL -> {
