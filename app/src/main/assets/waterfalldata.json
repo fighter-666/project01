@@ -456,7 +456,7 @@
             "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-12.eoc-3199600001",
             "sceneId": "hg_sy_feedtg##100001##default##3199600001##010001002000##3##N##1##12##N##N##31996",
             "picArea": {
-                "imageUrl": null,
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654670340734263.png",
                 "imageRatio": null,
                 "playType": null,
                 "videoStreamUrl": null,
@@ -671,6 +671,13 @@
                     "saleTipList": [
                         {
                             "title": "200MB流量",
+                            "fontColor": "",
+                            "frameColor": "",
+                            "imageUrl": "",
+                            "type": "1"
+                        },
+                        {
+                            "title": "接听免费",
                             "fontColor": "",
                             "frameColor": "",
                             "imageUrl": "",
