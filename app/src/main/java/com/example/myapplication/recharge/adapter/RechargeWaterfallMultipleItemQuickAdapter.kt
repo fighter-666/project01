@@ -1,7 +1,9 @@
 package com.example.myapplication.recharge.adapter
 
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
+import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -9,10 +11,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
+import com.example.myapplication.databinding.WidgetMultipleItemAdvertiseBinding
 import com.example.myapplication.databinding.WidgetMultipleItemCommonBinding
 import com.example.myapplication.databinding.WidgetMultipleItemManyImageBinding
 import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
+import com.example.myapplication.recharge.widget.ScrrollTextViewCommentListBackground
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +35,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
         )
         addItemType(
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.NULL,
-            R.layout.widget_multiple_item_common
+            R.layout.widget_multiple_item_null
         )
         addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.LIVE.toInt(),
@@ -43,7 +47,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
         )
         addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt(),
-            R.layout.widget_multiple_item_common
+            R.layout.widget_multiple_item_advertise
         )
         addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt(),
@@ -85,6 +89,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .apply(requestOptions)
                         .into(binding.ivPicAreaImageUrl4)
+                    binding.tvMainTitleTitle.text = item.picArea.title
                 }
 
             }
@@ -92,6 +97,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE -> {
                 // 处理单图布局
                 val binding = WidgetMultipleItemCommonBinding.bind(holder.itemView)
+
                 //在协程中加载网络图片或在后台线程中加载大量图片。
                 // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
                 CoroutineScope(Dispatchers.Main).launch {
@@ -107,25 +113,16 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
                 //commentList : 评论列表
                 if (item.picArea.commentList != null) {
-                    /*//右边textview跑马灯
-                    val marqueeText2: ScrrollTextViewBackground = binding.tvScrollBackground
-                    val demographicsList2: MutableList<String> = ArrayList()
-                    demographicsList2.add("股票")
-                    demographicsList2.add("药业")
-                    demographicsList2.add("上市")
-                    marqueeText2.setList(demographicsList2)
-                    marqueeText2.startScroll()*/
+                    val strs: MutableList<String> = mutableListOf() // 创建空的可变列表
 
-                    binding.tvCommentList.text = item.picArea.commentList[0].title
-                    if (item.picArea.commentList.size > 2) {
-                        binding.tvCommentListSecond.text =
-                            item.picArea.commentList[1].title
-                    } else {
-                        binding.tvCommentListSecond.isGone = true
+                    for (tab in item.picArea.commentList){
+                        strs.add(tab.title) // 将每个标题添加到列表中
                     }
-                } else {
-                    binding.tvCommentList.isGone = true
-                    binding.tvCommentListSecond.isGone = true
+
+                    binding.tvCommentList.visibility = View.VISIBLE
+                    val marqueeText2: ScrrollTextViewCommentListBackground = binding.tvCommentList
+                    marqueeText2.setList(strs) // 将列表传递给跑马灯控件的setList方法
+                    marqueeText2.startScroll()
                 }
 
                 //库存显示
@@ -198,6 +195,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             //7：配图：一行一个
                             "7" -> {
                                 //7：配图：一行一个
+                                binding.tvStockout.isGone = true
                                 if (tab.picList != null) {
                                     binding.ivContentAreaListPicListFirst.visibility = View.VISIBLE
                                     CoroutineScope(Dispatchers.Main).launch {
@@ -330,7 +328,62 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
             GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt() -> {
                 // 处理广告布局
+                val binding = WidgetMultipleItemAdvertiseBinding.bind(holder.itemView)
+                //在协程中加载网络图片或在后台线程中加载大量图片。
+                // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                CoroutineScope(Dispatchers.Main).launch {
+                    // 设置圆角半径
+                    val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                    Glide.with(context)
+                        .load(item.adLists[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .apply(requestOptions)
+                        .into(binding.ivAdListsImageUrl)
+                }
+                binding.tvAdListsImageUrl.text = item.adLists[0].title
 
+                //在协程中加载网络图片或在后台线程中加载大量图片。
+                // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                CoroutineScope(Dispatchers.Main).launch {
+                    // 设置圆角半径
+                    val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                    Glide.with(context)
+                        .load(item.adLists[1].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .apply(requestOptions)
+                        .into(binding.ivAdListsImageUrlSecond)
+                }
+                binding.tvAdListsImageUrlSecond.text = item.adLists[1].title
+
+                //在协程中加载网络图片或在后台线程中加载大量图片。
+                // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                CoroutineScope(Dispatchers.Main).launch {
+                    // 设置圆角半径
+                    val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                    Glide.with(context)
+                        .load(item.adLists[2].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .apply(requestOptions)
+                        .into(binding.ivAdListsImageUrlThird)
+                }
+                binding.tvAdListsImageUrlThird.text = item.adLists[2].title
+
+                //在协程中加载网络图片或在后台线程中加载大量图片。
+                // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                CoroutineScope(Dispatchers.Main).launch {
+                    // 设置圆角半径
+                    val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                    Glide.with(context)
+                        .load(item.adLists[3].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .apply(requestOptions)
+                        .into(binding.ivAdListsImageUrlFour)
+                }
+                binding.tvAdListsImageUrlFour.text = item.adLists[3].title
             }
 
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {

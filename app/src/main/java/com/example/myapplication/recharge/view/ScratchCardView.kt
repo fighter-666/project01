@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.R
 import java.util.Random
 
@@ -36,6 +37,8 @@ class ScratchCardView : View {
     private var showFullResult = false
     var scaleWidth: Float = 0f
     var scaleHeight: Float = 0f
+    var scratchCardViewGroup: ScratchCardViewGroup? = null
+
 
     constructor(context: Context?) : super(context) {
         init()
@@ -118,6 +121,7 @@ class ScratchCardView : View {
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
+
             MotionEvent.ACTION_DOWN -> {
                 //重置绘制路径
                 path.reset()
@@ -125,15 +129,19 @@ class ScratchCardView : View {
                 path.moveTo(event.x - mBitmapFrontWidth, event.y - mBitmapFrontHeight) //原点移动至手指的触摸点
                 startX = event.x
                 startY = event.y
+
+
             }
 
             MotionEvent.ACTION_MOVE -> {
+
                 //使用path.lineTo()方法将路径绘制到当前触摸点
                 path.lineTo(event.x - mBitmapFrontWidth, event.y - mBitmapFrontHeight)
                 endX = event.x
                 endY = event.y
                 disX = Math.abs(endX - startX)
                 disY = Math.abs(endY - startY)
+
 
             }
 
@@ -193,6 +201,7 @@ class ScratchCardView : View {
         }
 
         mCanvas.drawPath(path, pathPaint)
+        // 在这里调用隐藏视图的方法
         invalidate()
         return true
     }
@@ -211,4 +220,6 @@ class ScratchCardView : View {
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
     }
+
+
 }

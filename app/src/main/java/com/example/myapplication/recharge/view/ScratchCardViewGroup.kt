@@ -120,7 +120,15 @@ class ScratchCardViewGroup : ConstraintLayout {
         imageView2.setImageResource(R.drawable.hand)
 
         //让按钮和手指消失
-        close.setOnClickListener {
+        LogUtils.d(
+            "currentCloseValue" + imageView
+        )
+       /* if (currentCloseValue) {
+            imageView.visibility = View.GONE
+            imageView2.visibility = View.GONE
+        }*/
+
+        imageView.setOnClickListener {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
         }
@@ -168,4 +176,6 @@ class ScratchCardViewGroup : ConstraintLayout {
         })
         AnimatorSet.start()
     }
+
+
 }
