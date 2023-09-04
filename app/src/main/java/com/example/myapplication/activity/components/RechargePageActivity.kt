@@ -368,6 +368,7 @@ class RechargePageActivity : AppCompatActivity() {
         }
     }
 
+
     companion object {
         lateinit var link: String
     }

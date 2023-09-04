@@ -224,14 +224,6 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             //5：倒计时
                             "5" -> {
                                 // 获取倒计时数据结构
-                                fun getFeedList(): GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean {
-                                    // 假设从接口获取到倒计时数据结构
-                                    val countDownBean =
-                                        GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean()
-                                    countDownBean.startTime = "20230903120000"
-                                    countDownBean.endTime = "20230904120000"
-                                    return countDownBean
-                                }
                                 val countDownBean = tab.countDown // 假设从接口获取到倒计时数据结构
 
                                 // 判断是显示距开始还是距结束
@@ -240,16 +232,15 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                 // 计算距离开始或结束的剩余时间
                                 val remainingTimeInMillis = getRemainingTimeInMillis(countDownBean, isCountingDownToStart)
 
-
                                 // 显示倒计时信息
-                                var countdownText = formatCountdownText(remainingTimeInMillis, isCountingDownToStart)
-
-
                                 binding.tvCountDownBackground.visibility = View.VISIBLE
                                 binding.tvCountDown.visibility = View.VISIBLE
+                                //创建了一个CountDownTimer对象，并设置了倒计时的逻辑
                                 val countDownTimer = object : CountDownTimer(remainingTimeInMillis, 1000) {
+                                    //实现onTick方法：覆盖CountDownTimer类的onTick方法。在每个时间间隔（这里是1000毫秒）内，该方法会被调用一次
                                     override fun onTick(millisUntilFinished: Long) {
-                                        countdownText = formatCountdownText(millisUntilFinished, isCountingDownToStart)
+                                        //更新倒计时文本
+                                        var countdownText = formatCountdownText(millisUntilFinished, isCountingDownToStart)
                                         if (isCountingDownToStart) {
                                             countdownText = "距开始  $countdownText"
                                         } else {
@@ -268,6 +259,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                 countDownTimer.start()
                             }
 
+                            //6：人数
                             "6" -> {
 
                             }
@@ -382,6 +374,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
                             }
 
+                            //9：末尾卡片按钮列表
                             "9" -> {
 
                             }
@@ -491,11 +484,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
         }
     }
 
-
-
+    //// 判断是显示距开始还是距结束
     private fun shouldDisplayCountdownToStart(countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean): Boolean {
-        // 判断是显示距开始还是距结束
+        //获取当前时间
         val currentTime = getCurrentTime()
+        //验证开始时间和结束时间的有效性
         val isValidStartTime = isValidDateTime(countDownBean.startTime)
         val isValidEndTime = isValidDateTime(countDownBean.endTime)
 
@@ -522,10 +515,15 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
         }
     }
 
+    //计算剩余时间（以毫秒为单位）
     private fun getRemainingTimeInMillis(countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean, isCountingDownToStart: Boolean): Long {
+        //创建日期格式对象，使用默认的语言环境
         val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
+        //获取当前时间
         val currentTime = getCurrentTime()
+        //确定目标时间
         val targetTime = if (isCountingDownToStart) countDownBean.startTime else countDownBean.endTime
+        //计算剩余时间：使用日期格式化对象将目标时间和当前时间解析为Date对象，并通过调用time方法获取它们的时间戳（以毫秒为单位）
         return abs(dateFormat.parse(targetTime).time - dateFormat.parse(currentTime).time)
     }
 
