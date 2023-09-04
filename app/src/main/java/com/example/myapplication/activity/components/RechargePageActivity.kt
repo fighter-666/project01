@@ -100,7 +100,7 @@ class RechargePageActivity : AppCompatActivity() {
                     //使用 Glide 的 with() 方法传入一个上下文对象 context 来初始化 Glide
                     Glide.with(application)
                         .load(tabItem.tabIcon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(tabIcon)
 
@@ -125,7 +125,10 @@ class RechargePageActivity : AppCompatActivity() {
             //isDefault : 10.0新增是否默认选中（0：否，1：是） string
             if (tabItem.isDefault == "1") {
                 //通过 tabList.tabList.indexOf(tabItem) 获取 tabItem 在 tabList.tabList 中的索引
-                binding.viewPager2.setCurrentItem(tabList.tabList.indexOf(tabItem), false) // 设置默认选中项
+                binding.viewPager2.setCurrentItem(
+                    tabList.tabList.indexOf(tabItem),
+                    false
+                ) // 设置默认选中项
             }
         }
         mediator.attach()

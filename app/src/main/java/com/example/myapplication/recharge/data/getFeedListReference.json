@@ -1,0 +1,150 @@
+{
+    "headerInfos": {
+        "code": "string",
+        "reason": "string"
+    },
+    "responseData": {
+        "attach": "string",
+        "data": {
+            "feedList": [
+                {
+                    "adLists": [
+                        {
+                            "imageUrl": "string",
+                            "link": "string",
+                            "linkType": "string",
+                            "provinceCode": "string",
+                            "recommender": "string",
+                            "sceneId": "string",
+                            "title": "string"
+                        }
+                    ],
+                    "contentAreaList": [
+                        {
+                            "completionInfo": {
+                                "link": "string",
+                                "linkType": "string",
+                                "provinceCode": "string",
+                                "recommender": "string",
+                                "sceneId": "string",
+                                "title": "string"
+                            },
+                            "countDown": {
+                                "endTime": "string",
+                                "startTime": "string"
+                            },
+                            "location": {
+                                "icon": "string",
+                                "title": "string"
+                            },
+                            "mainTitle": {
+                                "color": "string",
+                                "title": "string",
+                                "type": "string"
+                            },
+                            "numText": "string",
+                            "picList": [
+                                {
+                                    "imageRatio": "string",
+                                    "imageUrl": "string",
+                                    "link": "string",
+                                    "linkType": "string",
+                                    "provinceCode": "string",
+                                    "recommender": "string",
+                                    "sceneId": "string",
+                                    "title": "string"
+                                }
+                            ],
+                            "price": {
+                                "isOriginalPriceLine": "string",
+                                "isShowPriceUnit": "string",
+                                "originalPrice": "string",
+                                "originalPriceColor": "string",
+                                "priceColor": "string",
+                                "priceDecimal": "string",
+                                "priceInteger": "string"
+                            },
+                            "saleTipList": [
+                                {
+                                    "fontColor": "string",
+                                    "frameColor": "string",
+                                    "imageUrl": "string",
+                                    "title": "string",
+                                    "type": "string"
+                                }
+                            ],
+                            "type": "string"
+                        }
+                    ],
+                    "externalOfferCode": "string",
+                    "firstSecondThreeClass": "string",
+                    "link": "string",
+                    "linkType": "string",
+                    "picArea": {
+                        "commentList": [
+                            {
+                                "backgroundColor": "string",
+                                "fontColor": "string",
+                                "title": "string"
+                            }
+                        ],
+                        "endTime": "string",
+                        "imageRatio": "string",
+                        "imageUrl": "string",
+                        "link": "string",
+                        "linkType": "string",
+                        "picList": [
+                            {
+                                "imageRatio": "string",
+                                "imageUrl": "string",
+                                "link": "string",
+                                "linkType": "string",
+                                "provinceCode": "string",
+                                "recommender": "string",
+                                "sceneId": "string",
+                                "title": "string"
+                            }
+                        ],
+                        "playType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "startTime": "string",
+                        "stock": "string",
+                        "title": "string",
+                        "topImage": "string",
+                        "topImageBeforeLive": "string",
+                        "topImageLiving": "string",
+                        "type": "string",
+                        "videoCommerceId": "string",
+                        "videoDuration": "string",
+                        "videoStreamUrl": "string",
+                        "videoStreamUrlType": "string"
+                    },
+                    "provinceCode": "string",
+                    "quickRecharge": {
+                        "denominations": [
+                            {
+                                "mainTitle": "string",
+                                "price": "string",
+                                "subtitle": "string"
+                            }
+                        ],
+                        "dialogText": "string",
+                        "link": "string",
+                        "linkType": "string",
+                        "loginRechargeText": "string",
+                        "title": "string",
+                        "withOutLoginRechargeFlag": "string"
+                    },
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "title": "string",
+                    "type": "string"
+                }
+            ]
+        },
+        "resultCode": "string",
+        "resultDesc": "string"
+    }
+}

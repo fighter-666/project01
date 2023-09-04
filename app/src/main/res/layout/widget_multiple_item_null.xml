@@ -6,102 +6,92 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="4dp"
     android:layout_marginBottom="10dp"
-    android:background="@drawable/shape_rectangle19"
-    >
+    android:background="@drawable/shape_rectangle19">
 
 
     <TextView
         android:id="@+id/tvMainNullTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="12dp"
+        android:gravity="left"
         android:text="您还想看哪方面？"
         android:textColor="#333333"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:gravity="left"
+        app:layout_constraintBottom_toTopOf="@id/tvNullTitleFirst"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvNullTitleFirst"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-
-        <TextView
-            android:id="@+id/tvNullTitleFirst"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_recharge_null"
-            android:text="签到得金豆"
-            android:textColor="#0e8cff"
-            android:textSize="14sp"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMainNullTitle"
-            app:layout_constraintBottom_toTopOf="@id/tvNullTitleSecond"/>
-
+    <TextView
+        android:id="@+id/tvNullTitleFirst"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/shape_recharge_null"
+        android:gravity="center"
+        android:text="签到得金豆"
+        android:textColor="#0e8cff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/tvNullTitleSecond"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvMainNullTitle" />
 
 
-
-        <TextView
-            android:id="@+id/tvNullTitleSecond"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_recharge_null"
-            android:text="附近客户经理"
-            android:textColor="#0e8cff"
-            android:textSize="14sp"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNullTitleFirst"
-            app:layout_constraintBottom_toTopOf="@id/tvNullTitleThird"/>
-
+    <TextView
+        android:id="@+id/tvNullTitleSecond"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/shape_recharge_null"
+        android:gravity="center"
+        android:text="附近客户经理"
+        android:textColor="#0e8cff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/tvNullTitleThird"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNullTitleFirst" />
 
 
-        <TextView
-            android:id="@+id/tvNullTitleThird"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_recharge_null"
-            android:text="话费查询"
-            android:textColor="#0e8cff"
-            android:textSize="14sp"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNullTitleSecond"
-            app:layout_constraintBottom_toTopOf="@id/tvNullTitleFour"/>
+    <TextView
+        android:id="@+id/tvNullTitleThird"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/shape_recharge_null"
+        android:gravity="center"
+        android:text="话费查询"
+        android:textColor="#0e8cff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/tvNullTitleFour"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNullTitleSecond" />
 
 
-
-        <TextView
-            android:id="@+id/tvNullTitleFour"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_recharge_null"
-            android:text="流量查询"
-            android:textColor="#0e8cff"
-            android:textSize="14sp"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNullTitleThird"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-
-
+    <TextView
+        android:id="@+id/tvNullTitleFour"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/shape_recharge_null"
+        android:gravity="center"
+        android:text="流量查询"
+        android:textColor="#0e8cff"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNullTitleThird" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,12 @@
 package com.example.myapplication.recharge.adapter
 
+import android.os.CountDownTimer
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
-import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -20,6 +23,10 @@ import com.example.myapplication.recharge.widget.ScrrollTextViewCommentListBackg
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Math.abs
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
@@ -115,7 +122,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 if (item.picArea.commentList != null) {
                     val strs: MutableList<String> = mutableListOf() // 创建空的可变列表
 
-                    for (tab in item.picArea.commentList){
+                    for (tab in item.picArea.commentList) {
                         strs.add(tab.title) // 将每个标题添加到列表中
                     }
 
@@ -171,21 +178,94 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                 if (tab.price != null) {
                                     binding.tvPriceInteger.text = tab.price.priceInteger
                                     binding.tvPriceDecimal.text = tab.price.priceDecimal
-                                    binding.tvOriginalPrice.text = tab.price.originalPrice
 
                                     binding.tvPriceInteger.visibility = View.VISIBLE
                                     binding.tvPriceDecimal.visibility = View.VISIBLE
                                     binding.tvOriginalPrice.visibility = View.VISIBLE
                                     binding.tvDollar.visibility = View.VISIBLE
+
+                                    //为文字设置删除线
+                                    val spannableString4 = SpannableString(tab.price.originalPrice)
+                                    val strikethroughSpan = StrikethroughSpan()
+                                    spannableString4.setSpan(
+                                        strikethroughSpan,
+                                        0,
+                                        spannableString4.length,
+                                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                    )
+                                    binding.tvOriginalPrice.setText(spannableString4)
                                 }
                             }
 
+                            //4：位置
                             "4" -> {
+                                //在协程中加载网络图片或在后台线程中加载大量图片。
+                                // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                               /* if (tab.location.icon != " ") {
+                                    CoroutineScope(Dispatchers.Main).launch {
+                                        // 设置圆角半径
+                                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                        Glide.with(context)
+                                            .load(tab.location.icon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                            .transition(DrawableTransitionOptions.withCrossFade())
+                                            .apply(requestOptions)
+                                            .into(binding.ivLocationIcon)
+                                    }
+                                }*/
+                                binding.tvLocationTitle.text = tab.location.title
+                                binding.ivLocationIcon.visibility = View.VISIBLE
+                                binding.tvLocationTitle.visibility = View.VISIBLE
+                                binding.clLocation.visibility = View.VISIBLE
+
 
                             }
 
+                            //5：倒计时
                             "5" -> {
+                                // 获取倒计时数据结构
+                                fun getFeedList(): GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean {
+                                    // 假设从接口获取到倒计时数据结构
+                                    val countDownBean =
+                                        GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean()
+                                    countDownBean.startTime = "20230903120000"
+                                    countDownBean.endTime = "20230904120000"
+                                    return countDownBean
+                                }
+                                val countDownBean = tab.countDown // 假设从接口获取到倒计时数据结构
 
+                                // 判断是显示距开始还是距结束
+                                val isCountingDownToStart = shouldDisplayCountdownToStart(countDownBean)
+
+                                // 计算距离开始或结束的剩余时间
+                                val remainingTimeInMillis = getRemainingTimeInMillis(countDownBean, isCountingDownToStart)
+
+
+                                // 显示倒计时信息
+                                var countdownText = formatCountdownText(remainingTimeInMillis, isCountingDownToStart)
+
+
+                                binding.tvCountDownBackground.visibility = View.VISIBLE
+                                binding.tvCountDown.visibility = View.VISIBLE
+                                val countDownTimer = object : CountDownTimer(remainingTimeInMillis, 1000) {
+                                    override fun onTick(millisUntilFinished: Long) {
+                                        countdownText = formatCountdownText(millisUntilFinished, isCountingDownToStart)
+                                        if (isCountingDownToStart) {
+                                            countdownText = "距开始  $countdownText"
+                                        } else {
+                                            countdownText = "距结束  $countdownText"
+                                        }
+                                        binding.tvCountDown.text = countdownText
+                                    }
+
+                                    override fun onFinish() {
+                                        // 倒计时结束
+                                        binding.tvCountDown.text = "倒计时结束"
+                                    }
+                                }
+
+                                // 启动倒计时
+                                countDownTimer.start()
                             }
 
                             "6" -> {
@@ -410,4 +490,59 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             }
         }
     }
+
+
+
+    private fun shouldDisplayCountdownToStart(countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean): Boolean {
+        // 判断是显示距开始还是距结束
+        val currentTime = getCurrentTime()
+        val isValidStartTime = isValidDateTime(countDownBean.startTime)
+        val isValidEndTime = isValidDateTime(countDownBean.endTime)
+
+        if (!isValidStartTime || !isValidEndTime) {
+            return false // 默认按不显示倒计时区域处理
+        }
+
+        return currentTime < countDownBean.startTime
+    }
+
+    private fun getCurrentTime(): String {
+        val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
+        return dateFormat.format(Date())
+    }
+
+    private fun isValidDateTime(dateTime: String): Boolean {
+        val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
+        dateFormat.isLenient = false
+        return try {
+            dateFormat.parse(dateTime)
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private fun getRemainingTimeInMillis(countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean, isCountingDownToStart: Boolean): Long {
+        val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
+        val currentTime = getCurrentTime()
+        val targetTime = if (isCountingDownToStart) countDownBean.startTime else countDownBean.endTime
+        return abs(dateFormat.parse(targetTime).time - dateFormat.parse(currentTime).time)
+    }
+
+    private fun formatCountdownText(remainingTimeInMillis: Long, isCountingDownToStart: Boolean): String {
+        val days = remainingTimeInMillis / (24 * 60 * 60 * 1000)
+        val hours = (remainingTimeInMillis % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
+        val minutes = (remainingTimeInMillis % (60 * 60 * 1000)) / (60 * 1000)
+        val seconds = (remainingTimeInMillis % (60 * 1000)) / 1000
+
+        val daysText = if (days > 0) "$days 天" else ""
+        val timeText = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+
+        return if (isCountingDownToStart) {
+            "$daysText$timeText"
+        } else {
+            "$daysText$timeText"
+        }
+    }
+
 }

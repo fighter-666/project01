@@ -974,6 +974,34 @@
                     "numText": null,
                     "picList": null,
                     "completionInfo": null
+                },
+                {
+                    "type": "4",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": {
+                        "icon" : "",
+                        "title" : "河北省 石家庄市"
+                    },
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "5",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": {
+                        "startTime" : "20230903120000",
+                        "endTime" : "20230904120000"
+                    },
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
                 }
             ],
             "adLists": null,
@@ -1028,7 +1056,22 @@
                     "numText": null,
                     "picList": null,
                     "completionInfo": null
+                },
+                {
+                    "type": "5",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": {
+                        "startTime" : "20230906120000",
+                        "endTime" : "20230907120000"
+                    },
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
                 }
+
             ],
             "adLists": null,
             "quickRecharge": null

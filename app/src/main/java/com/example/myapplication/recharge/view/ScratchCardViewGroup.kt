@@ -106,7 +106,8 @@ class ScratchCardViewGroup : ConstraintLayout {
         val customView = ScratchCardView(getContext())
         container.addView(customView)
 
-        val typedArray = context.obtainStyledAttributes(customAttrs, R.styleable.ScratchCardViewGroup)
+        val typedArray =
+            context.obtainStyledAttributes(customAttrs, R.styleable.ScratchCardViewGroup)
         val drawable = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc)
         val drawable2 = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc2)
         typedArray.recycle()
@@ -123,10 +124,10 @@ class ScratchCardViewGroup : ConstraintLayout {
         LogUtils.d(
             "currentCloseValue" + imageView
         )
-       /* if (currentCloseValue) {
-            imageView.visibility = View.GONE
-            imageView2.visibility = View.GONE
-        }*/
+        /* if (currentCloseValue) {
+             imageView.visibility = View.GONE
+             imageView2.visibility = View.GONE
+         }*/
 
         imageView.setOnClickListener {
             imageView.visibility = View.GONE
