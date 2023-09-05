@@ -1,10 +1,12 @@
 package com.example.myapplication.recharge.adapter
 
+import android.graphics.Color
 import android.os.CountDownTimer
 import android.text.SpannableString
 import android.text.Spanned
+import android.text.TextUtils
+import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
-import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import com.bumptech.glide.Glide
@@ -27,6 +29,7 @@ import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
@@ -67,37 +70,72 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE -> {
                 // 处理多图布局
                 val binding = WidgetMultipleItemManyImageBinding.bind(holder.itemView)
-                //在协程中加载网络图片或在后台线程中加载大量图片。
-                // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
-                CoroutineScope(Dispatchers.Main).launch {
-                    // 设置圆角半径
-                    val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                    Glide.with(context)
-                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(requestOptions)
-                        .into(binding.ivPicAreaImageUrl)
-                    Glide.with(context)
-                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(requestOptions)
-                        .into(binding.ivPicAreaImageUrl2)
-                    Glide.with(context)
-                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(requestOptions)
-                        .into(binding.ivPicAreaImageUrl3)
-                    Glide.with(context)
-                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(requestOptions)
-                        .into(binding.ivPicAreaImageUrl4)
+                if (item.picArea.picList.size >= 4){
+                    //在协程中加载网络图片或在后台线程中加载大量图片。
+                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                    CoroutineScope(Dispatchers.Main).launch {
+                        // 设置圆角半径
+                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl)
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl2)
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl3)
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl4)
+                        binding.tvMainTitleTitle.text = item.picArea.title
+                        binding.tvMainTitleTitle.visibility = View.VISIBLE
+                        binding.ivPicAreaImageUrl.visibility = View.VISIBLE
+                        binding.ivPicAreaImageUrl2.visibility = View.VISIBLE
+                        binding.ivPicAreaImageUrl3.visibility = View.VISIBLE
+                        binding.ivPicAreaImageUrl4.visibility = View.VISIBLE
+                    }
+                } else if (item.picArea.picList.size < 4 &&item.picArea.picList.size >= 2) {
+                    //在协程中加载网络图片或在后台线程中加载大量图片。
+                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                    CoroutineScope(Dispatchers.Main).launch {
+                        // 设置圆角半径
+                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl)
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl2)
+                        binding.tvMainTitleTitle.text = item.picArea.title
+                        binding.tvMainTitleTitle.visibility = View.VISIBLE
+                        binding.ivPicAreaImageUrl.visibility = View.VISIBLE
+                        binding.ivPicAreaImageUrl2.visibility = View.VISIBLE
+                    }
+                } else {
                     binding.tvMainTitleTitle.text = item.picArea.title
+                    binding.tvMainTitleTitle.visibility = View.VISIBLE
+
                 }
+
 
             }
 
@@ -146,30 +184,100 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                 //mainTitle : 主标题
                                 if (tab.mainTitle != null) {
                                     if (tab.mainTitle.title != "") {
+                                        if(tab.mainTitle.type == "1"){
+                                            binding.tvMainTitleTitle.maxLines = 1
+                                            binding.tvMainTitleTitle.ellipsize = TextUtils.TruncateAt.END
+                                        }
                                         binding.tvMainTitleTitle.text = tab.mainTitle.title
                                         binding.tvMainTitleTitle.visibility = View.VISIBLE
                                     }
                                 }
+
                             }
 
                             //2：随销条、
                             "2" -> {
                                 //saleTipList : 随销条
                                 if (tab.saleTipList != null) {
-                                    binding.tvSaleTipList.text = tab.saleTipList[0].title
-                                    binding.tvSaleTipListSecond.text = tab.saleTipList[1].title
-                                    binding.horizontalScrollView.visibility = View.VISIBLE
-                                    binding.tvSaleTipList.visibility = View.VISIBLE
-                                    binding.tvSaleTipListSecond.visibility = View.VISIBLE
-                                    //判断列表中的元素数量
-                                    if (tab.saleTipList.size > 2) {
-                                        binding.tvSaleTipListThird.text =
-                                            tab.saleTipList[2].title
-                                        binding.tvSaleTipListThird.visibility = View.VISIBLE
+                                    val filteredList: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean> = mutableListOf<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean>()
+                                    for (saleTipList in tab.saleTipList){
+                                        if (saleTipList.type == "1") {
+                                            filteredList.add(saleTipList)
+                                        }
+
+
+                                        when(filteredList.size){
+
+                                            /*1 -> {
+                                                binding.tvSaleTipList.text = filteredList[0].title
+                                                binding.tvSaleTipList.visibility = View.VISIBLE
+                                            }*/
+                                            /*2 -> {
+                                                binding.tvSaleTipList.text = filteredList[0].title
+                                                binding.tvSaleTipList.visibility = View.VISIBLE
+                                                binding.tvSaleTipListSecond.text = filteredList[1].title
+                                                binding.tvSaleTipListSecond.visibility = View.VISIBLE
+                                            }
+                                            3 -> {
+                                                binding.tvSaleTipList.text = filteredList[0].title
+                                                binding.tvSaleTipList.visibility = View.VISIBLE
+                                                binding.tvSaleTipListSecond.text = filteredList[1].title
+                                                binding.tvSaleTipListSecond.visibility = View.VISIBLE
+                                                binding.tvSaleTipListThird.text = filteredList[2].title
+                                                binding.tvSaleTipListThird.visibility = View.VISIBLE
+                                            }*/
+                                        }
+                                        if (saleTipList.type == "2") {
+                                            //在协程中加载网络图片或在后台线程中加载大量图片。
+                                            // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                                            CoroutineScope(Dispatchers.Main).launch {
+                                                // 设置圆角半径
+                                                val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                                Glide.with(context)
+                                                    .load(saleTipList.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                                    .transition(DrawableTransitionOptions.withCrossFade())
+                                                    .apply(requestOptions)
+                                                    .into(binding.tvSaleTipListImageUrl)
+                                            }
+                                            binding.tvSaleTipListImageUrl.visibility = View.VISIBLE
+
+
+                                        } else {
+                                            //判断列表中的元素数量
+
+                                        }
                                     }
 
-                                }
+                                     when(tab.saleTipList.size){
+                                                1 -> {
+                                                    binding.tvSaleTipList.text = tab.saleTipList[0].title
+                                                    binding.tvSaleTipList.visibility = View.VISIBLE
+                                                }
+                                                2 -> {
+                                                    binding.tvSaleTipList.text = tab.saleTipList[0].title
+                                                    binding.tvSaleTipList.visibility = View.VISIBLE
+                                                    if (binding.tvSaleTipList.text == ""){
+                                                        binding.tvSaleTipList.visibility = View.GONE
+                                                    }
+                                                    binding.tvSaleTipListSecond.text = tab.saleTipList[1].title
+                                                    binding.tvSaleTipListSecond.visibility = View.VISIBLE
+                                                }
+                                                3 -> {
+                                                    binding.tvSaleTipList.text = tab.saleTipList[0].title
+                                                    binding.tvSaleTipList.visibility = View.VISIBLE
+                                                    binding.tvSaleTipListSecond.text = tab.saleTipList[1].title
+                                                    binding.tvSaleTipListSecond.visibility = View.VISIBLE
+                                                    binding.tvSaleTipListThird.text = tab.saleTipList[2].title
+                                                    binding.tvSaleTipListThird.visibility = View.VISIBLE
+                                                }
+                                            }
 
+                                    binding.horizontalScrollView.visibility = View.VISIBLE
+
+
+
+                                }
                             }
 
                             //3：价格
@@ -182,18 +290,28 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                     binding.tvPriceInteger.visibility = View.VISIBLE
                                     binding.tvPriceDecimal.visibility = View.VISIBLE
                                     binding.tvOriginalPrice.visibility = View.VISIBLE
-                                    binding.tvDollar.visibility = View.VISIBLE
+                                    // "售价是否显示人民币符号：0：否1：是",
+                                    if (tab.price.isShowPriceUnit == "1"){
+                                        binding.tvIsShowPriceUnit.visibility = View.VISIBLE
+                                    }
 
-                                    //为文字设置删除线
-                                    val spannableString4 = SpannableString(tab.price.originalPrice)
-                                    val strikethroughSpan = StrikethroughSpan()
-                                    spannableString4.setSpan(
-                                        strikethroughSpan,
-                                        0,
-                                        spannableString4.length,
-                                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                    )
-                                    binding.tvOriginalPrice.setText(spannableString4)
+
+                                    //"isOriginalPriceLine": "原价是否划横线：0：否1：是"
+                                    if (tab.price.isOriginalPriceLine == "1"){
+                                        //为文字设置删除线
+                                        val spannableString4 = SpannableString(tab.price.originalPrice)
+                                        val strikethroughSpan = StrikethroughSpan()
+                                        spannableString4.setSpan(
+                                            strikethroughSpan,
+                                            0,
+                                            spannableString4.length,
+                                            Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                        )
+                                        binding.tvOriginalPrice.setText(spannableString4)
+                                    }else {
+                                        binding.tvOriginalPrice.text = tab.price.originalPrice
+                                    }
+
                                 }
                             }
 
@@ -243,10 +361,56 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                         var countdownText = formatCountdownText(millisUntilFinished, isCountingDownToStart)
                                         if (isCountingDownToStart) {
                                             countdownText = "距开始  $countdownText"
+                                            binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down_start)
+                                            binding.tvCountDownBackground.setBackgroundResource(R.drawable.shape_recharge_count_down_background_start)
+                                            val colorSpan = ForegroundColorSpan(Color.parseColor("#f5a937"))
+                                            val spannableString = SpannableString(countdownText)
+                                            spannableString.setSpan(
+                                                colorSpan,
+                                                3,
+                                                spannableString.length,
+                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                            )
+                                            val colorSpan2 = ForegroundColorSpan(Color.parseColor("#ffffff"))
+                                            spannableString.setSpan(
+                                                colorSpan2,
+                                                0,
+                                                3,
+                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                            )
+                                            //设置文字的前景色为白色色
+                                            val colorSpan3 = ForegroundColorSpan(Color.parseColor("#ffffff"))
+                                            spannableString.setSpan(
+                                                colorSpan3,
+                                                0,
+                                                3,
+                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                            )
+                                            binding.tvCountDown.setText(spannableString)
                                         } else {
                                             countdownText = "距结束  $countdownText"
+                                            binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down)
+                                            //设置文字的前景色为白色色
+                                            val spannableString = SpannableString(countdownText)
+                                            val colorSpan = ForegroundColorSpan(Color.parseColor("#ffffff"))
+                                            spannableString.setSpan(
+                                                colorSpan,
+                                                0,
+                                                3,
+                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                            )
+                                            binding.tvCountDown.setText(spannableString)
                                         }
-                                        binding.tvCountDown.text = countdownText
+
+
+                                       /* val colorSpan1 = BackgroundColorSpan(Color.parseColor("#ff656d"))
+                                        spannableString.setSpan(
+                                            colorSpan1,
+                                            0,
+                                            3,
+                                            Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                        )*/
+                                        //binding.tvCountDown.setText(spannableString)
                                     }
 
                                     override fun onFinish() {
@@ -261,7 +425,10 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
                             //6：人数
                             "6" -> {
-
+                                if (tab.numText != null) {
+                                    binding.tvNumText.text = tab.numText
+                                    binding.tvNumText.visibility = View.VISIBLE
+                                }
                             }
 
                             //7：配图：一行一个
@@ -376,6 +543,39 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
                             //9：末尾卡片按钮列表
                             "9" -> {
+                                binding.tvNullTitleFirst.text =
+                                    tab.completionInfo.title
+                                binding.tvNullTitleFirst.visibility =
+                                    View.VISIBLE
+
+                               /* var count = 0
+                                for (list in item.contentAreaList){
+                                    if (list.type == "9"){
+                                        count += 1
+                                    }
+                                }*/
+                                /*if (count > 1) {
+                                    binding.tvMainNullTitle.text =
+                                        item.contentAreaList[0].completionInfo.title
+                                    binding.tvMainNullTitle.visibility =
+                                        View.VISIBLE
+
+                                    binding.tvNullTitleSecond.text =
+                                        item.contentAreaList[2].completionInfo.title
+                                    binding.tvNullTitleThird.text =
+                                        item.contentAreaList[3].completionInfo.title
+                                    binding.tvNullTitleFour.text =
+                                        item.contentAreaList[3].completionInfo.title
+
+
+                                    binding.tvNullTitleSecond.visibility =
+                                        View.VISIBLE
+                                    binding.tvNullTitleThird.visibility =
+                                        View.VISIBLE
+                                    binding.tvNullTitleFour.visibility =
+                                        View.VISIBLE
+                                }*/
+
 
                             }
 
