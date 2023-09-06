@@ -595,6 +595,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/view"
                 app:layout_constraintTop_toBottomOf="@id/rechargeScratchCard"
                 >
                 <com.google.android.material.tabs.TabLayout
@@ -608,11 +609,12 @@
                     app:tabIndicatorFullWidth="false"
                     app:tabIndicator="@drawable/shape_tab_indicator"
                     app:tabIndicatorColor="#1990ff"
-                    app:tabMaxWidth="200dp"
                     app:tabMinWidth="50dp"
                     app:tabMode="scrollable"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/viewPager2"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     />
 
                 <androidx.viewpager2.widget.ViewPager2
@@ -638,6 +640,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llWaterfall" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

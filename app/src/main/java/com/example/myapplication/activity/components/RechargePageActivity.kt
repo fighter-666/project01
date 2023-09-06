@@ -1,11 +1,14 @@
 package com.example.myapplication.activity.components
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -27,6 +30,7 @@ import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrrollTextViewBackground
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
@@ -81,13 +85,58 @@ class RechargePageActivity : AppCompatActivity() {
             // 设置tab的自定义视图
             tab.customView = tabView
 
-            //redFlag : 是否显示红点：0否 1是 string
+            binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    // 选中状态发生变化时的处理逻辑
+                    val selectedPosition = tab.position // 获取选中的位置
+                    // 进行相应的处理，例如更新UI、加载内容等
+                    updateTabFont(tab, true); // 设置选中标签字体加粗
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    // 当前选中的标签取消选中时的处理逻辑
+                    updateTabFont(tab, false); // 取消选中标签字体加粗
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab) {
+                    // 当前选中的标签再次被选中时的处理逻辑
+                }
+
+                // 辅助方法：更新标签字体样式
+                private   fun updateTabFont(tab: TabLayout.Tab, isSelected: Boolean) {
+                    val customView: View? = tab.customView
+                    if (customView != null) {
+                        val tabName: TextView = customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
+                        if (isSelected) {
+                            tabName.setTypeface(null, Typeface.BOLD) // 设置字体加粗
+                        } else {
+                            tabName.setTypeface(null, Typeface.NORMAL) // 取消字体加粗
+                        }
+                    }
+                }
+            })
+
+
+            // 添加红点
             if (tabItem.redFlag == "1") {
-                redFlag.visibility = View.VISIBLE // 显示红点
-            } else {
-                redFlag.visibility = View.GONE // 隐藏红点
+                val badgeDrawable = tab.orCreateBadge
+                badgeDrawable.backgroundColor = ContextCompat.getColor(this, R.color.red)
+                badgeDrawable.isVisible = true
+                badgeDrawable.number = 0 // 设置红点上的数字，0 表示只显示红点，不显示数字
             }
 
+            //redFlag : 是否显示红点：0否 1是 string
+            if (tabItem.redFlag == "1") {
+                //通过 tabList.tabList.indexOf(tabItem) 获取 tabItem 在 tabList.tabList 中的索引
+                redFlag.visibility = View.VISIBLE
+
+            }
+            /*  binding.tabLayout.getTabAt(2)?.let {
+                 it.orCreateBadge.apply {
+                     backgroundColor = ContextCompat.getColor(application, R.color.red)
+                 }
+             }
+ */
             //tabType : tab栏显示类型：1：显示标题 2：显示图标 string
             if (tabItem.tabType == "1") {
                 tabIcon.visibility = View.GONE

@@ -49,6 +49,7 @@
         android:layout_height="7dp"
         android:layout_marginLeft="-2dp"
         android:layout_marginBottom="-5dp"
+        android:visibility="gone"
         android:src="@drawable/recharge_tab_red_dot"
         app:layout_constraintBottom_toTopOf="@id/tabName"
         app:layout_constraintLeft_toRightOf="@id/tabName" />

@@ -10,7 +10,7 @@
             "link": "",
             "linkType": "",
             "type": "1",
-            "isDefault": "0",
+            "isDefault": "1",
             "subTitle": "大家在看"
         },
         {
@@ -36,7 +36,7 @@
             "link": "",
             "linkType": "",
             "type": "1",
-            "isDefault": "1",
+            "isDefault": "0",
             "subTitle": "3C数码"
         },
         {
