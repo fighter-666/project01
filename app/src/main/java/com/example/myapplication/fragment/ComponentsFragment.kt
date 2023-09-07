@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.activity.components.VariousTextviewActivity
 import com.example.myapplication.activity.components.CustomActivity
+import com.example.myapplication.activity.components.PhnoeActivity
 import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.activity.components.bilibili.activity.DataBindingActivity
 import com.example.myapplication.activity.components.bilibili.activity.LiveDataActivity
@@ -76,7 +77,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "DataBindingActivity"),
             Pair(R.mipmap.icon_grid_view_helper, "ScoreActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "SharedPreferencesActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "13"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "PhnoeActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "14"),
             Pair(R.mipmap.icon_grid_tip_dialog, "15"),
             Pair(R.mipmap.icon_grid_tip_dialog, "16"),
@@ -180,8 +181,8 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                "13" -> {
-                    val intent = Intent(context, DataBindingActivity::class.java)
+                "PhnoeActivity" -> {
+                    val intent = Intent(context, PhnoeActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

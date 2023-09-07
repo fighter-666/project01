@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+        <TextView
+            android:id="@+id/et_phone"
+            android:text="19996801970"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/btn_select"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/beans"
+        />
+
+</LinearLayout>

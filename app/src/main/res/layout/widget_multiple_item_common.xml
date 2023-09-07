@@ -57,6 +57,16 @@
         app:layout_constraintBottom_toTopOf="@id/tvStockout"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvContentAreaListPicList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tvNumText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ivContentAreaListPicListDoubleIssueFee"
+        />
+
     <ImageView
         android:id="@+id/ivContentAreaListPicListFirst"
         android:layout_width="match_parent"
@@ -445,6 +455,8 @@
             android:id="@+id/tvLocationTitle"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="河北省 石家庄市"
             android:textColor="#ea5858"
             android:textSize="11sp"
@@ -493,6 +505,8 @@
         android:layout_width="wrap_content"
         android:layout_height="17dp"
         android:text="75.3万人观看"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="#999999"
         android:textSize="12sp"
         android:visibility="gone"

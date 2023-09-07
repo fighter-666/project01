@@ -1219,8 +1219,8 @@
                     "price": null,
                     "location": null,
                     "countDown": {
-                        "startTime" : "20230906120000",
-                        "endTime" : "20230907120000"
+                        "startTime" : "20230909120000",
+                        "endTime" : "20230910120000"
                     },
                     "numText": null,
                     "picList": null,
@@ -1460,7 +1460,7 @@
                         "provinceCode": "string",
                         "recommender": "string",
                         "sceneId": "string",
-                        "title": "附近客户经理"
+                        "title": "签到得金豆"
                     }
                 }
             ],

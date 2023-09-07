@@ -3,6 +3,7 @@ package com.example.myapplication.activity.components
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -39,6 +40,7 @@ import com.gyf.immersionbar.ImmersionBar
 class RechargePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
+    var originalHeight = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRechargePageBinding.inflate(layoutInflater)
@@ -85,6 +87,7 @@ class RechargePageActivity : AppCompatActivity() {
             // 设置tab的自定义视图
             tab.customView = tabView
 
+            //对选中状态的监听
             binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     // 选中状态发生变化时的处理逻辑
@@ -107,10 +110,15 @@ class RechargePageActivity : AppCompatActivity() {
                     val customView: View? = tab.customView
                     if (customView != null) {
                         val tabName: TextView = customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
+                        var tabIcon: ImageView = customView.findViewById(R.id.tabIcon) as ImageView // 自定义布局中的 TextView
+
                         if (isSelected) {
                             tabName.setTypeface(null, Typeface.BOLD) // 设置字体加粗
+                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f); // 设置字体大小，20sp
+                            val layoutParams = tabIcon.layoutParams
                         } else {
                             tabName.setTypeface(null, Typeface.NORMAL) // 取消字体加粗
+                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f); //  取消字体加粗
                         }
                     }
                 }

@@ -1,14 +1,20 @@
 package com.example.myapplication.recharge.adapter
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.CountDownTimer
+import android.provider.ContactsContract
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
 import android.view.View
+import androidx.activity.ComponentActivity
 import androidx.core.view.isGone
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -16,6 +22,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
+import com.example.myapplication.activity.components.PhnoeActivity
+import com.example.myapplication.adapter.HelperAdapter
 import com.example.myapplication.databinding.WidgetMultipleItemAdvertiseBinding
 import com.example.myapplication.databinding.WidgetMultipleItemCommonBinding
 import com.example.myapplication.databinding.WidgetMultipleItemManyImageBinding
@@ -364,6 +372,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                             binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down_start)
                                             binding.tvCountDownBackground.setBackgroundResource(R.drawable.shape_recharge_count_down_background_start)
                                             val colorSpan = ForegroundColorSpan(Color.parseColor("#f5a937"))
+                                            //设置文字的时间颜色为橘黄色
                                             val spannableString = SpannableString(countdownText)
                                             spannableString.setSpan(
                                                 colorSpan,
@@ -371,17 +380,10 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                                 spannableString.length,
                                                 Spanned.SPAN_INCLUSIVE_EXCLUSIVE
                                             )
+                                            //设置文字的前景色为白色色
                                             val colorSpan2 = ForegroundColorSpan(Color.parseColor("#ffffff"))
                                             spannableString.setSpan(
                                                 colorSpan2,
-                                                0,
-                                                3,
-                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                            )
-                                            //设置文字的前景色为白色色
-                                            val colorSpan3 = ForegroundColorSpan(Color.parseColor("#ffffff"))
-                                            spannableString.setSpan(
-                                                colorSpan3,
                                                 0,
                                                 3,
                                                 Spanned.SPAN_INCLUSIVE_EXCLUSIVE
@@ -390,7 +392,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                         } else {
                                             countdownText = "距结束  $countdownText"
                                             binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down)
-                                            //设置文字的前景色为白色色
+                                            //设置文字的前景色为白色
                                             val spannableString = SpannableString(countdownText)
                                             val colorSpan = ForegroundColorSpan(Color.parseColor("#ffffff"))
                                             spannableString.setSpan(
@@ -400,22 +402,14 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                                 Spanned.SPAN_INCLUSIVE_EXCLUSIVE
                                             )
                                             binding.tvCountDown.setText(spannableString)
+                                            binding.tvCountDown.setText(spannableString)
                                         }
-
-
-                                       /* val colorSpan1 = BackgroundColorSpan(Color.parseColor("#ff656d"))
-                                        spannableString.setSpan(
-                                            colorSpan1,
-                                            0,
-                                            3,
-                                            Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                        )*/
-                                        //binding.tvCountDown.setText(spannableString)
                                     }
 
                                     override fun onFinish() {
                                         // 倒计时结束
-                                        binding.tvCountDown.text = "倒计时结束"
+                                        binding.tvCountDown.visibility = View.GONE
+                                        binding.tvCountDownBackground.visibility = View.GONE
                                     }
                                 }
 
@@ -426,6 +420,9 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             //6：人数
                             "6" -> {
                                 if (tab.numText != null) {
+                                    /*val priceInTenThousand = tab.numText.toFloat() / 10000.0f
+                                    String.format("%.1f", priceInTenThousand) + " 万"
+                                    binding.tvNumText.text = priceInTenThousand.toString()*/
                                     binding.tvNumText.text = tab.numText
                                     binding.tvNumText.visibility = View.VISIBLE
                                 }
@@ -435,6 +432,15 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             "7" -> {
                                 //7：配图：一行一个
                                 binding.tvStockout.isGone = true
+
+                                /*//创建适配器
+                                val myAdapter = ContentAreaListPicListAdapter(R.layout.adapter_content_area_list_pic_list, item.contentAreaList)
+
+                                //设置布局管理器和给recyclerView 设置设配器
+                                binding.rvContentAreaListPicList.apply {
+                                    layoutManager = LinearLayoutManager(context)
+                                    adapter = myAdapter
+                                }*/
                                 if (tab.picList != null) {
                                     binding.ivContentAreaListPicListFirst.visibility = View.VISIBLE
                                     CoroutineScope(Dispatchers.Main).launch {
@@ -484,7 +490,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                             .apply(requestOptions)
                                             .into(binding.ivContentAreaListPicListFourth)
                                     }
-                                    /*if (item.contentAreaList.size > 4) {
+                                   /* if (item.contentAreaList.size > 4) {
                                         binding.ivContentAreaListPicListFifth.visibility = View.VISIBLE
                                         CoroutineScope(Dispatchers.Main).launch {
                                             // 设置圆角半径
@@ -662,6 +668,12 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
                 // 处理充值布局
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
+                binding.btnSelect.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                    (context as Activity).startActivityForResult(intent, 1)
+                }
+
+
                 binding.tvTitle.text = item.title
                 //10元
                 binding.tvMainTitleTenDollar.text = item.quickRecharge.denominations[0].mainTitle
@@ -699,13 +711,16 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
         return currentTime < countDownBean.startTime
     }
 
+    //获取当前时间并以指定的格式返回时间字符串。
     private fun getCurrentTime(): String {
         val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
         return dateFormat.format(Date())
     }
 
+    //检查给定的日期时间字符串是否是有效的
     private fun isValidDateTime(dateTime: String): Boolean {
         val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
+        //将isLenient属性设置为false，表示日期时间解析过程中严格按照指定的格式进行匹配
         dateFormat.isLenient = false
         return try {
             dateFormat.parse(dateTime)
@@ -727,20 +742,27 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
         return abs(dateFormat.parse(targetTime).time - dateFormat.parse(currentTime).time)
     }
 
+    //格式化倒计时文本，将给定的剩余时间（以毫秒为单位）转换为可读的倒计时字符串
     private fun formatCountdownText(remainingTimeInMillis: Long, isCountingDownToStart: Boolean): String {
+        //取整
         val days = remainingTimeInMillis / (24 * 60 * 60 * 1000)
+        //取余完，再取整
         val hours = (remainingTimeInMillis % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
         val minutes = (remainingTimeInMillis % (60 * 60 * 1000)) / (60 * 1000)
         val seconds = (remainingTimeInMillis % (60 * 1000)) / 1000
 
+        //计算得到的天数，判断是否大于0
         val daysText = if (days > 0) "$days 天" else ""
+        //使用String.format方法将小时、分钟和秒格式化为两位数的字符串，例如"01:05:30"
         val timeText = String.format("%02d:%02d:%02d", hours, minutes, seconds)
 
+        //根据isCountingDownToStart参数的值，决定最终返回的倒计时文本
         return if (isCountingDownToStart) {
             "$daysText$timeText"
         } else {
             "$daysText$timeText"
         }
     }
+
 
 }
