@@ -1,6 +1,10 @@
 package com.example.myapplication.recharge.fragment
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +19,13 @@ import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.property.Cards
 import com.google.gson.Gson
+import java.lang.Boolean
 
 
 class RechargeWaterfallFragment : Fragment() {
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
+    private lateinit var myAdapter: RechargeWaterfallMultipleItemQuickAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,58 +38,6 @@ class RechargeWaterfallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val piggies4 = mutableListOf<Cards>()
-        piggies4.add(
-            Cards(
-                0, 0, R.drawable.falls1, "电信关爱版-为老年人架桥", "0", "0", "0", "0", "0", 0, 0
-            )
-        )
-        piggies4.add(
-            Cards(
-                R.drawable.shape_rectangle18,
-                R.drawable.shape_rectangle18,
-                R.drawable.falls8,
-                "加装【副卡】，一份套餐全家用 ",
-                "赠新人礼包",
-                "赠美团神券",
-                "￥",
-                "10",
-                "/月",
-                0,
-                0
-            )
-        )
-        piggies4.add(
-            Cards(
-                R.drawable.shape_rectangle18,
-                R.drawable.shape_rectangle18,
-                R.drawable.fall,
-                "iPhone12 128GB 红色 双卡双待",
-                "免运费",
-                "送配件",
-                "0",
-                "0",
-                "0",
-                0,
-                0
-            )
-        )
-        piggies4.add(
-            Cards(
-                R.drawable.shape_rectangle18,
-                0,
-                R.drawable.falls4,
-                "15GB定向流量+腾讯视频月会员卡",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                0,
-                0
-            )
-        )
-
         val json: String = requireContext().assets.open("waterfalldata.json").bufferedReader().use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
@@ -93,19 +47,68 @@ class RechargeWaterfallFragment : Fragment() {
             Log.d(tag,"标签名称: ${feed.type}")
         }
 
-        val myAdapter = RechargeWaterfallMultipleItemQuickAdapter( feedList.feedList)
+        myAdapter = RechargeWaterfallMultipleItemQuickAdapter( feedList.feedList)
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
+    }
 
-
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { contactUri ->
+                val contactNumber = getContactNumberByUri(contactUri)
+                myAdapter.onContactClickListener?.onContactClick(contactNumber)
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getContactNumberByUri(contactUri: Uri): String? {
+        val contactData = contactUri
+        var phoneNumber: String? = null
+        val cursor = requireActivity().contentResolver.query(contactData, null, null, null, null)
+        cursor?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val nameIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
+                val hasPhoneIndex = cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)
+                val idIndex = cursor.getColumnIndex(ContactsContract.Contacts._ID)
+
+                val name = cursor.getString(nameIndex)
+                var hasPhone = cursor.getString(hasPhoneIndex)
+                val id = cursor.getString(idIndex)
+
+                hasPhone = if (hasPhone.equals("1", ignoreCase = true)) {
+                    "true"
+                } else {
+                    "false"
+                }
+
+                if (hasPhone.toBoolean()) {
+                    val phonesCursor = requireActivity().contentResolver.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
+                        null,
+                        null
+                    )
+
+                    phonesCursor?.use { phonesCursor ->
+                        if (phonesCursor.moveToFirst()) {
+                            val phoneNumberIndex = phonesCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                            phoneNumber = phonesCursor.getString(phoneNumberIndex)
+                        }
+                    }
+                }
+            }
+        }
+
+        return phoneNumber
     }
 }
 

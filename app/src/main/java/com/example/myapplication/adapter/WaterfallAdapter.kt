@@ -4,7 +4,7 @@ import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.AdapterWaterfallBinding
-import com.example.myapplication.property.Card
+import com.example.myapplication.recharge.view.property.Card
 import com.example.myapplication.util.DensityUtils
 
 class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :

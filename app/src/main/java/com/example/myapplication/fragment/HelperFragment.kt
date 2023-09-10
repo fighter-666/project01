@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.property.Piggy
+import com.example.myapplication.recharge.view.property.Piggy
 import com.example.myapplication.R
 import com.example.myapplication.adapter.HelperAdapter
 import com.example.myapplication.activity.components.WebViewActivity

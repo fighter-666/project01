@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.activity.components.BannerActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
 import com.example.myapplication.activity.components.CustomActivity
 import com.example.myapplication.activity.components.PhnoeActivity
@@ -24,7 +25,7 @@ import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
 import com.example.myapplication.feed.activity.FeedStreamHomePageActivity
-import com.example.myapplication.property.Piggy
+import com.example.myapplication.recharge.view.property.Piggy
 import com.gyf.immersionbar.ImmersionBar
 
 
@@ -78,7 +79,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_view_helper, "ScoreActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "SharedPreferencesActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "PhnoeActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "14"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "BannerActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "15"),
             Pair(R.mipmap.icon_grid_tip_dialog, "16"),
             Pair(R.mipmap.icon_grid_tip_dialog, "17"),
@@ -187,8 +188,8 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                "14" -> {
-                    val intent = Intent(context, ScoreActivity::class.java)
+                "BannerActivity" -> {
+                    val intent = Intent(context, BannerActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

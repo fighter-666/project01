@@ -1,4 +1,4 @@
-package com.example.myapplication.property
+package com.example.myapplication.recharge.view.property
 
 class Card(
     val image: Int,

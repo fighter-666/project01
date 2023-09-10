@@ -24,12 +24,16 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.activity.components.PhnoeActivity
 import com.example.myapplication.adapter.HelperAdapter
+import com.example.myapplication.data.DataBean
+import com.example.myapplication.databinding.ActivityBannerBinding
 import com.example.myapplication.databinding.WidgetMultipleItemAdvertiseBinding
 import com.example.myapplication.databinding.WidgetMultipleItemCommonBinding
 import com.example.myapplication.databinding.WidgetMultipleItemManyImageBinding
 import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.widget.ScrrollTextViewCommentListBackground
+import com.youth.banner.adapter.BannerImageAdapter
+import com.youth.banner.holder.BannerImageHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,6 +45,14 @@ import java.util.Locale
 
 class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
+
+    // 点击联系人的回调接口
+    interface OnContactClickListener {
+        fun onContactClick(contactNumber: String?)
+    }
+
+    var onContactClickListener: OnContactClickListener? = null
+
 
     init {
         addItemType(
@@ -71,6 +83,10 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt(),
             R.layout.widget_multiple_item_recharge
         )
+        addItemType(
+            GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt(),
+            R.layout.activity_banner
+        )
     }
 
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean) {
@@ -78,32 +94,32 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE -> {
                 // 处理多图布局
                 val binding = WidgetMultipleItemManyImageBinding.bind(holder.itemView)
-                if (item.picArea.picList.size >= 4){
+                if (item.picArea.picList.size >= 4) {
                     //在协程中加载网络图片或在后台线程中加载大量图片。
                     // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
                     CoroutineScope(Dispatchers.Main).launch {
                         // 设置圆角半径
                         val requestOptions = RequestOptions().transform(RoundedCorners(20))
                         Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            .load(item.picArea.picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .apply(requestOptions)
                             .into(binding.ivPicAreaImageUrl)
                         Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            .load(item.picArea.picList[1].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .apply(requestOptions)
                             .into(binding.ivPicAreaImageUrl2)
                         Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            .load(item.picArea.picList[2].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .apply(requestOptions)
                             .into(binding.ivPicAreaImageUrl3)
                         Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            .load(item.picArea.picList[3].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .apply(requestOptions)
@@ -115,7 +131,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                         binding.ivPicAreaImageUrl3.visibility = View.VISIBLE
                         binding.ivPicAreaImageUrl4.visibility = View.VISIBLE
                     }
-                } else if (item.picArea.picList.size < 4 &&item.picArea.picList.size >= 2) {
+                } else if (item.picArea.picList.size < 4 && item.picArea.picList.size >= 2) {
                     //在协程中加载网络图片或在后台线程中加载大量图片。
                     // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
                     CoroutineScope(Dispatchers.Main).launch {
@@ -141,10 +157,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 } else {
                     binding.tvMainTitleTitle.text = item.picArea.title
                     binding.tvMainTitleTitle.visibility = View.VISIBLE
-
                 }
-
-
             }
 
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE -> {
@@ -192,9 +205,10 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                 //mainTitle : 主标题
                                 if (tab.mainTitle != null) {
                                     if (tab.mainTitle.title != "") {
-                                        if(tab.mainTitle.type == "1"){
+                                        if (tab.mainTitle.type == "1") {
                                             binding.tvMainTitleTitle.maxLines = 1
-                                            binding.tvMainTitleTitle.ellipsize = TextUtils.TruncateAt.END
+                                            binding.tvMainTitleTitle.ellipsize =
+                                                TextUtils.TruncateAt.END
                                         }
                                         binding.tvMainTitleTitle.text = tab.mainTitle.title
                                         binding.tvMainTitleTitle.visibility = View.VISIBLE
@@ -207,14 +221,14 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             "2" -> {
                                 //saleTipList : 随销条
                                 if (tab.saleTipList != null) {
-                                    val filteredList: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean> = mutableListOf<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean>()
-                                    for (saleTipList in tab.saleTipList){
+                                    val filteredList: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean> =
+                                        mutableListOf<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean>()
+                                    for (saleTipList in tab.saleTipList) {
                                         if (saleTipList.type == "1") {
                                             filteredList.add(saleTipList)
                                         }
 
-
-                                        when(filteredList.size){
+                                        when (filteredList.size) {
 
                                             /*1 -> {
                                                 binding.tvSaleTipList.text = filteredList[0].title
@@ -240,7 +254,8 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                             // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
                                             CoroutineScope(Dispatchers.Main).launch {
                                                 // 设置圆角半径
-                                                val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                                val requestOptions =
+                                                    RequestOptions().transform(RoundedCorners(20))
                                                 Glide.with(context)
                                                     .load(saleTipList.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                                                     //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
@@ -257,34 +272,36 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                         }
                                     }
 
-                                     when(tab.saleTipList.size){
-                                                1 -> {
-                                                    binding.tvSaleTipList.text = tab.saleTipList[0].title
-                                                    binding.tvSaleTipList.visibility = View.VISIBLE
-                                                }
-                                                2 -> {
-                                                    binding.tvSaleTipList.text = tab.saleTipList[0].title
-                                                    binding.tvSaleTipList.visibility = View.VISIBLE
-                                                    if (binding.tvSaleTipList.text == ""){
-                                                        binding.tvSaleTipList.visibility = View.GONE
-                                                    }
-                                                    binding.tvSaleTipListSecond.text = tab.saleTipList[1].title
-                                                    binding.tvSaleTipListSecond.visibility = View.VISIBLE
-                                                }
-                                                3 -> {
-                                                    binding.tvSaleTipList.text = tab.saleTipList[0].title
-                                                    binding.tvSaleTipList.visibility = View.VISIBLE
-                                                    binding.tvSaleTipListSecond.text = tab.saleTipList[1].title
-                                                    binding.tvSaleTipListSecond.visibility = View.VISIBLE
-                                                    binding.tvSaleTipListThird.text = tab.saleTipList[2].title
-                                                    binding.tvSaleTipListThird.visibility = View.VISIBLE
-                                                }
+                                    when (tab.saleTipList.size) {
+                                        1 -> {
+                                            binding.tvSaleTipList.text = tab.saleTipList[0].title
+                                            binding.tvSaleTipList.visibility = View.VISIBLE
+                                        }
+
+                                        2 -> {
+                                            binding.tvSaleTipList.text = tab.saleTipList[0].title
+                                            binding.tvSaleTipList.visibility = View.VISIBLE
+                                            if (binding.tvSaleTipList.text == "") {
+                                                binding.tvSaleTipList.visibility = View.GONE
                                             }
+                                            binding.tvSaleTipListSecond.text =
+                                                tab.saleTipList[1].title
+                                            binding.tvSaleTipListSecond.visibility = View.VISIBLE
+                                        }
+
+                                        3 -> {
+                                            binding.tvSaleTipList.text = tab.saleTipList[0].title
+                                            binding.tvSaleTipList.visibility = View.VISIBLE
+                                            binding.tvSaleTipListSecond.text =
+                                                tab.saleTipList[1].title
+                                            binding.tvSaleTipListSecond.visibility = View.VISIBLE
+                                            binding.tvSaleTipListThird.text =
+                                                tab.saleTipList[2].title
+                                            binding.tvSaleTipListThird.visibility = View.VISIBLE
+                                        }
+                                    }
 
                                     binding.horizontalScrollView.visibility = View.VISIBLE
-
-
-
                                 }
                             }
 
@@ -299,15 +316,16 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                     binding.tvPriceDecimal.visibility = View.VISIBLE
                                     binding.tvOriginalPrice.visibility = View.VISIBLE
                                     // "售价是否显示人民币符号：0：否1：是",
-                                    if (tab.price.isShowPriceUnit == "1"){
+                                    if (tab.price.isShowPriceUnit == "1") {
                                         binding.tvIsShowPriceUnit.visibility = View.VISIBLE
                                     }
 
 
                                     //"isOriginalPriceLine": "原价是否划横线：0：否1：是"
-                                    if (tab.price.isOriginalPriceLine == "1"){
+                                    if (tab.price.isOriginalPriceLine == "1") {
                                         //为文字设置删除线
-                                        val spannableString4 = SpannableString(tab.price.originalPrice)
+                                        val spannableString4 =
+                                            SpannableString(tab.price.originalPrice)
                                         val strikethroughSpan = StrikethroughSpan()
                                         spannableString4.setSpan(
                                             strikethroughSpan,
@@ -316,10 +334,9 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                             Spanned.SPAN_INCLUSIVE_EXCLUSIVE
                                         )
                                         binding.tvOriginalPrice.setText(spannableString4)
-                                    }else {
+                                    } else {
                                         binding.tvOriginalPrice.text = tab.price.originalPrice
                                     }
-
                                 }
                             }
 
@@ -327,24 +344,22 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             "4" -> {
                                 //在协程中加载网络图片或在后台线程中加载大量图片。
                                 // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
-                               /* if (tab.location.icon != " ") {
-                                    CoroutineScope(Dispatchers.Main).launch {
-                                        // 设置圆角半径
-                                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                                        Glide.with(context)
-                                            .load(tab.location.icon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                                            .transition(DrawableTransitionOptions.withCrossFade())
-                                            .apply(requestOptions)
-                                            .into(binding.ivLocationIcon)
-                                    }
-                                }*/
+                                /* if (tab.location.icon != " ") {
+                                     CoroutineScope(Dispatchers.Main).launch {
+                                         // 设置圆角半径
+                                         val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                         Glide.with(context)
+                                             .load(tab.location.icon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                             .transition(DrawableTransitionOptions.withCrossFade())
+                                             .apply(requestOptions)
+                                             .into(binding.ivLocationIcon)
+                                     }
+                                 }*/
                                 binding.tvLocationTitle.text = tab.location.title
                                 binding.ivLocationIcon.visibility = View.VISIBLE
                                 binding.tvLocationTitle.visibility = View.VISIBLE
                                 binding.clLocation.visibility = View.VISIBLE
-
-
                             }
 
                             //5：倒计时
@@ -353,65 +368,76 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                 val countDownBean = tab.countDown // 假设从接口获取到倒计时数据结构
 
                                 // 判断是显示距开始还是距结束
-                                val isCountingDownToStart = shouldDisplayCountdownToStart(countDownBean)
+                                val isCountingDownToStart =
+                                    shouldDisplayCountdownToStart(countDownBean)
 
                                 // 计算距离开始或结束的剩余时间
-                                val remainingTimeInMillis = getRemainingTimeInMillis(countDownBean, isCountingDownToStart)
+                                val remainingTimeInMillis =
+                                    getRemainingTimeInMillis(countDownBean, isCountingDownToStart)
 
                                 // 显示倒计时信息
                                 binding.tvCountDownBackground.visibility = View.VISIBLE
                                 binding.tvCountDown.visibility = View.VISIBLE
                                 //创建了一个CountDownTimer对象，并设置了倒计时的逻辑
-                                val countDownTimer = object : CountDownTimer(remainingTimeInMillis, 1000) {
-                                    //实现onTick方法：覆盖CountDownTimer类的onTick方法。在每个时间间隔（这里是1000毫秒）内，该方法会被调用一次
-                                    override fun onTick(millisUntilFinished: Long) {
-                                        //更新倒计时文本
-                                        var countdownText = formatCountdownText(millisUntilFinished, isCountingDownToStart)
-                                        if (isCountingDownToStart) {
-                                            countdownText = "距开始  $countdownText"
-                                            binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down_start)
-                                            binding.tvCountDownBackground.setBackgroundResource(R.drawable.shape_recharge_count_down_background_start)
-                                            val colorSpan = ForegroundColorSpan(Color.parseColor("#f5a937"))
-                                            //设置文字的时间颜色为橘黄色
-                                            val spannableString = SpannableString(countdownText)
-                                            spannableString.setSpan(
-                                                colorSpan,
-                                                3,
-                                                spannableString.length,
-                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                val countDownTimer =
+                                    object : CountDownTimer(remainingTimeInMillis, 1000) {
+                                        //实现onTick方法：覆盖CountDownTimer类的onTick方法。在每个时间间隔（这里是1000毫秒）内，该方法会被调用一次
+                                        override fun onTick(millisUntilFinished: Long) {
+                                            //更新倒计时文本
+                                            var countdownText = formatCountdownText(
+                                                millisUntilFinished,
+                                                isCountingDownToStart
                                             )
-                                            //设置文字的前景色为白色色
-                                            val colorSpan2 = ForegroundColorSpan(Color.parseColor("#ffffff"))
-                                            spannableString.setSpan(
-                                                colorSpan2,
-                                                0,
-                                                3,
-                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                            )
-                                            binding.tvCountDown.setText(spannableString)
-                                        } else {
-                                            countdownText = "距结束  $countdownText"
-                                            binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down)
-                                            //设置文字的前景色为白色
-                                            val spannableString = SpannableString(countdownText)
-                                            val colorSpan = ForegroundColorSpan(Color.parseColor("#ffffff"))
-                                            spannableString.setSpan(
-                                                colorSpan,
-                                                0,
-                                                3,
-                                                Spanned.SPAN_INCLUSIVE_EXCLUSIVE
-                                            )
-                                            binding.tvCountDown.setText(spannableString)
-                                            binding.tvCountDown.setText(spannableString)
+                                            if (isCountingDownToStart) {
+                                                countdownText = "距开始  $countdownText"
+                                                binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down_start)
+                                                binding.tvCountDownBackground.setBackgroundResource(
+                                                    R.drawable.shape_recharge_count_down_background_start
+                                                )
+                                                val colorSpan =
+                                                    ForegroundColorSpan(Color.parseColor("#f5a937"))
+                                                //设置文字的时间颜色为橘黄色
+                                                val spannableString = SpannableString(countdownText)
+                                                spannableString.setSpan(
+                                                    colorSpan,
+                                                    3,
+                                                    spannableString.length,
+                                                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                                )
+                                                //设置文字的前景色为白色色
+                                                val colorSpan2 =
+                                                    ForegroundColorSpan(Color.parseColor("#ffffff"))
+                                                spannableString.setSpan(
+                                                    colorSpan2,
+                                                    0,
+                                                    3,
+                                                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                                )
+                                                binding.tvCountDown.setText(spannableString)
+                                            } else {
+                                                countdownText = "距结束  $countdownText"
+                                                binding.tvCountDown.setBackgroundResource(R.drawable.shape_recharge_count_down)
+                                                //设置文字的前景色为白色
+                                                val spannableString = SpannableString(countdownText)
+                                                val colorSpan =
+                                                    ForegroundColorSpan(Color.parseColor("#ffffff"))
+                                                spannableString.setSpan(
+                                                    colorSpan,
+                                                    0,
+                                                    3,
+                                                    Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+                                                )
+                                                binding.tvCountDown.setText(spannableString)
+                                                binding.tvCountDown.setText(spannableString)
+                                            }
+                                        }
+
+                                        override fun onFinish() {
+                                            // 倒计时结束
+                                            binding.tvCountDown.visibility = View.GONE
+                                            binding.tvCountDownBackground.visibility = View.GONE
                                         }
                                     }
-
-                                    override fun onFinish() {
-                                        // 倒计时结束
-                                        binding.tvCountDown.visibility = View.GONE
-                                        binding.tvCountDownBackground.visibility = View.GONE
-                                    }
-                                }
 
                                 // 启动倒计时
                                 countDownTimer.start()
@@ -490,19 +516,19 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                             .apply(requestOptions)
                                             .into(binding.ivContentAreaListPicListFourth)
                                     }
-                                   /* if (item.contentAreaList.size > 4) {
-                                        binding.ivContentAreaListPicListFifth.visibility = View.VISIBLE
-                                        CoroutineScope(Dispatchers.Main).launch {
-                                            // 设置圆角半径
-                                            val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                                            Glide.with(context)
-                                                .load(item.contentAreaList[4].picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                                                //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                                                .transition(DrawableTransitionOptions.withCrossFade())
-                                                .apply(requestOptions)
-                                                .into(binding.ivContentAreaListPicListFifth)
-                                        }
-                                    }*/
+                                    /* if (item.contentAreaList.size > 4) {
+                                         binding.ivContentAreaListPicListFifth.visibility = View.VISIBLE
+                                         CoroutineScope(Dispatchers.Main).launch {
+                                             // 设置圆角半径
+                                             val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                                             Glide.with(context)
+                                                 .load(item.contentAreaList[4].picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                                                 //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                                                 .transition(DrawableTransitionOptions.withCrossFade())
+                                                 .apply(requestOptions)
+                                                 .into(binding.ivContentAreaListPicListFifth)
+                                         }
+                                     }*/
                                 }
 
                             }
@@ -554,12 +580,12 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                                 binding.tvNullTitleFirst.visibility =
                                     View.VISIBLE
 
-                               /* var count = 0
-                                for (list in item.contentAreaList){
-                                    if (list.type == "9"){
-                                        count += 1
-                                    }
-                                }*/
+                                /* var count = 0
+                                 for (list in item.contentAreaList){
+                                     if (list.type == "9"){
+                                         count += 1
+                                     }
+                                 }*/
                                 /*if (count > 1) {
                                     binding.tvMainNullTitle.text =
                                         item.contentAreaList[0].completionInfo.title
@@ -693,6 +719,19 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 binding.tvSubtitleTwoHundredDollar.text =
                     item.quickRecharge.denominations[3].subtitle
             }
+            GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt() -> {
+                // 处理充值布局
+                val binding = ActivityBannerBinding.bind(holder.itemView)
+                binding.banner.setAdapter(object : BannerImageAdapter<DataBean>(DataBean.testData3) {
+                    override fun onBindView(holder: BannerImageHolder, data: DataBean, position: Int, size: Int) {
+                        Glide.with(holder.imageView)
+                            .load(data.imageUrl)
+                            .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
+                            .into(holder.imageView)
+                    }
+                })
+            }
+
         }
     }
 
@@ -731,19 +770,26 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
     }
 
     //计算剩余时间（以毫秒为单位）
-    private fun getRemainingTimeInMillis(countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean, isCountingDownToStart: Boolean): Long {
+    private fun getRemainingTimeInMillis(
+        countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean,
+        isCountingDownToStart: Boolean,
+    ): Long {
         //创建日期格式对象，使用默认的语言环境
         val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
         //获取当前时间
         val currentTime = getCurrentTime()
         //确定目标时间
-        val targetTime = if (isCountingDownToStart) countDownBean.startTime else countDownBean.endTime
+        val targetTime =
+            if (isCountingDownToStart) countDownBean.startTime else countDownBean.endTime
         //计算剩余时间：使用日期格式化对象将目标时间和当前时间解析为Date对象，并通过调用time方法获取它们的时间戳（以毫秒为单位）
         return abs(dateFormat.parse(targetTime).time - dateFormat.parse(currentTime).time)
     }
 
     //格式化倒计时文本，将给定的剩余时间（以毫秒为单位）转换为可读的倒计时字符串
-    private fun formatCountdownText(remainingTimeInMillis: Long, isCountingDownToStart: Boolean): String {
+    private fun formatCountdownText(
+        remainingTimeInMillis: Long,
+        isCountingDownToStart: Boolean,
+    ): String {
         //取整
         val days = remainingTimeInMillis / (24 * 60 * 60 * 1000)
         //取余完，再取整

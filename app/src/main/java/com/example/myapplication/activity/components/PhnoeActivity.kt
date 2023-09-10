@@ -32,7 +32,7 @@ class PhnoeActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phnoe)
         et_phone = findViewById<TextView>(R.id.et_phone)
-        btn_select = findViewById<ImageView>(R.id.btn_select)
+        btn_select = findViewById(R.id.btn_select)
         btn_select?.setOnClickListener(this)
     }
 

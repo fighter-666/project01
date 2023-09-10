@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.AdapterRechargeTabWaterfallBinding
 import com.example.myapplication.databinding.AdapterRechargeWaterfallBinding
-import com.example.myapplication.property.Card
+import com.example.myapplication.recharge.view.property.Card
 import com.example.myapplication.recharge.property.Cards
 import com.example.myapplication.util.DensityUtils
 

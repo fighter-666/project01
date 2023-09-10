@@ -53,7 +53,9 @@ public class GetFeedListData implements Serializable {
                 case FEED_LIST_ITEM_TYPE.LIVE:
                 case FEED_LIST_ITEM_TYPE.VIDEO:
                 case FEED_LIST_ITEM_TYPE.ADVERTISE:
-                case FEED_LIST_ITEM_TYPE.RECHARGE: {
+                case FEED_LIST_ITEM_TYPE.RECHARGE:
+                case FEED_LIST_ITEM_TYPE.BANNER:
+                {
                     return UtilOther.parseInt(type);
                 }
                 default: {
@@ -345,6 +347,7 @@ public class GetFeedListData implements Serializable {
         public static final String LIVE = "3";
         public static final String ADVERTISE = "4";
         public static final String RECHARGE = "5";
+        public static final String BANNER = "6";
     }
 
 

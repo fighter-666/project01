@@ -4,7 +4,7 @@ import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.AdapterLabBinding
-import com.example.myapplication.property.Piggy
+import com.example.myapplication.recharge.view.property.Piggy
 
 class LabAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) :
     BaseQuickAdapter<Piggy, BaseViewHolder>(layoutResId, data) {
