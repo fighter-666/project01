@@ -73,35 +73,35 @@ class DataBean {
                 val list: MutableList<DataBean> = ArrayList()
                 list.add(
                     DataBean(
-                        "https://img.zcool.cn/community/013de756fb63036ac7257948747896.jpg",
+                        "https://w.189.cn/bigdata/2023/2/13/111676275354612298.png",
                         null,
                         1
                     )
                 )
                 list.add(
                     DataBean(
-                        "https://img.zcool.cn/community/01639a56fb62ff6ac725794891960d.jpg",
+                        "https://w.189.cn/bigdata/2023/2/13/111676275354612298.png",
                         null,
                         1
                     )
                 )
                 list.add(
                     DataBean(
-                        "https://img.zcool.cn/community/01270156fb62fd6ac72579485aa893.jpg",
+                        "https://w.189.cn/bigdata/2023/2/13/111676275354612298.png",
                         null,
                         1
                     )
                 )
                 list.add(
                     DataBean(
-                        "https://img.zcool.cn/community/01233056fb62fe32f875a9447400e1.jpg",
+                        "https://w.189.cn/bigdata/2023/3/17/111679019573649550.jpg",
                         null,
                         1
                     )
                 )
                 list.add(
                     DataBean(
-                        "https://img.zcool.cn/community/016a2256fb63006ac7257948f83349.jpg",
+                        "https://w.189.cn/bigdata/2023/2/13/111676275354612298.png",
                         null,
                         1
                     )

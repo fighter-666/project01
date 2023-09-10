@@ -46,6 +46,15 @@ import java.util.Locale
 class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
 
+    private var onLoadMoreListener: OnLoadMoreListener? = null
+    interface OnLoadMoreListener {
+        fun onLoadMore()
+    }
+
+    fun setOnLoadMoreListener(listener: OnLoadMoreListener) {
+        onLoadMoreListener = listener
+    }
+
     // 点击联系人的回调接口
     interface OnContactClickListener {
         fun onContactClick(contactNumber: String?)
@@ -90,6 +99,9 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
     }
 
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean) {
+        if (holder.layoutPosition == data.size - 1) {
+            onLoadMoreListener?.onLoadMore()
+        }
         when (holder.itemViewType) {
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE -> {
                 // 处理多图布局
@@ -726,10 +738,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     override fun onBindView(holder: BannerImageHolder, data: DataBean, position: Int, size: Int) {
                         Glide.with(holder.imageView)
                             .load(data.imageUrl)
-                            .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
                             .into(holder.imageView)
                     }
                 })
+                binding.banner.setBannerRound2(20f)
+                binding.banner.setLoopTime(5000)
             }
 
         }

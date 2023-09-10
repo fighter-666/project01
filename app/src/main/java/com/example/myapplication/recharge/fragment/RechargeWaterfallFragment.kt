@@ -11,21 +11,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.myapplication.R
-import com.example.myapplication.recharge.adapter.RechargeWaterfallAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.RechargeWaterfallMultipleItemQuickAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
-import com.example.myapplication.recharge.data.GetFeedTabData
-import com.example.myapplication.recharge.property.Cards
 import com.google.gson.Gson
-import java.lang.Boolean
 
 
 class RechargeWaterfallFragment : Fragment() {
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
     private lateinit var myAdapter: RechargeWaterfallMultipleItemQuickAdapter
+    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +49,25 @@ class RechargeWaterfallFragment : Fragment() {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
+        myAdapter.setOnLoadMoreListener(object :
+            RechargeWaterfallMultipleItemQuickAdapter.OnLoadMoreListener {
+            override fun onLoadMore() {
+                // 执行加载更多的逻辑
+
+            }
+        })
+
+
+        /*mSwipeRefreshLayout = binding.srl
+        mSwipeRefreshLayout.setOnRefreshListener { //我在List最前面加入一条数据
+
+
+
+            //数据重新加载完成后，提示数据发生改变，并且设置现在不在刷新
+            //myAdapter.notifyDataSetChanged()
+            mSwipeRefreshLayout.setRefreshing(false)
+        }*/
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

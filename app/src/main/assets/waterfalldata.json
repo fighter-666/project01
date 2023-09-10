@@ -16,6 +16,50 @@
             "quickRecharge": null
         },
         {
+            "type": "5",
+            "externalOfferCode": null,
+            "firstSecondThreeClass": null,
+            "link": "30001",
+            "linkType": "1",
+            "title": "快速充值",
+            "provinceCode": null,
+            "recommender": null,
+            "sceneId": null,
+            "picArea": null,
+            "contentAreaList": null,
+            "adLists": null,
+            "quickRecharge": {
+                "title": "快速充值",
+                "link": "",
+                "linkType": "",
+                "withOutLoginRechargeFlag": "1",
+                "denominations": [
+                    {
+                        "mainTitle": "10元",
+                        "subtitle": "售9.95元",
+                        "price": "10"
+                    },
+                    {
+                        "mainTitle": "50元",
+                        "subtitle": "售49.75元",
+                        "price": "50"
+                    },
+                    {
+                        "mainTitle": "100元",
+                        "subtitle": "售99.50元",
+                        "price": "100"
+                    },
+                    {
+                        "mainTitle": "200元",
+                        "subtitle": "售199.00元",
+                        "price": "200"
+                    }
+                ],
+                "dialogText": "登录后，享充值%s权益\n（限电信号码）",
+                "loginRechargeText": "9.91"
+            }
+        },
+        {
             "type": "4",
             "externalOfferCode": null,
             "firstSecondThreeClass": null,
@@ -67,50 +111,7 @@
             ],
             "quickRecharge": null
         },
-        {
-            "type": "5",
-            "externalOfferCode": null,
-            "firstSecondThreeClass": null,
-            "link": "30001",
-            "linkType": "1",
-            "title": "快速充值",
-            "provinceCode": null,
-            "recommender": null,
-            "sceneId": null,
-            "picArea": null,
-            "contentAreaList": null,
-            "adLists": null,
-            "quickRecharge": {
-                "title": "快速充值",
-                "link": "",
-                "linkType": "",
-                "withOutLoginRechargeFlag": "1",
-                "denominations": [
-                    {
-                        "mainTitle": "10元",
-                        "subtitle": "售9.95元",
-                        "price": "10"
-                    },
-                    {
-                        "mainTitle": "50元",
-                        "subtitle": "售49.75元",
-                        "price": "50"
-                    },
-                    {
-                        "mainTitle": "100元",
-                        "subtitle": "售99.50元",
-                        "price": "100"
-                    },
-                    {
-                        "mainTitle": "200元",
-                        "subtitle": "售199.00元",
-                        "price": "200"
-                    }
-                ],
-                "dialogText": "登录后，享充值%s权益\n（限电信号码）",
-                "loginRechargeText": "9.91"
-            }
-        },
+
         {
             "type": "1",
             "externalOfferCode": "3184500006",
@@ -1166,8 +1167,8 @@
                     "price": null,
                     "location": null,
                     "countDown": {
-                        "startTime" : "20230903120000",
-                        "endTime" : "20230904120000"
+                        "startTime" : "202309212120000",
+                        "endTime" : "20230924120000"
                     },
                     "numText": null,
                     "picList": null,
@@ -1234,8 +1235,8 @@
                     "price": null,
                     "location": null,
                     "countDown": {
-                        "startTime" : "20230909120000",
-                        "endTime" : "20230910120000"
+                        "startTime" : "202309012120000",
+                        "endTime" : "20230915172800"
                     },
                     "numText": null,
                     "picList": null,
