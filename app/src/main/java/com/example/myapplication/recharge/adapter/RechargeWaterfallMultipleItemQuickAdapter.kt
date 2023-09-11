@@ -3,6 +3,7 @@ package com.example.myapplication.recharge.adapter
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.CountDownTimer
 import android.provider.ContactsContract
 import android.text.SpannableString
@@ -11,10 +12,12 @@ import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
 import android.view.View
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -47,6 +50,8 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
 
     private var onLoadMoreListener: OnLoadMoreListener? = null
+    private lateinit var phnoe: TextView
+
     interface OnLoadMoreListener {
         fun onLoadMore()
     }
@@ -56,11 +61,18 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
     }
 
     // 点击联系人的回调接口
-    interface OnContactClickListener {
-        fun onContactClick(contactNumber: String?)
+    interface OnActivityResultCallback {
+        fun onResult():String?
     }
 
-    var onContactClickListener: OnContactClickListener? = null
+    private var activityResultCallback: OnActivityResultCallback? = null
+
+    // 其他方法和构造函数...
+
+    fun setOnActivityResultCallback(callback: OnActivityResultCallback) {
+        activityResultCallback = callback
+        phnoe.text = callback.onResult()
+    }
 
 
     init {
@@ -708,8 +720,9 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
                 binding.btnSelect.setOnClickListener {
                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-                    (context as Activity).startActivityForResult(intent, 1)
+                    (context as ComponentActivity).startActivityForResult(intent, 1)
                 }
+                phnoe = binding.etPhone
 
 
                 binding.tvTitle.text = item.title
@@ -731,11 +744,18 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 binding.tvSubtitleTwoHundredDollar.text =
                     item.quickRecharge.denominations[3].subtitle
             }
+
             GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt() -> {
                 // 处理充值布局
                 val binding = ActivityBannerBinding.bind(holder.itemView)
-                binding.banner.setAdapter(object : BannerImageAdapter<DataBean>(DataBean.testData3) {
-                    override fun onBindView(holder: BannerImageHolder, data: DataBean, position: Int, size: Int) {
+                binding.banner.setAdapter(object :
+                    BannerImageAdapter<DataBean>(DataBean.testData3) {
+                    override fun onBindView(
+                        holder: BannerImageHolder,
+                        data: DataBean,
+                        position: Int,
+                        size: Int,
+                    ) {
                         Glide.with(holder.imageView)
                             .load(data.imageUrl)
                             .into(holder.imageView)
@@ -822,6 +842,50 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             "$daysText$timeText"
         }
     }
+    fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { contactUri ->
+                val phoneNumber = getContactPhoneNumber(contactUri)
+                //contactSelectedListener?.onContactSelected(phoneNumber)
+            }
+        }
+    }
+
+    private fun getContactPhoneNumber(contactUri: Uri): String? {
+        val contactData = contactUri
+        var phoneNumber: String? = null
+        val cursor = context.contentResolver.query(contactData, null, null, null, null)
+        cursor?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val hasPhoneIndex = cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)
+                val idIndex = cursor.getColumnIndex(ContactsContract.Contacts._ID)
+
+                val hasPhone = cursor.getString(hasPhoneIndex)
+                val id = cursor.getString(idIndex)
+
+                if (hasPhone.toBoolean()) {
+                    val phonesCursor = context.contentResolver.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        "${ContactsContract.CommonDataKinds.Phone.CONTACT_ID} = ?",
+                        arrayOf(id),
+                        null
+                    )
+
+                    phonesCursor?.use { phonesCursor ->
+                        if (phonesCursor.moveToFirst()) {
+                            val phoneNumberIndex = phonesCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                            phoneNumber = phonesCursor.getString(phoneNumberIndex)
+                        }
+                    }
+                }
+            }
+        }
+
+        return phoneNumber
+    }
 
 
 }
+
+

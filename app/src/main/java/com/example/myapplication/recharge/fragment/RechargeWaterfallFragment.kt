@@ -12,17 +12,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
+import com.example.myapplication.databinding.ViewGroupCustomBalanceInquiryBinding
+import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.adapter.RechargeWaterfallMultipleItemQuickAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.google.gson.Gson
 
 
-class RechargeWaterfallFragment : Fragment() {
+class RechargeWaterfallFragment : Fragment(),RechargeWaterfallMultipleItemQuickAdapter.OnActivityResultCallback {
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
     private lateinit var myAdapter: RechargeWaterfallMultipleItemQuickAdapter
-    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    private  var contactNumber: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,8 +77,11 @@ class RechargeWaterfallFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             data?.data?.let { contactUri ->
-                val contactNumber = getContactNumberByUri(contactUri)
-                myAdapter.onContactClickListener?.onContactClick(contactNumber)
+                contactNumber = getContactNumberByUri(contactUri)
+                LogUtils.d(
+                    "screenWidth=" + contactNumber + "; px=" + contactUri
+                )
+                myAdapter.handleActivityResult(requestCode, resultCode, data)
             }
         }
     }
@@ -85,10 +91,13 @@ class RechargeWaterfallFragment : Fragment() {
         _binding = null
     }
 
+    //用于从联系人的 Uri（Uniform Resource Identifier，统一资源标识符）中获取联系人的电话号码
     private fun getContactNumberByUri(contactUri: Uri): String? {
         val contactData = contactUri
         var phoneNumber: String? = null
+        //来获取一个光标（Cursor）对象。这里使用 contentResolver 来查询联系人的数据
         val cursor = requireActivity().contentResolver.query(contactData, null, null, null, null)
+        //使用 Kotlin 的 use 函数，确保在使用完光标后关闭它
         cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 val nameIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
@@ -107,8 +116,10 @@ class RechargeWaterfallFragment : Fragment() {
 
                 if (hasPhone.toBoolean()) {
                     val phonesCursor = requireActivity().contentResolver.query(
+                        //表示查询电话号码的内容 URI，指定了查询电话号码的数据表。
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                         null,
+                        //表示查询条件，限制查询结果必须与给定的联系人 ID 相匹配。
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
                         null,
                         null
@@ -116,16 +127,25 @@ class RechargeWaterfallFragment : Fragment() {
 
                     phonesCursor?.use { phonesCursor ->
                         if (phonesCursor.moveToFirst()) {
+                            //获取电话号码列的索引，将其赋值给 phoneNumberIndex。
                             val phoneNumberIndex = phonesCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                            //通过索引从光标中获取电话号码，并将其赋值给 phoneNumber
                             phoneNumber = phonesCursor.getString(phoneNumberIndex)
+
                         }
                     }
                 }
             }
         }
 
-        return phoneNumber
+       return phoneNumber
     }
+
+    override fun onResult(): String? {
+        TODO("Not yet implemented")
+        return contactNumber
+    }
+
 }
 
 

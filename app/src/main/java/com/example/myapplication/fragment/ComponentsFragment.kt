@@ -23,6 +23,7 @@ import com.example.myapplication.activity.components.bilibili.activity.ViewModel
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.RechargePageActivity
+import com.example.myapplication.activity.components.bilibili.activity.RoomActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
 import com.example.myapplication.feed.activity.FeedStreamHomePageActivity
 import com.example.myapplication.recharge.view.property.Piggy
@@ -80,7 +81,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "SharedPreferencesActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "PhnoeActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "BannerActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "15"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "RoomActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "16"),
             Pair(R.mipmap.icon_grid_tip_dialog, "17"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
@@ -194,8 +195,8 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                "15" -> {
-                    val intent = Intent(context, ScoreActivity::class.java)
+                "RoomActivity" -> {
+                    val intent = Intent(context, RoomActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }
