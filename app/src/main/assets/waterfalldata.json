@@ -53,6 +53,16 @@
                         "mainTitle": "200元",
                         "subtitle": "售199.00元",
                         "price": "200"
+                    },
+                    {
+                        "mainTitle": "200元",
+                        "subtitle": "售199.00元",
+                        "price": "200"
+                    },
+                    {
+                        "mainTitle": "200元",
+                        "subtitle": "售199.00元",
+                        "price": "200"
                     }
                 ],
                 "dialogText": "登录后，享充值%s权益\n（限电信号码）",
@@ -736,7 +746,22 @@
                     "numText": null,
                     "picList": null,
                     "completionInfo": null
+                },{
+                    "type": "1",
+                    "mainTitle": {
+                        "title": "【星卡】办理享话费体验金",
+                        "color": "",
+                        "type": "2"
+                    },
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
                 },
+
                 {
                     "type": "2",
                     "mainTitle": null,

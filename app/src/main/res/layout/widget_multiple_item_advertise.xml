@@ -3,124 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/shape_recharge_advertise"
+    android:layout_marginBottom="10dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="4dp"
-    android:layout_marginBottom="10dp"
-    android:background="@drawable/shape_rectangle19">
+    >
 
-    <ImageView
-        android:id="@+id/ivAdListsImageUrl"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAdList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginBottom="10dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/label"
-        app:layout_constraintBottom_toTopOf="@id/tvAdListsImageUrl"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvAdListsImageUrl"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="9dp"
-        android:text="加装【副卡】，一份套餐全家用"
-        android:textColor="#333333"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/ivAdListsImageUrlSecond"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivAdListsImageUrl" />
-
-    <ImageView
-        android:id="@+id/ivAdListsImageUrlSecond"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginBottom="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/label"
-        app:layout_constraintBottom_toTopOf="@id/tvAdListsImageUrlSecond"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAdListsImageUrl" />
-
-
-    <TextView
-        android:id="@+id/tvAdListsImageUrlSecond"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="9dp"
-        android:text="加装【副卡】，一份套餐全家用"
-        android:textColor="#333333"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/ivAdListsImageUrlThird"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivAdListsImageUrlSecond" />
-
-    <ImageView
-        android:id="@+id/ivAdListsImageUrlThird"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginBottom="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/label"
-        app:layout_constraintBottom_toTopOf="@id/tvAdListsImageUrlSecond"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAdListsImageUrlSecond" />
-
-    <TextView
-        android:id="@+id/tvAdListsImageUrlThird"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="9dp"
-        android:text="加装【副卡】，一份套餐全家用"
-        android:textColor="#333333"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/ivAdListsImageUrlFour"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivAdListsImageUrlThird" />
-
-    <ImageView
-        android:id="@+id/ivAdListsImageUrlFour"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginBottom="16dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/label"
-        app:layout_constraintBottom_toTopOf="@id/tvAdListsImageUrlFour"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAdListsImageUrlThird" />
-
-    <TextView
-        android:id="@+id/tvAdListsImageUrlFour"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="9dp"
-        android:text="加装【副卡】，一份套餐全家用"
-        android:textColor="#333333"
-        android:textSize="14sp"
+        android:layout_marginRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivAdListsImageUrlFour" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
