@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.databinding.ViewGroupCustomBalanceInquiryBinding
@@ -19,9 +18,12 @@ import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.adapter.RechargeWaterfallMultipleItemQuickAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.google.gson.Gson
+import com.scwang.smart.refresh.footer.BallPulseFooter
+import com.scwang.smart.refresh.header.BezierRadarHeader
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
-class RechargeWaterfallFragment : Fragment(),RechargeWaterfallMultipleItemQuickAdapter.OnActivityResultCallback {
+class RechargeWaterfallFragment : Fragment(){
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
     private lateinit var myAdapter: RechargeWaterfallMultipleItemQuickAdapter
@@ -52,24 +54,12 @@ class RechargeWaterfallFragment : Fragment(),RechargeWaterfallMultipleItemQuickA
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
-        myAdapter.setOnLoadMoreListener(object :
-            RechargeWaterfallMultipleItemQuickAdapter.OnLoadMoreListener {
-            override fun onLoadMore() {
-                // 执行加载更多的逻辑
 
-            }
-        })
-
-
-        /*mSwipeRefreshLayout = binding.srl
-        mSwipeRefreshLayout.setOnRefreshListener { //我在List最前面加入一条数据
+        myAdapter.notifyItemChanged(2)
 
 
 
-            //数据重新加载完成后，提示数据发生改变，并且设置现在不在刷新
-            //myAdapter.notifyDataSetChanged()
-            mSwipeRefreshLayout.setRefreshing(false)
-        }*/
+
 
     }
 
@@ -81,7 +71,6 @@ class RechargeWaterfallFragment : Fragment(),RechargeWaterfallMultipleItemQuickA
                 LogUtils.d(
                     "screenWidth=" + contactNumber + "; px=" + contactUri
                 )
-                myAdapter.handleActivityResult(requestCode, resultCode, data)
             }
         }
     }
@@ -141,10 +130,6 @@ class RechargeWaterfallFragment : Fragment(),RechargeWaterfallMultipleItemQuickA
        return phoneNumber
     }
 
-    override fun onResult(): String? {
-        TODO("Not yet implemented")
-        return contactNumber
-    }
 
 }
 

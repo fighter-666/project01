@@ -20,6 +20,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.adapter.ComponentsAdapter
+import com.example.myapplication.adapter.LabAdapter
 import com.example.myapplication.databinding.AdapterAdvertiseBinding
 import com.example.myapplication.databinding.AdapterRechargeContentAreaListBinding
 import com.example.myapplication.databinding.WidgetMultipleItemAdvertiseBinding
@@ -31,8 +32,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class ContentAreaListAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean>) :
-    BaseQuickAdapter<GetFeedListData.FeedListBean.ContentAreaListBean, BaseViewHolder>(layoutResId, data) {
+class ContentAreaListAdapter(
+    @LayoutRes layoutResId: Int,
+    data: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean>,
+) :
+    BaseQuickAdapter<GetFeedListData.FeedListBean.ContentAreaListBean, BaseViewHolder>(
+        layoutResId,
+        data
+    ) {
 
     override fun convert(
         holder: BaseViewHolder,
@@ -43,101 +50,26 @@ class ContentAreaListAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetF
         when (item.type) {
             "1" -> {
                 //mainTitle : 主标题
-                        if (item.mainTitle.type == "1") {
-                            binding.tvMainTitleTitle.maxLines = 1
-                            binding.tvMainTitleTitle.ellipsize =
-                                TextUtils.TruncateAt.END
-                        }
-                        binding.tvMainTitleTitle.text = item.mainTitle.title
-                        binding.tvMainTitleTitle.visibility = View.VISIBLE
+                if (item.mainTitle.type == "1") {
+                    binding.tvMainTitleTitle.maxLines = 1
+                    binding.tvMainTitleTitle.ellipsize =
+                        TextUtils.TruncateAt.END
+                }
+                binding.tvMainTitleTitle.text = item.mainTitle.title
+                binding.tvMainTitleTitle.visibility = View.VISIBLE
             }
 
             //2：随销条、
             "2" -> {
-                //saleTipList : 随销条
-                if (item.saleTipList != null) {
-                    val filteredList: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean> =
-                        mutableListOf<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean>()
-                    for (saleTipList in item.saleTipList) {
-                        if (saleTipList.type == "1") {
-                            filteredList.add(saleTipList)
-                        }
+                //创建适配器
+                val myAdapter = SaleTipListAdapter(R.layout.adapter_recharge_contentarealist_saletiplist, item.saleTipList)
 
-                        when (filteredList.size) {
-
-                            1 -> {
-                                binding.tvSaleTipList.text = filteredList[0].title
-                                binding.tvSaleTipList.visibility = View.VISIBLE
-                            }
-                            2 -> {
-                                binding.tvSaleTipList.text = filteredList[0].title
-                                binding.tvSaleTipList.visibility = View.VISIBLE
-                                binding.tvSaleTipListSecond.text = filteredList[1].title
-                                binding.tvSaleTipListSecond.visibility = View.VISIBLE
-                            }
-                            3 -> {
-                                binding.tvSaleTipList.text = filteredList[0].title
-                                binding.tvSaleTipList.visibility = View.VISIBLE
-                                binding.tvSaleTipListSecond.text = filteredList[1].title
-                                binding.tvSaleTipListSecond.visibility = View.VISIBLE
-                                binding.tvSaleTipListThird.text = filteredList[2].title
-                                binding.tvSaleTipListThird.visibility = View.VISIBLE
-                            }
-                        }
-                        if (saleTipList.type == "2") {
-                            //在协程中加载网络图片或在后台线程中加载大量图片。
-                            // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
-                            CoroutineScope(Dispatchers.Main).launch {
-                                // 设置圆角半径
-                                val requestOptions =
-                                    RequestOptions().transform(RoundedCorners(20))
-                                Glide.with(context)
-                                    .load(saleTipList.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                                    .transition(DrawableTransitionOptions.withCrossFade())
-                                    .apply(requestOptions)
-                                    .into(binding.tvSaleTipListImageUrl)
-                            }
-                            binding.tvSaleTipListImageUrl.visibility = View.VISIBLE
-
-
-                        } else {
-                            //判断列表中的元素数量
-
-                        }
-                    }
-
-                    when (item.saleTipList.size) {
-                        1 -> {
-                            binding.tvSaleTipList.text = item.saleTipList[0].title
-                            binding.tvSaleTipList.visibility = View.VISIBLE
-                        }
-
-                        2 -> {
-                            binding.tvSaleTipList.text = item.saleTipList[0].title
-                            binding.tvSaleTipList.visibility = View.VISIBLE
-                            if (binding.tvSaleTipList.text == "") {
-                                binding.tvSaleTipList.visibility = View.GONE
-                            }
-                            binding.tvSaleTipListSecond.text =
-                                item.saleTipList[1].title
-                            binding.tvSaleTipListSecond.visibility = View.VISIBLE
-                        }
-
-                        3 -> {
-                            binding.tvSaleTipList.text = item.saleTipList[0].title
-                            binding.tvSaleTipList.visibility = View.VISIBLE
-                            binding.tvSaleTipListSecond.text =
-                                item.saleTipList[1].title
-                            binding.tvSaleTipListSecond.visibility = View.VISIBLE
-                            binding.tvSaleTipListThird.text =
-                                item.saleTipList[2].title
-                            binding.tvSaleTipListThird.visibility = View.VISIBLE
-                        }
-                    }
-
-                    binding.horizontalScrollView.visibility = View.VISIBLE
+                //设置布局管理器和给 recyclerView设置适配器
+                binding.rvSaleTipList.apply {
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = myAdapter
                 }
+                //saleTipList : 随销条
             }
 
             //3：价格
@@ -177,7 +109,6 @@ class ContentAreaListAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetF
 
             //4：位置
             "4" -> {
-
                 binding.tvLocationTitle.text = item.location.title
                 binding.ivLocationIcon.visibility = View.VISIBLE
                 binding.tvLocationTitle.visibility = View.VISIBLE
@@ -279,7 +210,10 @@ class ContentAreaListAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetF
             //7：配图：一行一个
             "7" -> {
 
-                val rechargeAdapter = ContentAreaListPicListAdapter(R.layout.adapter_recharge_contentarealist_piclist,item.picList)
+                val rechargeAdapter = ContentAreaListPicListAdapter(
+                    R.layout.adapter_recharge_contentarealist_piclist,
+                    item.picList
+                )
 
                 //设置布局管理器和给recyclerView 设置设配器
                 binding.rvPicList.apply {
@@ -291,57 +225,21 @@ class ContentAreaListAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetF
 
             //8：配图2：一行两个
             "8" -> {
-                /*val myAdapter = RechargeContentAreaListGridAdapter(R.layout.adapter_components, piggies)
+                val myAdapter = RechargeContentAreaListGridAdapter(R.layout.adapter_recharge_contentarealist_piclist_double, item.picList)
 
                 //设置布局管理器和给recyclerView设置适配器
-                binding.rvComponents.apply {
-                    layoutManager = GridLayoutManager(context, 3)
+                binding.rvPicListDouble.apply {
+                    layoutManager = GridLayoutManager(context, 2)
                     adapter = myAdapter
-                }*/
-                /*if (item.picList != null) {
-                    binding.ivContentAreaListPicListDoubleIssueFee.visibility =
-                        View.VISIBLE
-                    CoroutineScope(Dispatchers.Main).launch {
-                        // 设置圆角半径
-                        val requestOptions =
-                            RequestOptions().transform(RoundedCorners(20))
-                        Glide.with(context)
-                            .load(item.picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivContentAreaListPicListDoubleIssueFee)
-                    }
-                    binding.ivContentAreaListPicListDoubleDrawALottery.visibility =
-                        View.VISIBLE
-                    CoroutineScope(Dispatchers.Main).launch {
-                        // 设置圆角半径
-                        val requestOptions =
-                            RequestOptions().transform(RoundedCorners(20))
-                        Glide.with(context)
-                            .load(item.picList[1].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivContentAreaListPicListDoubleDrawALottery)
-                    }
-                    binding.tvContentAreaListPicListDoubleIssueFee.visibility = View.VISIBLE
-                    binding.tvContentAreaListPicListDoubleDrawALottery.visibility = View.VISIBLE
-
-                    binding.tvContentAreaListPicListDoubleIssueFee.text =
-                        item.picList[0].title
-                    binding.tvContentAreaListPicListDoubleDrawALottery.text =
-                        item.picList[0].title
-                }*/
-
+                }
             }
 
             //9：末尾卡片按钮列表
             "9" -> {
-                /*binding.tvNullTitleFirst.text =
+                binding.tvNullTitleFirst.text =
                     item.completionInfo.title
                 binding.tvNullTitleFirst.visibility =
-                    View.VISIBLE*/
+                    View.VISIBLE
             }
 
             else -> {

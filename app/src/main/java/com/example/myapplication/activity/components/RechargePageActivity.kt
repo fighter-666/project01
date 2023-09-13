@@ -35,6 +35,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
+import com.scwang.smart.refresh.footer.BallPulseFooter
+import com.scwang.smart.refresh.header.BezierRadarHeader
+import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
 class RechargePageActivity : AppCompatActivity() {
@@ -51,6 +54,11 @@ class RechargePageActivity : AppCompatActivity() {
             .titleBar(binding.tvTitle)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init();
+
+// 设置 Header 为贝塞尔雷达样式
+        binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))
+// 设置 Footer 为球脉冲样式
+        binding.refreshLayout.setRefreshFooter(BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale))
 
         val json: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
             application.assets.open("tab.json").bufferedReader().use { it.readText() }

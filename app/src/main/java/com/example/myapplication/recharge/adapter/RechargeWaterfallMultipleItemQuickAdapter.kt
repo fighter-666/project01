@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.core.view.isGone
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -28,11 +29,14 @@ import com.example.myapplication.databinding.ActivityBannerBinding
 import com.example.myapplication.databinding.WidgetMultipleItemAdvertiseBinding
 import com.example.myapplication.databinding.WidgetMultipleItemCommonBinding
 import com.example.myapplication.databinding.WidgetMultipleItemManyImageBinding
+import com.example.myapplication.databinding.WidgetMultipleItemNullBinding
 import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.widget.ScrrollTextViewCommentListBackground
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
+import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.indicator.Indicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,33 +48,6 @@ import java.util.Locale
 
 class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
-
-    private var onLoadMoreListener: OnLoadMoreListener? = null
-    private lateinit var phnoe: TextView
-
-    interface OnLoadMoreListener {
-        fun onLoadMore()
-    }
-
-    fun setOnLoadMoreListener(listener: OnLoadMoreListener) {
-        onLoadMoreListener = listener
-    }
-
-    // 点击联系人的回调接口
-    interface OnActivityResultCallback {
-        fun onResult():String?
-    }
-
-    private var activityResultCallback: OnActivityResultCallback? = null
-
-    // 其他方法和构造函数...
-
-    fun setOnActivityResultCallback(callback: OnActivityResultCallback) {
-        activityResultCallback = callback
-        phnoe.text = callback.onResult()
-    }
-
-
     init {
         addItemType(
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE,
@@ -107,77 +84,37 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
     }
 
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean) {
-        if (holder.layoutPosition == data.size - 1) {
-            onLoadMoreListener?.onLoadMore()
-        }
         when (holder.itemViewType) {
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE -> {
                 // 处理多图布局
                 val binding = WidgetMultipleItemManyImageBinding.bind(holder.itemView)
-                if (item.picArea.picList.size >= 4) {
-                    //在协程中加载网络图片或在后台线程中加载大量图片。
-                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
-                    CoroutineScope(Dispatchers.Main).launch {
-                        // 设置圆角半径
-                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                        Glide.with(context)
-                            .load(item.picArea.picList[0].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivPicAreaImageUrl)
-                        Glide.with(context)
-                            .load(item.picArea.picList[1].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivPicAreaImageUrl2)
-                        Glide.with(context)
-                            .load(item.picArea.picList[2].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivPicAreaImageUrl3)
-                        Glide.with(context)
-                            .load(item.picArea.picList[3].imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivPicAreaImageUrl4)
-                        binding.tvMainTitleTitle.text = item.picArea.title
-                        binding.tvMainTitleTitle.visibility = View.VISIBLE
-                        binding.ivPicAreaImageUrl.visibility = View.VISIBLE
-                        binding.ivPicAreaImageUrl2.visibility = View.VISIBLE
-                        binding.ivPicAreaImageUrl3.visibility = View.VISIBLE
-                        binding.ivPicAreaImageUrl4.visibility = View.VISIBLE
+
+                //contentAreaList : 内容区域
+                if (item.contentAreaList != null) {
+                    val rechargeAdapter = ContentAreaListAdapter(
+                        R.layout.adapter_recharge_content_area_list,
+                        item.contentAreaList
+                    )
+
+                    //设置布局管理器和给recyclerView 设置设配器
+                    binding.rvContentAreaList.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = rechargeAdapter
                     }
-                } else if (item.picArea.picList.size < 4 && item.picArea.picList.size >= 2) {
-                    //在协程中加载网络图片或在后台线程中加载大量图片。
-                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
-                    CoroutineScope(Dispatchers.Main).launch {
-                        // 设置圆角半径
-                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                        Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivPicAreaImageUrl)
-                        Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivPicAreaImageUrl2)
-                        binding.tvMainTitleTitle.text = item.picArea.title
-                        binding.tvMainTitleTitle.visibility = View.VISIBLE
-                        binding.ivPicAreaImageUrl.visibility = View.VISIBLE
-                        binding.ivPicAreaImageUrl2.visibility = View.VISIBLE
-                    }
-                } else {
-                    binding.tvMainTitleTitle.text = item.picArea.title
-                    binding.tvMainTitleTitle.visibility = View.VISIBLE
                 }
+
+                val myAdapter = RechargeManyImageGridAdapter(R.layout.adapter_recharge_many_image_grid, item.picArea.picList)
+
+                //设置布局管理器和给recyclerView设置适配器
+                binding.rvPicAreaImageUrl.apply {
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = myAdapter
+                }
+
+                binding.tvMainTitleTitle.text = item.picArea.title
+                binding.tvMainTitleTitle.visibility = View.VISIBLE
+
+
             }
 
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE -> {
@@ -213,13 +150,15 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
                 //库存显示
                 if (item.picArea.stock != null) {
-                    binding.tvStockout.isGone = true
+                    binding.tvStockout.visibility = View.VISIBLE
                 }
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
-                    val rechargeAdapter = ContentAreaListAdapter(R.layout.adapter_recharge_content_area_list,item.contentAreaList)
+                    val rechargeAdapter = ContentAreaListAdapter(
+                        R.layout.adapter_recharge_content_area_list,
+                        item.contentAreaList
+                    )
 
-                    binding.rvContentAreaList.visibility = View.VISIBLE
                     //设置布局管理器和给recyclerView 设置设配器
                     binding.rvContentAreaList.apply {
                         layoutManager = LinearLayoutManager(context)
@@ -230,6 +169,21 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.NULL -> {
                 // 处理空布局
+                val binding = WidgetMultipleItemNullBinding.bind(holder.itemView)
+
+                //contentAreaList : 内容区域
+                if (item.contentAreaList != null) {
+                    val rechargeAdapter = ContentAreaListAdapter(
+                        R.layout.adapter_recharge_content_area_list,
+                        item.contentAreaList
+                    )
+
+                    //设置布局管理器和给recyclerView 设置设配器
+                    binding.rvContentAreaList.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = rechargeAdapter
+                    }
+                }
             }
 
             GetFeedListData.FEED_LIST_ITEM_TYPE.LIVE.toInt() -> {
@@ -243,7 +197,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt() -> {
                 // 处理广告布局
                 val binding = WidgetMultipleItemAdvertiseBinding.bind(holder.itemView)
-                val rechargeAdapter = AdvertiseAdapter(R.layout.adapter_advertise,item.adLists)
+                val rechargeAdapter = AdvertiseAdapter(R.layout.adapter_advertise, item.adLists)
 
                 //设置布局管理器和给recyclerView 设置设配器
                 binding.rvAdList.apply {
@@ -259,9 +213,9 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
                     (context as ComponentActivity).startActivityForResult(intent, 1)
                 }
-                phnoe = binding.etPhone
 
-                val rechargeAdapter = RechargeAdapter(R.layout.adapter_recharge,item.quickRecharge.denominations)
+                val rechargeAdapter =
+                    RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
 
                 //设置布局管理器和给recyclerView 设置设配器
                 binding.rlRecharge.apply {
@@ -288,129 +242,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 })
                 binding.banner.setBannerRound2(20f)
                 binding.banner.setLoopTime(5000)
+                binding.banner.setIndicator(CircleIndicator(context)) // 设置指示器为圆圈样式
             }
 
         }
     }
-
-    //// 判断是显示距开始还是距结束
-    private fun shouldDisplayCountdownToStart(countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean): Boolean {
-        //获取当前时间
-        val currentTime = getCurrentTime()
-        //验证开始时间和结束时间的有效性
-        val isValidStartTime = isValidDateTime(countDownBean.startTime)
-        val isValidEndTime = isValidDateTime(countDownBean.endTime)
-
-        if (!isValidStartTime || !isValidEndTime) {
-            return false // 默认按不显示倒计时区域处理
-        }
-
-        return currentTime < countDownBean.startTime
-    }
-
-    //获取当前时间并以指定的格式返回时间字符串。
-    private fun getCurrentTime(): String {
-        val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
-        return dateFormat.format(Date())
-    }
-
-    //检查给定的日期时间字符串是否是有效的
-    private fun isValidDateTime(dateTime: String): Boolean {
-        val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
-        //将isLenient属性设置为false，表示日期时间解析过程中严格按照指定的格式进行匹配
-        dateFormat.isLenient = false
-        return try {
-            dateFormat.parse(dateTime)
-            true
-        } catch (e: Exception) {
-            false
-        }
-    }
-
-    //计算剩余时间（以毫秒为单位）
-    private fun getRemainingTimeInMillis(
-        countDownBean: GetFeedListData.FeedListBean.ContentAreaListBean.CountDownBean,
-        isCountingDownToStart: Boolean,
-    ): Long {
-        //创建日期格式对象，使用默认的语言环境
-        val dateFormat = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
-        //获取当前时间
-        val currentTime = getCurrentTime()
-        //确定目标时间
-        val targetTime =
-            if (isCountingDownToStart) countDownBean.startTime else countDownBean.endTime
-        //计算剩余时间：使用日期格式化对象将目标时间和当前时间解析为Date对象，并通过调用time方法获取它们的时间戳（以毫秒为单位）
-        return abs(dateFormat.parse(targetTime).time - dateFormat.parse(currentTime).time)
-    }
-
-    //格式化倒计时文本，将给定的剩余时间（以毫秒为单位）转换为可读的倒计时字符串
-    private fun formatCountdownText(
-        remainingTimeInMillis: Long,
-        isCountingDownToStart: Boolean,
-    ): String {
-        //取整
-        val days = remainingTimeInMillis / (24 * 60 * 60 * 1000)
-        //取余完，再取整
-        val hours = (remainingTimeInMillis % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
-        val minutes = (remainingTimeInMillis % (60 * 60 * 1000)) / (60 * 1000)
-        val seconds = (remainingTimeInMillis % (60 * 1000)) / 1000
-
-        //计算得到的天数，判断是否大于0
-        val daysText = if (days > 0) "$days 天" else ""
-        //使用String.format方法将小时、分钟和秒格式化为两位数的字符串，例如"01:05:30"
-        val timeText = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-
-        //根据isCountingDownToStart参数的值，决定最终返回的倒计时文本
-        return if (isCountingDownToStart) {
-            "$daysText$timeText"
-        } else {
-            "$daysText$timeText"
-        }
-    }
-    fun handleActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { contactUri ->
-                val phoneNumber = getContactPhoneNumber(contactUri)
-                //contactSelectedListener?.onContactSelected(phoneNumber)
-            }
-        }
-    }
-
-    private fun getContactPhoneNumber(contactUri: Uri): String? {
-        val contactData = contactUri
-        var phoneNumber: String? = null
-        val cursor = context.contentResolver.query(contactData, null, null, null, null)
-        cursor?.use { cursor ->
-            if (cursor.moveToFirst()) {
-                val hasPhoneIndex = cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)
-                val idIndex = cursor.getColumnIndex(ContactsContract.Contacts._ID)
-
-                val hasPhone = cursor.getString(hasPhoneIndex)
-                val id = cursor.getString(idIndex)
-
-                if (hasPhone.toBoolean()) {
-                    val phonesCursor = context.contentResolver.query(
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        null,
-                        "${ContactsContract.CommonDataKinds.Phone.CONTACT_ID} = ?",
-                        arrayOf(id),
-                        null
-                    )
-
-                    phonesCursor?.use { phonesCursor ->
-                        if (phonesCursor.moveToFirst()) {
-                            val phoneNumberIndex = phonesCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                            phoneNumber = phonesCursor.getString(phoneNumberIndex)
-                        }
-                    }
-                }
-            }
-        }
-
-        return phoneNumber
-    }
-
-
 }
 
 
