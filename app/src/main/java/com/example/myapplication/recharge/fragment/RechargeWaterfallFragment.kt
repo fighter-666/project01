@@ -2,6 +2,7 @@ package com.example.myapplication.recharge.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -13,14 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
-import com.example.myapplication.databinding.ViewGroupCustomBalanceInquiryBinding
-import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.adapter.RechargeWaterfallMultipleItemQuickAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.google.gson.Gson
-import com.scwang.smart.refresh.footer.BallPulseFooter
-import com.scwang.smart.refresh.header.BezierRadarHeader
-import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
 class RechargeWaterfallFragment : Fragment(){
@@ -28,6 +24,7 @@ class RechargeWaterfallFragment : Fragment(){
     val binding get() = _binding!!
     private lateinit var myAdapter: RechargeWaterfallMultipleItemQuickAdapter
     private  var contactNumber: String? = null
+    private var mIntent: Intent? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,12 +62,28 @@ class RechargeWaterfallFragment : Fragment(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             data?.data?.let { contactUri ->
+                mIntent = data
                 contactNumber = getContactNumberByUri(contactUri)
                 LogUtils.d(
                     "screenWidth=" + contactNumber + "; px=" + contactUri
                 )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RechargeWaterfallFragment.PERMISSIONS_REQUEST_READ_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 用户成功授予权限
+               // getContactNumberByUri(mIntent)
             }
         }
     }
@@ -128,6 +141,11 @@ class RechargeWaterfallFragment : Fragment(){
         }
 
        return phoneNumber
+    }
+
+    companion object {
+        private const val PICK_CONTACT = 1
+        private const val PERMISSIONS_REQUEST_READ_CONTACTS = 2
     }
 
 

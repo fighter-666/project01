@@ -5,10 +5,7 @@ import androidx.core.view.isGone
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.databinding.AdapterRechargeTabWaterfallBinding
-import com.example.myapplication.databinding.AdapterRechargeWaterfallBinding
-import com.example.myapplication.recharge.view.property.Card
 import com.example.myapplication.recharge.property.Cards
-import com.example.myapplication.util.DensityUtils
 
 class RechargeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Cards>) :
     BaseQuickAdapter<Cards, BaseViewHolder>(layoutResId, data) {
@@ -68,7 +65,6 @@ class RechargeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Ca
         layoutParams.height = layoutParams2.width
         binding.ivImage.layoutParams = layoutParams*/
     }
-
 
 
 }

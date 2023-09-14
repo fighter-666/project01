@@ -68,7 +68,11 @@ class RechangeWaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Ca
         binding.ivImage.layoutParams = layoutParams*/
     }
 
-    private fun setCardView(holder: BaseViewHolder, binding: AdapterRechargeWaterfallBinding, card: Cards) {
+    private fun setCardView(
+        holder: BaseViewHolder,
+        binding: AdapterRechargeWaterfallBinding,
+        card: Cards,
+    ) {
         //计算图片宽高
         val layoutParams = binding.ivImage.layoutParams as ConstraintLayout.LayoutParams
         val space = DensityUtils.dpToPx(context, 18f)

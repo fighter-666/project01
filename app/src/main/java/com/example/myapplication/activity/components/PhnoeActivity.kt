@@ -8,23 +8,14 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
-import java.lang.Boolean
-import kotlin.Array
-import kotlin.Int
-import kotlin.IntArray
-import kotlin.String
-import kotlin.arrayOf
 
 
 class PhnoeActivity : AppCompatActivity(), View.OnClickListener {
-    private var et_username: EditText? = null
     private var et_phone: TextView? = null
     private var btn_select: ImageView? = null
     private var mIntent: Intent? = null
@@ -89,17 +80,10 @@ class PhnoeActivity : AppCompatActivity(), View.OnClickListener {
         if (data == null) {
             return
         }
-        val contactData = data.data ?: return
-        var name = ""
         var phoneNumber = ""
         val contactUri = data.data
         val cursor = contentResolver.query(contactUri!!, null, null, null, null)
         if (cursor!!.moveToFirst()) {
-            name = cursor
-                .getString(
-                    cursor
-                        .getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)
-                )
             var hasPhone = cursor
                 .getString(
                     cursor
@@ -114,7 +98,8 @@ class PhnoeActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 "false"
             }
-            if (Boolean.parseBoolean(hasPhone)) {
+            if (hasPhone.toBoolean()
+            ) {
                 val phones = contentResolver
                     .query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,

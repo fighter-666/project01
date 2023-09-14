@@ -8,8 +8,14 @@ import com.example.myapplication.databinding.AdapterRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.view.property.Piggy
 
-class RechargeAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetFeedListData.FeedListBean.QuickRechargeBean.DenominationBean>) :
-    BaseQuickAdapter<GetFeedListData.FeedListBean.QuickRechargeBean.DenominationBean, BaseViewHolder>(layoutResId, data) {
+class RechargeAdapter(
+    @LayoutRes layoutResId: Int,
+    data: MutableList<GetFeedListData.FeedListBean.QuickRechargeBean.DenominationBean>,
+) :
+    BaseQuickAdapter<GetFeedListData.FeedListBean.QuickRechargeBean.DenominationBean, BaseViewHolder>(
+        layoutResId,
+        data
+    ) {
 
     override fun convert(
         holder: BaseViewHolder,

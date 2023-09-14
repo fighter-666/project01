@@ -1,6 +1,5 @@
 package com.example.myapplication.recharge.adapter
 
-import android.text.TextUtils
 import android.view.View
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
@@ -9,15 +8,20 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.example.myapplication.databinding.AdapterRechargeContentarealistPiclistBinding
 import com.example.myapplication.databinding.AdapterRechargeContentarealistSaletiplistBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SaleTipListAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean>) :
-BaseQuickAdapter<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean, BaseViewHolder>(layoutResId, data) {
+class SaleTipListAdapter(
+    @LayoutRes layoutResId: Int,
+    data: MutableList<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean>,
+) :
+    BaseQuickAdapter<GetFeedListData.FeedListBean.ContentAreaListBean.SaleTipListBean, BaseViewHolder>(
+        layoutResId,
+        data
+    ) {
 
 
     override fun convert(

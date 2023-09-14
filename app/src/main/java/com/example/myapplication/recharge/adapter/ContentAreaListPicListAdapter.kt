@@ -13,7 +13,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ContentAreaListPicListAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetFeedListData.FeedListBean.PicListBean>) :
+class ContentAreaListPicListAdapter(
+    @LayoutRes layoutResId: Int,
+    data: MutableList<GetFeedListData.FeedListBean.PicListBean>,
+) :
     BaseQuickAdapter<GetFeedListData.FeedListBean.PicListBean, BaseViewHolder>(layoutResId, data) {
 
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean.PicListBean) {

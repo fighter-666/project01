@@ -62,11 +62,15 @@ class ContentAreaListAdapter(
             //2：随销条、
             "2" -> {
                 //创建适配器
-                val myAdapter = SaleTipListAdapter(R.layout.adapter_recharge_contentarealist_saletiplist, item.saleTipList)
+                val myAdapter = SaleTipListAdapter(
+                    R.layout.adapter_recharge_contentarealist_saletiplist,
+                    item.saleTipList
+                )
 
                 //设置布局管理器和给 recyclerView设置适配器
                 binding.rvSaleTipList.apply {
-                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter = myAdapter
                 }
                 //saleTipList : 随销条
@@ -225,7 +229,10 @@ class ContentAreaListAdapter(
 
             //8：配图2：一行两个
             "8" -> {
-                val myAdapter = RechargeContentAreaListGridAdapter(R.layout.adapter_recharge_contentarealist_piclist_double, item.picList)
+                val myAdapter = RechargeContentAreaListGridAdapter(
+                    R.layout.adapter_recharge_contentarealist_piclist_double,
+                    item.picList
+                )
 
                 //设置布局管理器和给recyclerView设置适配器
                 binding.rvPicListDouble.apply {

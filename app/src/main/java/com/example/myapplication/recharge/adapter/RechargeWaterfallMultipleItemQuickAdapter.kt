@@ -1,20 +1,9 @@
 package com.example.myapplication.recharge.adapter
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
-import android.os.CountDownTimer
 import android.provider.ContactsContract
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextUtils
-import android.text.style.ForegroundColorSpan
-import android.text.style.StrikethroughSpan
 import android.view.View
-import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.core.view.isGone
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -36,14 +25,9 @@ import com.example.myapplication.recharge.widget.ScrrollTextViewCommentListBackg
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
-import com.youth.banner.indicator.Indicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Math.abs
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 
 class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
@@ -103,7 +87,10 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     }
                 }
 
-                val myAdapter = RechargeManyImageGridAdapter(R.layout.adapter_recharge_many_image_grid, item.picArea.picList)
+                val myAdapter = RechargeManyImageGridAdapter(
+                    R.layout.adapter_recharge_many_image_grid,
+                    item.picArea.picList
+                )
 
                 //设置布局管理器和给recyclerView设置适配器
                 binding.rvPicAreaImageUrl.apply {
