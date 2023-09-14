@@ -26,12 +26,12 @@
         android:layout_weight="1"
         android:background="@drawable/shape_tvsaletiplist_rextangle"
         android:gravity="center"
-        android:visibility="gone"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="赠新人礼包"
         android:textColor="#5faef7"
         android:textSize="11sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tvSaleTipListImageUrl"
         app:layout_constraintTop_toTopOf="parent" />

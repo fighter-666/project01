@@ -1,5 +1,6 @@
 package com.example.myapplication.recharge.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.provider.ContactsContract
 import android.view.View
@@ -7,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -108,18 +110,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 // 处理单图布局
                 val binding = WidgetMultipleItemCommonBinding.bind(holder.itemView)
 
-                //在协程中加载网络图片或在后台线程中加载大量图片。
-                // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
-                CoroutineScope(Dispatchers.Main).launch {
-                    // 设置圆角半径
-                    val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                    Glide.with(context)
-                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(requestOptions)
-                        .into(binding.ivPicAreaImageUrl)
-                }
+
 
                 //commentList : 评论列表
                 if (item.picArea.commentList != null) {
@@ -150,6 +141,34 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     binding.rvContentAreaList.apply {
                         layoutManager = LinearLayoutManager(context)
                         adapter = rechargeAdapter
+                    }
+
+                    //在协程中加载网络图片或在后台线程中加载大量图片。
+                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                    CoroutineScope(Dispatchers.Main).launch {
+                        // 设置圆角半径
+                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
+                            //.apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl)
+                    }
+                } else{
+                    //在协程中加载网络图片或在后台线程中加载大量图片。
+                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                    CoroutineScope(Dispatchers.Main).launch {
+                        // 设置圆角半径
+                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                        Glide.with(context)
+                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            //.transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
+                            //.transition(DrawableTransitionOptions.withCrossFade())
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl)
                     }
                 }
             }
@@ -201,6 +220,8 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     (context as ComponentActivity).startActivityForResult(intent, 1)
                 }
 
+                binding.etPhone.text = item.quickRecharge.title
+
                 val rechargeAdapter =
                     RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
 
@@ -232,6 +253,17 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 binding.banner.setIndicator(CircleIndicator(context)) // 设置指示器为圆圈样式
             }
 
+        }
+    }
+
+
+    // 在片段（Fragment）中重写onActivityResult方法
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            // 处理通讯录选择结果
+            // ...
+            // 刷新适配器
+            notifyItemChanged(2)
         }
     }
 }

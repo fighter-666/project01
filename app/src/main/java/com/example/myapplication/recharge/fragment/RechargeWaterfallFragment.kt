@@ -3,10 +3,8 @@ package com.example.myapplication.recharge.fragment
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +23,7 @@ class RechargeWaterfallFragment : Fragment(){
     private lateinit var myAdapter: RechargeWaterfallMultipleItemQuickAdapter
     private  var contactNumber: String? = null
     private var mIntent: Intent? = null
+    private lateinit var feedList: GetFeedListData
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,36 +39,35 @@ class RechargeWaterfallFragment : Fragment(){
         val json: String = requireContext().assets.open("waterfalldata.json").bufferedReader().use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
-        val feedList= gson.fromJson(json, GetFeedListData::class.java)
-        val tag = "TAG"
-        for (feed in feedList.feedList) {
-            Log.d(tag,"标签名称: ${feed.type}")
-        }
-
+        feedList= gson.fromJson(json, GetFeedListData::class.java)
+        //初始化瀑布流
         myAdapter = RechargeWaterfallMultipleItemQuickAdapter( feedList.feedList)
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
-
-        myAdapter.notifyItemChanged(2)
-
-
-
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        myAdapter.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             data?.data?.let { contactUri ->
                 mIntent = data
-                contactNumber = getContactNumberByUri(contactUri)
+                contactNumber = getContactNumberByUri(data)
                 LogUtils.d(
-                    "screenWidth=" + contactNumber + "; px=" + contactUri
+                    "contactNumber=" + contactNumber + "; px=" + contactUri
                 )
+                val updatedItem =
+                    myAdapter.getItem(2)
+                if (updatedItem.quickRecharge != null) {
+                    updatedItem.quickRecharge.title = contactNumber
+                }
+
+                // 更新适配器中的数据集
+                feedList.feedList.set(2, updatedItem); // 将索引为2的项替换为更新后的项
+                myAdapter.notifyItemChanged(2)
             }
         }
     }
@@ -83,7 +81,8 @@ class RechargeWaterfallFragment : Fragment(){
         if (requestCode == RechargeWaterfallFragment.PERMISSIONS_REQUEST_READ_CONTACTS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // 用户成功授予权限
-               // getContactNumberByUri(mIntent)
+                getContactNumberByUri(mIntent)
+                myAdapter.notifyItemChanged(2)
             }
         }
     }
@@ -94,11 +93,12 @@ class RechargeWaterfallFragment : Fragment(){
     }
 
     //用于从联系人的 Uri（Uniform Resource Identifier，统一资源标识符）中获取联系人的电话号码
-    private fun getContactNumberByUri(contactUri: Uri): String? {
-        val contactData = contactUri
+    private fun getContactNumberByUri(data: Intent?): String? {
         var phoneNumber: String? = null
+        val contactUri = data?.data
         //来获取一个光标（Cursor）对象。这里使用 contentResolver 来查询联系人的数据
-        val cursor = requireActivity().contentResolver.query(contactData, null, null, null, null)
+        val cursor =
+            contactUri?.let { requireActivity().contentResolver.query(it, null, null, null, null) }
         //使用 Kotlin 的 use 函数，确保在使用完光标后关闭它
         cursor?.use { cursor ->
             if (cursor.moveToFirst()) {

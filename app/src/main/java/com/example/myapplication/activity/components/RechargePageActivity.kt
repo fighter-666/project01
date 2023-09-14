@@ -1,8 +1,8 @@
 package com.example.myapplication.activity.components
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +43,7 @@ import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 class RechargePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
+    private lateinit var fragment: RechargeWaterfallFragment
     var originalHeight = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -409,6 +410,11 @@ class RechargePageActivity : AppCompatActivity() {
         )
         //给RecycleView设置适配器
         binding.rvWaterfall.setAdapter(fourthAdapter)*/
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        fragment.onActivityResult(requestCode, resultCode, data)
     }
 
     class RechargeFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
