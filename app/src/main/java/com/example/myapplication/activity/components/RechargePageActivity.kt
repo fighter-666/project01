@@ -414,7 +414,7 @@ class RechargePageActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        fragment.onActivityResult(requestCode, resultCode, data)
+        //fragment.onActivityResult(requestCode, resultCode, data)
     }
 
     class RechargeFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :

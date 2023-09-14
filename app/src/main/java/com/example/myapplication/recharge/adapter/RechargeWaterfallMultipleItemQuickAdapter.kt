@@ -102,15 +102,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
                 binding.tvMainTitleTitle.text = item.picArea.title
                 binding.tvMainTitleTitle.visibility = View.VISIBLE
-
-
             }
 
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE -> {
                 // 处理单图布局
                 val binding = WidgetMultipleItemCommonBinding.bind(holder.itemView)
-
-
 
                 //commentList : 评论列表
                 if (item.picArea.commentList != null) {
@@ -218,6 +214,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 binding.btnSelect.setOnClickListener {
                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
                     (context as ComponentActivity).startActivityForResult(intent, 1)
+                    binding.etPhone.text = "18350970625"
                 }
 
                 binding.etPhone.text = item.quickRecharge.title
@@ -235,6 +232,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
             GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt() -> {
                 // 处理充值布局
                 val binding = ActivityBannerBinding.bind(holder.itemView)
+
                 binding.banner.setAdapter(object :
                     BannerImageAdapter<DataBean>(DataBean.testData3) {
                     override fun onBindView(
@@ -248,9 +246,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             .into(holder.imageView)
                     }
                 })
+                //设置圆角
                 binding.banner.setBannerRound2(20f)
+                //设置轮播时间间隔
                 binding.banner.setLoopTime(5000)
-                binding.banner.setIndicator(CircleIndicator(context)) // 设置指示器为圆圈样式
+                binding.banner.indicator = CircleIndicator(context) // 设置指示器为圆圈样式
             }
 
         }
