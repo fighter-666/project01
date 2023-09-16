@@ -913,10 +913,10 @@
                     "saleTipList": null,
                     "price": {
                         "isShowPriceUnit": "1",
-                        "priceInteger": "5",
+                        "priceInteger": "5888888888888888888",
                         "priceDecimal": "/月",
                         "priceColor": "",
-                        "originalPrice": "",
+                        "originalPrice": "￥10/月",
                         "originalPriceColor": "",
                         "isOriginalPriceLine": ""
                     },
@@ -1117,6 +1117,11 @@
                 "commentList": [
                     {
                         "title": "热播剧集抢先看",
+                        "fontColor": "",
+                        "backgroundColor": ""
+                    },
+                    {
+                        "title": "操作简单",
                         "fontColor": "",
                         "backgroundColor": ""
                     }

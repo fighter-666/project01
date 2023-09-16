@@ -1,6 +1,7 @@
 package com.example.myapplication.recharge.adapter
 
 import android.graphics.Color
+import android.icu.number.IntegerWidth
 import android.os.CountDownTimer
 import android.text.SpannableString
 import android.text.Spanned
@@ -8,6 +9,7 @@ import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
 import android.view.View
+import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.GridLayoutManager
@@ -40,6 +42,9 @@ class ContentAreaListAdapter(
         layoutResId,
         data
     ) {
+        private  var tvPriceIntegerWidth: Int = 0
+        private  var tvPriceDecimalWidth: Int = 0
+        private  var tvOriginalPriceWidth: Int = 0
 
     override fun convert(
         holder: BaseViewHolder,
@@ -80,14 +85,30 @@ class ContentAreaListAdapter(
             "3" -> {
                 //price : 价格
                 if (item.price != null) {
-                    binding.tvPriceInteger.text = item.price.priceInteger
+                    //售价字体颜色通过priceColor控制，默认颜色为#ea5858
+                    binding.tvPriceInteger.text = "item.price.priceInteger"
+                   if (item.price.priceColor != ""){
+                        // 获取颜色值
+                        val color = Color.parseColor(item.price.priceColor)
+                        binding.tvPriceInteger.setTextColor(color)
+                        binding.tvPriceDecimal.setTextColor(color)
+                        binding.tvIsShowPriceUnit.setTextColor(color)
+                    }
+
+                    //售价字体颜色通过priceColor控制，默认颜色为#ea5858
                     binding.tvPriceDecimal.text = item.price.priceDecimal
+
+                    //原价originalPrice字段控制（没有不显示），字体颜色通过originalPriceColor控制，默认为#999999
+                    if (item.price.originalPriceColor != ""){
+                        val color2 = Color.parseColor(item.price.originalPriceColor)
+                        binding.tvOriginalPrice.setTextColor(color2)
+                    }
 
                     binding.tvPriceInteger.visibility = View.VISIBLE
                     binding.tvPriceDecimal.visibility = View.VISIBLE
                     binding.tvOriginalPrice.visibility = View.VISIBLE
                     // "售价是否显示人民币符号：0：否1：是",
-                    if (item.price.isShowPriceUnit == "1") {
+                     if (item.price.isShowPriceUnit == "1") {
                         binding.tvIsShowPriceUnit.visibility = View.VISIBLE
                     }
 
@@ -108,6 +129,59 @@ class ContentAreaListAdapter(
                     } else {
                         binding.tvOriginalPrice.text = item.price.originalPrice
                     }
+
+                    // 添加视图树监听器
+                    binding.tvPriceInteger.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            // 获取TextView的宽度
+                            tvPriceIntegerWidth = binding.tvPriceInteger.width
+
+                            // 在此处使用TextView的宽度进行后续操作
+                            // ...
+
+                            // 移除监听器
+                            binding.tvPriceInteger.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        }
+                    })
+                    // 添加视图树监听器
+                    binding.tvPriceDecimal.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            // 获取TextView的宽度
+                            tvPriceDecimalWidth = binding.tvPriceDecimal.width
+
+                            // 在此处使用TextView的宽度进行后续操作
+                            // ...
+
+                            // 移除监听器
+                            binding.tvPriceInteger.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        }
+                    })
+                    // 添加视图树监听器
+                    binding.tvOriginalPrice.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                        override fun onGlobalLayout() {
+                            // 获取TextView的宽度
+                            tvOriginalPriceWidth = binding.tvOriginalPrice.width
+
+                            // 在此处使用TextView的宽度进行后续操作
+                            // ...
+
+                            // 移除监听器
+                            binding.tvPriceInteger.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        }
+                    })
+                    //当售价和原价过长出现交叉时仅展示原价
+                    if ( binding.tvIsShowPriceUnit.width + tvOriginalPriceWidth + tvPriceDecimalWidth +tvPriceIntegerWidth> recyclerView.measuredWidth){
+                        binding.tvOriginalPrice.visibility = View.GONE
+                    }
+
+                    //当仅有原价或售价且超过一行宽度时右侧…展示
+                    if (binding.tvPriceInteger.width + binding.tvPriceDecimal.width + binding.tvPriceDecimal.width> recyclerView.measuredWidth){
+                        binding.tvPriceInteger.maxLines = 1
+                        binding.tvPriceInteger.ellipsize = TextUtils.TruncateAt.END
+                        binding.tvPriceDecimal.visibility = View.GONE
+                        binding.tvOriginalPrice.visibility = View.GONE
+                    }
+
                 }
             }
 

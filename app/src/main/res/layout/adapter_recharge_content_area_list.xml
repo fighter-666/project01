@@ -88,7 +88,6 @@
         android:layout_marginBottom="5dp"
         android:text="10"
         android:textColor="#ea5858"
-
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="gone"
@@ -111,13 +110,13 @@
         android:id="@+id/tvOriginalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="58dp"
+        android:layout_marginRight="10dp"
         android:text="10"
         android:textColor="#999999"
         android:textSize="12sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/tvPriceDecimal"
-        app:layout_constraintLeft_toRightOf="@id/tvPriceInteger" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
