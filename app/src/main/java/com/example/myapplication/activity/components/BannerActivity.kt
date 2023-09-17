@@ -29,22 +29,22 @@ class BannerActivity : AppCompatActivity() {
 
         val imageAdapter = ImageAdapter(DataBean.testData2)
         //加载本地图片
-        /*//加载本地图片
+        //加载本地图片
         binding.banner.setAdapter(imageAdapter)
             .addBannerLifecycleObserver(this)
             .setIndicator(CircleIndicator(this))
             .setOnBannerListener(OnBannerListener<Any?> { data, position ->
                 Log.i(TAG, "position: $position")
-            })*/
+            })
 
-        binding.banner.setAdapter(object : BannerImageAdapter<DataBean>(DataBean.testData3) {
+     /*   binding.banner.setAdapter(object : BannerImageAdapter<DataBean>(DataBean.testData3) {
             override fun onBindView(holder: BannerImageHolder, data: DataBean, position: Int, size: Int) {
                 Glide.with(holder.imageView)
                     .load(data.imageUrl)
                     .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
                     .into(holder.imageView)
             }
-        })
+        })*/
 
 
     }

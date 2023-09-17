@@ -35,6 +35,7 @@ class RechargeManyImageGridAdapter(
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean.PicListBean) {
         val binding = AdapterRechargeManyImageGridBinding.bind(holder.itemView)
 
+        val imageWeight = recyclerView.measuredWidth/2
         // 在协程中加载网络图片或在后台线程中加载大量图片。
         // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
         CoroutineScope(Dispatchers.Main).launch {
@@ -44,6 +45,8 @@ class RechargeManyImageGridAdapter(
                 .load(item.imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(requestOptions)
+                    //每个图片都是正方形显示
+                .override(imageWeight,imageWeight)//这里的单位是px
                 .into(binding.ivImageUrl)
         }
     }

@@ -34,6 +34,16 @@ import kotlinx.coroutines.launch
 
 class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
+
+    private var onContactSelectedListener: OnContactSelectedListener? = null
+    interface OnContactSelectedListener {
+        fun onContactSelected(phoneNumber: String)
+    }
+
+    fun setOnContactSelectedListener(listener: OnContactSelectedListener) {
+        onContactSelectedListener = listener
+    }
+
     init {
         addItemType(
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE,
@@ -126,6 +136,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 if (item.picArea.stock != null) {
                     binding.tvStockout.visibility = View.VISIBLE
                 }
+                val imageWeight = recyclerView.measuredWidth
+                if (item.picArea.imageRatio == null){
+                    item.picArea.imageRatio = 1.0f.toString()
+                }
+                val imageRatio = item.picArea.imageRatio.toFloat()
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
                     val rechargeAdapter = ContentAreaListAdapter(
@@ -143,7 +158,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
                     CoroutineScope(Dispatchers.Main).launch {
                         // 设置圆角半径
-                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                        //val requestOptions = RequestOptions().transform(RoundedCorners(20))
                         Glide.with(context)
                             .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
@@ -151,6 +166,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                             .transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
                             //.apply(requestOptions)
                             .into(binding.ivPicAreaImageUrl)
+
                     }
                 } else{
                     //在协程中加载网络图片或在后台线程中加载大量图片。
@@ -214,8 +230,9 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 binding.btnSelect.setOnClickListener {
                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
                     (context as ComponentActivity).startActivityForResult(intent, 1)
-                    binding.etPhone.text = "18350970625"
+                    //binding.etPhone.text = "18350970625"
                 }
+                //onContactSelectedListener?.onContactSelected(phoneNumber)
 
                 binding.etPhone.text = item.quickRecharge.title
 
@@ -241,9 +258,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                         position: Int,
                         size: Int,
                     ) {
-                        Glide.with(holder.imageView)
-                            .load(data.imageUrl)
-                            .into(holder.imageView)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            Glide.with(holder.imageView)
+                                .load(data.imageUrl)
+                                .into(holder.imageView)
+                        }
                     }
                 })
                 //设置圆角
@@ -258,14 +277,6 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
 
     // 在片段（Fragment）中重写onActivityResult方法
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            // 处理通讯录选择结果
-            // ...
-            // 刷新适配器
-            notifyItemChanged(2)
-        }
-    }
 }
 
 

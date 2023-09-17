@@ -1037,7 +1037,7 @@
             "sceneId": "hg_sy_feedtg##100001##default##3483200001##010001002000##1##N##1##16##N##N##34832",
             "picArea": {
                 "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654653421294263.png",
-                "imageRatio": "1.000",
+                "imageRatio": "3.000",
                 "playType": null,
                 "videoStreamUrl": null,
                 "videoStreamUrlType": null,
@@ -1079,8 +1079,8 @@
                 {
                     "type": "1",
                     "mainTitle": {
-                        "title": "【孝心卡】孝顺爸妈用孝心",
-                        "color": "",
+                        "title": "【孝心卡】孝顺爸妈用孝心888888888888888888888888888",
+                        "color": "#aaaaaa",
                         "type": "2"
                     },
                     "saleTipList": null,

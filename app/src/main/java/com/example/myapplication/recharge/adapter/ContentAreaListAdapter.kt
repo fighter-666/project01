@@ -7,7 +7,6 @@ import android.text.Spanned
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
-import android.util.Log
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,10 +29,10 @@ class ContentAreaListAdapter(
         layoutResId,
         data
     ) {
-        private  var tvPriceIntegerWidth: Int = 0
-        private  var tvPriceDecimalWidth: Int = 0
-        private  var tvOriginalPriceWidth: Int = 0
-        private  var tvIsShowPriceUnitWidth: Int = 0
+    private var tvPriceIntegerWidth: Int = 0
+    private var tvPriceDecimalWidth: Int = 0
+    private var tvOriginalPriceWidth: Int = 0
+    private var tvIsShowPriceUnitWidth: Int = 0
 
     override fun convert(
         holder: BaseViewHolder,
@@ -46,9 +45,16 @@ class ContentAreaListAdapter(
                 //mainTitle : 主标题
                 if (item.mainTitle.type == "1") {
                     binding.tvMainTitleTitle.maxLines = 1
-                    binding.tvMainTitleTitle.ellipsize =
-                        TextUtils.TruncateAt.END
+                } else{
+                    binding.tvMainTitleTitle.maxLines = 2
                 }
+                if (item.mainTitle.color != ""){
+                    binding.tvMainTitleTitle.setTextColor(
+                        Color.parseColor(item.mainTitle.color)
+                    )
+                }
+                binding.tvMainTitleTitle.ellipsize =
+                    TextUtils.TruncateAt.END
                 binding.tvMainTitleTitle.text = item.mainTitle.title
                 binding.tvMainTitleTitle.visibility = View.VISIBLE
             }
@@ -76,7 +82,7 @@ class ContentAreaListAdapter(
                 if (item.price != null) {
                     //售价字体颜色通过priceColor控制，默认颜色为#ea5858
                     binding.tvPriceInteger.text = item.price.priceInteger
-                   if (item.price.priceColor != ""){
+                    if (item.price.priceColor != "") {
                         // 获取颜色值
                         val color = Color.parseColor(item.price.priceColor)
                         binding.tvPriceInteger.setTextColor(color)
@@ -88,7 +94,7 @@ class ContentAreaListAdapter(
                     binding.tvPriceDecimal.text = item.price.priceDecimal
 
                     //原价originalPrice字段控制（没有不显示），字体颜色通过originalPriceColor控制，默认为#999999
-                    if (item.price.originalPriceColor != ""){
+                    if (item.price.originalPriceColor != "") {
                         val color2 = Color.parseColor(item.price.originalPriceColor)
                         binding.tvOriginalPrice.setTextColor(color2)
                     }
@@ -97,10 +103,9 @@ class ContentAreaListAdapter(
                     binding.tvPriceDecimal.visibility = View.VISIBLE
                     binding.tvOriginalPrice.visibility = View.VISIBLE
                     // "售价是否显示人民币符号：0：否1：是",
-                     if (item.price.isShowPriceUnit == "1") {
+                    if (item.price.isShowPriceUnit == "1") {
                         binding.tvIsShowPriceUnit.visibility = View.VISIBLE
                     }
-
 
                     //"isOriginalPriceLine": "原价是否划横线：0：否1：是"
                     if (item.price.isOriginalPriceLine == "1") {
@@ -119,13 +124,6 @@ class ContentAreaListAdapter(
                         binding.tvOriginalPrice.text = item.price.originalPrice
                     }
 
-                    val TAG = "aaa"
-
-
-
-
-
-
                     binding.tvPriceInteger.post {
                         run() {
                             binding.tvPriceDecimal.post {
@@ -134,42 +132,60 @@ class ContentAreaListAdapter(
                                         run() {
                                             binding.tvIsShowPriceUnit.post {
                                                 run() {
-                                                    tvIsShowPriceUnitWidth = binding.tvIsShowPriceUnit.width;
-                                                    tvOriginalPriceWidth = binding.tvOriginalPrice.width;
-                                                    tvPriceDecimalWidth = binding.tvPriceDecimal.width;
-                                                    tvPriceIntegerWidth = binding.tvPriceInteger.width;
+                                                    tvIsShowPriceUnitWidth =
+                                                        binding.tvIsShowPriceUnit.width
+                                                    tvOriginalPriceWidth =
+                                                        binding.tvOriginalPrice.width;
+                                                    tvPriceDecimalWidth =
+                                                        binding.tvPriceDecimal.width;
+                                                    tvPriceIntegerWidth =
+                                                        binding.tvPriceInteger.width;
                                                     //当售价和原价过长出现交叉时仅展示原价
-                                                    if (item.price.priceInteger != "" &&item.price.originalPrice!="" ){
-                                                        val totalWidth = tvIsShowPriceUnitWidth + tvOriginalPriceWidth + tvPriceDecimalWidth +tvPriceIntegerWidth +DensityUtils.dpToPx(context,20f)
-                                                        if ( totalWidth > recyclerView.measuredWidth){
-                                                            binding.tvOriginalPrice.visibility = View.GONE
+                                                    if (item.price.priceInteger != "" && item.price.originalPrice != "") {
+                                                        val totalWidth =
+                                                            tvIsShowPriceUnitWidth + tvOriginalPriceWidth + tvPriceDecimalWidth + tvPriceIntegerWidth + DensityUtils.dpToPx(
+                                                                context,
+                                                                20f
+                                                            )
+                                                        if (totalWidth > recyclerView.measuredWidth) {
+                                                            binding.tvOriginalPrice.visibility =
+                                                                View.GONE
 
                                                         }
-                                                        Log.e(TAG,"totalWidth:" + totalWidth);
-                                                        Log.e(TAG,"recyclerView.measuredWidth: " + recyclerView.measuredWidth
-                                                                + " tvIsShowPriceUnitWidth: " + tvIsShowPriceUnitWidth +" tvOriginalPriceWidth: " + tvOriginalPriceWidth
-                                                                + " tvPriceDecimalWidth: " + tvPriceDecimalWidth +" tvPriceIntegerWidth: " + tvPriceIntegerWidth);
-                                                    }else{
+                                                    } else {
                                                         binding.tvOriginalPrice.maxLines = 1
-                                                        binding.tvOriginalPrice.maxWidth = recyclerView.measuredWidth- DensityUtils.dpToPx(context,20f)
+                                                        binding.tvOriginalPrice.maxWidth =
+                                                            recyclerView.measuredWidth - DensityUtils.dpToPx(
+                                                                context,
+                                                                20f
+                                                            )
                                                         binding.tvOriginalPrice.isSingleLine = true
-                                                        binding.tvOriginalPrice.ellipsize = TextUtils.TruncateAt.END
+                                                        binding.tvOriginalPrice.ellipsize =
+                                                            TextUtils.TruncateAt.END
                                                     }
 
 
                                                     //当仅有原价或售价且超过一行宽度时右侧…展示
-                                                    val totalWidth2 =  tvIsShowPriceUnitWidth + tvPriceDecimalWidth +tvPriceIntegerWidth+DensityUtils.dpToPx(context,20f)
-                                                    if (totalWidth2 >= recyclerView.measuredWidth){
+                                                    val totalWidth2 =
+                                                        tvIsShowPriceUnitWidth + tvPriceDecimalWidth + tvPriceIntegerWidth + DensityUtils.dpToPx(
+                                                            context,
+                                                            20f
+                                                        )
+                                                    if (totalWidth2 >= recyclerView.measuredWidth) {
                                                         binding.tvPriceInteger.maxLines = 1
-                                                        binding.tvPriceInteger.maxWidth = recyclerView.measuredWidth - tvIsShowPriceUnitWidth - DensityUtils.dpToPx(context,20f)
+                                                        binding.tvPriceInteger.maxWidth =
+                                                            recyclerView.measuredWidth - tvIsShowPriceUnitWidth - DensityUtils.dpToPx(
+                                                                context,
+                                                                20f
+                                                            )
                                                         binding.tvPriceInteger.isSingleLine = true
-                                                        binding.tvPriceInteger.ellipsize = TextUtils.TruncateAt.END
-                                                        binding.tvPriceDecimal.visibility = View.GONE
-                                                        binding.tvOriginalPrice.visibility = View.GONE
+                                                        binding.tvPriceInteger.ellipsize =
+                                                            TextUtils.TruncateAt.END
+                                                        binding.tvPriceDecimal.visibility =
+                                                            View.GONE
+                                                        binding.tvOriginalPrice.visibility =
+                                                            View.GONE
                                                     }
-                                                    /*Log.e(TAG,"totalWidth2:" + totalWidth2);
-                                                    Log.e(TAG,"tvPriceIntegerWidth:" + tvPriceIntegerWidth);
-                                                    Log.e(TAG,"recyclerView.measuredWidth:" + recyclerView.measuredWidth);*/
                                                 }
                                             }
                                         }
@@ -320,8 +336,6 @@ class ContentAreaListAdapter(
             }
 
             else -> {
-
-
             }
         }
     }

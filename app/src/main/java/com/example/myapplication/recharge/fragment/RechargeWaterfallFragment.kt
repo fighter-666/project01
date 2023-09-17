@@ -3,6 +3,7 @@ package com.example.myapplication.recharge.fragment
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.blankj.utilcode.util.LogUtils
+import com.example.myapplication.activity.components.PhnoeActivity
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.RechargeWaterfallMultipleItemQuickAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
@@ -46,56 +48,72 @@ class RechargeWaterfallFragment : Fragment(){
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
+
+
+        binding.btnSelect.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            startActivityForResult(intent, 1)
+        }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        LogUtils.d(
+            "555=" + "aaaaaa"
+        )
+      super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            PICK_CONTACT -> {
+                mIntent = data
+                val contactUri = data?.data
+                getContactNumberByUri(contactUri)
+                if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+                    data?.data?.let { contactUri ->
+                        mIntent = data
+                        contactNumber = getContactNumberByUri(contactUri)
+                        LogUtils.d(
+                            "contactNumber=" + contactNumber + "; px=" + contactUri
+                        )
+                        val updatedItem =
+                            myAdapter.getItem(2)
+                        if (updatedItem.quickRecharge != null) {
+                            updatedItem.quickRecharge.title = contactNumber
+                        }
+
+                        // 更新适配器中的数据集
+                        feedList.feedList.set(2, updatedItem); // 将索引为2的项替换为更新后的项
+                        myAdapter.notifyItemChanged(2)
+                    }
+                }
+            }
+
+
+        }
+
+    }
+
+   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        myAdapter.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { contactUri ->
-                mIntent = data
-                contactNumber = getContactNumberByUri(data)
+            if (data != null) {
+                val contactUri = data.data
+                val phoneNumber = contactUri?.let { getContactNumberByUri(it) }
+                // 在这里处理获取的选中手机号码 phoneNumber
                 LogUtils.d(
-                    "contactNumber=" + contactNumber + "; px=" + contactUri
+                    "phoneNumber=" + phoneNumber
                 )
-                val updatedItem =
-                    myAdapter.getItem(2)
-                if (updatedItem.quickRecharge != null) {
-                    updatedItem.quickRecharge.title = contactNumber
-                }
-
-                // 更新适配器中的数据集
-                feedList.feedList.set(2, updatedItem); // 将索引为2的项替换为更新后的项
-                myAdapter.notifyItemChanged(2)
             }
         }
-    }
+    }*/
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray,
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == RechargeWaterfallFragment.PERMISSIONS_REQUEST_READ_CONTACTS) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 用户成功授予权限
-                getContactNumberByUri(mIntent)
-                myAdapter.notifyItemChanged(2)
-            }
-        }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
     //用于从联系人的 Uri（Uniform Resource Identifier，统一资源标识符）中获取联系人的电话号码
-    private fun getContactNumberByUri(data: Intent?): String? {
+    private fun getContactNumberByUri(data: Uri?): String? {
         var phoneNumber: String? = null
-        val contactUri = data?.data
+        val contactUri = data
         //来获取一个光标（Cursor）对象。这里使用 contentResolver 来查询联系人的数据
         val cursor =
             contactUri?.let { requireActivity().contentResolver.query(it, null, null, null, null) }
@@ -139,7 +157,6 @@ class RechargeWaterfallFragment : Fragment(){
                 }
             }
         }
-
        return phoneNumber
     }
 

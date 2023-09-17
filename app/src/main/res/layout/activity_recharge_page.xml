@@ -7,24 +7,21 @@
     android:background="#f4f4f4">
 
 
-
-
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
+            android:layout_height="wrap_content">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,8 +36,7 @@
                     android:layout_height="39dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/tvRechargeResult"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- 在这里添加你的约束布局内容 -->
                 <ImageView
@@ -152,8 +148,8 @@
                     android:layout_marginTop="27dp"
                     android:background="@drawable/shape_rectangle2"
                     app:ivLoadHeight="17dp"
-                    app:ivReLoadHeight="14dp"
                     app:ivLoadWidth="16dp"
+                    app:ivReLoadHeight="14dp"
                     app:ivReLoadWidth="16dp"
                     app:layout_constraintLeft_toRightOf="@id/tvContinueRecharge"
                     app:layout_constraintRight_toRightOf="parent"
@@ -395,25 +391,26 @@
                         android:layout_width="50dp"
                         android:layout_height="24dp"
                         android:layout_marginLeft="220dp"
-                        android:layout_marginTop="24dp"
                         android:background="@drawable/shape_rectangle9"
                         android:gravity="center"
                         android:text="去开启"
                         android:textColor="#5b82ff"
                         android:textSize="13sp"
                         app:layout_constraintLeft_toRightOf="@id/ivAutoRecharge"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/ivAutoRecharge"
+                        app:layout_constraintBottom_toBottomOf="@id/ivAutoRecharge"/>
 
                     <View
+                        android:id="@+id/viewLine"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginRight="12dp"
                         android:background="@drawable/shape_rectangle10"
                         android:color="#eeeeee"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/ivAutoRecharge" />
 
 
                     <ImageView
@@ -421,10 +418,10 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginTop="86dp"
+                        android:layout_marginTop="16dp"
                         android:src="@drawable/watch_video"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/viewLine" />
 
 
                     <TextView
@@ -472,38 +469,39 @@
                         android:layout_width="50dp"
                         android:layout_height="24dp"
                         android:layout_marginLeft="220dp"
-                        android:layout_marginTop="94dp"
                         android:background="@drawable/shape_rectangle9"
                         android:gravity="center"
                         android:text="去看看"
                         android:textColor="#5b82ff"
                         android:textSize="13sp"
                         app:layout_constraintLeft_toRightOf="@id/ivWatchVideo"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/ivWatchVideo"
+                        app:layout_constraintBottom_toBottomOf="@id/ivWatchVideo"/>
 
                     <View
+                        android:id="@+id/viewLine2"
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginTop="140dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginRight="12dp"
                         android:background="@drawable/shape_rectangle10"
                         android:color="#eeeeee"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/ivWatchVideo" />
 
                     <TextView
                         android:id="@+id/tvCrossExchange"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="13dp"
-                        android:layout_marginTop="156dp"
+                        android:layout_marginTop="12dp"
                         android:gravity="left"
                         android:text="推荐兑换好物："
                         android:textColor="#333333"
                         android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/viewLine2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -594,12 +592,12 @@
                     android:id="@+id/llWaterfall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_marginTop="15dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toTopOf="@id/viewBottom"
-                    app:layout_constraintTop_toBottomOf="@id/rechargeScratchCard"
-                    >
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rechargeScratchCard">
+
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabLayout"
                         android:layout_width="match_parent"
@@ -607,17 +605,16 @@
                         android:background="@drawable/shape_recharge_tab_rectangle"
                         android:minHeight="?attr/actionBarSize"
                         android:theme="@style/Theme.AppCompat"
-                        app:tabIndicatorHeight="4dp"
-                        app:tabIndicatorFullWidth="false"
-                        app:tabIndicator="@drawable/shape_tab_indicator"
-                        app:tabIndicatorColor="#1990ff"
-                        app:tabMinWidth="50dp"
-                        app:tabMode="scrollable"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/viewPager2"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tabIndicator="@drawable/shape_tab_indicator"
+                        app:tabIndicatorColor="#1990ff"
+                        app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorHeight="4dp"
+                        app:tabMinWidth="50dp"
+                        app:tabMode="scrollable" />
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/viewPager2"
@@ -625,25 +622,24 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        app:layout_constraintTop_toBottomOf="@id/tabLayout"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:id="@+id/viewBottom"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/llWaterfall"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    />
--->
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llWaterfall" />
+                -->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
         <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     <androidx.appcompat.widget.Toolbar
@@ -652,8 +648,7 @@
         android:layout_height="wrap_content"
         android:background="#f4f4f4"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.example.myapplication.widget.CustomTitleBarViewGroup
             android:id="@+id/tvTitle"
@@ -668,7 +663,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:right_title="评价" />
     </androidx.appcompat.widget.Toolbar>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
