@@ -31,6 +31,7 @@ import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrrollTextViewBackground
+import com.example.myapplication.widget.MyBaseFragmentActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
@@ -40,7 +41,7 @@ import com.scwang.smart.refresh.header.BezierRadarHeader
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
-class RechargePageActivity : AppCompatActivity() {
+class RechargePageActivity :  MyBaseFragmentActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
     private lateinit var fragment: RechargeWaterfallFragment

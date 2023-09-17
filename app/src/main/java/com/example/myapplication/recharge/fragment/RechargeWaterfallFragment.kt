@@ -58,9 +58,6 @@ class RechargeWaterfallFragment : Fragment(){
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        LogUtils.d(
-            "555=" + "aaaaaa"
-        )
       super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             PICK_CONTACT -> {
@@ -71,18 +68,20 @@ class RechargeWaterfallFragment : Fragment(){
                     data?.data?.let { contactUri ->
                         mIntent = data
                         contactNumber = getContactNumberByUri(contactUri)
-                        LogUtils.d(
-                            "contactNumber=" + contactNumber + "; px=" + contactUri
-                        )
+
                         val updatedItem =
-                            myAdapter.getItem(2)
+                            myAdapter.getItem(1)
                         if (updatedItem.quickRecharge != null) {
                             updatedItem.quickRecharge.title = contactNumber
+                            // 更新适配器中的数据集
+                            feedList.feedList.set(1, updatedItem); // 将索引为2的项替换为更新后的项
+                            myAdapter.notifyItemChanged(1)
+                            LogUtils.d(
+                                "contactNumber=" + contactNumber + "; updatedItem=" + updatedItem.quickRecharge.title
+                            )
                         }
 
-                        // 更新适配器中的数据集
-                        feedList.feedList.set(2, updatedItem); // 将索引为2的项替换为更新后的项
-                        myAdapter.notifyItemChanged(2)
+
                     }
                 }
             }
