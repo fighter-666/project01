@@ -913,10 +913,67 @@
                     "saleTipList": null,
                     "price": {
                         "isShowPriceUnit": "1",
-                        "priceInteger": "5888888888888888888",
+                        "priceInteger": "58",
                         "priceDecimal": "/月",
                         "priceColor": "",
                         "originalPrice": "￥10/月",
+                        "originalPriceColor": "",
+                        "isOriginalPriceLine": ""
+                    },
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "3",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": {
+                        "isShowPriceUnit": "1",
+                        "priceInteger": "58888888",
+                        "priceDecimal": "/月",
+                        "priceColor": "",
+                        "originalPrice": "￥10/月",
+                        "originalPriceColor": "",
+                        "isOriginalPriceLine": ""
+                    },
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "3",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": {
+                        "isShowPriceUnit": "1",
+                        "priceInteger": "5888888888888",
+                        "priceDecimal": "/月",
+                        "priceColor": "",
+                        "originalPrice": "",
+                        "originalPriceColor": "",
+                        "isOriginalPriceLine": ""
+                    },
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "3",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": {
+                        "isShowPriceUnit": "",
+                        "priceInteger": "",
+                        "priceDecimal": "",
+                        "priceColor": "",
+                        "originalPrice": "588888888888893338999999999",
                         "originalPriceColor": "",
                         "isOriginalPriceLine": ""
                     },
@@ -1129,6 +1186,53 @@
                 "picList": []
             },
             "contentAreaList": [
+                {
+                    "type": "3",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": {
+                        "isShowPriceUnit": "1",
+                        "priceInteger": "5888888888888",
+                        "priceDecimal": "/月",
+                        "priceColor": "",
+                        "originalPrice": "",
+                        "originalPriceColor": "",
+                        "isOriginalPriceLine": ""
+                    },
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "4",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": {
+                        "icon" : "",
+                        "title" : "河北省 石家庄市"
+                    },
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "5",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": {
+                        "startTime" : "202309212120000",
+                        "endTime" : "20230924120000"
+                    },
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
                 {
                     "type": "1",
                     "mainTitle": {

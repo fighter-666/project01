@@ -1,35 +1,23 @@
 package com.example.myapplication.recharge.adapter
 
 import android.graphics.Color
-import android.icu.number.IntegerWidth
 import android.os.CountDownTimer
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
+import android.util.Log
 import android.view.View
-import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
-import androidx.core.view.isGone
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
-import com.example.myapplication.adapter.ComponentsAdapter
-import com.example.myapplication.adapter.LabAdapter
-import com.example.myapplication.databinding.AdapterAdvertiseBinding
 import com.example.myapplication.databinding.AdapterRechargeContentAreaListBinding
-import com.example.myapplication.databinding.WidgetMultipleItemAdvertiseBinding
 import com.example.myapplication.recharge.data.GetFeedListData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.myapplication.util.DensityUtils
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -45,6 +33,7 @@ class ContentAreaListAdapter(
         private  var tvPriceIntegerWidth: Int = 0
         private  var tvPriceDecimalWidth: Int = 0
         private  var tvOriginalPriceWidth: Int = 0
+        private  var tvIsShowPriceUnitWidth: Int = 0
 
     override fun convert(
         holder: BaseViewHolder,
@@ -86,7 +75,7 @@ class ContentAreaListAdapter(
                 //price : 价格
                 if (item.price != null) {
                     //售价字体颜色通过priceColor控制，默认颜色为#ea5858
-                    binding.tvPriceInteger.text = "item.price.priceInteger"
+                    binding.tvPriceInteger.text = item.price.priceInteger
                    if (item.price.priceColor != ""){
                         // 获取颜色值
                         val color = Color.parseColor(item.price.priceColor)
@@ -130,58 +119,65 @@ class ContentAreaListAdapter(
                         binding.tvOriginalPrice.text = item.price.originalPrice
                     }
 
-                    // 添加视图树监听器
-                    binding.tvPriceInteger.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                        override fun onGlobalLayout() {
-                            // 获取TextView的宽度
-                            tvPriceIntegerWidth = binding.tvPriceInteger.width
+                    val TAG = "aaa"
 
-                            // 在此处使用TextView的宽度进行后续操作
-                            // ...
 
-                            // 移除监听器
-                            binding.tvPriceInteger.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+
+
+
+                    binding.tvPriceInteger.post {
+                        run() {
+                            binding.tvPriceDecimal.post {
+                                run() {
+                                    binding.tvOriginalPrice.post {
+                                        run() {
+                                            binding.tvIsShowPriceUnit.post {
+                                                run() {
+                                                    tvIsShowPriceUnitWidth = binding.tvIsShowPriceUnit.width;
+                                                    tvOriginalPriceWidth = binding.tvOriginalPrice.width;
+                                                    tvPriceDecimalWidth = binding.tvPriceDecimal.width;
+                                                    tvPriceIntegerWidth = binding.tvPriceInteger.width;
+                                                    //当售价和原价过长出现交叉时仅展示原价
+                                                    if (item.price.priceInteger != "" &&item.price.originalPrice!="" ){
+                                                        val totalWidth = tvIsShowPriceUnitWidth + tvOriginalPriceWidth + tvPriceDecimalWidth +tvPriceIntegerWidth +DensityUtils.dpToPx(context,20f)
+                                                        if ( totalWidth > recyclerView.measuredWidth){
+                                                            binding.tvOriginalPrice.visibility = View.GONE
+
+                                                        }
+                                                        Log.e(TAG,"totalWidth:" + totalWidth);
+                                                        Log.e(TAG,"recyclerView.measuredWidth: " + recyclerView.measuredWidth
+                                                                + " tvIsShowPriceUnitWidth: " + tvIsShowPriceUnitWidth +" tvOriginalPriceWidth: " + tvOriginalPriceWidth
+                                                                + " tvPriceDecimalWidth: " + tvPriceDecimalWidth +" tvPriceIntegerWidth: " + tvPriceIntegerWidth);
+                                                    }else{
+                                                        binding.tvOriginalPrice.maxLines = 1
+                                                        binding.tvOriginalPrice.maxWidth = recyclerView.measuredWidth- DensityUtils.dpToPx(context,20f)
+                                                        binding.tvOriginalPrice.isSingleLine = true
+                                                        binding.tvOriginalPrice.ellipsize = TextUtils.TruncateAt.END
+                                                    }
+
+
+                                                    //当仅有原价或售价且超过一行宽度时右侧…展示
+                                                    val totalWidth2 =  tvIsShowPriceUnitWidth + tvPriceDecimalWidth +tvPriceIntegerWidth+DensityUtils.dpToPx(context,20f)
+                                                    if (totalWidth2 >= recyclerView.measuredWidth){
+                                                        binding.tvPriceInteger.maxLines = 1
+                                                        binding.tvPriceInteger.maxWidth = recyclerView.measuredWidth - tvIsShowPriceUnitWidth - DensityUtils.dpToPx(context,20f)
+                                                        binding.tvPriceInteger.isSingleLine = true
+                                                        binding.tvPriceInteger.ellipsize = TextUtils.TruncateAt.END
+                                                        binding.tvPriceDecimal.visibility = View.GONE
+                                                        binding.tvOriginalPrice.visibility = View.GONE
+                                                    }
+                                                    /*Log.e(TAG,"totalWidth2:" + totalWidth2);
+                                                    Log.e(TAG,"tvPriceIntegerWidth:" + tvPriceIntegerWidth);
+                                                    Log.e(TAG,"recyclerView.measuredWidth:" + recyclerView.measuredWidth);*/
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    })
-                    // 添加视图树监听器
-                    binding.tvPriceDecimal.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                        override fun onGlobalLayout() {
-                            // 获取TextView的宽度
-                            tvPriceDecimalWidth = binding.tvPriceDecimal.width
-
-                            // 在此处使用TextView的宽度进行后续操作
-                            // ...
-
-                            // 移除监听器
-                            binding.tvPriceInteger.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                        }
-                    })
-                    // 添加视图树监听器
-                    binding.tvOriginalPrice.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                        override fun onGlobalLayout() {
-                            // 获取TextView的宽度
-                            tvOriginalPriceWidth = binding.tvOriginalPrice.width
-
-                            // 在此处使用TextView的宽度进行后续操作
-                            // ...
-
-                            // 移除监听器
-                            binding.tvPriceInteger.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                        }
-                    })
-                    //当售价和原价过长出现交叉时仅展示原价
-                    if ( binding.tvIsShowPriceUnit.width + tvOriginalPriceWidth + tvPriceDecimalWidth +tvPriceIntegerWidth> recyclerView.measuredWidth){
-                        binding.tvOriginalPrice.visibility = View.GONE
                     }
-
-                    //当仅有原价或售价且超过一行宽度时右侧…展示
-                    if (binding.tvPriceInteger.width + binding.tvPriceDecimal.width + binding.tvPriceDecimal.width> recyclerView.measuredWidth){
-                        binding.tvPriceInteger.maxLines = 1
-                        binding.tvPriceInteger.ellipsize = TextUtils.TruncateAt.END
-                        binding.tvPriceDecimal.visibility = View.GONE
-                        binding.tvOriginalPrice.visibility = View.GONE
-                    }
-
                 }
             }
 

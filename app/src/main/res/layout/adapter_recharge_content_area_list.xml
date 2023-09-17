@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/cl"
     android:background="@drawable/shape_rectangle19">
 
 
@@ -77,7 +78,7 @@
         android:textColor="#ea5858"
         android:textSize="12sp"
         android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@id/tvPriceDecimal"
+        app:layout_constraintBottom_toBottomOf="@id/tvPriceInteger"
         app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle" />
 
     <TextView
@@ -89,6 +90,8 @@
         android:text="10"
         android:textColor="#ea5858"
         android:textSize="18sp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/clLocation"

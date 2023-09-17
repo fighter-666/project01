@@ -163,4 +163,5 @@ class VariousTextviewActivity : AppCompatActivity() {
         binding.tvText10.setText(spannableString10)
 
     }
+
 }
