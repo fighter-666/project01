@@ -29,14 +29,15 @@ class RechargeWaterfallBaiduFragment : Fragment() {
         //访问网页
         binding.webview.loadUrl(RechargePageActivity.link)
         //系统默认会通过手机浏览器打开网页，为了能够直接通过WebView显示网页，则必须设置
-        binding.webview.setWebViewClient(object : WebViewClient() {
+        binding.webview.webViewClient = object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 //使用WebView加载显示url
                 view.loadUrl(url)
                 //返回true
                 return true
             }
-        })
+        }
     }
 }
 

@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="360dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#f4f4f4">
+    android:background="@color/gray_200"
+    >
 
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -26,9 +27,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:paddingLeft="13dp"
-                android:paddingRight="13dp">
+                android:paddingRight="13dp"
+                tools:ignore="ExtraText">
 
                 <View
                     android:id="@+id/viewTop"

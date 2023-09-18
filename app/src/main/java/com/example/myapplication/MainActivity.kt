@@ -11,7 +11,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.adapter.DynamicFragmentAdapter
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.feed.activity.FeedStreamHomePageActivity
 import com.example.myapplication.fragment.ComponentsFragment
 import com.example.myapplication.fragment.HelperFragment
 import com.example.myapplication.fragment.LabFragment
@@ -42,24 +44,11 @@ class MainActivity : AppCompatActivity() {
             R.mipmap.icon_tabbar_lab_selected
         )
 
-        //设置默认的丽萍页面限制
-        binding.viewPager.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
-        //使用FragmentStateAdapter的匿名子类为ViewPager2设置适配器
-        /* binding.viewPager.adapter = object : FragmentStateAdapter(supportFragmentManager,lifecycle) {
-             override fun getItemCount(): Int {
-                 //返回标签页的数量
-                 return tabs.size
-             }
-
-             override fun createFragment(position: Int): Fragment {
-                 val fragment = ComponentsFragment.newInstance(tabs[position])
-                 val tab = binding.tabLayout.getTabAt(position)
-                 tab?.setIcon(pics[position])
-                 return fragment
-             }
-         }*/
-
-        val adapter = DynamicFragmentAdapter(supportFragmentManager, lifecycle)
+        // offscreenPageLimit 离屏页面限制决定了在 ViewPager 的适配器中，当前页面两侧应该保留的页面数量
+        // tabs.size 被用来动态地根据标签数量设置离屏页面限制
+        binding.viewPager.offscreenPageLimit = tabs.size
+        val adapter =
+            DynamicFragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager.adapter = adapter
 
         val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -70,27 +59,7 @@ class MainActivity : AppCompatActivity() {
             tabTitle.text = tabs[position]
             tabIcon.setImageResource(pics[position])
             tab.customView = tabView
-            //tab.setIcon(pics[position])
         }
         mediator.attach()
-    }
-
-    private class DynamicFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-        FragmentStateAdapter(fragmentManager, lifecycle) {
-        private val fragments = listOf(
-            ComponentsFragment(),
-            HelperFragment(),
-            LabFragment(),
-            WaterfallFragment(),
-            //加载更多的 Fragment 实例
-        )
-
-        override fun getItemCount(): Int {
-            return fragments.size
-        }
-
-        override fun createFragment(position: Int): Fragment {
-            return fragments[position]
-        }
     }
 }

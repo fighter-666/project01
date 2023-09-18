@@ -12,9 +12,9 @@ import android.graphics.PorterDuffXfermode
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import com.blankj.utilcode.util.LogUtils
 import com.example.myapplication.R
 import java.util.Random
+import kotlin.math.abs
 
 
 class ScratchCardView : View {
@@ -24,20 +24,19 @@ class ScratchCardView : View {
     private lateinit var pathPaint: Paint
     private lateinit var paint: Paint
     private lateinit var path: Path
-    var startX: Float = 0f
-    var startY: Float = 0f
-    var endX: Float = 0f
-    var endY: Float = 0f
-    var disX: Float = 0f
-    var disY: Float = 0f
-    var mBitmapFrontWidth: Float = 0f
-    var w: Int = 0
-    var h: Int = 0
-    var mBitmapFrontHeight: Float = 0f
+    private var startX: Float = 0f
+    private var startY: Float = 0f
+    private var endX: Float = 0f
+    private var endY: Float = 0f
+    private var disX: Float = 0f
+    private var disY: Float = 0f
+    private var mBitmapFrontWidth: Float = 0f
+    private var w: Int = 0
+    private var h: Int = 0
+    private var mBitmapFrontHeight: Float = 0f
     private var showFullResult = false
-    var scaleWidth: Float = 0f
-    var scaleHeight: Float = 0f
-    var scratchCardViewGroup: ScratchCardViewGroup? = null
+    private var scaleWidth: Float = 0f
+    private var scaleHeight: Float = 0f
 
 
     constructor(context: Context?) : super(context) {
@@ -108,10 +107,10 @@ class ScratchCardView : View {
         super.onLayout(changed, left, top, right, bottom)
 
         //适配屏幕
-        mBitmapBackground = getBitmap(mBitmapBackground, w, h)
+        mBitmapBackground = getBitmap(mBitmapBackground, w )
         mBitmapFront = getBitmap(
             mBitmapFront, (mBitmapBackground.width * 0.95).toInt(),
-            (mBitmapBackground.height * 0.92).toInt()
+
         )
 
         //设置绘图画布（Canvas）的目标位图为 mBitmapFront，接下来的绘制操作将直接作用于 mBitmapFront
@@ -139,8 +138,8 @@ class ScratchCardView : View {
                 path.lineTo(event.x - mBitmapFrontWidth, event.y - mBitmapFrontHeight)
                 endX = event.x
                 endY = event.y
-                disX = Math.abs(endX - startX)
-                disY = Math.abs(endY - startY)
+                disX = abs(endX - startX)
+                disY = abs(endY - startY)
 
 
             }
@@ -160,7 +159,7 @@ class ScratchCardView : View {
         val bitmap: Bitmap = mBitmapFront // 从某处获取位图对象
         val w: Int = bitmap.width // 位图的宽度
         val h: Int = bitmap.height // 位图的高度
-        val mPixels: IntArray = IntArray(w * h) // 创建一个整型数组来存储像素数据
+        val mPixels = IntArray(w * h) // 创建一个整型数组来存储像素数据
 
         //获取一个位图（Bitmap）的像素，并计算刮除区域的面积
         bitmap.getPixels(mPixels, 0, w, 0, 0, w, h)
@@ -206,7 +205,7 @@ class ScratchCardView : View {
         return true
     }
 
-    fun getBitmap(bm: Bitmap, newWidth: Int, newHeight: Int): Bitmap {
+    private fun getBitmap(bm: Bitmap, newWidth: Int): Bitmap {
         // 获得图片的宽高
         val width = bm.width
         val height = bm.height

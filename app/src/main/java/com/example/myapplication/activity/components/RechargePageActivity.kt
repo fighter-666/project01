@@ -21,6 +21,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRechargePageBinding
 import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
+import com.example.myapplication.recharge.adapter.RechargeFragmentAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.fragment.RechargeWaterfallBaiduFragment
@@ -69,8 +70,9 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
         val tabList = gson.fromJson(json, GetFeedTabData::class.java)
 
 
-        //设置默认的预加载页面限制
-        binding.viewPager2.offscreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+        //将 offscreenPageLimit 属性设置为 7，表示 ViewPager 会在当前页面的左右各保留 7 个页面的缓存。
+        // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
+        binding.viewPager2.offscreenPageLimit = tabList.tabList.size
 
         //将适配器对象与ViewPager2绑定，以便在ViewPager2中显示相应的页面内容
         val adapter = RechargeFragmentAdapter(supportFragmentManager, lifecycle)
@@ -418,27 +420,7 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
         //fragment.onActivityResult(requestCode, resultCode, data)
     }
 
-    class RechargeFragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-        FragmentStateAdapter(fragmentManager, lifecycle) {
-        private val fragments = listOf(
-            RechargeWaterfallFragment(),
-            RechargeWaterfallBaiduFragment(),
-            RechargeWaterfallFragment(),
-            RechargeWaterfallFragment(),
-            RechargeWaterfallFragment(),
-            RechargeWaterfallFragment(),
-            RechargeWaterfallFragment(),
-            //加载更多的 Fragment 实例
-        )
 
-        override fun getItemCount(): Int {
-            return fragments.size
-        }
-
-        override fun createFragment(position: Int): Fragment {
-            return fragments[position]
-        }
-    }
 
 
     companion object {

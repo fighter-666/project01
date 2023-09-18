@@ -10,4 +10,7 @@
     <color name="gray">#cccccc</color>
     <color name="blue">#0000ff</color>
     <color name="red">#ff0000</color>
+    <color name="gray_200">#f4f4f4</color>
+    <color name="ea5858">#ea5858</color>
+    <color name="black_999999">#999999</color>
 </resources>

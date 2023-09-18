@@ -3,6 +3,7 @@ package com.example.myapplication.recharge.view
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -29,7 +30,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
      * 这个构造方法是在代码中new的时候调用的
      * @param context
      */
-    constructor(context: Context?) : super(context!!) {}
+    constructor(context: Context?) : super(context!!)
 
     /**
      * 这个构造方法是在xml文件中初始化调用的
@@ -51,8 +52,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         context!!,
         attrs,
         defStyleAttr
-    ) {
-    }
+    )
 
     //抽到的卡片回传到自定义View，(context as ComponentActivity)将 context 对象强制转换为 ComponentActivity 类型，
     // 以便可以调用 ComponentActivity 类中定义的方法和属性。
@@ -93,8 +93,8 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         screenWidth = measuredWidth
     }
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
         // 卡片三等分
         val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f)) / 3
         val layoutParams1 =  binding.ivFirstCard.layoutParams

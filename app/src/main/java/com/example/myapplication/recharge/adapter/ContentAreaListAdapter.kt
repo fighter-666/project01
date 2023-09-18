@@ -84,10 +84,26 @@ class ContentAreaListAdapter(
                     binding.tvPriceInteger.text = item.price.priceInteger
                     if (item.price.priceColor != "") {
                         // 获取颜色值
-                        val color = Color.parseColor(item.price.priceColor)
-                        binding.tvPriceInteger.setTextColor(color)
-                        binding.tvPriceDecimal.setTextColor(color)
-                        binding.tvIsShowPriceUnit.setTextColor(color)
+                        val color = item.price.priceColor
+                        try {
+                            binding.tvPriceInteger.setTextColor(Color.parseColor(color))
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                            binding.tvPriceInteger.setTextColor(context.resources.getColor(R.color.ea5858))
+                        }
+                        try {
+                            binding.tvPriceDecimal.setTextColor(Color.parseColor(color))
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                            binding.tvPriceDecimal.setTextColor(context.resources.getColor(R.color.ea5858))
+                        }
+                        try {
+                            binding.tvIsShowPriceUnit.setTextColor(Color.parseColor(color))
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                            binding.tvIsShowPriceUnit.setTextColor(context.resources.getColor(R.color.ea5858))
+                        }
+
                     }
 
                     //售价字体颜色通过priceColor控制，默认颜色为#ea5858
@@ -95,8 +111,13 @@ class ContentAreaListAdapter(
 
                     //原价originalPrice字段控制（没有不显示），字体颜色通过originalPriceColor控制，默认为#999999
                     if (item.price.originalPriceColor != "") {
-                        val color2 = Color.parseColor(item.price.originalPriceColor)
-                        binding.tvOriginalPrice.setTextColor(color2)
+                        val color2 = item.price.originalPriceColor
+                        try {
+                            binding.tvOriginalPrice.setTextColor(Color.parseColor(color2))
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                            binding.tvOriginalPrice.setTextColor(context.resources.getColor(R.color.black_999999))
+                        }
                     }
 
                     binding.tvPriceInteger.visibility = View.VISIBLE
