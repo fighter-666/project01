@@ -48,12 +48,6 @@ class RechargeWaterfallFragment : Fragment(){
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
-
-
-        binding.btnSelect.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-            startActivityForResult(intent, 1)
-        }
     }
 
 
@@ -111,6 +105,7 @@ class RechargeWaterfallFragment : Fragment(){
 
     //用于从联系人的 Uri（Uniform Resource Identifier，统一资源标识符）中获取联系人的电话号码
     private fun getContactNumberByUri(data: Uri?): String? {
+
         var phoneNumber: String? = null
         val contactUri = data
         //来获取一个光标（Cursor）对象。这里使用 contentResolver 来查询联系人的数据

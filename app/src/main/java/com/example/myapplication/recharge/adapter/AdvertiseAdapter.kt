@@ -7,6 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterAdvertiseBinding
 import com.example.myapplication.databinding.AdapterHelperBinding
 import com.example.myapplication.databinding.AdapterRechargeBinding
@@ -31,6 +32,7 @@ class AdvertiseAdapter(@LayoutRes layoutResId: Int, data: MutableList<GetFeedLis
                 //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(requestOptions)
+                .error(R.drawable.ic_launcher_foreground)
                 .into(binding.ivImageUrl)
         }
         binding.tvTitle.text = item.title

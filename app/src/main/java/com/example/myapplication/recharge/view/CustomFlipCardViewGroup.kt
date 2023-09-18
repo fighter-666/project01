@@ -91,11 +91,6 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         //获取可用屏幕宽度
         screenWidth = measuredWidth
-        // 请求重新布局
-        requestLayout()
-        post {
-            invalidate()
-        }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
