@@ -10,9 +10,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -21,15 +23,14 @@ import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.example.myapplication.util.GetScreenUtils
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityFlipPageBinding
+import com.example.myapplication.util.GetScreenUtils
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.lang.reflect.Method
 import java.util.Random
 
 /**
@@ -38,7 +39,7 @@ import java.util.Random
  * @param valueAnimator 要重置时长的ValueAnimator对象
  */
 @SuppressLint("DiscouragedPrivateApi")
-fun resetDurationScale(valueAnimator: ValueAnimator) {
+/*fun resetDurationScale(valueAnimator: ValueAnimator) {
     try {
         val method: Method = ValueAnimator::class.java.getDeclaredMethod(
             "setDurationScale",
@@ -49,12 +50,12 @@ fun resetDurationScale(valueAnimator: ValueAnimator) {
     } catch (e: Exception) {
         e.printStackTrace()
     }
-}
+}*/
 
-class FlipPage : SlideRightBackActivity() {
+class FlipPage : AppCompatActivity() {
     private lateinit var binding: ActivityFlipPageBinding
     private lateinit var card: ImageView
-    private lateinit var closeicon: ImageView
+    private lateinit var closeIcon: ImageView
     private lateinit var prise: ImageView
     private lateinit var button: ImageView
     private lateinit var hint: ImageView
@@ -67,16 +68,17 @@ class FlipPage : SlideRightBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFlipPageBinding.inflate(layoutInflater)
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(binding.root)
 
         //沉浸式
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
-            .init();
+            .init()
 
         card = binding.ivCard
-        closeicon = binding.ivFlipPageClose
+        closeIcon = binding.ivFlipPageClose
         beam = binding.ivBeam
         prise = binding.ivFlipPagePrise
         button = binding.ivFlipPageCloseButton
@@ -98,7 +100,6 @@ class FlipPage : SlideRightBackActivity() {
 
         //动态设置底部动效的宽高
         val layoutParams1 = binding.ivFlipPageButtom.layoutParams
-        val initialWidth = 720
         val initialHeight = 377
 
         layoutParams1.width = imageWidth
@@ -106,36 +107,29 @@ class FlipPage : SlideRightBackActivity() {
         layoutParams1.height = (initialHeight * widthScale1).toInt()
         binding.ivFlipPageButtom.layoutParams = layoutParams1
 
-        //贴脸的效果移除，我的测试机density是2.75
-        val density = resources.displayMetrics.density
-        val cameraDistance = density * 10000
-        card.cameraDistance = cameraDistance
-
         //卡片缩放从100%放大到150%（缩放时间：0.2s）
-        val beamScaleX0 = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.000000000000000001f)
-        val beamScaleY0 = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.000000000000000001f)
-        beamScaleX0.duration = 1
-        beamScaleY0.duration = 1
         val scaleX = ObjectAnimator.ofFloat(card, View.SCALE_X, 1.5f)
         val scaleY = ObjectAnimator.ofFloat(card, View.SCALE_Y, 1.5f)
-        scaleX.duration = 400
-        scaleY.duration = 400
-        resetDurationScale(beamScaleX0)
-        beamScaleX0.addListener(object : AnimatorListenerAdapter() {
+        scaleX.duration = 600
+        scaleY.duration = 600
+        //resetDurationScale(beamScaleX0)
+
+        //2、卡片旋转由0度转向+15度（旋转时间0.2s）
+        //    光束出场从0%缩放至60%（缩放时间0.2s）
+        val rotation = ObjectAnimator.ofFloat(card, View.ROTATION, 0f,15f)
+        rotation.duration = 200
+        rotation.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 prise.visibility = View.GONE
                 button.visibility = View.GONE
                 hint.visibility = View.GONE
+                beam.visibility = View.VISIBLE
             }
         })
 
-        //2、卡片旋转由0度转向+15度（旋转时间0.2s）
-        //    光束出场从0%缩放至60%（缩放时间0.2s）
-        val rotation = ObjectAnimator.ofFloat(card, View.ROTATION, 15f)
-        rotation.duration = 200
 
-        val beamScaleX = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0.6f)
-        val beamScaleY = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0.6f)
+        val beamScaleX = ObjectAnimator.ofFloat(beam, View.SCALE_X, 0f,0.6f)
+        val beamScaleY = ObjectAnimator.ofFloat(beam, View.SCALE_Y, 0f,0.6f)
         beamScaleX.duration = 200
         beamScaleY.duration = 200
 
@@ -185,6 +179,10 @@ class FlipPage : SlideRightBackActivity() {
         beamScaleX5.duration = 200
         beamScaleY5.duration = 200
 
+        //贴脸的效果移除，我的测试机density是2.75
+        val density = resources.displayMetrics.density
+        val cameraDistance = density * 10000
+        card.cameraDistance = cameraDistance
         //7、卡片绕y轴旋转由0度旋转至270度（旋转时间0.4s）
         //   卡片缩放由150%放大至300%（缩放时间0.4s）
         //   光束消失透明度由100%变至0%（变化时间0.2s）
@@ -205,7 +203,7 @@ class FlipPage : SlideRightBackActivity() {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation6结束后更换图片资源
                 //生成一个随机的图片资源ID
-                var randomImageRes = 0
+                var randomImageRes: Int
                 val imageArray = arrayOf(R.drawable.winner, R.drawable.card3)
                 val random = Random()
                 val index = random.nextInt(imageArray.size)
@@ -256,7 +254,7 @@ class FlipPage : SlideRightBackActivity() {
         rotation7.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 // 在rotation结束后添加图片资源
-                closeicon.setImageResource(R.drawable.closeicon)
+                closeIcon.setImageResource(R.drawable.closeicon)
             }
         })
 
@@ -276,7 +274,7 @@ class FlipPage : SlideRightBackActivity() {
         rotation8.interpolator = LinearInterpolator()
 
         combinedAnimatorSet = AnimatorSet().apply {
-            playTogether(scaleX, scaleY, beamScaleX0, beamScaleY0)
+            /*playTogether(scaleX, scaleY)
             playTogether(rotation, beamScaleX, beamScaleY)
             playTogether(rotation2, beamScaleX2, beamScaleY2)
             playTogether(rotation3, beamScaleX3, beamScaleY3)
@@ -287,21 +285,26 @@ class FlipPage : SlideRightBackActivity() {
             playTogether(rotation8)
             playSequentially(
                 scaleX,
-                rotation,
-                rotation2,
+               rotation,
+                *//*rotation2,
                 rotation3,
                 rotation4,
                 beamScaleX5,
                 rotation6,
                 rotation7,
-                rotation8
-            )
+                rotation8*//*
+            )*/
         }
         combinedAnimatorSet.start()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        combinedAnimatorSet.cancel()
+        combinedAnimatorSet.removeAllListeners()
+    }
     @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
+  /*  override fun onBackPressed() {
         // 在这里执行您的逻辑
         //卡片摇晃的时候，用户关闭弹窗，卡片要回到初始态，然后开始退场动画。
         if (combinedAnimatorSet.isRunning) {
@@ -313,25 +316,26 @@ class FlipPage : SlideRightBackActivity() {
             //使用协程让返回键延迟执行
             CoroutineScope(Dispatchers.Main).launch {
                 delay(200)
+                cardRotation.cancel();
                 super.onBackPressed()
             }
         } else {
             super.onBackPressed()
         }
 
-    }
+    }*/
 
     //让glide只加载一次gif图片
     //定义了一个options对象，用于配置Glide的选项。这里设置了图片的
     // 缩放方式为fitCenter()，跳过内存缓存（skipMemoryCache(true)），
     // 并将磁盘缓存策略设置为DiskCacheStrategy.DATA，表示只缓存原始数据。
-    val options = RequestOptions()
+    private val options = RequestOptions()
         .fitCenter()
         .skipMemoryCache(true)
         .diskCacheStrategy(DiskCacheStrategy.DATA)
 
     fun loadImage(imageView: ImageView) {
-        Glide.with(getApplicationContext())
+        Glide.with(applicationContext)
             .asGif()
             .load(R.drawable.cheer)
             .apply(options)

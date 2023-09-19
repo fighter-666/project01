@@ -12,8 +12,8 @@ open class MyBaseFragmentActivity : FragmentActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val fragmentManager = supportFragmentManager
-        for (indext in fragmentManager.fragments.indices) {
-            val fragment = fragmentManager.fragments[indext] //找到第一层Fragment
+        for (index in fragmentManager.fragments.indices) {
+            val fragment = fragmentManager.fragments[index] //找到第一层Fragment
             fragment?.let { handleResult(it, requestCode, resultCode, data) }
                 ?: Log.w(
                     TAG, "Activity result no fragment exists for index: 0x"

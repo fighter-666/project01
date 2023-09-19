@@ -1,12 +1,9 @@
 package com.example.myapplication.recharge.adapter
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.provider.ContactsContract
 import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -34,18 +31,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
+class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
-
-    private var onContactSelectedListener: OnContactSelectedListener? = null
-    interface OnContactSelectedListener {
-        fun onContactSelected(phoneNumber: String)
-    }
-
-    fun setOnContactSelectedListener(listener: OnContactSelectedListener) {
-        onContactSelectedListener = listener
-    }
-
     init {
         addItemType(
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE,
@@ -101,7 +88,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                     }
                 }
 
-                val myAdapter = RechargeManyImageGridAdapter(
+                val myAdapter = ManyImageGridAdapter(
                     R.layout.adapter_recharge_many_image_grid,
                     item.picArea.picList
                 )
@@ -122,15 +109,15 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
 
                 //commentList : 评论列表
                 if (item.picArea.commentList != null) {
-                    val strs: MutableList<String> = mutableListOf() // 创建空的可变列表
+                    val stars: MutableList<String> = mutableListOf() // 创建空的可变列表
 
                     for (tab in item.picArea.commentList) {
-                        strs.add(tab.title) // 将每个标题添加到列表中
+                        stars.add(tab.title) // 将每个标题添加到列表中
                     }
 
                     binding.tvCommentList.visibility = View.VISIBLE
                     val marqueeText2: ScrrollTextViewCommentListBackground = binding.tvCommentList
-                    marqueeText2.setList(strs) // 将列表传递给跑马灯控件的setList方法
+                    marqueeText2.setList(stars) // 将列表传递给跑马灯控件的setList方法
                     marqueeText2.startScroll()
                 }
 
@@ -138,11 +125,11 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 if (item.picArea.stock != null) {
                     binding.tvStockout.visibility = View.VISIBLE
                 }
-                val imageWeight = recyclerView.measuredWidth
+                // imageWeight = recyclerView.measuredWidth
                 if (item.picArea.imageRatio == null){
                     item.picArea.imageRatio = 1.0f.toString()
                 }
-                val imageRatio = item.picArea.imageRatio.toFloat()
+                //val imageRatio = item.picArea.imageRatio.toFloat()
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
                     val rechargeAdapter = ContentAreaListAdapter(
@@ -232,9 +219,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 binding.btnSelect.setOnClickListener {
                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
                     (context as ComponentActivity).startActivityForResult(intent, 1)
-                    //binding.etPhone.text = "18350970625"
                 }
-                //onContactSelectedListener?.onContactSelected(phoneNumber)
 
                 binding.etPhone.text = item.quickRecharge.title
 
@@ -263,6 +248,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                         CoroutineScope(Dispatchers.Main).launch {
                             Glide.with(holder.imageView)
                                 .load(data.imageUrl)
+                                .error(R.drawable.ic_launcher_foreground)
                                 .into(holder.imageView)
                         }
                     }
@@ -272,6 +258,7 @@ class RechargeWaterfallMultipleItemQuickAdapter(data: MutableList<GetFeedListDat
                 //设置轮播时间间隔
                 binding.banner.setLoopTime(5000)
                 binding.banner.indicator = CircleIndicator(context) // 设置指示器为圆圈样式
+                binding.banner.setIndicatorWidth(15,15)
             }
 
         }

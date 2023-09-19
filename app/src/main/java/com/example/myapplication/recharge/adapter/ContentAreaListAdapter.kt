@@ -336,7 +336,7 @@ class ContentAreaListAdapter(
 
             //8：配图2：一行两个
             "8" -> {
-                val myAdapter = RechargeContentAreaListGridAdapter(
+                val myAdapter = ContentAreaListGridAdapter(
                     R.layout.adapter_recharge_contentarealist_piclist_double,
                     item.picList
                 )

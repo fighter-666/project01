@@ -11,7 +11,7 @@ import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBaiduBinding
 
 
-class RechargeWaterfallWapFragment : Fragment() {
+class WapFragment : Fragment() {
     private var _binding: FragmentRechargeWaterfallBaiduBinding? = null
     val binding get() = _binding!!
 

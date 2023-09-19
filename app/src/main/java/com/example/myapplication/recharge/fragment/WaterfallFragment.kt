@@ -11,16 +11,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
-import com.example.myapplication.recharge.adapter.RechargeWaterfallMultipleItemQuickAdapter
+import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.google.gson.Gson
 
 
-@Suppress("NAME_SHADOWING", "DEPRECATION")
-class RechargeWaterfallFragment : Fragment(){
+class WaterfallFragment : Fragment(){
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
-    private lateinit var myAdapter: RechargeWaterfallMultipleItemQuickAdapter
+    private lateinit var myAdapter: WaterfallAdapter
     private  var contactNumber: String? = null
     private var mIntent: Intent? = null
     private lateinit var feedList: GetFeedListData
@@ -41,7 +40,7 @@ class RechargeWaterfallFragment : Fragment(){
         val gson = Gson()
         feedList= gson.fromJson(json, GetFeedListData::class.java)
         //初始化瀑布流
-        myAdapter = RechargeWaterfallMultipleItemQuickAdapter( feedList.feedList)
+        myAdapter = WaterfallAdapter( feedList.feedList)
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
@@ -128,10 +127,6 @@ class RechargeWaterfallFragment : Fragment(){
     companion object {
         private const val PICK_CONTACT = 1
     }
-
-
-
-
 }
 
 

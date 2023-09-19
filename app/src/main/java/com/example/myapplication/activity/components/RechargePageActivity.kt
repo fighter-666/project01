@@ -13,8 +13,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRechargePageBinding
-import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
-import com.example.myapplication.recharge.adapter.RechargeFragmentAdapter
+import com.example.myapplication.recharge.adapter.CrossExchangeAdapter
+import com.example.myapplication.recharge.adapter.FragmentAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.property.Piggy
@@ -32,7 +32,6 @@ import com.scwang.smart.refresh.header.BezierRadarHeader
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
-@Suppress("NAME_SHADOWING")
 class RechargePageActivity :  MyBaseFragmentActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
@@ -50,10 +49,10 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
 // 设置 Header 为贝塞尔雷达样式
         binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))
 // 设置 Footer 为球脉冲样式
-        binding.refreshLayout.setRefreshFooter(BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.FixedBehind))
+        binding.refreshLayout.setRefreshFooter(BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Translate))
 
         val json: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
-            application.assets.open("tab.json").bufferedReader().use { it.readText() }
+            application.assets.open("getFeedTabData.json").bufferedReader().use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         val tabList = gson.fromJson(json, GetFeedTabData::class.java)
@@ -64,7 +63,7 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
         binding.viewPager2.offscreenPageLimit = tabList.tabList.size
 
         //将适配器对象与ViewPager2绑定，以便在ViewPager2中显示相应的页面内容
-        val adapter = RechargeFragmentAdapter(supportFragmentManager, lifecycle)
+        val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager2.adapter = adapter
 
         //创建了一个TabLayoutMediator对象，并将其与TabLayout和ViewPager2进行关联。
@@ -302,7 +301,7 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
         )
 
         //创建适配器
-        val secondAdapter = CrossExchengeAdapter(R.layout.adapter_cross_exchenge, piggies2)
+        val secondAdapter = CrossExchangeAdapter(R.layout.adapter_cross_exchenge, piggies2)
 
         //设置布局管理器
         binding.rvCrossExchange.setLayoutManager(

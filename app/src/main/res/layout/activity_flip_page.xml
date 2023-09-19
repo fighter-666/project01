@@ -9,6 +9,7 @@
         android:id="@+id/ivBeam"
         android:layout_width="900dp"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,8 +19,8 @@
 
     <ImageView
         android:id="@+id/ivCard"
-        android:layout_width="97dp"
-        android:layout_height="98dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:scaleType="fitCenter"
         android:transitionName="transition_image"
         app:layout_constraintBottom_toBottomOf="parent"

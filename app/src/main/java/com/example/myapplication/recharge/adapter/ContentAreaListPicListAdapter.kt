@@ -7,6 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterRechargeContentarealistPiclistBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import kotlinx.coroutines.CoroutineScope
@@ -30,6 +31,7 @@ class ContentAreaListPicListAdapter(
                 .load(item.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                 //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                 .transition(DrawableTransitionOptions.withCrossFade())
+                .error(R.drawable.ic_launcher_background)
                 .apply(requestOptions)
                 .into(binding.ivPicList)
         }
