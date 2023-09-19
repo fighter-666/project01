@@ -1,6 +1,5 @@
 package com.example.myapplication.activity.components
 
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.TypedValue
@@ -8,14 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.myapplication.R
@@ -24,9 +17,6 @@ import com.example.myapplication.recharge.adapter.CrossExchengeAdapter
 import com.example.myapplication.recharge.adapter.RechargeFragmentAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
-import com.example.myapplication.recharge.fragment.RechargeWaterfallBaiduFragment
-import com.example.myapplication.recharge.fragment.RechargeWaterfallFragment
-import com.example.myapplication.recharge.property.Cards
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
@@ -42,11 +32,10 @@ import com.scwang.smart.refresh.header.BezierRadarHeader
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 
 
+@Suppress("NAME_SHADOWING")
 class RechargePageActivity :  MyBaseFragmentActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
-    private lateinit var fragment: RechargeWaterfallFragment
-    var originalHeight = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRechargePageBinding.inflate(layoutInflater)
@@ -56,12 +45,12 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
         ImmersionBar.with(this).transparentStatusBar()  //透明状态栏，不写默认透明色
             .titleBar(binding.tvTitle)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
-            .init();
+            .init()
 
 // 设置 Header 为贝塞尔雷达样式
         binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))
 // 设置 Footer 为球脉冲样式
-        binding.refreshLayout.setRefreshFooter(BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale))
+        binding.refreshLayout.setRefreshFooter(BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.FixedBehind))
 
         val json: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
             application.assets.open("tab.json").bufferedReader().use { it.readText() }
@@ -102,15 +91,13 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
             //对选中状态的监听
             binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    // 选中状态发生变化时的处理逻辑
-                    val selectedPosition = tab.position // 获取选中的位置
                     // 进行相应的处理，例如更新UI、加载内容等
-                    updateTabFont(tab, true); // 设置选中标签字体加粗
+                    updateTabFont(tab, true) // 设置选中标签字体加粗
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
                     // 当前选中的标签取消选中时的处理逻辑
-                    updateTabFont(tab, false); // 取消选中标签字体加粗
+                    updateTabFont(tab, false) // 取消选中标签字体加粗
                 }
 
                 override fun onTabReselected(tab: TabLayout.Tab) {
@@ -122,15 +109,12 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
                     val customView: View? = tab.customView
                     if (customView != null) {
                         val tabName: TextView = customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
-                        var tabIcon: ImageView = customView.findViewById(R.id.tabIcon) as ImageView // 自定义布局中的 TextView
-
                         if (isSelected) {
                             tabName.setTypeface(null, Typeface.BOLD) // 设置字体加粗
-                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f); // 设置字体大小，20sp
-                            val layoutParams = tabIcon.layoutParams
+                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f) // 设置字体大小，20sp
                         } else {
                             tabName.setTypeface(null, Typeface.NORMAL) // 取消字体加粗
-                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f); //  取消字体加粗
+                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f) //  取消字体加粗
                         }
                     }
                 }
@@ -329,99 +313,7 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
 
         //给RecycleView设置适配器
         binding.rvCrossExchange.setAdapter(secondAdapter)
-
-
-        /*//第三个
-        val piggies3 = mutableListOf<MultipleItem>()
-        piggies3.add(MultipleItem(1,))
-        piggies3.add(MultipleItem(2,))
-        piggies3.add(MultipleItem(3,))
-
-        //创建适配器
-        val thirdAdapter = MultipleItemQuickAdapter( piggies3)
-
-        //设置布局管理器
-       binding.recyclerView3.setLayoutManager(LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false))
-
-        //给RecycleView设置适配器
-       binding.recyclerView3.setAdapter(thirdAdapter)*/
-
-
-        //第三个
-        val piggies4 = mutableListOf<Cards>()
-        piggies4.add(
-            Cards(
-                0, 0, R.drawable.falls1, "电信关爱版-为老年人架桥", "0", "0", "0", "0", "0", 0, 0
-            )
-        )
-        piggies4.add(
-            Cards(
-                R.drawable.shape_rectangle18,
-                R.drawable.shape_rectangle18,
-                R.drawable.falls8,
-                "加装【副卡】，一份套餐全家用 ",
-                "赠新人礼包",
-                "赠美团神券",
-                "￥",
-                "10",
-                "/月",
-                0,
-                0
-            )
-        )
-        piggies4.add(
-            Cards(
-                R.drawable.shape_rectangle18,
-                R.drawable.shape_rectangle18,
-                R.drawable.fall,
-                "iPhone12 128GB 红色 双卡双待",
-                "免运费",
-                "送配件",
-                "0",
-                "0",
-                "0",
-                0,
-                0
-            )
-        )
-        piggies4.add(
-            Cards(
-                R.drawable.shape_rectangle18,
-                0,
-                R.drawable.falls4,
-                "15GB定向流量+腾讯视频月会员卡",
-                "0",
-                "0",
-                "0",
-                "0",
-                "0",
-                0,
-                0
-            )
-        )
-        //piggies4.add(Cards(R.drawable.falls3, "iPhone12 128GB 红色 双卡双待", "免运费","0","0","0","0", 0, 0))
-        //piggies4.add(Cards(R.drawable.falls4, "15GB定向流量+腾讯视频月会员卡", "可查全网记录","0","0","0","0", 0, 0))
-
-        /*//创建适配器
-        val fourthAdapter = RechangeWaterfallAdapter(R.layout.adapter_recharge_waterfall, piggies4)
-
-        //设置布局管理器
-        binding.rvWaterfall.setLayoutManager(
-            StaggeredGridLayoutManager(
-                2, StaggeredGridLayoutManager.VERTICAL
-            )
-        )
-        //给RecycleView设置适配器
-        binding.rvWaterfall.setAdapter(fourthAdapter)*/
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        //fragment.onActivityResult(requestCode, resultCode, data)
-    }
-
-
-
 
     companion object {
         lateinit var link: String

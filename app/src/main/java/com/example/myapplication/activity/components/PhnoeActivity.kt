@@ -1,16 +1,11 @@
 package com.example.myapplication.activity.components
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
 
@@ -90,6 +85,5 @@ class PhnoeActivity : AppCompatActivity() {
 
     companion object {
         const val PICK_CONTACT = 1
-        private const val PERMISSIONS_REQUEST_READ_CONTACTS = 2
     }
 }

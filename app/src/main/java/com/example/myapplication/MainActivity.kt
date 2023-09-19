@@ -6,18 +6,8 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.adapter.DynamicFragmentAdapter
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.feed.activity.FeedStreamHomePageActivity
-import com.example.myapplication.fragment.ComponentsFragment
-import com.example.myapplication.fragment.HelperFragment
-import com.example.myapplication.fragment.LabFragment
-import com.example.myapplication.fragment.WaterfallFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gyf.immersionbar.ImmersionBar
 
@@ -33,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         //沉浸式处理
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
-            .init();
+            .init()
 
 
         val tabs = arrayOf("Components", "Helper", "Lab", "Waterfall")

@@ -36,7 +36,7 @@ class RechargeWaterfallFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val json: String = requireContext().assets.open("waterfalldata.json").bufferedReader().use { it.readText() }
+        val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader().use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         feedList= gson.fromJson(json, GetFeedListData::class.java)
@@ -49,7 +49,6 @@ class RechargeWaterfallFragment : Fragment(){
     }
 
 
-    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
       super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {

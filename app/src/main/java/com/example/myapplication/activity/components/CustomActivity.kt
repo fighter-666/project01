@@ -17,7 +17,7 @@ class CustomActivity : AppCompatActivity() {
         ImmersionBar.with(this)
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
-            .init();
+            .init()
 
         //创建了一个自定义视图对象 customView 并将其设置为当前活动的内容视图。
         val customView = CustomView(this)

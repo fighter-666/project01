@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         app:banner_indicator_normal_color="@color/white"
-        app:banner_indicator_selected_color="@color/black"
+        app:banner_indicator_selected_color="@color/blue"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

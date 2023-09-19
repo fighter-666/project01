@@ -33,7 +33,7 @@ class VariousTextviewActivity : AppCompatActivity() {
         ImmersionBar.with(this)
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
-            .init();
+            .init()
 
         //设置文字的前景色为淡蓝色
         val spannableString = SpannableString("设置文字的前景色为淡蓝色")
