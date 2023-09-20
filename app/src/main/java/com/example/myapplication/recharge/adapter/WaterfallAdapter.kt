@@ -219,6 +219,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 binding.btnSelect.setOnClickListener {
                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
                     (context as ComponentActivity).startActivityForResult(intent, 1)
+                    //(context as ComponentActivity).pickContactLauncher.launch(intent)
                 }
 
                 binding.etPhone.text = hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""), 3)

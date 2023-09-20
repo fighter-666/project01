@@ -2,12 +2,14 @@ package com.example.myapplication.activity.components
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -21,11 +23,12 @@ class PhoneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phnoe)
-        et_phone = findViewById<TextView>(R.id.et_phone)
+        et_phone = findViewById(R.id.et_phone)
         btn_select = findViewById(R.id.btn_select)
+        // 通过注册的ActivityResultLauncher启动通讯录选择
         btn_select?.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-            startActivityForResult(intent, PICK_CONTACT)
+            pickContactLauncher.launch(intent)
         }
         // 检查是否已经拥有所需权限
         if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
@@ -38,6 +41,16 @@ class PhoneActivity : AppCompatActivity() {
 
         // 处理权限请求结果
 
+    }
+
+    // 在Activity或Fragment中定义一个ActivityResultLauncher
+    private val pickContactLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            data?.let {
+                getContacts(it)
+            }
+        }
     }
 
     @Deprecated("Deprecated in Java")
