@@ -7,21 +7,21 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.myapplication.R
-import com.example.myapplication.recharge.widget.MarqueeTextView
 
 
 /**
  * 上下滚动的 textView
  */
-class ScrrollTextViewBackground @JvmOverloads constructor(
+class ScrollTextViewCommentListBackground @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) :
     LinearLayout(context, attrs, defStyleAttr) {
-    private val mBannerTV1: MarqueeTextView
-    private val mBannerTV2: MarqueeTextView
+    private val mBannerTV1: TextView
+    private val mBannerTV2: TextView
     private val handler: Handler
     private var isShow = false
     private var startY1 = 0
@@ -38,7 +38,7 @@ class ScrrollTextViewBackground @JvmOverloads constructor(
     init {
         val view: View =
             LayoutInflater.from(context)
-                .inflate(R.layout.widget_scroll_text_background_layout, this)
+                .inflate(R.layout.widget_scroll_comment_list_layout, this)
         mBannerTV1 = view.findViewById(R.id.tv_banner1)
         mBannerTV2 = view.findViewById(R.id.tv_banner2)
         handler = Handler()
@@ -99,8 +99,8 @@ class ScrrollTextViewBackground @JvmOverloads constructor(
         }
     }
 
-    fun stopScroll() {
+    /*fun stopScroll() {
         handler.removeCallbacks(runnable)
         hasPostRunnable = false
-    }
+    }*/
 }

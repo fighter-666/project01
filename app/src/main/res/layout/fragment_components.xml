@@ -23,16 +23,29 @@
             android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
+    <View
+        android:id="@+id/viewTop"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <com.example.myapplication.widget.RecyclerViewAtViewPager2
         android:id="@+id/rvComponents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/viewTop"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        app:layout_constraintLeft_toLeftOf="parent "
-        app:layout_constraintTop_toBottomOf="@id/rvComponents" />
+<!--<View
+    android:id="@+id/view"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

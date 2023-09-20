@@ -24,7 +24,7 @@ class CustomTitleBarViewGroup : RelativeLayout {
      * 这个构造方法是在代码中new的时候调用的
      * @param context
      */
-    constructor(context: Context?) : super(context) {}
+    constructor(context: Context?) : super(context)
 
     /**
      * 这个构造方法是在xml文件中初始化调用的
@@ -45,16 +45,15 @@ class CustomTitleBarViewGroup : RelativeLayout {
         context,
         attrs,
         defStyleAttr
-    ) {
-    }
+    )
 
     private fun initView(context: Context, attrs: AttributeSet) {
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.view_group_custom_title_bar, this)
-        imageView = findViewById<ImageView>(R.id.ivLeft)
-        imageView2 = findViewById<ImageView>(R.id.ivRight)
-        textView = findViewById<TextView>(R.id.tvTitleBar)
-        textView2 = findViewById<TextView>(R.id.tvRightBar)
+        imageView = findViewById(R.id.ivLeft)
+        imageView2 = findViewById(R.id.ivRight)
+        textView = findViewById(R.id.tvTitleBar)
+        textView2 = findViewById(R.id.tvRightBar)
 
         //在组件活动（ComponentActivity）中注册一个用于启动活动并接收结果的活动结果协议（ActivityResultContract）
         val myActivityLauncher = (context as ComponentActivity).registerForActivityResult(
@@ -82,19 +81,19 @@ class CustomTitleBarViewGroup : RelativeLayout {
         val content = typedArray.getString(R.styleable.CustomTitleBarViewGroup_title)
         val content2 = typedArray.getString(R.styleable.CustomTitleBarViewGroup_right_title)
         val barImageWidth = typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageWidth3, 20)
-        val right_ImageWidth =
+        val rightImageWidth =
             typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageWidth3, 20)
         val barImageHeight = typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageHeight3, 20)
-        val right_ImageHeight =
+        val rightImageHeight =
             typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageHeight3, 20)
         typedArray.recycle()
 
         // 将获取到的属性值应用到您的视图或逻辑中
         // 例如，设置图片的宽度和高度
         imageView.layoutParams.width = barImageWidth
-        imageView2.layoutParams.width = right_ImageWidth
+        imageView2.layoutParams.width = rightImageWidth
         imageView.layoutParams.height = barImageHeight
-        imageView2.layoutParams.height = right_ImageHeight
+        imageView2.layoutParams.height = rightImageHeight
 
         // 设置图片资源
         imageView.setImageDrawable(drawable)

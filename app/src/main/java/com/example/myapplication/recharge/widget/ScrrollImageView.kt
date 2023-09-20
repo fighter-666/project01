@@ -1,7 +1,6 @@
 package com.example.myapplication.recharge.widget
 
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Handler
 import android.util.AttributeSet
@@ -10,7 +9,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.myapplication.R
-import org.jetbrains.annotations.Nullable
 
 
 /**
@@ -98,8 +96,8 @@ class ScrollImageView @JvmOverloads constructor(
         }
     }
 
-    fun stopScroll() {
+   /* fun stopScroll() {
         handler.removeCallbacks(runnable)
         hasPostRunnable = false
-    }
+    }*/
 }

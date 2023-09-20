@@ -16,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.util.Pair
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ViewGroupCustomFlipCardBinding
+import com.example.myapplication.recharge.activity.CardActivity
 import com.example.myapplication.recharge.activity.FlipPage
 import com.example.myapplication.util.DensityUtils
 
@@ -67,7 +68,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
             }
         }
 
-/*    //第二张卡片
+    //第二张卡片
     private val myActivityLauncher2 =
         (context as ComponentActivity).registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
             if (activityResult.resultCode == Activity.RESULT_OK) {
@@ -85,7 +86,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
                 drawable = result?.let { ResourcesCompat.getDrawable(context.resources, it, null) }
                 binding.ivThirdCard.setImageDrawable(drawable)
             }
-        }*/
+        }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -93,7 +94,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         screenWidth = measuredWidth
     }
 
-   /* override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         // 卡片三等分
         val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f)) / 3
@@ -131,7 +132,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         layoutParams3Copy.width = imageWidth
         layoutParams3Copy.height = imageWidth
         binding.ivThirdCardBackground.layoutParams = layoutParams3Copy
-    }*/
+    }
 
     private fun initView(context: Context) {
         //获取子控件
@@ -156,7 +157,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         //第一张卡片的点击事件
         binding.ivFirstCard.setOnClickListener {
             //跳转页面
-            val intent = Intent(getContext(), FlipPage::class.java)
+            val intent = Intent(getContext(), CardActivity::class.java)
 
             // 创建 ActivityOptionsCompat，并设置共享元素转场动画
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -168,9 +169,9 @@ class CustomFlipCardViewGroup : ConstraintLayout {
             myActivityLauncher.launch(intent, options)
         }
 
-        /*//第二张卡片的点击事件
+        //第二张卡片的点击事件
         binding.ivSecondCard.setOnClickListener {
-            val intent = Intent(getContext(), FlipPage::class.java)
+            val intent = Intent(getContext(), CardActivity::class.java)
 
             // 创建共享元素的 Pair 对象
             val imagePair = Pair<View, String>(binding.ivSecondCard, "transition_image")
@@ -189,7 +190,7 @@ class CustomFlipCardViewGroup : ConstraintLayout {
 
         ////第三张卡片的点击事件
         binding.ivThirdCard.setOnClickListener {
-            val intent = Intent(getContext(), FlipPage::class.java)
+            val intent = Intent(getContext(), CardActivity::class.java)
 
             // 创建共享元素的 Pair 对象
             val imagePair = Pair<View, String>(binding.ivThirdCard, "transition_image")
@@ -202,6 +203,6 @@ class CustomFlipCardViewGroup : ConstraintLayout {
 
             // 启动活动并应用转场动画
             myActivityLauncher3.launch(intent, options)
-        }*/
+        }
     }
 }

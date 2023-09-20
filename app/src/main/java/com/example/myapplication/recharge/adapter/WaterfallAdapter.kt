@@ -22,7 +22,7 @@ import com.example.myapplication.databinding.WidgetMultipleItemManyImageBinding
 import com.example.myapplication.databinding.WidgetMultipleItemNullBinding
 import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
-import com.example.myapplication.recharge.widget.ScrrollTextViewCommentListBackground
+import com.example.myapplication.recharge.widget.ScrollTextViewCommentListBackground
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
@@ -116,7 +116,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     }
 
                     binding.tvCommentList.visibility = View.VISIBLE
-                    val marqueeText2: ScrrollTextViewCommentListBackground = binding.tvCommentList
+                    val marqueeText2: ScrollTextViewCommentListBackground = binding.tvCommentList
                     marqueeText2.setList(stars) // 将列表传递给跑马灯控件的setList方法
                     marqueeText2.startScroll()
                 }
@@ -126,7 +126,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     binding.tvStockout.visibility = View.VISIBLE
                 }
                 // imageWeight = recyclerView.measuredWidth
-                if (item.picArea.imageRatio == null){
+                if (item.picArea.imageRatio == null) {
                     item.picArea.imageRatio = 1.0f.toString()
                 }
                 //val imageRatio = item.picArea.imageRatio.toFloat()
@@ -152,12 +152,12 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
+                            .transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
                             //.apply(requestOptions)
                             .into(binding.ivPicAreaImageUrl)
 
                     }
-                } else{
+                } else {
                     //在协程中加载网络图片或在后台线程中加载大量图片。
                     // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
                     CoroutineScope(Dispatchers.Main).launch {
@@ -221,7 +221,9 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     (context as ComponentActivity).startActivityForResult(intent, 1)
                 }
 
-                binding.etPhone.text = item.quickRecharge.title
+                binding.etPhone.text = hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""), 3)
+
+
 
                 val rechargeAdapter =
                     RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
@@ -258,12 +260,25 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //设置轮播时间间隔
                 binding.banner.setLoopTime(5000)
                 binding.banner.indicator = CircleIndicator(context) // 设置指示器为圆圈样式
-                binding.banner.setIndicatorWidth(15,15)
+                binding.banner.setIndicatorWidth(15, 15)
             }
 
         }
     }
 
+    private fun hideCharactersFromIndex(text: String, startIndex: Int): String {
+        val length = text.length
+        if (startIndex >= length) {
+            return text
+        }
+
+        val hiddenText = StringBuilder(text)
+        for (i in startIndex until startIndex+ 4) {
+            hiddenText.setCharAt(i, '*')
+        }
+
+        return hiddenText.toString()
+    }
 
     // 在片段（Fragment）中重写onActivityResult方法
 }

@@ -15,6 +15,9 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
 import com.example.myapplication.util.DensityUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class ScratchCardViewGroup : ConstraintLayout {
@@ -130,40 +133,43 @@ class ScratchCardViewGroup : ConstraintLayout {
             container.addView(customView2)
         }
 
-        //手指动画
-        val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f)
-        val translateY = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f)
-        translateX.duration = 1800
-        translateY.duration = 1800
-        val animatorSet = AnimatorSet().apply {
-            playTogether(translateX, translateY)
-            playSequentially(translateX)
+        CoroutineScope(Dispatchers.Main).launch {
+            //手指动画
+            val translateX = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f)
+            val translateY = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f)
+            translateX.duration = 1800
+            translateY.duration = 1800
+            val animatorSet = AnimatorSet().apply {
+                playTogether(translateX, translateY)
+                playSequentially(translateX)
+            }
+
+            val translateX2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f, 0f)
+            val translateY2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f, 0f)
+            translateX2.duration = 1800
+            translateY2.duration = 1800
+            val animatorSet2 = AnimatorSet().apply {
+                playTogether(translateX2, translateY2)
+                playSequentially(translateX2)
+            }
+
+            //当AnimatorSet结束时运行AnimatorSet2
+            animatorSet.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    animatorSet2.start() // 重新开始动画
+                }
+            })
+            //当AnimatorSet2结束时运行AnimatorSet
+            animatorSet2.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    animatorSet.start() // 重新开始动画
+                }
+            })
+            animatorSet.start()
         }
 
-        val translateX2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_X, 40f, 0f)
-        val translateY2 = ObjectAnimator.ofFloat(imageView2, View.TRANSLATION_Y, 40f, 0f)
-        translateX2.duration = 1800
-        translateY2.duration = 1800
-        val animatorSet2 = AnimatorSet().apply {
-            playTogether(translateX2, translateY2)
-            playSequentially(translateX2)
-        }
-
-        //当AnimatorSet结束时运行AnimatorSet2
-        animatorSet.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                animatorSet2.start() // 重新开始动画
-            }
-        })
-        //当AnimatorSet2结束时运行AnimatorSet
-        animatorSet2.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                animatorSet.start() // 重新开始动画
-            }
-        })
-        animatorSet.start()
     }
 
 

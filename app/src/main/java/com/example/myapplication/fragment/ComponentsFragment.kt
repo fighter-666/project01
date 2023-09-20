@@ -2,6 +2,7 @@ package com.example.myapplication.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.example.myapplication.R
 import com.example.myapplication.activity.components.BannerActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
 import com.example.myapplication.activity.components.CustomActivity
-import com.example.myapplication.activity.components.PhnoeActivity
+import com.example.myapplication.activity.components.PhoneActivity
 import com.example.myapplication.activity.components.ThirdActivity
 import com.example.myapplication.activity.components.bilibili.activity.DataBindingActivity
 import com.example.myapplication.activity.components.bilibili.activity.LiveDataActivity
@@ -80,7 +81,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "DataBindingActivity"),
             Pair(R.mipmap.icon_grid_view_helper, "ScoreActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "SharedPreferencesActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "PhnoeActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "PhoneActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "BannerActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "RoomActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "Room2Activity"),
@@ -94,7 +95,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "19"),
             Pair(R.mipmap.icon_grid_tip_dialog, "19"),
             Pair(R.mipmap.icon_grid_tip_dialog, "19"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "66"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -184,8 +185,8 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                "PhnoeActivity" -> {
-                    val intent = Intent(context, PhnoeActivity::class.java)
+                "PhoneActivity" -> {
+                    val intent = Intent(context, PhoneActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
                 }

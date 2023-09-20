@@ -1,6 +1,5 @@
 package com.example.myapplication.widget
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -16,23 +15,16 @@ import android.view.View
  */
 class CustomView(context: Context?) : View(context) {
 
-    private var paint: Paint
-    private var path: Path
-    private var rectf: RectF
-    private var rectf2: RectF
+    private var paint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private var path: Path = Path()
+    private var rectf: RectF = RectF(200f, 1200f, 400f, 1400f)
+    private var rectf2: RectF = RectF(400f, 1200f, 600f, 1400f)
 
-    init {
-        //创建了一个 Paint 对象，并设置了抗锯齿标志（ANTI_ALIAS_FLAG）
-        paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        path = Path()
-        rectf = RectF(200f, 1200f, 400f, 1400f)
-        rectf2 = RectF(400f, 1200f, 600f, 1400f)
-    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        paint.setAntiAlias(true)
+        paint.isAntiAlias = true
         //canvas.drawColor(Color.YELLOW)
 
         //画圆
@@ -45,7 +37,7 @@ class CustomView(context: Context?) : View(context) {
 
         //填充模式的圆
         paint.style = Paint.Style.FILL
-        paint.setColor(Color.BLUE)
+        paint.color = Color.BLUE
         canvas.drawCircle(200f, 400f, 100f, paint)
 
         //画矩形
@@ -79,7 +71,7 @@ class CustomView(context: Context?) : View(context) {
 
         //画心形
         paint.style = Paint.Style.FILL
-        paint.setColor(Color.RED)
+        paint.color = Color.RED
         path.addArc(rectf, -225f, 225f)
         path.arcTo(rectf2, -180f, 225f, false)
         path.lineTo(400f, 1542f)

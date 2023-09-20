@@ -29,9 +29,9 @@ public class GetFeedTabData implements Serializable {
          * redFlag : 是否显示红点：0否 1是 string
          * subTitle : 10.3新增，副标题 string
          * tabIcon : tab栏图标 string
-         * tabName : tab栏名称 string
          * tabType : tab栏显示类型：1：显示标题 2：显示图标 string
          * timestamp : 时间戳（yyyyMMddHHmmss） string
+         * tabName : tab栏名称 string
          * tagList : 10.4新增,标签列表 [{"tagID": "string","tagIcon": "string","tagName": "string","tagType": "string"}]
          * type : tab栏显示内容类型：1.显示feed流原生列表 2：显示wap页面 3：10.0新增显示原生关注页 string
          */

@@ -1,27 +1,33 @@
 package com.example.myapplication.recharge.fragment
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.myapplication.activity.components.PhoneActivity
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.google.gson.Gson
 
 
-class WaterfallFragment : Fragment(){
+class WaterfallFragment : Fragment() {
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
     private lateinit var myAdapter: WaterfallAdapter
-    private  var contactNumber: String? = null
+    private var contactNumber: String? = null
     private var mIntent: Intent? = null
+    private var contactUri: Uri? = null
     private lateinit var feedList: GetFeedListData
 
     override fun onCreateView(
@@ -35,21 +41,38 @@ class WaterfallFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader().use { it.readText() }
+        val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
+            .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
-        feedList= gson.fromJson(json, GetFeedListData::class.java)
+        feedList = gson.fromJson(json, GetFeedListData::class.java)
         //初始化瀑布流
-        myAdapter = WaterfallAdapter( feedList.feedList)
+        myAdapter = WaterfallAdapter(feedList.feedList)
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_CONTACTS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // 如果没有权限，则向用户请求权限
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.READ_CONTACTS),
+                2
+            )
+        } else {
+            // 如果已经拥有权限，则执行读取联系人数据的操作
+            getContactNumberByUri(contactUri)
         }
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-      super.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             PICK_CONTACT -> {
                 mIntent = data
@@ -70,6 +93,22 @@ class WaterfallFragment : Fragment(){
                         }
                     }
                 }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PhoneActivity.PICK_CONTACT) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 用户已经授予了读取联系人的权限
+                getContactNumberByUri(contactUri)
+            } else {
+                // 用户拒绝了权限请求，可以在这里处理相应逻辑
             }
         }
     }

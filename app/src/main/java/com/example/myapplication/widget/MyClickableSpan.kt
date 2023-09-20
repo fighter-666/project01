@@ -10,7 +10,7 @@ import com.example.myapplication.activity.components.CustomActivity
 
 class MyClickableSpan(private val content: String, private val context: Context) : ClickableSpan() {
     override fun updateDrawState(ds: TextPaint) {
-        ds.setUnderlineText(false)
+        ds.isUnderlineText = false
     }
 
     override fun onClick(widget: View) {

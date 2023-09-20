@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.example.myapplication.R
-import com.example.myapplication.recharge.widget.MarqueeTextView
 
 
 /**
@@ -99,8 +98,8 @@ class ScrollTextView @JvmOverloads constructor(
         }
     }
 
-    fun stopScroll() {
+  /*  fun stopScroll() {
         handler.removeCallbacks(runnable)
         hasPostRunnable = false
-    }
+    }*/
 }

@@ -37,11 +37,11 @@ class RecyclerViewAtViewPager2 : RecyclerView {
                 val endY = ev.y.toInt()
                 val disX = Math.abs(endX - startX)
                 val disY = Math.abs(endY - startY)
-                LogUtils.d(
+                /*LogUtils.d(
                     "DispatchTouchEvent disX=" + disX + "; disY" + disY + "; canScrollHorizontally(startX - endX) = " + canScrollHorizontally(
                         startX - endX
                     ) + "; canScrollVertically(startY - endY)" + canScrollVertically(startY - endY)
-                )
+                )*/
                 if (disX > disY) {
                     //如果是纵向滑动，告知父布局不进行时间拦截，交由子布局消费，　requestDisallowInterceptTouchEvent(true)
                     parent.requestDisallowInterceptTouchEvent(canScrollHorizontally(startX - endX))

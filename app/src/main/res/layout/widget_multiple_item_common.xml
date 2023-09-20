@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivPicAreaImageUrl"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <com.example.myapplication.recharge.widget.ScrrollTextViewCommentListBackground
+    <com.example.myapplication.recharge.widget.ScrollTextViewCommentListBackground
         android:id="@+id/tvCommentList"
         android:layout_width="wrap_content"
         android:layout_height="19dp"

@@ -10,7 +10,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRechargePageBinding
 import com.example.myapplication.recharge.adapter.CrossExchangeAdapter
@@ -21,7 +23,7 @@ import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
-import com.example.myapplication.recharge.widget.ScrrollTextViewBackground
+import com.example.myapplication.recharge.widget.ScrollTextViewBackground
 import com.example.myapplication.widget.MyBaseFragmentActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -30,9 +32,12 @@ import com.gyf.immersionbar.ImmersionBar
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.BezierRadarHeader
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class RechargePageActivity :  MyBaseFragmentActivity() {
+class RechargePageActivity : MyBaseFragmentActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,9 +63,12 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
         val tabList = gson.fromJson(json, GetFeedTabData::class.java)
 
 
-        //将 offscreenPageLimit 属性设置为 7，表示 ViewPager 会在当前页面的左右各保留 7 个页面的缓存。
+        //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
-        binding.viewPager2.offscreenPageLimit = tabList.tabList.size
+        // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
+        binding.viewPager2.post {
+            binding.viewPager2.offscreenPageLimit = tabList.tabList.size
+        }
 
         //将适配器对象与ViewPager2绑定，以便在ViewPager2中显示相应的页面内容
         val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
@@ -104,10 +112,11 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
                 }
 
                 // 辅助方法：更新标签字体样式
-                private   fun updateTabFont(tab: TabLayout.Tab, isSelected: Boolean) {
+                private fun updateTabFont(tab: TabLayout.Tab, isSelected: Boolean) {
                     val customView: View? = tab.customView
                     if (customView != null) {
-                        val tabName: TextView = customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
+                        val tabName: TextView =
+                            customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
                         if (isSelected) {
                             tabName.setTypeface(null, Typeface.BOLD) // 设置字体加粗
                             tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f) // 设置字体大小，20sp
@@ -150,11 +159,18 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
 
                 if (tabItem.tabIcon != "") {
                     //使用 Glide 的 with() 方法传入一个上下文对象 context 来初始化 Glide
-                    Glide.with(application)
-                        .load(tabItem.tabIcon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(tabIcon)
+                    //在协程中加载网络图片或在后台线程中加载大量图片。
+                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                    CoroutineScope(Dispatchers.Main).launch {
+                        // 设置圆角半径
+                        Glide.with(application)
+                            .load(tabItem.tabIcon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                            .transition(DrawableTransitionOptions.withCrossFade())
+                            .error(R.drawable.baseline_thumb_up_24)
+                            .into(tabIcon)
+                    }
+
 
                     /*val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
                     //使用 resources.getIdentifier(tabIconResourceName, "drawable", packageName)，
@@ -187,7 +203,7 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
 
         //消息条
         //右边textview跑马灯
-        val marqueeText2: ScrrollTextViewBackground = binding.tvScrollBackground
+        val marqueeText2: ScrollTextViewBackground = binding.tvScrollBackground
         val demographicsList2: MutableList<String> = ArrayList()
         demographicsList2.add("股票")
         demographicsList2.add("药业")
@@ -224,14 +240,12 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
             RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggies)
 
         //设置布局管理器
-        binding.rvRecommendationService.setLayoutManager(
-            LinearLayoutManager(
-                this, LinearLayoutManager.HORIZONTAL, false
-            )
+        binding.rvRecommendationService.layoutManager = LinearLayoutManager(
+            this, LinearLayoutManager.HORIZONTAL, false
         )
 
         //给RecycleView设置适配器
-        binding.rvRecommendationService.setAdapter(myAdapter)
+        binding.rvRecommendationService.adapter = myAdapter
 
         //添加装饰器
         //binding.rvRecommendationService.addItemDecoration(FirstDecoration())
@@ -251,14 +265,12 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
             RecommendationServiceAdapteer(R.layout.adapter_recommendation_service, piggiesCopy)
 
         //设置布局管理器
-        binding.rvRecommendationServiceCopy.setLayoutManager(
-            LinearLayoutManager(
-                this, LinearLayoutManager.HORIZONTAL, false
-            )
+        binding.rvRecommendationServiceCopy.layoutManager = LinearLayoutManager(
+            this, LinearLayoutManager.HORIZONTAL, false
         )
 
         //给RecycleView设置适配器
-        binding.rvRecommendationServiceCopy.setAdapter(myAdapterCopy)
+        binding.rvRecommendationServiceCopy.adapter = myAdapterCopy
 
         //添加装饰器
         //binding.rvRecommendationServiceCopy.addItemDecoration(FirstDecoration())
@@ -304,14 +316,12 @@ class RechargePageActivity :  MyBaseFragmentActivity() {
         val secondAdapter = CrossExchangeAdapter(R.layout.adapter_cross_exchenge, piggies2)
 
         //设置布局管理器
-        binding.rvCrossExchange.setLayoutManager(
-            LinearLayoutManager(
-                this, LinearLayoutManager.HORIZONTAL, false
-            )
+        binding.rvCrossExchange.layoutManager = LinearLayoutManager(
+            this, LinearLayoutManager.HORIZONTAL, false
         )
 
         //给RecycleView设置适配器
-        binding.rvCrossExchange.setAdapter(secondAdapter)
+        binding.rvCrossExchange.adapter = secondAdapter
     }
 
     companion object {

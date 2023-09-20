@@ -1,16 +1,20 @@
 package com.example.myapplication.activity.components
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.myapplication.R
 
 
-class PhnoeActivity : AppCompatActivity() {
+class PhoneActivity : AppCompatActivity() {
     private var et_phone: TextView? = null
     private var btn_select: ImageView? = null
     private var mIntent: Intent? = null
@@ -23,6 +27,17 @@ class PhnoeActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
             startActivityForResult(intent, PICK_CONTACT)
         }
+        // 检查是否已经拥有所需权限
+        if (ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            // 如果没有权限，则向用户请求权限
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS), 2)
+        } else {
+            // 如果已经拥有权限，则执行读取联系人数据的操作
+            getContacts(mIntent)
+        }
+
+        // 处理权限请求结果
+
     }
 
     @Deprecated("Deprecated in Java")
@@ -35,6 +50,20 @@ class PhnoeActivity : AppCompatActivity() {
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PICK_CONTACT) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 用户已经授予了读取联系人的权限
+                getContacts(mIntent)
+            } else {
+                // 用户拒绝了权限请求，可以在这里处理相应逻辑
+            }
+        }
+    }
+
+
 
 
     @SuppressLint("Range")
