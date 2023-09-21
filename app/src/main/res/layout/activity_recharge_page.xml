@@ -604,6 +604,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:tabIndicator="@drawable/shape_tab_indicator"
                         app:tabIndicatorColor="#1990ff"
+                        app:tabPaddingBottom="3dp"
                         app:tabIndicatorFullWidth="false"
                         app:tabIndicatorHeight="4dp"
                         app:tabMinWidth="50dp"

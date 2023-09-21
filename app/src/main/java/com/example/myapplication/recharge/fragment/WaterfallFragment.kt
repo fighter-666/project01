@@ -1,9 +1,11 @@
 package com.example.myapplication.recharge.fragment
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -19,6 +21,7 @@ import com.example.myapplication.activity.components.PhoneActivity
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
+import com.example.myapplication.recharge.widget.MyLifecycleObserver
 import com.google.gson.Gson
 
 
@@ -30,6 +33,15 @@ class WaterfallFragment : Fragment() {
     private var mIntent: Intent? = null
     private var contactUri: Uri? = null
     private lateinit var feedList: GetFeedListData
+    lateinit var observer : MyLifecycleObserver
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // ...
+
+        observer = MyLifecycleObserver(requireActivity().activityResultRegistry)
+        lifecycle.addObserver(observer)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +75,16 @@ class WaterfallFragment : Fragment() {
             adapter = myAdapter
         }
 
+        /*binding.btnSelect.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            pickContact.launch(intent)
+        }*/
+
+        binding.btnSelect.setOnClickListener {
+            // Open the activity to select an image
+            observer.selectImage()
+        }
+
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.READ_CONTACTS
@@ -78,7 +100,55 @@ class WaterfallFragment : Fragment() {
             // 如果已经拥有权限，则执行读取联系人数据的操作
             getContactNumberByUri(contactUri)
         }
+        requestPermission
     }
+
+    @SuppressLint("Range")
+    private val pickContact = registerForActivityResult(ActivityResultContracts.PickContact()) { uri ->
+
+        val cursor: Cursor?=
+            uri?.let { requireActivity().contentResolver.query(it,null,null,null,null) }
+
+        cursor?.let { cursor ->
+            while (cursor.moveToNext()){
+                //联系人id
+                val contactId:String=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                //联系人姓名
+                val contactName=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+
+                val phones=requireActivity().contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    null,
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"="+contactId,
+                    null,null
+                )
+                phones?.let {
+                    while (it.moveToNext()){
+
+                        //联系人电话
+                        val phoneNumber=it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+
+                    }
+                    it.close()
+                }
+
+            }
+            cursor.close()
+
+        }
+
+
+    }
+
+    private val requestPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                pickContact.launch(null)
+
+            } else {
+                // 权限被拒绝就要提醒
+                //showSettingDialog()
+            }
+        }
 
 
 

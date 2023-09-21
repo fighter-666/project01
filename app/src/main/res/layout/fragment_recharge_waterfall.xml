@@ -15,5 +15,15 @@
         app:layout_constraintRight_toRightOf="parent"
     />
 
+    <ImageView
+        android:id="@+id/btn_select"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:visibility="gone"
+        android:src="@drawable/beans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
