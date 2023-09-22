@@ -222,9 +222,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     //(context as ComponentActivity).pickContactLauncher.launch(intent)
                 }
 
+                //消除空格，并且第四位到第七位用*代替
                 binding.etPhone.text = hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""), 3)
-
-
 
                 val rechargeAdapter =
                     RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
@@ -267,6 +266,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
         }
     }
 
+    //第四位到第七位用*代替
     private fun hideCharactersFromIndex(text: String, startIndex: Int): String {
         val length = text.length
         if (startIndex >= length) {

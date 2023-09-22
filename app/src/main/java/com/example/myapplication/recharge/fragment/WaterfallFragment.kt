@@ -54,14 +54,14 @@ class WaterfallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pickContactLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        /*val pickContactLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data = result.data
                 data?.let {
                     getContactNumberByUri(it.data)
                 }
             }
-        }
+        }*/
 
         val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
             .use { it.readText() }
@@ -100,7 +100,7 @@ class WaterfallFragment : Fragment() {
             // 如果已经拥有权限，则执行读取联系人数据的操作
             getContactNumberByUri(contactUri)
         }
-        requestPermission
+        //requestPermission
     }
 
     @SuppressLint("Range")
@@ -138,7 +138,7 @@ class WaterfallFragment : Fragment() {
 
 
     }
-
+/*
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
@@ -148,7 +148,7 @@ class WaterfallFragment : Fragment() {
                 // 权限被拒绝就要提醒
                 //showSettingDialog()
             }
-        }
+        }*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

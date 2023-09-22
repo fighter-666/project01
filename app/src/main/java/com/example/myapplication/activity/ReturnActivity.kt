@@ -27,7 +27,7 @@ class ReturnActivity : AppCompatActivity() {
                 putExtra("result", 1)
             }
             setResult(Activity.RESULT_OK, intent1)
-            onBackPressed()
+            finish()
         }
     }
 }
