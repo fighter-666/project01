@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
@@ -21,16 +19,12 @@ import kotlinx.coroutines.launch
 
 
 class CustomBalanceInquiryViewGroup : ConstraintLayout {
-    private lateinit var imageView: ImageView
-    private lateinit var imageView2: ImageView
-    private lateinit var textView: TextView
-    private lateinit var rl: ConstraintLayout
 
     /**
      * 这个构造方法是在代码中new的时候调用的
      * @param context
      */
-    constructor(context: Context?) : super(context!!) {}
+    constructor(context: Context?) : super(context!!)
 
     /**
      * 这个构造方法是在xml文件中初始化调用的
@@ -52,8 +46,8 @@ class CustomBalanceInquiryViewGroup : ConstraintLayout {
         context!!,
         attrs,
         defStyleAttr
-    ) {
-    }
+    )
+
 
     private fun initView(context: Context, attrs: AttributeSet) {
         //获取子控件
@@ -91,7 +85,7 @@ class CustomBalanceInquiryViewGroup : ConstraintLayout {
         binding.tvCheck.text = tvChecktextContent
 
 // 声明一个全局的 Animation 对象
-        var animation: Animation? = null
+        var animation: Animation
 
 // 初始时隐藏图片
         binding.ivLoad.visibility = View.GONE
@@ -105,7 +99,7 @@ class CustomBalanceInquiryViewGroup : ConstraintLayout {
             binding.ivLoad.setImageResource(R.drawable.upload1)
             binding.ivLoad.visibility = View.VISIBLE
             binding.ivReLoad.visibility = GONE
-            binding.tvCheck.setTextSize(16f)
+            binding.tvCheck.textSize = 16f
             binding.tvCheck.text = "查询中..."
             // 设置文本居中显示
 
@@ -119,7 +113,7 @@ class CustomBalanceInquiryViewGroup : ConstraintLayout {
                 Animation.RELATIVE_TO_SELF,
                 0.5f
             )
-            animation?.duration = 3000
+            animation.duration = 3000
             binding.ivLoad.startAnimation(animation)
             //implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
             // 使用协程延迟三秒并隐藏图片

@@ -1,9 +1,6 @@
 package com.example.myapplication.recharge.adapter
 
-import android.content.Intent
-import android.provider.ContactsContract
 import android.view.View
-import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -14,9 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
-import com.example.myapplication.data.DataBean
 import com.example.myapplication.databinding.ActivityBannerBinding
-import com.example.myapplication.databinding.WidgetMultipleItemAdvertiseBinding
 import com.example.myapplication.databinding.WidgetMultipleItemCommonBinding
 import com.example.myapplication.databinding.WidgetMultipleItemManyImageBinding
 import com.example.myapplication.databinding.WidgetMultipleItemNullBinding
@@ -30,9 +25,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
+
+    //一个可为空的函数类型变量，用于保存点击事件的监听器
+    private var onItemClickListener: ((GetFeedListData.FeedListBean) -> Unit)? = null
     init {
         addItemType(
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE,
@@ -56,16 +53,16 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
         )
         addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt(),
-            R.layout.widget_multiple_item_advertise
+            R.layout.activity_banner
         )
         addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt(),
             R.layout.widget_multiple_item_recharge
         )
-        addItemType(
+        /*addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt(),
             R.layout.activity_banner
-        )
+        )*/
     }
 
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean) {
@@ -132,17 +129,16 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //val imageRatio = item.picArea.imageRatio.toFloat()
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
-                    val rechargeAdapter = ContentAreaListAdapter(
-                        R.layout.adapter_recharge_content_area_list,
-                        item.contentAreaList
-                    )
+                      val rechargeAdapter = ContentAreaListAdapter(
+                          R.layout.adapter_recharge_content_area_list,
+                          item.contentAreaList
+                      )
 
-                    //设置布局管理器和给recyclerView 设置设配器
-                    binding.rvContentAreaList.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = rechargeAdapter
-                    }
-
+                      //设置布局管理器和给recyclerView 设置设配器
+                      binding.rvContentAreaList.apply {
+                          layoutManager = LinearLayoutManager(context)
+                          adapter = rechargeAdapter
+                      }
                     //在协程中加载网络图片或在后台线程中加载大量图片。
                     // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
                     CoroutineScope(Dispatchers.Main).launch {
@@ -203,47 +199,13 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
             GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt() -> {
                 // 处理广告布局
-                val binding = WidgetMultipleItemAdvertiseBinding.bind(holder.itemView)
-                val rechargeAdapter = AdvertiseAdapter(R.layout.adapter_advertise, item.adLists)
-
-                //设置布局管理器和给recyclerView 设置设配器
-                binding.rvAdList.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = rechargeAdapter
-                }
-            }
-
-            GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
-                // 处理充值布局
-                val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
-                binding.btnSelect.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-                    (context as ComponentActivity).startActivityForResult(intent, 1)
-                    //(context as ComponentActivity).pickContactLauncher.launch(intent)
-                }
-
-                //消除空格，并且第四位到第七位用*代替
-                binding.etPhone.text = hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""), 3)
-
-                val rechargeAdapter =
-                    RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
-
-                //设置布局管理器和给recyclerView 设置设配器
-                binding.rlRecharge.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = rechargeAdapter
-                }
-            }
-
-            GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt() -> {
-                // 处理充值布局
                 val binding = ActivityBannerBinding.bind(holder.itemView)
 
                 binding.banner.setAdapter(object :
-                    BannerImageAdapter<DataBean>(DataBean.testData3) {
+                    BannerImageAdapter<GetFeedListData.FeedListBean.AdListBean>(item.adLists) {
                     override fun onBindView(
                         holder: BannerImageHolder,
-                        data: DataBean,
+                        data: GetFeedListData.FeedListBean.AdListBean,
                         position: Int,
                         size: Int,
                     ) {
@@ -261,9 +223,66 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 binding.banner.setLoopTime(5000)
                 binding.banner.indicator = CircleIndicator(context) // 设置指示器为圆圈样式
                 binding.banner.setIndicatorWidth(15, 15)
+
             }
 
+            GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
+                // 处理充值布局
+                val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
+                binding.btnSelect.setOnClickListener {
+                    //设置点击事件监听器
+                        onItemClickListener?.invoke(item)
+                   /* if (ContextCompat.checkSelfPermission(
+                            context, Manifest.permission.READ_CONTACTS
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        // 如果没有权限，则向用户请求权限
+                        ActivityCompat.requestPermissions(
+                            context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
+                        )
+
+                    } else {
+                        // 如果已经拥有权限，则执行读取联系人数据的操作
+                        //getContactNumberByUri(contactUri)
+                    }
+                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                    (context as ComponentActivity).startActivityForResult(intent, 1)*/
+                    //(context as ComponentActivity).pickContactLauncher.launch(intent)
+                }
+
+                //消除空格，并且第四位到第七位用*代替
+                binding.etPhone.text =
+                    hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""), 3)
+
+                val rechargeAdapter =
+                    RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
+
+                //设置布局管理器和给recyclerView 设置设配器
+                binding.rlRecharge.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = rechargeAdapter
+                }
+            }
+
+            /*GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt() -> {
+                *//*val binding = WidgetMultipleItemAdvertiseBinding.bind(holder.itemView)
+                val rechargeAdapter = AdvertiseAdapter(R.layout.adapter_advertise, item.adLists)
+
+                //设置布局管理器和给recyclerView 设置设配器
+                binding.rvAdList.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = rechargeAdapter
+                }*//*
+            }*/
+
         }
+    }
+
+    //它接受一个函数类型的参数 listener，该函数类型接受一个 Piggy 对象作为参数，并不返回任何结果
+    fun setOnItemClickListener(listener: (GetFeedListData.FeedListBean) -> Unit) {
+        //onItemClickListener 被赋值为传入的 listener，
+        // 从而将外部传入的点击事件监听器与适配器关联起来
+        onItemClickListener = listener
     }
 
     //第四位到第七位用*代替
@@ -274,14 +293,12 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
         }
 
         val hiddenText = StringBuilder(text)
-        for (i in startIndex until startIndex+ 4) {
+        for (i in startIndex until startIndex + 4) {
             hiddenText.setCharAt(i, '*')
         }
 
         return hiddenText.toString()
     }
-
-    // 在片段（Fragment）中重写onActivityResult方法
 }
 
 

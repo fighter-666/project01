@@ -27,20 +27,20 @@ class DataBean {
         val testData: List<DataBean>
             get() {
                 val list: MutableList<DataBean> = ArrayList()
-                list.add(DataBean(R.drawable.tengxun,"相信自己,你努力的样子真的很美", 1))
+                list.add(DataBean(R.drawable.tengxun, "相信自己,你努力的样子真的很美", 1))
                 list.add(DataBean(R.drawable.tengxun, "极致简约,梦幻小屋", 3))
                 list.add(DataBean(R.drawable.tengxun, "超级卖梦人", 3))
-                list.add(DataBean(R.drawable.tengxun,"夏季新搭配", 1))
-                list.add(DataBean(R.drawable.tengxun,"绝美风格搭配", 1))
-                list.add(DataBean(R.drawable.tengxun,"微微一笑 很倾城", 3))
+                list.add(DataBean(R.drawable.tengxun, "夏季新搭配", 1))
+                list.add(DataBean(R.drawable.tengxun, "绝美风格搭配", 1))
+                list.add(DataBean(R.drawable.tengxun, "微微一笑 很倾城", 3))
                 return list
             }
         val testData2: List<DataBean>
             get() {
                 val list: MutableList<DataBean> = ArrayList()
-                list.add(DataBean(R.drawable.youku,"听风.赏雨", 3))
-                list.add(DataBean(R.drawable.tengxun,"迪丽热巴.迪力木拉提", 1))
-                list.add(DataBean(R.drawable.bean,"爱美.人间有之", 3))
+                list.add(DataBean(R.drawable.youku, "听风.赏雨", 3))
+                list.add(DataBean(R.drawable.tengxun, "迪丽热巴.迪力木拉提", 1))
+                list.add(DataBean(R.drawable.bean, "爱美.人间有之", 3))
                 list.add(DataBean(R.drawable.scratch1, "洋洋洋.气质篇", 1))
                 list.add(DataBean(R.drawable.prise, "生活的态度", 3))
                 return list
@@ -61,9 +61,9 @@ class DataBean {
                         2
                     )
                 )
-                list.add(DataBean(R.drawable.batman,"听风.赏雨", 1))
-                list.add(DataBean(R.drawable.batman,"迪丽热巴.迪力木拉提", 1))
-                list.add(DataBean(R.drawable.batman,"爱美.人间有之", 1))
+                list.add(DataBean(R.drawable.batman, "听风.赏雨", 1))
+                list.add(DataBean(R.drawable.batman, "迪丽热巴.迪力木拉提", 1))
+                list.add(DataBean(R.drawable.batman, "爱美.人间有之", 1))
                 list.add(DataBean(R.drawable.batman, "洋洋洋.气质篇", 1))
                 list.add(DataBean(R.drawable.batman, "生活的态度", 1))
                 return list

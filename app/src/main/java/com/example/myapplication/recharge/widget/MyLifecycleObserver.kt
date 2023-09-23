@@ -1,8 +1,5 @@
 package com.example.myapplication.recharge.widget
 
-import android.app.Activity
-import android.net.Uri
-import android.provider.ContactsContract
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,10 +9,9 @@ import androidx.lifecycle.LifecycleOwner
 class MyLifecycleObserver(private val registry : ActivityResultRegistry)
     : DefaultLifecycleObserver {
     private lateinit var getContent : ActivityResultLauncher<String>
-    private lateinit var pickContactLauncher : ActivityResultLauncher<String>
 
     override fun onCreate(owner: LifecycleOwner) {
-        getContent = registry.register("key", owner, ActivityResultContracts.GetContent()) { uri ->
+        getContent = registry.register("key", owner, ActivityResultContracts.GetContent()) {
             // Handle the returned Uri
         }
        /* pickContactLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

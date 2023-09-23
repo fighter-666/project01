@@ -17,7 +17,6 @@ import androidx.core.util.Pair
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ViewGroupCustomFlipCardBinding
 import com.example.myapplication.recharge.activity.CardActivity
-import com.example.myapplication.recharge.activity.FlipPage
 import com.example.myapplication.util.DensityUtils
 
 

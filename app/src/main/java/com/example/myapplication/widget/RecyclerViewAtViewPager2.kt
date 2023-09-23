@@ -4,8 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.LogUtils
-import org.jetbrains.annotations.Nullable
+import kotlin.math.abs
 
 
 /**
@@ -13,15 +12,13 @@ import org.jetbrains.annotations.Nullable
  * @Version 1.0
  */
 class RecyclerViewAtViewPager2 : RecyclerView {
-    constructor(context: Context) : super(context) {}
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {}
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(
         context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int,
-    ) : super(context, attrs, defStyleAttr) {
-    }
-
+    ) : super(context, attrs, defStyleAttr)
     private var startX = 0
     private var startY = 0
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -35,8 +32,8 @@ class RecyclerViewAtViewPager2 : RecyclerView {
             MotionEvent.ACTION_MOVE -> {
                 val endX = ev.x.toInt()
                 val endY = ev.y.toInt()
-                val disX = Math.abs(endX - startX)
-                val disY = Math.abs(endY - startY)
+                val disX = abs(endX - startX)
+                val disY = abs(endY - startY)
                 /*LogUtils.d(
                     "DispatchTouchEvent disX=" + disX + "; disY" + disY + "; canScrollHorizontally(startX - endX) = " + canScrollHorizontally(
                         startX - endX

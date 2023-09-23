@@ -1,11 +1,9 @@
 package com.example.myapplication.recharge.fragment
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -17,7 +15,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.myapplication.activity.components.PhoneActivity
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
@@ -31,9 +28,8 @@ class WaterfallFragment : Fragment() {
     private lateinit var myAdapter: WaterfallAdapter
     private var contactNumber: String? = null
     private var mIntent: Intent? = null
-    private var contactUri: Uri? = null
     private lateinit var feedList: GetFeedListData
-    lateinit var observer : MyLifecycleObserver
+    private lateinit var observer: MyLifecycleObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,17 +48,40 @@ class WaterfallFragment : Fragment() {
         return binding.root
     }
 
+  /*  private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // 用户授予了权限
+            // 在这里执行相应的操作
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            pickContactLauncher.launch(intent)
+        } else {
+            // 用户拒绝了权限
+            // 在这里处理权限被拒绝的情况
+        }
+    }*/
+    private val pickContactLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            // Log.d("aaa",result.resultCode.toString())
+            if (result.resultCode == Activity.RESULT_OK) {
+                mIntent = result.data
+                val contactUri = mIntent?.data
+                contactNumber = getContactNumberByUri(contactUri)
+                //刷新指定item
+                val updatedItem = myAdapter.getItem(1)
+                if (updatedItem.quickRecharge != null) {
+                    updatedItem.quickRecharge.title = contactNumber
+                    // 更新适配器中的数据集
+                    feedList.feedList[1] = updatedItem // 将索引为2的项替换为更新后的项
+                    myAdapter.notifyItemChanged(1)
+                }
+
+            }
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*val pickContactLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data = result.data
-                data?.let {
-                    getContactNumberByUri(it.data)
-                }
-            }
-        }*/
-
         val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
             .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
@@ -74,83 +93,48 @@ class WaterfallFragment : Fragment() {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
+        myAdapter.setOnItemClickListener {
+            if (context?.let { it1 ->
+                    ContextCompat.checkSelfPermission(
+                        it1, Manifest.permission.READ_CONTACTS
+                    )
+                } != PackageManager.PERMISSION_GRANTED
+            ) {
+                // 如果没有权限，则向用户请求权限
+                ActivityCompat.requestPermissions(
+                    context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
+                )
 
-        /*binding.btnSelect.setOnClickListener {
+            } else {
+                // 如果已经拥有权限，则执行读取联系人数据的操作
+                getContactNumberByUri(mIntent?.data)
+            }
             val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-            pickContact.launch(intent)
-        }*/
+            pickContactLauncher.launch(intent)
+        }
 
         binding.btnSelect.setOnClickListener {
             // Open the activity to select an image
             observer.selectImage()
         }
 
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_CONTACTS
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // 如果没有权限，则向用户请求权限
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.READ_CONTACTS),
-                2
-            )
-        } else {
-            // 如果已经拥有权限，则执行读取联系人数据的操作
-            getContactNumberByUri(contactUri)
-        }
+        /* if (ContextCompat.checkSelfPermission(
+                 requireContext(), Manifest.permission.READ_CONTACTS
+             ) != PackageManager.PERMISSION_GRANTED
+         ) {
+             // 如果没有权限，则向用户请求权限
+             ActivityCompat.requestPermissions(
+                 requireActivity(), arrayOf(Manifest.permission.READ_CONTACTS), 2
+             )
+         } else {
+             // 如果已经拥有权限，则执行读取联系人数据的操作
+             getContactNumberByUri(contactUri)
+         }*/
         //requestPermission
-    }
-
-    @SuppressLint("Range")
-    private val pickContact = registerForActivityResult(ActivityResultContracts.PickContact()) { uri ->
-
-        val cursor: Cursor?=
-            uri?.let { requireActivity().contentResolver.query(it,null,null,null,null) }
-
-        cursor?.let { cursor ->
-            while (cursor.moveToNext()){
-                //联系人id
-                val contactId:String=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
-                //联系人姓名
-                val contactName=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-
-                val phones=requireActivity().contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null,
-                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"="+contactId,
-                    null,null
-                )
-                phones?.let {
-                    while (it.moveToNext()){
-
-                        //联系人电话
-                        val phoneNumber=it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-
-                    }
-                    it.close()
-                }
-
-            }
-            cursor.close()
-
-        }
-
 
     }
-/*
-    private val requestPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted) {
-                pickContact.launch(null)
 
-            } else {
-                // 权限被拒绝就要提醒
-                //showSettingDialog()
-            }
-        }*/
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             PICK_CONTACT -> {
@@ -163,8 +147,7 @@ class WaterfallFragment : Fragment() {
                         contactNumber = getContactNumberByUri(contactUri)
 
                         //刷新指定item
-                        val updatedItem =
-                            myAdapter.getItem(1)
+                        val updatedItem = myAdapter.getItem(1)
                         if (updatedItem.quickRecharge != null) {
                             updatedItem.quickRecharge.title = contactNumber
                             // 更新适配器中的数据集
@@ -175,23 +158,25 @@ class WaterfallFragment : Fragment() {
                 }
             }
         }
-    }
+    }*/
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray,
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PhoneActivity.PICK_CONTACT) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 用户已经授予了读取联系人的权限
-                getContactNumberByUri(contactUri)
-            } else {
-                // 用户拒绝了权限请求，可以在这里处理相应逻辑
+    /*    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<String>,
+            grantResults: IntArray,
+        ) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            if (requestCode == 2) {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 用户已经授予了读取联系人的权限
+                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                    pickContactLauncher.launch(intent)
+                } else {
+                    // 用户拒绝了权限请求，可以在这里处理相应逻辑
+                    Toast.makeText(context,"权限被拒绝了",Toast.LENGTH_SHORT).show();
+                }
             }
-        }
-    }
+        }*/
 
     //用于从联系人的 Uri（Uniform Resource Identifier，统一资源标识符）中获取联系人的电话号码
     private fun getContactNumberByUri(data: Uri?): String? {
@@ -206,8 +191,7 @@ class WaterfallFragment : Fragment() {
             if (it.moveToFirst()) {
                 //这行代码获取存储联系人是否有电话号码的列的索引。
                 // HAS_PHONE_NUMBER 是联系人表中的一个列，它表示该联系人是否有电话号码。
-                val hasPhoneIndex =
-                    it.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)
+                val hasPhoneIndex = it.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)
                 //这行代码获取联系人 ID 列的索引。_ID 是联系人表中的一个列，它表示每个联系人的唯一标识符。
                 val idIndex = it.getColumnIndex(ContactsContract.Contacts._ID)
 
@@ -229,12 +213,9 @@ class WaterfallFragment : Fragment() {
                     // requireActivity() 返回与当前 Fragment 相关联的 Activity。
                     val phonesCursor = requireActivity().contentResolver.query(
                         //表示查询电话号码的内容 URI，指定了查询电话号码的数据表。
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                         //表示查询条件，限制查询结果必须与给定的联系人 ID 相匹配。
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
-                        null,
-                        null
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null
                     )
 
                     // 这行代码使用了安全调用操作符 ?. 以确保 phonesCursor 不为 null，并在使用后自动关闭 Cursor
@@ -255,9 +236,9 @@ class WaterfallFragment : Fragment() {
         return phoneNumber
     }
 
-    companion object {
+    /*companion object {
         private const val PICK_CONTACT = 1
-    }
+    }*/
 }
 
 

@@ -6,8 +6,7 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="4dp"
     android:layout_marginBottom="10dp"
-    android:background="@drawable/shape_rectangle19"
-    >
+    android:background="@drawable/shape_rectangle19">
 
 
     <com.youth.banner.Banner
@@ -16,8 +15,8 @@
         android:layout_height="250dp"
         app:banner_indicator_normal_color="@color/gray_C4C4C4"
         app:banner_indicator_selected_color="@color/blue_3399ff"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

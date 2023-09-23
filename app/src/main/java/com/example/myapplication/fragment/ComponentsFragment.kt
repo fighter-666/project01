@@ -119,7 +119,7 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                "VariousTextviewActivity" -> {
+               /* "VariousTextviewActivity" -> {
                     val intent = Intent(context, VariousTextviewActivity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
@@ -207,7 +207,7 @@ class ComponentsFragment : Fragment() {
                     val intent = Intent(context, Room2Activity::class.java)
                     intent.putExtra("piggyName", piggy.name)
                     startActivity(intent)
-                }
+                }*/
                 // 其他Piggy对象的处理逻辑...
 
                 else -> {

@@ -44,7 +44,7 @@
             android:src="@drawable/phone"
             app:layout_constraintTop_toTopOf="@id/et_phone"
             app:layout_constraintBottom_toBottomOf="@id/et_phone"
-            app:layout_constraintLeft_toRightOf="@id/et_phone"
+            app:layout_constraintRight_toRightOf="@id/rlRecharge"
             />
 
 

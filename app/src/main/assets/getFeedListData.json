@@ -1,18 +1,55 @@
 {
     "feedList": [
         {
-            "type": "6",
-            "externalOfferCode": "1977000102",
-            "firstSecondThreeClass": "####",
-            "link": "https://www.baidu.com",
-            "linkType": "2",
-            "title": "iphone13",
-            "provinceCode": "1000000037",
-            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-10.eoc-1977000102",
-            "sceneId": "hg_sy_feedtg##100001##default##1977000102##010001002000##3##N##1##10##N##N##19770",
+            "type": "4",
+            "externalOfferCode": null,
+            "firstSecondThreeClass": null,
+            "link": null,
+            "linkType": null,
+            "title": null,
+            "provinceCode": null,
+            "recommender": null,
+            "sceneId": null,
             "picArea": null,
             "contentAreaList": null,
-            "adLists": null,
+            "adLists": [
+                {
+                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "title": "用户召回提醒",
+                    "link": "https://wapside.189.cn:9001/resources/dist/signInActivity.html?ticket=$ticket$&version=$version$&utm_ch=app&utm_sch=hg_sy_feedljdt",
+                    "linkType": "2",
+                    "provinceCode": "1000000037",
+                    "sceneId": "hg_sy_feedjdt##2870##default##2233400002##010001002000##3##N##1##1##N##N##22334",
+                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-1.eoc-2233400002"
+                },
+                {
+                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "title": "金豆失效提醒",
+                    "link": "https://wapact.189.cn:9001/JinDouMall/JinDouMall_luckDraw.html?ticket=$ticket$&utm_ch=hg_app&utm_sch=hg_sy_feedjdt_1&utm_as=sjdjdqhf",
+                    "linkType": "5",
+                    "provinceCode": "1000000037",
+                    "sceneId": "hg_sy_feedjdt##2870##default##1977000295##010001002000##3##N##1##2##N##N##19770",
+                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-2.eoc-1977000295"
+                },
+                {
+                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "title": "转码",
+                    "link": "http%3A%2F%2F180.166.195.1%3A28143%2Fgonet%2Fgateway%2Fauthentication%3Fticket%3D%24ticket%24%0A",
+                    "linkType": "5",
+                    "provinceCode": "1000000037",
+                    "sceneId": "hg_sy_feedjdt##2870##default##2349900003##010001002000##3##N##1##3##N##N##23499",
+                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-3.eoc-2349900003"
+                },
+                {
+                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "title": "星级会员客户端单点",
+                    "link": "http://cljy.zsc.189.cn/cljy-ui/star/yssb/redirect",
+                    "linkType": "2",
+                    "provinceCode": "1000000037",
+                    "sceneId": "hg_sy_feedjdt##2870##default##1977000296##010001002000##3##N##1##4##N##N##19770",
+                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-4.eoc-1977000296"
+                }
+            ],
             "quickRecharge": null
         },
         {
@@ -69,58 +106,7 @@
                 "loginRechargeText": "9.91"
             }
         },
-        {
-            "type": "4",
-            "externalOfferCode": null,
-            "firstSecondThreeClass": null,
-            "link": null,
-            "linkType": null,
-            "title": null,
-            "provinceCode": null,
-            "recommender": null,
-            "sceneId": null,
-            "picArea": null,
-            "contentAreaList": null,
-            "adLists": [
-                {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/26/111682475969300939.png",
-                    "title": "用户召回提醒",
-                    "link": "https://wapside.189.cn:9001/resources/dist/signInActivity.html?ticket=$ticket$&version=$version$&utm_ch=app&utm_sch=hg_sy_feedljdt",
-                    "linkType": "2",
-                    "provinceCode": "1000000037",
-                    "sceneId": "hg_sy_feedjdt##2870##default##2233400002##010001002000##3##N##1##1##N##N##22334",
-                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-1.eoc-2233400002"
-                },
-                {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/26/111682476035986289.png",
-                    "title": "金豆失效提醒",
-                    "link": "https://wapact.189.cn:9001/JinDouMall/JinDouMall_luckDraw.html?ticket=$ticket$&utm_ch=hg_app&utm_sch=hg_sy_feedjdt_1&utm_as=sjdjdqhf",
-                    "linkType": "5",
-                    "provinceCode": "1000000037",
-                    "sceneId": "hg_sy_feedjdt##2870##default##1977000295##010001002000##3##N##1##2##N##N##19770",
-                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-2.eoc-1977000295"
-                },
-                {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
-                    "title": "转码",
-                    "link": "http%3A%2F%2F180.166.195.1%3A28143%2Fgonet%2Fgateway%2Fauthentication%3Fticket%3D%24ticket%24%0A",
-                    "linkType": "5",
-                    "provinceCode": "1000000037",
-                    "sceneId": "hg_sy_feedjdt##2870##default##2349900003##010001002000##3##N##1##3##N##N##23499",
-                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-3.eoc-2349900003"
-                },
-                {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/26/111682476035986289.png",
-                    "title": "星级会员客户端单点",
-                    "link": "http://cljy.zsc.189.cn/cljy-ui/star/yssb/redirect",
-                    "linkType": "2",
-                    "provinceCode": "1000000037",
-                    "sceneId": "hg_sy_feedjdt##2870##default##1977000296##010001002000##3##N##1##4##N##N##19770",
-                    "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-4.eoc-1977000296"
-                }
-            ],
-            "quickRecharge": null
-        },
+
 
         {
             "type": "1",
@@ -1315,7 +1301,7 @@
                     "location": null,
                     "countDown": {
                         "startTime" : "202309212120000",
-                        "endTime" : "20230924120000"
+                        "endTime" : "20230928120000"
                     },
                     "numText": null,
                     "picList": null,
@@ -1382,8 +1368,8 @@
                     "price": null,
                     "location": null,
                     "countDown": {
-                        "startTime" : "202309012120000",
-                        "endTime" : "20230915172800"
+                        "startTime" : "202309282120000",
+                        "endTime" : "20230929172800"
                     },
                     "numText": null,
                     "picList": null,
