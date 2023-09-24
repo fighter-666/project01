@@ -61,6 +61,48 @@ class WaterfallFragment : Fragment() {
             // 在这里处理权限被拒绝的情况
         }
     }*/
+  private val READ_CONTACTS_PERMISSION_REQUEST_CODE = 2
+
+    // 在适当的位置调用该方法来请求权限
+    private fun requestReadContactsPermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // 如果已经有权限，直接执行读取联系人数据的操作
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            pickContactLauncher.launch(intent)
+            getContactNumberByUri(mIntent?.data)
+        } else {
+            // 请求权限
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_CONTACTS),
+                READ_CONTACTS_PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
+    // 处理权限请求结果
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            READ_CONTACTS_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 用户同意了权限，执行读取联系人数据的操作
+                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                    pickContactLauncher.launch(intent)
+                    getContactNumberByUri(mIntent?.data)
+                } else {
+                    // 用户拒绝了权限，可以给出相应的提示或处理逻辑
+                }
+            }
+        }
+    }
+
     private val pickContactLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             // Log.d("aaa",result.resultCode.toString())
@@ -94,7 +136,8 @@ class WaterfallFragment : Fragment() {
             adapter = myAdapter
         }
         myAdapter.setOnItemClickListener {
-            if (context?.let { it1 ->
+            requestReadContactsPermission()
+        /* if (context?.let { it1 ->
                     ContextCompat.checkSelfPermission(
                         it1, Manifest.permission.READ_CONTACTS
                     )
@@ -108,15 +151,14 @@ class WaterfallFragment : Fragment() {
             } else {
                 // 如果已经拥有权限，则执行读取联系人数据的操作
                 getContactNumberByUri(mIntent?.data)
-            }
-            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-            pickContactLauncher.launch(intent)
-        }
+            }*/
 
+        }
+/*
         binding.btnSelect.setOnClickListener {
             // Open the activity to select an image
             observer.selectImage()
-        }
+        }*/
 
         /* if (ContextCompat.checkSelfPermission(
                  requireContext(), Manifest.permission.READ_CONTACTS
