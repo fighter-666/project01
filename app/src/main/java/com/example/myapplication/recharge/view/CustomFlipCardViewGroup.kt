@@ -93,6 +93,10 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         screenWidth = measuredWidth
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+    }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         // 卡片三等分

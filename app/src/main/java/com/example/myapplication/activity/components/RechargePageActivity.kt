@@ -40,8 +40,6 @@ import kotlinx.coroutines.launch
 class RechargePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
-    private lateinit var scratchCardView: ScratchCardView
-    private lateinit var scratchCardViewGroup: ScratchCardViewGroup
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRechargePageBinding.inflate(layoutInflater)
@@ -53,12 +51,7 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
 
-        // 实例化 scratchCardView 和 scratchCardViewGroup
 
-        scratchCardView = ScratchCardView(this)
-        scratchCardViewGroup =  ScratchCardViewGroup(this)
-        // 设置 ScratchCardViewGroup 作为回调接收者
-        scratchCardView.setNumberChangeListener(scratchCardViewGroup)
 
 // 设置 Header 为贝塞尔雷达样式
         binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))

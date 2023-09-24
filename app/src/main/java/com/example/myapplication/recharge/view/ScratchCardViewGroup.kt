@@ -21,12 +21,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
+class ScratchCardViewGroup : ConstraintLayout {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textview: TextView
     private lateinit var close: ConstraintLayout
     private lateinit var container: ConstraintLayout
+    private lateinit var scratch: ScratchCardView
     private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
     private lateinit var scratchCardView: ScratchCardView
@@ -61,60 +62,85 @@ class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        screenWidth = measuredWidth
+        screenWidth = MeasureSpec.getSize(widthMeasureSpec)
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        //获取图片宽度
+
+
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+
+       /* val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 20f))
+        val layoutParams1 = container.layoutParams
+        val initialWidth = 1020
+        val initialHeight = (((initialWidth).toFloat() / 668) * 214).toInt()
+        layoutParams1.width = imageWidth
+
+        //缩放比例
+        val widthScale = layoutParams1.width.toFloat() / initialWidth.toFloat()
+
+        layoutParams1.height = initialHeight * widthScale.toInt()
+        container.layoutParams = layoutParams1*/
+    }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        //获取图片宽度
-      val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 20f))
-      val layoutParams1 = container.layoutParams
-      val initialWidth = layoutParams1.width
-      val initialHeight = (((initialWidth).toFloat() / 668) * 214).toInt()
+        val imageWidth = screenWidth
+        val layoutParams1 =  container.layoutParams
+        layoutParams1.width = imageWidth
+        layoutParams1.height = (((imageWidth).toFloat() / 668) * 214).toInt()+150
+        container.layoutParams = layoutParams1
 
-      layoutParams1.width = imageWidth
 
-      //缩放比例
-      val widthScale = layoutParams1.width.toFloat() / initialWidth.toFloat()
 
-      layoutParams1.height = initialHeight * widthScale.toInt()
-      container.layoutParams = layoutParams1
+        /* val layoutParamsClose = close.layoutParams
 
-      val layoutParamsClose = close.layoutParams
-
-      //获取初始宽高
-      layoutParamsClose.width = imageWidth
-      close.layoutParams = layoutParamsClose
+        //获取初始宽高
+        layoutParamsClose.width = imageWidth
+        close.layoutParams = layoutParamsClose*/
     }
 
     private fun initView() {
 
         //获取子控件
         LayoutInflater.from(context).inflate(R.layout.view_group_custom_scratch_card, this)
-        imageView = findViewById(R.id.imageHand)
-        imageView2 = findViewById(R.id.imageHand2)
         textview = findViewById(R.id.tvFlipCardChange)
-        close = findViewById(R.id.close)
+        /*imageView = findViewById(R.id.imageHand)
+        imageView2 = findViewById(R.id.imageHand2)
+        close = findViewById(R.id.close)*/
         container = findViewById(R.id.container)
+        scratch = findViewById(R.id.scratch)
 
         //绑定刮卡view
-        val customView = ScratchCardView(context)
-        container.addView(customView)
+  /*      val customView = ScratchCardView(context)
+        container.addView(customView)*/
 
         val typedArray =
             context.obtainStyledAttributes(customAttrs, R.styleable.ScratchCardViewGroup)
-        val drawable = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc)
-        val drawable2 = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc2)
+        //val drawable = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc)
+        //val drawable2 = typedArray.getDrawable(R.styleable.ScratchCardViewGroup_scratchSrc2)
         typedArray.recycle()
 
+        //再刮一次
+        textview.setOnClickListener {
+            Toast.makeText(context, "再来一次", Toast.LENGTH_SHORT).show()
+            //customView.resetScratchCard()
+            /*val customView2 = ScratchCardView(context)
+            scratch.addView(customView2)*/
+        }
+
         // 设置图片资源
-        imageView.setImageDrawable(drawable)
-        imageView2.setImageDrawable(drawable2)
+        //imageView.setImageDrawable(drawable)
+        //imageView2.setImageDrawable(drawable2)
 
         //imageView.setImageResource(R.drawable.card1)
-        imageView.setImageResource(R.drawable.button2)
-        imageView2.setImageResource(R.drawable.hand)
+        //imageView.setImageResource(R.drawable.button2)
+        //imageView2.setImageResource(R.drawable.hand)
 
         //让按钮和手指消失
         /* if (scratchCardView.number > 0) {
@@ -131,18 +157,12 @@ class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
         scratchCardView.setNumberChangeListener(scratchCardViewGroup) // 将 ScratchCardViewGroup 设置为回调接收者*/
 
 
-        imageView.setOnClickListener {
+       /* imageView.setOnClickListener {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
         }
 
-        //再刮一次
-        textview.setOnClickListener {
-            Toast.makeText(context, "再来一次", Toast.LENGTH_SHORT).show()
-            //customView.resetScratchCard()
-            val customView2 = ScratchCardView(context)
-            container.addView(customView2)
-        }
+
 
         CoroutineScope(Dispatchers.Main).launch {
             //手指动画
@@ -180,15 +200,14 @@ class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
             })
             animatorSet.start()
         }
-
+*/
     }
 
-    override fun onNumberChanged(newNumber: Int) {
+   /* override fun onNumberChanged(newNumber: Int) {
         // 处理新的数值，例如隐藏 imageView 和 imageView2
         if (newNumber == 2) {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
         }
-        Log.d("aaa", newNumber.toString())
-    }
+    }*/
 }
