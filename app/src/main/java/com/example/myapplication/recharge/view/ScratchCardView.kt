@@ -10,12 +10,19 @@ import android.graphics.Path
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.myapplication.R
+import com.example.myapplication.recharge.data.GetFeedListData
+import com.example.myapplication.recharge.property.Piggy
 import java.util.Random
 import kotlin.math.abs
 
+// 定义回调函数接口
+interface NumberChangeListener {
+    fun onNumberChanged(newNumber: Int)
+}
 
 class ScratchCardView : View {
     private lateinit var mBitmapBackground: Bitmap
@@ -37,7 +44,14 @@ class ScratchCardView : View {
     private var showFullResult = false
     private var scaleWidth: Float = 0f
     private var scaleHeight: Float = 0f
+    var number: Int = 0
 
+    private var numberChangeListener: NumberChangeListener? = null
+
+    // 设置回调函数
+    fun setNumberChangeListener(listener: NumberChangeListener) {
+        this.numberChangeListener = listener
+    }
 
     constructor(context: Context?) : super(context) {
         init()
@@ -129,29 +143,21 @@ class ScratchCardView : View {
                 startX = event.x
                 startY = event.y
 
-
             }
 
             MotionEvent.ACTION_MOVE -> {
-
                 //使用path.lineTo()方法将路径绘制到当前触摸点
                 path.lineTo(event.x - mBitmapFrontWidth, event.y - mBitmapFrontHeight)
                 endX = event.x
                 endY = event.y
                 disX = abs(endX - startX)
                 disY = abs(endY - startY)
-
-
-            }
-
-            MotionEvent.ACTION_UP -> {
-
             }
         }
         performClick()
-
         return true
     }
+
 
     override fun performClick(): Boolean {
         super.performClick()
@@ -187,6 +193,9 @@ class ScratchCardView : View {
             if (percent > 25) {
                 showFullResult = true
             }
+            number = 2
+            // 调用回调函数传递新的数值
+            numberChangeListener?.onNumberChanged(number)
         }
 
         //上下冲突

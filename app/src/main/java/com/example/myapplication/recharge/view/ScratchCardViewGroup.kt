@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -20,7 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ScratchCardViewGroup : ConstraintLayout {
+class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textview: TextView
@@ -28,6 +29,7 @@ class ScratchCardViewGroup : ConstraintLayout {
     private lateinit var container: ConstraintLayout
     private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
+    private lateinit var scratchCardView: ScratchCardView
 
     /**
      * 这个构造方法是在代码中new的时候调用的
@@ -115,10 +117,19 @@ class ScratchCardViewGroup : ConstraintLayout {
         imageView2.setImageResource(R.drawable.hand)
 
         //让按钮和手指消失
-        /* if (currentCloseValue) {
+        /* if (scratchCardView.number > 0) {
              imageView.visibility = View.GONE
              imageView2.visibility = View.GONE
          }*/
+
+
+
+/*        // 使用示例
+        val scratchCardView = ScratchCardView()
+        val scratchCardViewGroup = ScratchCardViewGroup()
+
+        scratchCardView.setNumberChangeListener(scratchCardViewGroup) // 将 ScratchCardViewGroup 设置为回调接收者*/
+
 
         imageView.setOnClickListener {
             imageView.visibility = View.GONE
@@ -172,5 +183,12 @@ class ScratchCardViewGroup : ConstraintLayout {
 
     }
 
-
+    override fun onNumberChanged(newNumber: Int) {
+        // 处理新的数值，例如隐藏 imageView 和 imageView2
+        if (newNumber == 2) {
+            imageView.visibility = View.GONE
+            imageView2.visibility = View.GONE
+        }
+        Log.d("aaa", newNumber.toString())
+    }
 }

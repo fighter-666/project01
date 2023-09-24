@@ -10,8 +10,8 @@ import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -33,8 +33,6 @@ class WaterfallFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // ...
-
         observer = MyLifecycleObserver(requireActivity().activityResultRegistry)
         lifecycle.addObserver(observer)
     }
@@ -48,22 +46,7 @@ class WaterfallFragment : Fragment() {
         return binding.root
     }
 
-  /*  private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            // 用户授予了权限
-            // 在这里执行相应的操作
-            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-            pickContactLauncher.launch(intent)
-        } else {
-            // 用户拒绝了权限
-            // 在这里处理权限被拒绝的情况
-        }
-    }*/
-  private val READ_CONTACTS_PERMISSION_REQUEST_CODE = 2
-
-    // 在适当的位置调用该方法来请求权限
+    //用于请求读取联系人权限并执行相应的操作。
     private fun requestReadContactsPermission() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -73,39 +56,40 @@ class WaterfallFragment : Fragment() {
             // 如果已经有权限，直接执行读取联系人数据的操作
             val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
             pickContactLauncher.launch(intent)
-            getContactNumberByUri(mIntent?.data)
+            //getContactNumberByUri(mIntent?.data)
         } else {
             // 请求权限
-            requestPermissions(
+            /*requestPermissions(
                 arrayOf(Manifest.permission.READ_CONTACTS),
                 READ_CONTACTS_PERMISSION_REQUEST_CODE
-            )
+            )*/
+            /*ActivityCompat.requestPermissions(
+                context as Activity,
+                arrayOf(Manifest.permission.READ_CONTACTS),
+                READ_CONTACTS_PERMISSION_REQUEST_CODE
+            )*/
+            requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
         }
     }
 
     // 处理权限请求结果
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            READ_CONTACTS_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 用户同意了权限，执行读取联系人数据的操作
-                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-                    pickContactLauncher.launch(intent)
-                    getContactNumberByUri(mIntent?.data)
-                } else {
-                    // 用户拒绝了权限，可以给出相应的提示或处理逻辑
-                }
-            }
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            // 用户同意了权限，跳转到通讯录界面，选择充值号码
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            pickContactLauncher.launch(intent)
+        } else {
+            // 用户拒绝了权限，可以给出相应的提示或处理逻辑
+            Toast.makeText(context, "请打开读取联系人权限", Toast.LENGTH_SHORT).show()
+            //requestReadContactsPermission()
         }
     }
 
+    //使用registerForActivityResult来注册一个用于选择联系人的Activity结果回调
     private val pickContactLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            // Log.d("aaa",result.resultCode.toString())
             if (result.resultCode == Activity.RESULT_OK) {
                 mIntent = result.data
                 val contactUri = mIntent?.data
@@ -124,6 +108,7 @@ class WaterfallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
         val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
             .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
@@ -137,90 +122,25 @@ class WaterfallFragment : Fragment() {
         }
         myAdapter.setOnItemClickListener {
             requestReadContactsPermission()
-        /* if (context?.let { it1 ->
-                    ContextCompat.checkSelfPermission(
-                        it1, Manifest.permission.READ_CONTACTS
+            /* if (context?.let { it1 ->
+                        ContextCompat.checkSelfPermission(
+                            it1, Manifest.permission.READ_CONTACTS
+                        )
+                    } != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // 如果没有权限，则向用户请求权限
+                    ActivityCompat.requestPermissions(
+                        context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
                     )
-                } != PackageManager.PERMISSION_GRANTED
-            ) {
-                // 如果没有权限，则向用户请求权限
-                ActivityCompat.requestPermissions(
-                    context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
-                )
 
-            } else {
-                // 如果已经拥有权限，则执行读取联系人数据的操作
-                getContactNumberByUri(mIntent?.data)
-            }*/
+                } else {
+                    // 如果已经拥有权限，则执行读取联系人数据的操作
+                    getContactNumberByUri(mIntent?.data)
+                }*/
 
         }
-/*
-        binding.btnSelect.setOnClickListener {
-            // Open the activity to select an image
-            observer.selectImage()
-        }*/
-
-        /* if (ContextCompat.checkSelfPermission(
-                 requireContext(), Manifest.permission.READ_CONTACTS
-             ) != PackageManager.PERMISSION_GRANTED
-         ) {
-             // 如果没有权限，则向用户请求权限
-             ActivityCompat.requestPermissions(
-                 requireActivity(), arrayOf(Manifest.permission.READ_CONTACTS), 2
-             )
-         } else {
-             // 如果已经拥有权限，则执行读取联系人数据的操作
-             getContactNumberByUri(contactUri)
-         }*/
-        //requestPermission
-
     }
 
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            PICK_CONTACT -> {
-                mIntent = data
-                val contactUri = data?.data
-                getContactNumberByUri(contactUri)
-                if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-                    data?.data?.let {
-                        mIntent = data
-                        contactNumber = getContactNumberByUri(contactUri)
-
-                        //刷新指定item
-                        val updatedItem = myAdapter.getItem(1)
-                        if (updatedItem.quickRecharge != null) {
-                            updatedItem.quickRecharge.title = contactNumber
-                            // 更新适配器中的数据集
-                            feedList.feedList[1] = updatedItem // 将索引为2的项替换为更新后的项
-                            myAdapter.notifyItemChanged(1)
-                        }
-                    }
-                }
-            }
-        }
-    }*/
-
-    /*    override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<String>,
-            grantResults: IntArray,
-        ) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            if (requestCode == 2) {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 用户已经授予了读取联系人的权限
-                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-                    pickContactLauncher.launch(intent)
-                } else {
-                    // 用户拒绝了权限请求，可以在这里处理相应逻辑
-                    Toast.makeText(context,"权限被拒绝了",Toast.LENGTH_SHORT).show();
-                }
-            }
-        }*/
-
-    //用于从联系人的 Uri（Uniform Resource Identifier，统一资源标识符）中获取联系人的电话号码
     private fun getContactNumberByUri(data: Uri?): String? {
 
         var phoneNumber: String? = null
@@ -277,6 +197,111 @@ class WaterfallFragment : Fragment() {
         }
         return phoneNumber
     }
+
+ /*      override fun shouldShowRequestPermissionRationale(permission: String): Boolean {
+           // 检查权限是否需要解释给用户
+           if (permission == Manifest.permission.READ_CONTACTS) {
+               // 如果需要解释，您可以在此处提供自定义的解释逻辑
+               // 返回true表示需要解释给用户
+               val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+               pickContactLauncher.launch(intent)
+               return true
+           } else{
+               // 用户拒绝了权限，可以给出相应的提示或处理逻辑
+               Toast.makeText(context, "请打开读取联系人权限", Toast.LENGTH_SHORT).show()
+           }
+           // 对于其他权限，调用父类的实现
+           return super.shouldShowRequestPermissionRationale(permission)
+       }*/
+
+
+    // Ex. Launching ACCESS_FINE_LOCATION permission.
+
+    /* override fun onRequestPermissionsResult(
+         requestCode: Int,
+         permissions: Array<String>,
+         grantResults: IntArray,
+     ) {
+         when (requestCode) {
+             READ_CONTACTS_PERMISSION_REQUEST_CODE -> {
+                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                     // 用户同意了权限，跳转到通讯录界面，选择充值号码
+                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                     pickContactLauncher.launch(intent)
+                     getContactNumberByUri(mIntent?.data)
+                 } else {
+                     // 用户拒绝了权限，可以给出相应的提示或处理逻辑
+                     Toast.makeText(context, "请打开读取联系人权限", Toast.LENGTH_SHORT).show()
+                 }
+             }
+         }
+     }*/
+    /*
+            binding.btnSelect.setOnClickListener {
+                // Open the activity to select an image
+                observer.selectImage()
+            }*/
+
+    /* if (ContextCompat.checkSelfPermission(
+             requireContext(), Manifest.permission.READ_CONTACTS
+         ) != PackageManager.PERMISSION_GRANTED
+     ) {
+         // 如果没有权限，则向用户请求权限
+         ActivityCompat.requestPermissions(
+             requireActivity(), arrayOf(Manifest.permission.READ_CONTACTS), 2
+         )
+     } else {
+         // 如果已经拥有权限，则执行读取联系人数据的操作
+         getContactNumberByUri(contactUri)
+     }*/
+    //requestPermission
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            PICK_CONTACT -> {
+                mIntent = data
+                val contactUri = data?.data
+                getContactNumberByUri(contactUri)
+                if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+                    data?.data?.let {
+                        mIntent = data
+                        contactNumber = getContactNumberByUri(contactUri)
+
+                        //刷新指定item
+                        val updatedItem = myAdapter.getItem(1)
+                        if (updatedItem.quickRecharge != null) {
+                            updatedItem.quickRecharge.title = contactNumber
+                            // 更新适配器中的数据集
+                            feedList.feedList[1] = updatedItem // 将索引为2的项替换为更新后的项
+                            myAdapter.notifyItemChanged(1)
+                        }
+                    }
+                }
+            }
+        }
+    }*/
+
+    /*    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<String>,
+            grantResults: IntArray,
+        ) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            if (requestCode == 2) {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 用户已经授予了读取联系人的权限
+                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                    pickContactLauncher.launch(intent)
+                } else {
+                    // 用户拒绝了权限请求，可以在这里处理相应逻辑
+                    Toast.makeText(context,"权限被拒绝了",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }*/
+
+    //用于从联系人的 Uri（Uniform Resource Identifier，统一资源标识符）中获取联系人的电话号码
+
 
     /*companion object {
         private const val PICK_CONTACT = 1

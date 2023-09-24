@@ -90,16 +90,6 @@
                         "mainTitle": "200元",
                         "subtitle": "售199.00元",
                         "price": "200"
-                    },
-                    {
-                        "mainTitle": "200元",
-                        "subtitle": "售199.00元",
-                        "price": "200"
-                    },
-                    {
-                        "mainTitle": "200元",
-                        "subtitle": "售199.00元",
-                        "price": "200"
                     }
                 ],
                 "dialogText": "登录后，享充值%s权益\n（限电信号码）",
@@ -1172,53 +1162,7 @@
                 "picList": []
             },
             "contentAreaList": [
-                {
-                    "type": "3",
-                    "mainTitle": null,
-                    "saleTipList": null,
-                    "price": {
-                        "isShowPriceUnit": "1",
-                        "priceInteger": "5888888888888",
-                        "priceDecimal": "/月",
-                        "priceColor": "",
-                        "originalPrice": "",
-                        "originalPriceColor": "",
-                        "isOriginalPriceLine": ""
-                    },
-                    "location": null,
-                    "countDown": null,
-                    "numText": null,
-                    "picList": null,
-                    "completionInfo": null
-                },
-                {
-                    "type": "4",
-                    "mainTitle": null,
-                    "saleTipList": null,
-                    "price": null,
-                    "location": {
-                        "icon" : "",
-                        "title" : "河北省 石家庄市"
-                    },
-                    "countDown": null,
-                    "numText": null,
-                    "picList": null,
-                    "completionInfo": null
-                },
-                {
-                    "type": "5",
-                    "mainTitle": null,
-                    "saleTipList": null,
-                    "price": null,
-                    "location": null,
-                    "countDown": {
-                        "startTime" : "202309212120000",
-                        "endTime" : "20230924120000"
-                    },
-                    "numText": null,
-                    "picList": null,
-                    "completionInfo": null
-                },
+
                 {
                     "type": "1",
                     "mainTitle": {
@@ -1771,5 +1715,6 @@
             ],
             "quickRecharge": null
         }
+
     ]
 }

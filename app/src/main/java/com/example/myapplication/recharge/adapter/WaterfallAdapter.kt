@@ -18,6 +18,7 @@ import com.example.myapplication.databinding.WidgetMultipleItemNullBinding
 import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.widget.ScrollTextViewCommentListBackground
+import com.example.myapplication.util.DensityUtils
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
@@ -30,6 +31,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
     //一个可为空的函数类型变量，用于保存点击事件的监听器
     private var onItemClickListener: ((GetFeedListData.FeedListBean) -> Unit)? = null
+
     init {
         addItemType(
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE,
@@ -129,18 +131,17 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //val imageRatio = item.picArea.imageRatio.toFloat()
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
-                      val rechargeAdapter = ContentAreaListAdapter(
-                          R.layout.adapter_recharge_content_area_list,
-                          item.contentAreaList
-                      )
+                    val rechargeAdapter = ContentAreaListAdapter(
+                        R.layout.adapter_recharge_content_area_list,
+                        item.contentAreaList
+                    )
 
-                      //设置布局管理器和给recyclerView 设置设配器
-                      binding.rvContentAreaList.apply {
-                          layoutManager = LinearLayoutManager(context)
-                          adapter = rechargeAdapter
-                      }
-                    //在协程中加载网络图片或在后台线程中加载大量图片。
-                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
+                    //设置布局管理器和给recyclerView 设置设配器
+                    binding.rvContentAreaList.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = rechargeAdapter
+                    }
+
                     CoroutineScope(Dispatchers.Main).launch {
                         // 设置圆角半径
                         //val requestOptions = RequestOptions().transform(RoundedCorners(20))
@@ -149,7 +150,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
-                            //.apply(requestOptions)
+                            //.apply(requestOptions
                             .into(binding.ivPicAreaImageUrl)
 
                     }
@@ -201,6 +202,16 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 // 处理广告布局
                 val binding = ActivityBannerBinding.bind(holder.itemView)
 
+                CoroutineScope(Dispatchers.Main).launch {
+                    val lp = binding.banner.layoutParams   //获取列表项视图（item view）的布局参数。
+
+                    //缩放比例
+                    val widthScale = recyclerView.measuredWidth.toFloat() / 1002
+                    lp.height = (DensityUtils.dpToPx(context, 250f) * widthScale).toInt()
+                    binding.banner.layoutParams = lp
+                }
+
+
                 binding.banner.setAdapter(object :
                     BannerImageAdapter<GetFeedListData.FeedListBean.AdListBean>(item.adLists) {
                     override fun onBindView(
@@ -231,28 +242,28 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
                 binding.btnSelect.setOnClickListener {
                     //设置点击事件监听器
-                        onItemClickListener?.invoke(item)
-                   /* if (ContextCompat.checkSelfPermission(
-                            context, Manifest.permission.READ_CONTACTS
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        // 如果没有权限，则向用户请求权限
-                        ActivityCompat.requestPermissions(
-                            context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
-                        )
+                    onItemClickListener?.invoke(item)
+                    /* if (ContextCompat.checkSelfPermission(
+                             context, Manifest.permission.READ_CONTACTS
+                         ) != PackageManager.PERMISSION_GRANTED
+                     ) {
+                         // 如果没有权限，则向用户请求权限
+                         ActivityCompat.requestPermissions(
+                             context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
+                         )
 
-                    } else {
-                        // 如果已经拥有权限，则执行读取联系人数据的操作
-                        //getContactNumberByUri(contactUri)
-                    }
-                    val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-                    (context as ComponentActivity).startActivityForResult(intent, 1)*/
+                     } else {
+                         // 如果已经拥有权限，则执行读取联系人数据的操作
+                         //getContactNumberByUri(contactUri)
+                     }
+                     val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+                     (context as ComponentActivity).startActivityForResult(intent, 1)*/
                     //(context as ComponentActivity).pickContactLauncher.launch(intent)
                 }
 
                 //消除空格，并且第四位到第七位用*代替
                 binding.etPhone.text =
-                    hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""), 3)
+                    hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""))
 
                 val rechargeAdapter =
                     RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
@@ -286,14 +297,14 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     }
 
     //第四位到第七位用*代替
-    private fun hideCharactersFromIndex(text: String, startIndex: Int): String {
+    private fun hideCharactersFromIndex(text: String): String {
         val length = text.length
-        if (startIndex >= length) {
+        if (3 >= length) {
             return text
         }
 
         val hiddenText = StringBuilder(text)
-        for (i in startIndex until startIndex + 4) {
+        for (i in 3 until 3 + 4) {
             hiddenText.setCharAt(i, '*')
         }
 

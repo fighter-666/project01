@@ -20,6 +20,8 @@ import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
+import com.example.myapplication.recharge.view.ScratchCardView
+import com.example.myapplication.recharge.view.ScratchCardViewGroup
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrollTextViewBackground
@@ -38,6 +40,8 @@ import kotlinx.coroutines.launch
 class RechargePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
+    private lateinit var scratchCardView: ScratchCardView
+    private lateinit var scratchCardViewGroup: ScratchCardViewGroup
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRechargePageBinding.inflate(layoutInflater)
@@ -48,6 +52,13 @@ class RechargePageActivity : AppCompatActivity() {
             .titleBar(binding.tvTitle)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
+
+        // 实例化 scratchCardView 和 scratchCardViewGroup
+
+        scratchCardView = ScratchCardView(this)
+        scratchCardViewGroup =  ScratchCardViewGroup(this)
+        // 设置 ScratchCardViewGroup 作为回调接收者
+        scratchCardView.setNumberChangeListener(scratchCardViewGroup)
 
 // 设置 Header 为贝塞尔雷达样式
         binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))
@@ -64,10 +75,11 @@ class RechargePageActivity : AppCompatActivity() {
         //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
         // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
-        binding.viewPager2.post {
-            binding.viewPager2.offscreenPageLimit = tabList.tabList.size
+        CoroutineScope(Dispatchers.Main).launch {
+            binding.viewPager2.post {
+                binding.viewPager2.offscreenPageLimit = tabList.tabList.size
+            }
         }
-
         //将适配器对象与ViewPager2绑定，以便在ViewPager2中显示相应的页面内容
         val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager2.adapter = adapter
@@ -115,12 +127,33 @@ class RechargePageActivity : AppCompatActivity() {
                     if (customView != null) {
                         val tabName: TextView =
                             customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
-                        if (isSelected) {
-                            tabName.setTypeface(null, Typeface.BOLD) // 设置字体加粗
-                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f) // 设置字体大小，20sp
-                        } else {
-                            tabName.setTypeface(null, Typeface.NORMAL) // 取消字体加粗
-                            tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f) //  取消字体加粗
+                        val tabIcon = customView.findViewById<ImageView>(R.id.tabIcon)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            if (isSelected) {
+                                tabName.setTypeface(null, Typeface.BOLD) // 设置字体加粗
+                                tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f) // 设置字体大小，20sp
+                                /**
+                                 * 以textView为例获取控件宽、高
+                                 */
+                                tabIcon.post {
+                                    run {
+                                        val layoutParams1 =  tabIcon.layoutParams
+                                        layoutParams1.height = 80
+                                        tabIcon.layoutParams = layoutParams1
+                                    }
+                                }
+
+                            } else {
+                                tabName.setTypeface(null, Typeface.NORMAL) // 取消字体加粗
+                                tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f) //  取消字体加粗
+                                tabIcon.post {
+                                    run {
+                                        val layoutParams1 =  tabIcon.layoutParams
+                                        layoutParams1.height = 70
+                                        tabIcon.layoutParams = layoutParams1
+                                    }
+                                }
+                            }
                         }
                     }
                 }
