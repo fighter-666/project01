@@ -76,11 +76,12 @@ class RechargePageActivity : AppCompatActivity() {
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
         // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
         CoroutineScope(Dispatchers.Main).launch {
-            binding.viewPager2.post {
-                binding.viewPager2.offscreenPageLimit = tabList.tabList.size
-            }
+            binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
         }
-        //将适配器对象与ViewPager2绑定，以便在ViewPager2中显示相应的页面内容
+        binding.viewPager2.post {
+
+        }
+
         val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager2.adapter = adapter
 

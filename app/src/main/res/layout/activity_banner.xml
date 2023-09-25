@@ -13,7 +13,8 @@
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="157:212"
         app:banner_indicator_normal_color="@color/gray_C4C4C4"
         app:banner_indicator_selected_color="@color/blue_3399ff"
         app:layout_constraintBottom_toBottomOf="parent"

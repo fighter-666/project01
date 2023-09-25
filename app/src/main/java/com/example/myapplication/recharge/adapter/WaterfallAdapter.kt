@@ -38,36 +38,31 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             R.layout.widget_multiple_item_many_image
         )
         addItemType(
-            GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE,
-            R.layout.widget_multiple_item_common
+            GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE, R.layout.widget_multiple_item_common
         )
         addItemType(
-            GetFeedListData.FEED_ADAPTER_ITEM_TYPE.NULL,
-            R.layout.widget_multiple_item_null
+            GetFeedListData.FEED_ADAPTER_ITEM_TYPE.NULL, R.layout.widget_multiple_item_null
         )
         addItemType(
-            GetFeedListData.FEED_LIST_ITEM_TYPE.LIVE.toInt(),
-            R.layout.widget_multiple_item_common
+            GetFeedListData.FEED_LIST_ITEM_TYPE.LIVE.toInt(), R.layout.widget_multiple_item_common
         )
         addItemType(
-            GetFeedListData.FEED_LIST_ITEM_TYPE.VIDEO.toInt(),
-            R.layout.widget_multiple_item_common
+            GetFeedListData.FEED_LIST_ITEM_TYPE.VIDEO.toInt(), R.layout.widget_multiple_item_common
         )
         addItemType(
-            GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt(),
-            R.layout.activity_banner
+            GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt(), R.layout.activity_banner
         )
         addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt(),
             R.layout.widget_multiple_item_recharge
-        )
-        /*addItemType(
+        )/*addItemType(
             GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt(),
             R.layout.activity_banner
         )*/
     }
 
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean) {
+        //holder.addOnClickListener(R.id.btn_select)
         when (holder.itemViewType) {
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.MANY_IMAGE -> {
                 // 处理多图布局
@@ -76,8 +71,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
                     val rechargeAdapter = ContentAreaListAdapter(
-                        R.layout.adapter_recharge_content_area_list,
-                        item.contentAreaList
+                        R.layout.adapter_recharge_content_area_list, item.contentAreaList
                     )
 
                     //设置布局管理器和给recyclerView 设置设配器
@@ -88,8 +82,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 }
 
                 val myAdapter = ManyImageGridAdapter(
-                    R.layout.adapter_recharge_many_image_grid,
-                    item.picArea.picList
+                    R.layout.adapter_recharge_many_image_grid, item.picArea.picList
                 )
 
                 //设置布局管理器和给recyclerView设置适配器
@@ -132,8 +125,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
                     val rechargeAdapter = ContentAreaListAdapter(
-                        R.layout.adapter_recharge_content_area_list,
-                        item.contentAreaList
+                        R.layout.adapter_recharge_content_area_list, item.contentAreaList
                     )
 
                     //设置布局管理器和给recyclerView 设置设配器
@@ -165,8 +157,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             //.transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
                             //.transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
-                            .into(binding.ivPicAreaImageUrl)
+                            .apply(requestOptions).into(binding.ivPicAreaImageUrl)
                     }
                 }
             }
@@ -178,8 +169,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
                     val rechargeAdapter = ContentAreaListAdapter(
-                        R.layout.adapter_recharge_content_area_list,
-                        item.contentAreaList
+                        R.layout.adapter_recharge_content_area_list, item.contentAreaList
                     )
 
                     //设置布局管理器和给recyclerView 设置设配器
@@ -201,17 +191,6 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt() -> {
                 // 处理广告布局
                 val binding = ActivityBannerBinding.bind(holder.itemView)
-
-                CoroutineScope(Dispatchers.Main).launch {
-                    val lp = binding.banner.layoutParams   //获取列表项视图（item view）的布局参数。
-
-                    //缩放比例
-                    val widthScale = recyclerView.measuredWidth.toFloat() / 1002
-                    lp.height = (DensityUtils.dpToPx(context, 250f) * widthScale).toInt()
-                    binding.banner.layoutParams = lp
-                }
-
-
                 binding.banner.setAdapter(object :
                     BannerImageAdapter<GetFeedListData.FeedListBean.AdListBean>(item.adLists) {
                     override fun onBindView(
@@ -221,10 +200,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                         size: Int,
                     ) {
                         CoroutineScope(Dispatchers.Main).launch {
-                            Glide.with(holder.imageView)
-                                .load(data.imageUrl)
-                                .error(R.drawable.ic_launcher_foreground)
-                                .into(holder.imageView)
+                            Glide.with(holder.imageView).load(data.imageUrl)
+                                .error(R.drawable.ic_launcher_foreground).into(holder.imageView)
                         }
                     }
                 })
@@ -240,10 +217,12 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
                 // 处理充值布局
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
-                binding.btnSelect.setOnClickListener {
+
+                holder.itemView
+                binding.btnSelect
+           /*     binding.btnSelect.setOnClickListener {
                     //设置点击事件监听器
-                    onItemClickListener?.invoke(item)
-                    /* if (ContextCompat.checkSelfPermission(
+                    onItemClickListener?.invoke(item)*//* if (ContextCompat.checkSelfPermission(
                              context, Manifest.permission.READ_CONTACTS
                          ) != PackageManager.PERMISSION_GRANTED
                      ) {
@@ -257,9 +236,9 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                          //getContactNumberByUri(contactUri)
                      }
                      val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-                     (context as ComponentActivity).startActivityForResult(intent, 1)*/
+                     (context as ComponentActivity).startActivityForResult(intent, 1)*//*
                     //(context as ComponentActivity).pickContactLauncher.launch(intent)
-                }
+                }*/
 
                 //消除空格，并且第四位到第七位用*代替
                 binding.etPhone.text =

@@ -19,10 +19,11 @@ import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.widget.MyLifecycleObserver
+import com.example.myapplication.widget.BaseLazyFragment
 import com.google.gson.Gson
 
 
-class WaterfallFragment : Fragment() {
+class WaterfallFragment : BaseLazyFragment() {
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
     private lateinit var myAdapter: WaterfallAdapter
@@ -30,6 +31,31 @@ class WaterfallFragment : Fragment() {
     private var mIntent: Intent? = null
     private lateinit var feedList: GetFeedListData
     private lateinit var observer: MyLifecycleObserver
+
+    override fun lazyInit() {
+        val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
+            .use { it.readText() }
+        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+        val gson = Gson()
+        feedList = gson.fromJson(json, GetFeedListData::class.java)
+        //初始化瀑布流
+        myAdapter = WaterfallAdapter(feedList.feedList)
+        binding.rvComponentsWaterfall.apply {
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            adapter = myAdapter
+        }
+        //注册条目子组件的点击事件
+        myAdapter.addChildClickViewIds(binding.btnSelect.id)
+        //监听条目子组件的点击事件
+        myAdapter.setOnItemChildClickListener { _, view, position ->
+            if (view.id == binding.btnSelect.id) {
+                requestReadContactsPermission()
+            }
+        }
+        myAdapter.setOnItemClickListener { _, _, position ->
+            Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,21 +134,12 @@ class WaterfallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lazyInit()
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
-        val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
-            .use { it.readText() }
-        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
-        val gson = Gson()
-        feedList = gson.fromJson(json, GetFeedListData::class.java)
-        //初始化瀑布流
-        myAdapter = WaterfallAdapter(feedList.feedList)
-        binding.rvComponentsWaterfall.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = myAdapter
-        }
-        myAdapter.setOnItemClickListener {
+
+        /*myAdapter.setOnItemClickListener {
             requestReadContactsPermission()
-            /* if (context?.let { it1 ->
+            *//* if (context?.let { it1 ->
                         ContextCompat.checkSelfPermission(
                             it1, Manifest.permission.READ_CONTACTS
                         )
@@ -136,9 +153,9 @@ class WaterfallFragment : Fragment() {
                 } else {
                     // 如果已经拥有权限，则执行读取联系人数据的操作
                     getContactNumberByUri(mIntent?.data)
-                }*/
+                }*//*
 
-        }
+        }*/
     }
 
     private fun getContactNumberByUri(data: Uri?): String? {

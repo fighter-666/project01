@@ -99,25 +99,21 @@ class CustomFlipCardViewGroup : ConstraintLayout {
         val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 40f)) / 3
         val layoutParams1 =  binding.ivFirstCard.layoutParams
         layoutParams1.width = imageWidth
-        layoutParams1.height = imageWidth
         binding.ivFirstCard.layoutParams = layoutParams1
 
         //重叠的卡片当作背景
         val layoutParams1Copy =  binding.ivFirstCardBackground.layoutParams
         layoutParams1Copy.width = imageWidth
-        layoutParams1Copy.height = imageWidth
         binding.ivFirstCardBackground.layoutParams = layoutParams1Copy
 
         //第二张卡片
         val layoutParams2 =  binding.ivSecondCard.layoutParams
         layoutParams2.width = imageWidth
-        layoutParams2.height = imageWidth
         binding.ivSecondCard.layoutParams = layoutParams2
 
         //重叠的第二张卡片
         val layoutParams2Copy =  binding.ivSecondCardBackground.layoutParams
         layoutParams2Copy.width = imageWidth
-        layoutParams2Copy.height = imageWidth
         binding.ivSecondCardBackground.layoutParams = layoutParams2Copy
 
         //第三张卡片

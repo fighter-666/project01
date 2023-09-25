@@ -10,12 +10,9 @@ import android.graphics.Path
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.myapplication.R
-import com.example.myapplication.recharge.data.GetFeedListData
-import com.example.myapplication.recharge.property.Piggy
 import java.util.Random
 import kotlin.math.abs
 
@@ -134,7 +131,6 @@ class ScratchCardView : View {
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
-
             MotionEvent.ACTION_DOWN -> {
                 //重置绘制路径
                 path.reset()
@@ -193,9 +189,9 @@ class ScratchCardView : View {
             if (percent > 25) {
                 showFullResult = true
             }
-            number = 2
+            //number = 2
             // 调用回调函数传递新的数值
-            numberChangeListener?.onNumberChanged(number)
+            //numberChangeListener?.onNumberChanged(number)
         }
 
         //上下冲突
@@ -228,6 +224,4 @@ class ScratchCardView : View {
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
     }
-
-
 }

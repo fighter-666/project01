@@ -9,23 +9,14 @@ import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBaiduBinding
+import com.example.myapplication.widget.BaseLazyFragment
 
 
-class WapFragment : Fragment() {
+class WapFragment : BaseLazyFragment() {
     private var _binding: FragmentRechargeWaterfallBaiduBinding? = null
     val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentRechargeWaterfallBaiduBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun lazyInit() {
         //访问网页
         binding.webview.post {
             binding.webview.loadUrl(RechargePageActivity.link)
@@ -40,6 +31,21 @@ class WapFragment : Fragment() {
                 }
             }
         }
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentRechargeWaterfallBaiduBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lazyInit()
 
     }
 }

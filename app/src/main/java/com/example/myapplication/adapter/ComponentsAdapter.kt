@@ -3,6 +3,7 @@ package com.example.myapplication.adapter
 import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterComponentsBinding
 import com.example.myapplication.recharge.view.property.Piggy
 
@@ -12,13 +13,17 @@ class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>) :
     private var onItemClickListener: ((Piggy) -> Unit)? = null
 
     override fun convert(holder: BaseViewHolder, item: Piggy) {
+        holder.setImageResource(R.id.ivComponentsAdapter, item.image)
+        holder.setText(R.id.tvComponentsAdapter, item.name)
+            //.addOnClickListener(R.id.tvComponentsAdapter)
+            //.addOnLocationClickListener(R.id.tvComponentsAdapter)
         //将 holder.itemView（列表项的根视图）与生成的绑定类 ComponentsBinding 进行绑定。
         // 通过调用 bind() 方法，你可以获取到生成的绑定类的实例 binding。
         val binding = AdapterComponentsBinding.bind(holder.itemView)
 
         //设置图片和标题
-        binding.ivComponentsAdapter.setImageResource(item.image)
-        binding.tvComponentsAdapter.text = item.name
+        //binding.ivComponentsAdapter.setImageResource(item.image)
+        //binding.tvComponentsAdapter.text = item.name
 
         //设置点击事件监听器
         holder.itemView.setOnClickListener {

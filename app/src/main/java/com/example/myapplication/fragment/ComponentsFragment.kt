@@ -109,6 +109,7 @@ class ComponentsFragment : Fragment() {
             adapter = myAdapter
         }
 
+
         myAdapter.setOnItemClickListener { piggy ->
             // 处理列表项点击事件
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
