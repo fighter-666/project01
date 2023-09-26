@@ -20,11 +20,10 @@ import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
-import com.example.myapplication.recharge.view.ScratchCardView
-import com.example.myapplication.recharge.view.ScratchCardViewGroup
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrollTextViewBackground
+import com.example.myapplication.util.DensityUtils
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
@@ -40,8 +39,6 @@ import kotlinx.coroutines.launch
 class RechargePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
-    private lateinit var scratchCardView: ScratchCardView
-    private lateinit var scratchCardViewGroup: ScratchCardViewGroup
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRechargePageBinding.inflate(layoutInflater)
@@ -53,12 +50,6 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
 
-        // 实例化 scratchCardView 和 scratchCardViewGroup
-
-        scratchCardView = ScratchCardView(this)
-        scratchCardViewGroup =  ScratchCardViewGroup(this)
-        // 设置 ScratchCardViewGroup 作为回调接收者
-        scratchCardView.setNumberChangeListener(scratchCardViewGroup)
 
 // 设置 Header 为贝塞尔雷达样式
         binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))
@@ -130,30 +121,27 @@ class RechargePageActivity : AppCompatActivity() {
                             customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
                         val tabIcon = customView.findViewById<ImageView>(R.id.tabIcon)
                         CoroutineScope(Dispatchers.Main).launch {
+
                             if (isSelected) {
                                 tabName.setTypeface(null, Typeface.BOLD) // 设置字体加粗
-                                tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f) // 设置字体大小，20sp
-                                /**
-                                 * 以textView为例获取控件宽、高
-                                 */
-                                tabIcon.post {
-                                    run {
-                                        val layoutParams1 =  tabIcon.layoutParams
-                                        layoutParams1.height = 80
-                                        tabIcon.layoutParams = layoutParams1
-                                    }
-                                }
+                                tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f) // 设置字体大小，20sp
+                                val layoutParams = tabName.layoutParams
+                                layoutParams.height = DensityUtils.dpToPx(applicationContext, 25f)
+                                tabName.layoutParams = layoutParams
+                                val layoutParams1 = tabIcon.layoutParams
+                                layoutParams1.height = DensityUtils.dpToPx(applicationContext, 25f)
+                                tabIcon.layoutParams = layoutParams1
+
 
                             } else {
                                 tabName.setTypeface(null, Typeface.NORMAL) // 取消字体加粗
-                                tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f) //  取消字体加粗
-                                tabIcon.post {
-                                    run {
-                                        val layoutParams1 =  tabIcon.layoutParams
-                                        layoutParams1.height = 70
-                                        tabIcon.layoutParams = layoutParams1
-                                    }
-                                }
+                                tabName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f) //  取消字体加粗
+                                val layoutParams = tabName.layoutParams
+                                layoutParams.height = DensityUtils.dpToPx(applicationContext, 20f)
+                                tabName.layoutParams = layoutParams
+                                val layoutParams1 = tabIcon.layoutParams
+                                layoutParams1.height = DensityUtils.dpToPx(applicationContext, 20f)
+                                tabIcon.layoutParams = layoutParams1
                             }
                         }
                     }
@@ -175,17 +163,17 @@ class RechargePageActivity : AppCompatActivity() {
                 redFlag.visibility = View.VISIBLE
 
             }
-              binding.tabLayout.getTabAt(2)?.let {
-                 it.orCreateBadge.apply {
-                     backgroundColor = ContextCompat.getColor(application, R.color.red)
-                 }
-             }
+            binding.tabLayout.getTabAt(2)?.let {
+                it.orCreateBadge.apply {
+                    backgroundColor = ContextCompat.getColor(application, R.color.red)
+                }
+            }
 
             //tabType : tab栏显示类型：1：显示标题 2：显示图标 string
             if (tabItem.tabType == "1") {
                 tabIcon.visibility = View.GONE
             } else {
-                subTitle.visibility = View.INVISIBLE
+                //subTitle.visibility = View.INVISIBLE
                 tabName.visibility = View.GONE
                 //tabIcon : tab栏图标 string
 
@@ -204,12 +192,12 @@ class RechargePageActivity : AppCompatActivity() {
                     }
 
 
-                   /* val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
-                    //使用 resources.getIdentifier(tabIconResourceName, "drawable", packageName)，
-                    // 我们通过资源名称、资源类型（这里是 "drawable"）和包名来获取资源的标识符
-                    val resourceId =
-                        resources.getIdentifier(tabIconResourceName, "drawable", packageName)
-                    tabIcon.setImageResource(resourceId)*/
+                    /* val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
+                     //使用 resources.getIdentifier(tabIconResourceName, "drawable", packageName)，
+                     // 我们通过资源名称、资源类型（这里是 "drawable"）和包名来获取资源的标识符
+                     val resourceId =
+                         resources.getIdentifier(tabIconResourceName, "drawable", packageName)
+                     tabIcon.setImageResource(resourceId)*/
                 }
             }
 

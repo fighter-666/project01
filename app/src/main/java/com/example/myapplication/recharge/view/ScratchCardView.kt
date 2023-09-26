@@ -16,9 +16,8 @@ import com.example.myapplication.R
 import java.util.Random
 import kotlin.math.abs
 
-// 定义回调函数接口
-interface NumberChangeListener {
-    fun onNumberChanged(newNumber: Int)
+interface OnScratchTouchListener {
+    fun onScratch()
 }
 
 class ScratchCardView : View {
@@ -42,13 +41,8 @@ class ScratchCardView : View {
     private var scaleWidth: Float = 0f
     private var scaleHeight: Float = 0f
     var number: Int = 0
+    var onScratchTouchListener: OnScratchTouchListener? = null
 
-    private var numberChangeListener: NumberChangeListener? = null
-
-    // 设置回调函数
-    fun setNumberChangeListener(listener: NumberChangeListener) {
-        this.numberChangeListener = listener
-    }
 
     constructor(context: Context?) : super(context) {
         init()
@@ -138,6 +132,8 @@ class ScratchCardView : View {
                 path.moveTo(event.x - mBitmapFrontWidth, event.y - mBitmapFrontHeight) //原点移动至手指的触摸点
                 startX = event.x
                 startY = event.y
+                // 通知外部发生了触摸
+                onScratchTouchListener?.onScratch()
 
             }
 
@@ -151,6 +147,7 @@ class ScratchCardView : View {
             }
         }
         performClick()
+
         return true
     }
 

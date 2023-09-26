@@ -21,7 +21,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
+
+class ScratchCardViewGroup : ConstraintLayout {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textview: TextView
@@ -29,8 +30,18 @@ class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
     private lateinit var container: ConstraintLayout
     private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
-    private lateinit var scratchCardView: ScratchCardView
+    private  var scratchCardView: ScratchCardView = ScratchCardView(context)
 
+    init {
+        // 设置 ScratchCardView 的触摸监听
+        scratchCardView.onScratchTouchListener = object : OnScratchTouchListener {
+            override fun onScratch() {
+                imageView.visibility = View.INVISIBLE
+                Log.d("ScratchCardView", "555")
+            }
+        }
+
+    }
     /**
      * 这个构造方法是在代码中new的时候调用的
      * @param context
@@ -67,6 +78,7 @@ class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+
         //获取图片宽度
       val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 20f))
       val layoutParams1 = container.layoutParams
@@ -183,12 +195,5 @@ class ScratchCardViewGroup : ConstraintLayout, NumberChangeListener {
 
     }
 
-    override fun onNumberChanged(newNumber: Int) {
-        // 处理新的数值，例如隐藏 imageView 和 imageView2
-        if (newNumber == 2) {
-            imageView.visibility = View.GONE
-            imageView2.visibility = View.GONE
-        }
-        Log.d("aaa", newNumber.toString())
-    }
+
 }

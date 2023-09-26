@@ -1,6 +1,8 @@
 package com.example.myapplication.recharge.adapter
 
 import android.view.View
+import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -18,13 +20,13 @@ import com.example.myapplication.databinding.WidgetMultipleItemNullBinding
 import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.widget.ScrollTextViewCommentListBackground
-import com.example.myapplication.util.DensityUtils
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
     BaseMultiItemQuickAdapter<GetFeedListData.FeedListBean, BaseViewHolder>(data) {
@@ -121,20 +123,27 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 if (item.picArea.imageRatio == null) {
                     item.picArea.imageRatio = 1.0f.toString()
                 }
+
+
+                //卡片锁宽等比缩放（imageRatio用来计算高度）
+                val layoutParams = binding.ivPicAreaImageUrl.layoutParams as ConstraintLayout.LayoutParams
+                layoutParams.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
+
+                binding.ivPicAreaImageUrl.layoutParams = layoutParams
+
                 //val imageRatio = item.picArea.imageRatio.toFloat()
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
-                    val rechargeAdapter = ContentAreaListAdapter(
-                        R.layout.adapter_recharge_content_area_list, item.contentAreaList
-                    )
-
-                    //设置布局管理器和给recyclerView 设置设配器
-                    binding.rvContentAreaList.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = rechargeAdapter
-                    }
-
                     CoroutineScope(Dispatchers.Main).launch {
+                        val rechargeAdapter = ContentAreaListAdapter(
+                            R.layout.adapter_recharge_content_area_list, item.contentAreaList
+                        )
+
+                        //设置布局管理器和给recyclerView 设置设配器
+                        binding.rvContentAreaList.apply {
+                            layoutManager = LinearLayoutManager(context)
+                            adapter = rechargeAdapter
+                        }
                         // 设置圆角半径
                         //val requestOptions = RequestOptions().transform(RoundedCorners(20))
                         Glide.with(context)
@@ -144,7 +153,6 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             .transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
                             //.apply(requestOptions
                             .into(binding.ivPicAreaImageUrl)
-
                     }
                 } else {
                     //在协程中加载网络图片或在后台线程中加载大量图片。
@@ -157,7 +165,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             //.transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
                             //.transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions).into(binding.ivPicAreaImageUrl)
+                            .apply(requestOptions)
+                            .into(binding.ivPicAreaImageUrl)
                     }
                 }
             }

@@ -9,7 +9,8 @@ import com.example.myapplication.recharge.fragment.WaterfallFragment
 
 class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
-    private val fragments = listOf(
+
+    private val fragments = listOf (
         WaterfallFragment(),
         WapFragment(),
         WaterfallFragment(),

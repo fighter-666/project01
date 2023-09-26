@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
@@ -21,6 +20,9 @@ import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.widget.MyLifecycleObserver
 import com.example.myapplication.widget.BaseLazyFragment
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class WaterfallFragment : BaseLazyFragment() {
@@ -32,29 +34,10 @@ class WaterfallFragment : BaseLazyFragment() {
     private lateinit var feedList: GetFeedListData
     private lateinit var observer: MyLifecycleObserver
 
-    override fun lazyInit() {
-        val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
-            .use { it.readText() }
-        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
-        val gson = Gson()
-        feedList = gson.fromJson(json, GetFeedListData::class.java)
+    override fun lazyInit()  {
+
         //初始化瀑布流
-        myAdapter = WaterfallAdapter(feedList.feedList)
-        binding.rvComponentsWaterfall.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = myAdapter
-        }
-        //注册条目子组件的点击事件
-        myAdapter.addChildClickViewIds(binding.btnSelect.id)
-        //监听条目子组件的点击事件
-        myAdapter.setOnItemChildClickListener { _, view, position ->
-            if (view.id == binding.btnSelect.id) {
-                requestReadContactsPermission()
-            }
-        }
-        myAdapter.setOnItemClickListener { _, _, position ->
-            Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +65,6 @@ class WaterfallFragment : BaseLazyFragment() {
             // 如果已经有权限，直接执行读取联系人数据的操作
             val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
             pickContactLauncher.launch(intent)
-            //getContactNumberByUri(mIntent?.data)
         } else {
             // 请求权限
             /*requestPermissions(
@@ -121,20 +103,45 @@ class WaterfallFragment : BaseLazyFragment() {
                 val contactUri = mIntent?.data
                 contactNumber = getContactNumberByUri(contactUri)
                 //刷新指定item
+                //获取要刷新的position
                 val updatedItem = myAdapter.getItem(1)
                 if (updatedItem.quickRecharge != null) {
                     updatedItem.quickRecharge.title = contactNumber
                     // 更新适配器中的数据集
-                    feedList.feedList[1] = updatedItem // 将索引为2的项替换为更新后的项
+                    feedList.feedList[1] = updatedItem // 将索引为1的项替换为更新后的项
                     myAdapter.notifyItemChanged(1)
                 }
-
             }
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lazyInit()
+        CoroutineScope(Dispatchers.Main).launch {
+            val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
+                .use { it.readText() }
+            //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+            val gson = Gson()
+            feedList = gson.fromJson(json, GetFeedListData::class.java)
+            myAdapter = WaterfallAdapter(feedList.feedList)
+            binding.rvComponentsWaterfall.apply {
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                adapter = myAdapter
+            }
+            //注册子组件的点击事件
+            myAdapter.addChildClickViewIds(binding.btnSelect.id)
+
+            //监听条目子组件的点击事件
+            myAdapter.setOnItemChildClickListener { adapter, view, position ->
+                if (view.id == binding.btnSelect.id) {
+                    requestReadContactsPermission()
+                }
+            }
+
+            myAdapter.setOnItemClickListener { _, _, position ->
+                Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
+            }
+        }
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
 
         /*myAdapter.setOnItemClickListener {

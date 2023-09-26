@@ -26,15 +26,15 @@ class ComponentsAdapter(@LayoutRes layoutResId: Int, data: MutableList<Piggy>) :
         //binding.tvComponentsAdapter.text = item.name
 
         //设置点击事件监听器
-        holder.itemView.setOnClickListener {
+        /*holder.itemView.setOnClickListener {
             onItemClickListener?.invoke(item)
-        }
+        }*/
     }
 
     //它接受一个函数类型的参数 listener，该函数类型接受一个 Piggy 对象作为参数，并不返回任何结果
-    fun setOnItemClickListener(listener: (Piggy) -> Unit) {
+    /*fun setOnItemClickListener(listener: (Piggy) -> Unit) {
         //onItemClickListener 被赋值为传入的 listener，
         // 从而将外部传入的点击事件监听器与适配器关联起来
         onItemClickListener = listener
-    }
+    }*/
 }

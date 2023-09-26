@@ -109,8 +109,98 @@ class ComponentsFragment : Fragment() {
             adapter = myAdapter
         }
 
+        myAdapter.setOnItemClickListener { _, view, position ->
+            Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
+            when (position) {
+                0-> {
+                    val intent = Intent(context, RechargePageActivity::class.java)
+                    startActivity(intent)
+                }
 
-        myAdapter.setOnItemClickListener { piggy ->
+                1-> {
+                    val intent = Intent(context, VariousTextviewActivity::class.java)
+                    startActivity(intent)
+                }
+
+                2 -> {
+                    val intent = Intent(context, ThirdActivity::class.java)
+                    startActivity(intent)
+                }
+
+                3 -> {
+                    val intent = Intent(context, FeedStreamHomePageActivity::class.java)
+                    startActivity(intent)
+                }
+
+                4 -> {
+                    val intent = Intent(context, WebViewActivity::class.java)
+                    startActivity(intent)
+                }
+
+                5 -> {
+                    val intent = Intent(context, CustomActivity::class.java)
+                    startActivity(intent)
+                }
+/*
+                "CommonControlActivity" -> {
+                    val intent = Intent(context, CommonControlActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "ViewModelTestActivity" -> {
+                    val intent = Intent(context, ViewModelTestActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "LiveDataActivity" -> {
+                    val intent = Intent(context, LiveDataActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "DataBindingActivity" -> {
+                    val intent = Intent(context, DataBindingActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "ScoreActivity" -> {
+                    val intent = Intent(context, ScoreActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "SharedPreferencesActivity" -> {
+                    val intent = Intent(context, SharedPreferencesActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "PhoneActivity" -> {
+                    val intent = Intent(context, PhoneActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "BannerActivity" -> {
+                    val intent = Intent(context, BannerActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "RoomActivity" -> {
+                    val intent = Intent(context, RoomActivity::class.java)
+                    startActivity(intent)
+                }
+
+                "Room2Activity" -> {
+                    val intent = Intent(context, Room2Activity::class.java)
+                    startActivity(intent)
+                }*/
+                // 其他Piggy对象的处理逻辑...
+
+                else -> {
+                    // 默认的页面跳转逻辑
+                    val intent = Intent(context, RechargePageActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+       /* myAdapter.setOnItemClickListener { piggy ->
             // 处理列表项点击事件
             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
             when (piggy.name) {
@@ -218,7 +308,7 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
             }
-        }
+        }*/
 
     }
 
