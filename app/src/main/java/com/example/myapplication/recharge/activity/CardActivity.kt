@@ -370,4 +370,9 @@ class CardActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        combinedAnimatorSet.cancel()
+    }
 }

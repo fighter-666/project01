@@ -7,6 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterRechargeManyImageGridBinding
 import com.example.myapplication.recharge.data.GetFeedListData
 import kotlinx.coroutines.CoroutineScope
@@ -42,6 +43,7 @@ class ManyImageGridAdapter(
                 .load(item.imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(requestOptions)
+                .error(R.drawable.ic_launcher_foreground)
                     //每个图片都是正方形显示
                 .override(imageWeight,imageWeight)//这里的单位是px
                 .into(binding.ivImageUrl)

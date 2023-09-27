@@ -16,7 +16,23 @@ class WapFragment : BaseLazyFragment() {
     private var _binding: FragmentRechargeWaterfallBaiduBinding? = null
     val binding get() = _binding!!
 
-    override fun lazyInit() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentRechargeWaterfallBaiduBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun loadData() {
         //访问网页
         binding.webview.post {
             binding.webview.loadUrl(RechargePageActivity.link)
@@ -31,22 +47,6 @@ class WapFragment : BaseLazyFragment() {
                 }
             }
         }
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentRechargeWaterfallBaiduBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        lazyInit()
-
     }
 }
 

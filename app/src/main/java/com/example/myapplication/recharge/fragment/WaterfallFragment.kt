@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
@@ -33,12 +34,6 @@ class WaterfallFragment : BaseLazyFragment() {
     private var mIntent: Intent? = null
     private lateinit var feedList: GetFeedListData
     private lateinit var observer: MyLifecycleObserver
-
-    override fun lazyInit()  {
-
-        //初始化瀑布流
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,8 +111,31 @@ class WaterfallFragment : BaseLazyFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lazyInit()
-        CoroutineScope(Dispatchers.Main).launch {
+        //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
+
+        /*myAdapter.setOnItemClickListener {
+            requestReadContactsPermission()
+            *//* if (context?.let { it1 ->
+                        ContextCompat.checkSelfPermission(
+                            it1, Manifest.permission.READ_CONTACTS
+                        )
+                    } != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // 如果没有权限，则向用户请求权限
+                    ActivityCompat.requestPermissions(
+                        context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
+                    )
+
+                } else {
+                    // 如果已经拥有权限，则执行读取联系人数据的操作
+                    getContactNumberByUri(mIntent?.data)
+                }*//*
+
+        }*/
+    }
+
+    override fun loadData() {
+        //CoroutineScope(Dispatchers.Main).launch {
             val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
                 .use { it.readText() }
             //使用了Gson库来将JSON数据转换为GetFeedTabData对象
@@ -141,28 +159,7 @@ class WaterfallFragment : BaseLazyFragment() {
             myAdapter.setOnItemClickListener { _, _, position ->
                 Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
             }
-        }
-        //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
-
-        /*myAdapter.setOnItemClickListener {
-            requestReadContactsPermission()
-            *//* if (context?.let { it1 ->
-                        ContextCompat.checkSelfPermission(
-                            it1, Manifest.permission.READ_CONTACTS
-                        )
-                    } != PackageManager.PERMISSION_GRANTED
-                ) {
-                    // 如果没有权限，则向用户请求权限
-                    ActivityCompat.requestPermissions(
-                        context as Activity, arrayOf(Manifest.permission.READ_CONTACTS), 2
-                    )
-
-                } else {
-                    // 如果已经拥有权限，则执行读取联系人数据的操作
-                    getContactNumberByUri(mIntent?.data)
-                }*//*
-
-        }*/
+        //}
     }
 
     private fun getContactNumberByUri(data: Uri?): String? {

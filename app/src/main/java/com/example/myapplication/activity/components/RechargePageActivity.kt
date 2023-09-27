@@ -66,12 +66,8 @@ class RechargePageActivity : AppCompatActivity() {
         //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
         // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
-        CoroutineScope(Dispatchers.Main).launch {
             binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
-        }
-        binding.viewPager2.post {
 
-        }
 
         val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager2.adapter = adapter

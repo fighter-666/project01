@@ -152,6 +152,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             .transition(DrawableTransitionOptions.withCrossFade())
                             .transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
                             //.apply(requestOptions
+                            .error(R.drawable.ic_launcher_foreground)
                             .into(binding.ivPicAreaImageUrl)
                     }
                 } else {
@@ -166,6 +167,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             //.transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
                             //.transition(DrawableTransitionOptions.withCrossFade())
                             .apply(requestOptions)
+                            .error(R.drawable.ic_launcher_foreground)
                             .into(binding.ivPicAreaImageUrl)
                     }
                 }
