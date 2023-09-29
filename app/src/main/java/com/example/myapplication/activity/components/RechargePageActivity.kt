@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.myapplication.R
@@ -18,6 +19,7 @@ import com.example.myapplication.recharge.adapter.CrossExchangeAdapter
 import com.example.myapplication.recharge.adapter.FragmentAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.data.GetFeedTabData
+import com.example.myapplication.recharge.fragment.LazyLoadFragment
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
@@ -71,6 +73,14 @@ class RechargePageActivity : AppCompatActivity() {
 
         val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
         binding.viewPager2.adapter = adapter
+
+     /*   binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                val fragment = adapter.getFragment(position) as? LazyLoadFragment
+                fragment?.onFragmentVisible()
+            }
+        })*/
+
 
         //创建了一个TabLayoutMediator对象，并将其与TabLayout和ViewPager2进行关联。
         val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->

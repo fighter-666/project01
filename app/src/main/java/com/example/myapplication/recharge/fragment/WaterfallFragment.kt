@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
@@ -21,9 +20,6 @@ import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.widget.MyLifecycleObserver
 import com.example.myapplication.widget.BaseLazyFragment
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class WaterfallFragment : BaseLazyFragment() {
@@ -99,9 +95,11 @@ class WaterfallFragment : BaseLazyFragment() {
                 contactNumber = getContactNumberByUri(contactUri)
                 //刷新指定item
                 //获取要刷新的position
+
                 val updatedItem = myAdapter.getItem(1)
                 if (updatedItem.quickRecharge != null) {
                     updatedItem.quickRecharge.title = contactNumber
+                    Toast.makeText(context, updatedItem.quickRecharge.title, Toast.LENGTH_SHORT).show()
                     // 更新适配器中的数据集
                     feedList.feedList[1] = updatedItem // 将索引为1的项替换为更新后的项
                     myAdapter.notifyItemChanged(1)
@@ -153,6 +151,7 @@ class WaterfallFragment : BaseLazyFragment() {
             myAdapter.setOnItemChildClickListener { adapter, view, position ->
                 if (view.id == binding.btnSelect.id) {
                     requestReadContactsPermission()
+                    //Toast.makeText(context, "onItemChildClick $position", Toast.LENGTH_SHORT).show()
                 }
             }
 
