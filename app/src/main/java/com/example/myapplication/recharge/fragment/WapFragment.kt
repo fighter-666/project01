@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.fragment.app.Fragment
 import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBaiduBinding
 import com.example.myapplication.widget.BaseLazyFragment
@@ -46,6 +45,18 @@ class WapFragment : BaseLazyFragment() {
                     return true
                 }
             }
+        }
+    }
+
+    companion object {
+        private const val ARG_TAB_NAME = "tabName"
+
+        fun newInstance(tabName: Int): WapFragment {
+            val args = Bundle()
+            args.putString(ARG_TAB_NAME, tabName.toString())
+            val fragment = WapFragment()
+            fragment.arguments = args
+            return fragment
         }
     }
 }

@@ -29,3 +29,24 @@ class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
         return fragments[position]
     }
 }
+
+/*
+class FragmentAdapter(
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle,
+    private val fragmentTypes: List<String>
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
+
+    override fun getItemCount(): Int {
+        return fragmentTypes.size
+    }
+
+    override fun createFragment(position: Int): Fragment {
+        return when (fragmentTypes[position]) {
+            "Waterfall" -> WaterfallFragment()
+            "Wap" -> WapFragment()
+            // ... 其他类型的 Fragments ...
+            else -> WaterfallFragment()  // 一个默认的 Fragment，或者可以抛出异常
+        }
+    }
+}*/

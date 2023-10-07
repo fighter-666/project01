@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +17,11 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRechargePageBinding
 import com.example.myapplication.recharge.adapter.CrossExchangeAdapter
-import com.example.myapplication.recharge.adapter.FragmentAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
+import com.example.myapplication.recharge.adapter.Viewpager2Adapter
 import com.example.myapplication.recharge.data.GetFeedTabData
-import com.example.myapplication.recharge.fragment.LazyLoadFragment
+import com.example.myapplication.recharge.fragment.WapFragment
+import com.example.myapplication.recharge.fragment.WaterfallFragment
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
 import com.example.myapplication.recharge.widget.ScrollImageView
@@ -41,6 +43,7 @@ import kotlinx.coroutines.launch
 class RechargePageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRechargePageBinding
+    private lateinit var fragmentTypes: List<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRechargePageBinding.inflate(layoutInflater)
@@ -64,22 +67,49 @@ class RechargePageActivity : AppCompatActivity() {
         val gson = Gson()
         val tabList = gson.fromJson(json, GetFeedTabData::class.java)
 
-
         //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
         // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
-            binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
+        binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
 
 
-        val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
-        binding.viewPager2.adapter = adapter
+        // val fragmentTypes = listOf("Waterfall", "Wap", "Waterfall", /* ... 其他类型 ... */)
+        // val adapter = FragmentAdapter(supportFragmentManager, lifecycle, fragmentTypes)
+        //val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
+        val adapter = Viewpager2Adapter(this)
 
-     /*   binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPager2.adapter =adapter
+
+        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                val fragment = adapter.getFragment(position) as? LazyLoadFragment
-                fragment?.onFragmentVisible()
+                super.onPageSelected(position)
+                Toast.makeText(applicationContext, "position:$position", Toast.LENGTH_SHORT).show()
+                // Here, position indicates the currently visible fragment's index.
             }
-        })*/
+        })
+
+
+        /* for (tab in tabList.tabList) {
+             adapter.addFragment(WapFragment.newInstance(tab))
+         }*/
+
+        // 添加  frament
+        for (i in tabList.tabList.indices) {
+            when (i) {
+                0 -> adapter.addFragment(WaterfallFragment.newInstance(i))
+                1 -> adapter.addFragment(WapFragment.newInstance(i))
+                else -> adapter.addFragment(WaterfallFragment.newInstance(i))
+                // ...为其他indexes添加对应的Fragment
+            }
+        }
+
+
+        /*   binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+               override fun onPageSelected(position: Int) {
+                   val fragment = adapter.getFragment(position) as? LazyLoadFragment
+                   fragment?.onFragmentVisible()
+               }
+           })*/
 
 
         //创建了一个TabLayoutMediator对象，并将其与TabLayout和ViewPager2进行关联。
@@ -102,6 +132,9 @@ class RechargePageActivity : AppCompatActivity() {
 
             // 设置tab的自定义视图
             tab.customView = tabView
+
+
+
 
             //对选中状态的监听
             binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -215,8 +248,9 @@ class RechargePageActivity : AppCompatActivity() {
                 // 处理链接为空的情况
                 // 可以显示一个提示或执行其他逻辑
             }
+            //fragmentTypes =tabItem
 
-            //isDefault : 10.0新增是否默认选中（0：否，1：是） string
+                //isDefault : 10.0新增是否默认选中（0：否，1：是） string
             if (tabItem.isDefault == "1") {
                 //通过 tabList.tabList.indexOf(tabItem) 获取 tabItem 在 tabList.tabList 中的索引
                 binding.viewPager2.setCurrentItem(
@@ -226,6 +260,8 @@ class RechargePageActivity : AppCompatActivity() {
             }
         }
         mediator.attach()
+
+
 
         //消息条
         //右边textview跑马灯

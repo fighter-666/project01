@@ -14,7 +14,7 @@
             "contentAreaList": null,
             "adLists": [
                 {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111662105176148988.jpg",
                     "title": "用户召回提醒",
                     "link": "https://wapside.189.cn:9001/resources/dist/signInActivity.html?ticket=$ticket$&version=$version$&utm_ch=app&utm_sch=hg_sy_feedljdt",
                     "linkType": "2",
@@ -23,7 +23,7 @@
                     "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-1.eoc-2233400002"
                 },
                 {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111662105176148988.jpg",
                     "title": "金豆失效提醒",
                     "link": "https://wapact.189.cn:9001/JinDouMall/JinDouMall_luckDraw.html?ticket=$ticket$&utm_ch=hg_app&utm_sch=hg_sy_feedjdt_1&utm_as=sjdjdqhf",
                     "linkType": "5",
@@ -32,7 +32,7 @@
                     "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-2.eoc-1977000295"
                 },
                 {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111662105176148988.jpg",
                     "title": "转码",
                     "link": "http%3A%2F%2F180.166.195.1%3A28143%2Fgonet%2Fgateway%2Fauthentication%3Fticket%3D%24ticket%24%0A",
                     "linkType": "5",
@@ -41,7 +41,7 @@
                     "recommender": "cc-010001002000.rmc-hg_sy_feedjdt.fd-2.od-3.eoc-2349900003"
                 },
                 {
-                    "imageUrl": "https://zsc.189.cn/bigdata/2023/4/27/111682590088591346.webp",
+                    "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111662105176148988.jpg",
                     "title": "星级会员客户端单点",
                     "link": "http://cljy.zsc.189.cn/cljy-ui/star/yssb/redirect",
                     "linkType": "2",

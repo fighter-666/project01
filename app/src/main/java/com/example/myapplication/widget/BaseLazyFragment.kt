@@ -4,9 +4,14 @@ import androidx.fragment.app.Fragment
 
 
 open class BaseLazyFragment : Fragment() {
+    private var isDataLoaded = false
+
     override fun onResume() {
         super.onResume()
-        loadData()
+        if (!isDataLoaded) {
+            loadData()
+            isDataLoaded = true
+        }
     }
 
      open fun loadData() {
