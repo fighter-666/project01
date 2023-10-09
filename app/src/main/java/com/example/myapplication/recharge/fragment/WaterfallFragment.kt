@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
@@ -130,11 +131,11 @@ class WaterfallFragment : BaseLazyFragment() {
             adapter = myAdapter
         }
         //注册子组件的点击事件
-        myAdapter.addChildClickViewIds(binding.btnSelect.id)
+        myAdapter.addChildClickViewIds(R.id.btnSelect)
 
         //监听条目子组件的点击事件
         myAdapter.setOnItemChildClickListener { adapter, view, position ->
-            if (view.id == binding.btnSelect.id) {
+            if (view.id == R.id.btnSelect) {
                 requestReadContactsPermission()
             }
         }

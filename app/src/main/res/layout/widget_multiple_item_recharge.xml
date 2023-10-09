@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toTopOf="@id/rlRecharge"/>
 
         <ImageView
-            android:id="@+id/btn_select"
+            android:id="@+id/btnSelect"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/phone"
