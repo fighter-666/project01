@@ -15,6 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.myapplication.R
+import com.example.myapplication.recharge.data.GetFeedListData
+import com.example.myapplication.recharge.widget.HideOnScrollManager
+import com.example.myapplication.recharge.widget.LoadMoreManager
 import com.example.myapplication.util.DensityUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,18 +33,7 @@ class ScratchCardViewGroup : ConstraintLayout {
     private lateinit var container: ConstraintLayout
     private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
-    private  var scratchCardView: ScratchCardView = ScratchCardView(context)
 
-    init {
-        // 设置 ScratchCardView 的触摸监听
-        scratchCardView.onScratchTouchListener = object : OnScratchTouchListener {
-            override fun onScratch() {
-                imageView.visibility = View.INVISIBLE
-                Log.d("ScratchCardView", "555")
-            }
-        }
-
-    }
     /**
      * 这个构造方法是在代码中new的时候调用的
      * @param context
@@ -147,6 +139,17 @@ class ScratchCardViewGroup : ConstraintLayout {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
         }
+
+        // 设置回调监听器
+        HideOnScrollManager.setOnHideOnScrollListener(object : HideOnScrollManager.OnHideOnScrollListener {
+            override fun onHide() {
+                imageView.visibility = View.GONE
+                imageView2.visibility = View.GONE
+            }
+
+
+
+        })
 
         //再刮一次
         textview.setOnClickListener {

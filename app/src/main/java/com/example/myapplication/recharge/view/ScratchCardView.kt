@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
@@ -13,8 +14,10 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import com.example.myapplication.R
+import com.example.myapplication.recharge.widget.HideOnScrollManager
 import java.util.Random
 import kotlin.math.abs
+
 
 interface OnScratchTouchListener {
     fun onScratch()
@@ -191,6 +194,7 @@ class ScratchCardView : View {
             if (percent > 25) {
                 showFullResult = true
             }
+            HideOnScrollManager.notifyScrolling()
             //number = 2
             // 调用回调函数传递新的数值
             //numberChangeListener?.onNumberChanged(number)
@@ -225,5 +229,10 @@ class ScratchCardView : View {
 
         // 得到新的图片
         return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
+    }
+
+    // 添加重新再刮一次的方法
+    fun resetScratchCard() {
+        invalidate()
     }
 }

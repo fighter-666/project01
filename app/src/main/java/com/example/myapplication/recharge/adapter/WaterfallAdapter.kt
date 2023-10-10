@@ -300,6 +300,15 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
         return hiddenText.toString()
     }
+
+    fun addMoreValue(feedList: MutableList<GetFeedListData.FeedListBean>, newData: List<GetFeedListData.FeedListBean>) {
+        // 将新数据（newData）添加到现有的 feedList 集合中
+        feedList.addAll(newData)
+        // 或者，如果你希望新数据添加到开头，可以使用以下方式
+        // feedList.addAll(0, newData)
+    }
+
+
 }
 
 

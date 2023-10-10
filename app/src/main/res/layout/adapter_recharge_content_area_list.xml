@@ -40,6 +40,7 @@
         android:textColor="#ea5858"
         android:textSize="12sp"
         android:visibility="gone"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvPriceDecimal"
         app:layout_constraintBottom_toBottomOf="@id/tvPriceInteger"
         app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle" />
 
@@ -56,6 +57,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:visibility="gone"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvPriceDecimal"
         app:layout_constraintBottom_toTopOf="@id/clLocation"
         app:layout_constraintLeft_toRightOf="@id/tvIsShowPriceUnit"
         app:layout_constraintTop_toBottomOf="@id/rvSaleTipList" />

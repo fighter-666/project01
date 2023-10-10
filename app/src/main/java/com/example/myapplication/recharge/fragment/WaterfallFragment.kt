@@ -18,6 +18,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
+import com.example.myapplication.recharge.widget.LoadMoreManager
 import com.example.myapplication.widget.BaseLazyFragment
 import com.example.myapplication.widget.MyFragmentObserver
 import com.google.gson.Gson
@@ -63,15 +64,6 @@ class WaterfallFragment : BaseLazyFragment() {
             pickContactLauncher.launch(intent)
         } else {
             // 请求权限
-            /*requestPermissions(
-                arrayOf(Manifest.permission.READ_CONTACTS),
-                READ_CONTACTS_PERMISSION_REQUEST_CODE
-            )*/
-            /*ActivityCompat.requestPermissions(
-                context as Activity,
-                arrayOf(Manifest.permission.READ_CONTACTS),
-                READ_CONTACTS_PERMISSION_REQUEST_CODE
-            )*/
             requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
         }
     }
@@ -143,6 +135,36 @@ class WaterfallFragment : BaseLazyFragment() {
         myAdapter.setOnItemClickListener { _, _, position ->
             Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
         }
+
+        // 设置回调监听器
+        LoadMoreManager.setOnLoadMoreListener(object : LoadMoreManager.OnLoadMoreListener {
+            override fun onLoadMore() {
+                // 在这里触发加载更多数据的操作
+                val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
+                data.add(
+                    feedList.feedList[5]
+                )
+                data.add(
+                    feedList.feedList[6]
+                )
+                data.add(
+                    feedList.feedList[16]
+                )
+                data.add(
+                    feedList.feedList[15]
+                )
+                myAdapter.addMoreValue(feedList.feedList,data)
+                val startPosition = feedList.feedList.size - 2 // 开始位置是已有数据的最后两个位置
+                val itemCount = data.size // 添加的数据项数
+                myAdapter.notifyItemRangeInserted(startPosition, itemCount)
+            }
+        })
+
+// 在合适的地方触发加载更多事件
+
+
+
+
     }
 
     private fun getContactNumberByUri(data: Uri?): String? {

@@ -2,6 +2,8 @@ package com.example.myapplication.activity.components
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -19,11 +22,14 @@ import com.example.myapplication.databinding.ActivityRechargePageBinding
 import com.example.myapplication.recharge.adapter.CrossExchangeAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.adapter.Viewpager2Adapter
+import com.example.myapplication.recharge.adapter.WaterfallAdapter
+import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.fragment.WapFragment
 import com.example.myapplication.recharge.fragment.WaterfallFragment
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
+import com.example.myapplication.recharge.widget.LoadMoreManager
 import com.example.myapplication.recharge.widget.ScrollImageView
 import com.example.myapplication.recharge.widget.ScrollTextView
 import com.example.myapplication.recharge.widget.ScrollTextViewBackground
@@ -38,6 +44,7 @@ import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.security.auth.callback.Callback
 
 
 class RechargePageActivity : AppCompatActivity() {
@@ -54,6 +61,59 @@ class RechargePageActivity : AppCompatActivity() {
             .titleBar(binding.tvTitle)    //解决状态栏和布局重叠问题，任选其一
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
+
+
+
+       /* val mHandler = Handler(object : Callback {
+            fun handleMessage(msg: Message): Boolean {
+                when (msg.what) {
+                    1 -> {
+                        binding.refreshLayout.finishRefresh(true)
+                        adapter.setDatas(msg.obj)
+                    }
+
+                    2 -> {
+                        val json: String = application.assets.open("getFeedListData.json").bufferedReader()
+                            .use { it.readText() }
+                        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+                        val gson = Gson()
+                        val feedList = gson.fromJson(json, GetFeedListData::class.java)
+                        val myAdapter = WaterfallAdapter(feedList.feedList)
+                        binding.refreshLayout.finishLoadMore(true)
+                        myAdapter.addMoreValue(msg.obj)
+                    }
+                }
+                return false
+            }
+        })*/
+
+        binding.refreshLayout.setOnLoadMoreListener {
+            /*val data: MutableList<GetFeedListData.FeedListBean> = initDatas()
+            val message = Message()
+            message.what = 2
+            message.obj = data
+            mHandler.sendMessageDelayed(message, 2000)*/
+       /*     val json: String = application.assets.open("getFeedListData.json").bufferedReader()
+                .use { it.readText() }
+            //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+            val gson = Gson()
+            val feedList = gson.fromJson(json, GetFeedListData::class.java)
+            val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
+            data.add(
+                feedList.feedList[5]
+            )
+            data.add(
+                    feedList.feedList[6]
+                    )
+
+            val myAdapter = WaterfallAdapter(feedList.feedList)*/
+            binding.refreshLayout.finishLoadMore(2000)
+            LoadMoreManager.triggerLoadMore()
+            /*myAdapter.addMoreValue(feedList.feedList,data)
+            val startPosition = feedList.feedList.size - 2 // 开始位置是已有数据的最后两个位置
+            val itemCount = data.size // 添加的数据项数
+            myAdapter.notifyItemRangeInserted(startPosition, itemCount)*/
+        }
 
 
 // 设置 Header 为贝塞尔雷达样式
@@ -384,6 +444,15 @@ class RechargePageActivity : AppCompatActivity() {
 
         //给RecycleView设置适配器
         binding.rvCrossExchange.adapter = secondAdapter
+    }
+
+    private fun initDatas() {
+        val piggies2 = mutableListOf<Second>()
+        piggies2.add(
+            Second(
+                R.drawable.tengxun, "腾讯视频会员\n" + "周卡", "1000金豆", 0
+            )
+        )
     }
 
     companion object {
