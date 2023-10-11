@@ -131,7 +131,6 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
                 binding.ivPicAreaImageUrl.layoutParams = layoutParams
 
-                //val imageRatio = item.picArea.imageRatio.toFloat()
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
                     CoroutineScope(Dispatchers.Main).launch {
@@ -229,8 +228,6 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 // 处理充值布局
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
 
-                holder.itemView
-                binding.btnSelect
            /*     binding.btnSelect.setOnClickListener {
                     //设置点击事件监听器
                     onItemClickListener?.invoke(item)*//* if (ContextCompat.checkSelfPermission(

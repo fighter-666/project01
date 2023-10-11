@@ -27,8 +27,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="13dp"
-                android:paddingRight="13dp"
                 tools:ignore="ExtraText">
 
                 <!-- 在这里添加你的约束布局内容 -->
@@ -41,7 +39,7 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/tvRechargeResult"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvRechargeResult"
@@ -54,7 +52,7 @@
                     android:textStyle="bold"
                     app:layout_constraintLeft_toRightOf="@id/ivTick"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvRechargeNumber"
@@ -62,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="27dp"
                     android:gravity="left"
+                    android:paddingLeft="13dp"
                     android:text="充值号码"
                     android:textColor="#999999"
                     android:textSize="14sp"
@@ -72,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
+                    android:paddingRight="13dp"
                     android:text="173 666 99999"
                     android:textColor="#333333"
                     android:textSize="14sp"
@@ -85,6 +85,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="175dp"
                     android:gravity="left"
+                    android:paddingLeft="13dp"
                     android:text="支付金额"
                     android:textColor="#999999"
                     android:textSize="14sp"
@@ -110,6 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="13dp"
                     android:gravity="right"
                     android:text="99.5元"
                     android:textColor="#333333"
@@ -122,6 +124,7 @@
                     android:id="@+id/tvContinueRecharge"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="27dp"
                     android:background="@drawable/shape_rectangle"
                     android:gravity="center"
@@ -139,6 +142,7 @@
                     android:layout_height="36dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="27dp"
+                    android:layout_marginRight="13dp"
                     android:background="@drawable/shape_rectangle2"
                     app:ivLoadHeight="17dp"
                     app:ivLoadWidth="16dp"
@@ -155,7 +159,9 @@
                     android:id="@+id/clScrollBar"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="13dp"
                     android:background="@drawable/shape_rectangle3"
                     app:layout_constraintTop_toBottomOf="@id/tvBalanceInquiry"
                     tools:ignore="MissingConstraints">
@@ -209,7 +215,9 @@
                     android:id="@+id/clRecommendationService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginRight="13dp"
                     android:background="@drawable/shape_rectangle5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/clScrollBar"
@@ -267,7 +275,9 @@
                     android:id="@+id/clRecommendationServiceCopy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="13dp"
                     android:background="@drawable/shape_rectangle5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/clRecommendationService"
@@ -323,7 +333,9 @@
                     android:id="@+id/clCrossExchange"
                     android:layout_width="match_parent"
                     android:layout_height="269dp"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="13dp"
                     android:background="@drawable/shape_rectangle5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/clRecommendationServiceCopy"
@@ -565,7 +577,9 @@
                     android:id="@+id/rechargeFlipCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="13dp"
+                    android:layout_marginRight="13dp"
                     android:background="@drawable/shape_rectangle5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/clCrossExchange"
@@ -575,7 +589,9 @@
                     android:id="@+id/rechargeScratchCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginRight="13dp"
                     android:background="@drawable/shape_rectangle5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rechargeFlipCard" />
@@ -597,30 +613,31 @@
                         android:layout_height="40dp"
                         android:background="@color/gray_200"
                         android:minHeight="?attr/actionBarSize"
-                        android:theme="@style/Theme.AppCompat"
                         android:paddingBottom="5dp"
+                        android:theme="@style/Theme.AppCompat"
                         app:layout_constraintBottom_toTopOf="@id/viewPager2"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:tabIndicator="@drawable/shape_tab_indicator"
-                        app:tabIndicatorGravity="bottom"
                         app:tabIndicatorColor="#1990ff"
-                        app:tabPaddingBottom="3dp"
                         app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorGravity="bottom"
                         app:tabIndicatorHeight="4dp"
                         app:tabMinWidth="50dp"
-                        app:tabMode="scrollable" />
+                        app:tabMode="scrollable"
+                        app:tabPaddingBottom="3dp" />
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/viewPager2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
                         android:orientation="horizontal"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
@@ -630,13 +647,13 @@
             android:layout_height="wrap_content" />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
-     <View
-                    android:id="@+id/viewBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-         app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/refreshLayout" />
+    <View
+        android:id="@+id/viewBar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@id/refreshLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
