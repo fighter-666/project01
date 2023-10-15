@@ -96,7 +96,8 @@ class WaterfallFragment : BaseLazyFragment() {
                 val updatedItem = myAdapter.getItem(1)
                 if (updatedItem.quickRecharge != null) {
                     updatedItem.quickRecharge.title = contactNumber
-                    Toast.makeText(context, updatedItem.quickRecharge.title, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, updatedItem.quickRecharge.title, Toast.LENGTH_SHORT)
+                        .show()
                     // 更新适配器中的数据集
                     feedList.feedList[1] = updatedItem // 将索引为1的项替换为更新后的项
                     myAdapter.notifyItemChanged(1)
@@ -137,6 +138,7 @@ class WaterfallFragment : BaseLazyFragment() {
         }
 
         // 设置回调监听器
+        // 在合适的地方触发加载更多事件
         LoadMoreManager.setOnLoadMoreListener(object : LoadMoreManager.OnLoadMoreListener {
             override fun onLoadMore() {
                 // 在这里触发加载更多数据的操作
@@ -153,18 +155,12 @@ class WaterfallFragment : BaseLazyFragment() {
                 data.add(
                     feedList.feedList[15]
                 )
-                myAdapter.addMoreValue(feedList.feedList,data)
+                myAdapter.addMoreValue(feedList.feedList, data)
                 val startPosition = feedList.feedList.size - 2 // 开始位置是已有数据的最后两个位置
                 val itemCount = data.size // 添加的数据项数
                 myAdapter.notifyItemRangeInserted(startPosition, itemCount)
             }
         })
-
-// 在合适的地方触发加载更多事件
-
-
-
-
     }
 
     private fun getContactNumberByUri(data: Uri?): String? {

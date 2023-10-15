@@ -139,9 +139,6 @@ class RechargePageActivity : AppCompatActivity() {
             // 设置tab的自定义视图
             tab.customView = tabView
 
-
-
-
             //对选中状态的监听
             binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
@@ -235,8 +232,6 @@ class RechargePageActivity : AppCompatActivity() {
                             .error(R.drawable.baseline_thumb_up_24)
                             .into(tabIcon)
                     }
-
-
                     /* val tabIconResourceName = tabItem.tabIcon.substringAfter("R.drawable.")
                      //使用 resources.getIdentifier(tabIconResourceName, "drawable", packageName)，
                      // 我们通过资源名称、资源类型（这里是 "drawable"）和包名来获取资源的标识符
@@ -266,8 +261,6 @@ class RechargePageActivity : AppCompatActivity() {
             }
         }
         mediator.attach()
-
-
 
         //消息条
         //右边textview跑马灯
