@@ -20,7 +20,7 @@ import com.example.myapplication.recharge.adapter.CrossExchangeAdapter
 import com.example.myapplication.recharge.adapter.RecommendationServiceAdapteer
 import com.example.myapplication.recharge.adapter.Viewpager2Adapter
 import com.example.myapplication.recharge.data.GetFeedTabData
-import com.example.myapplication.recharge.fragment.WapFragment
+import com.example.myapplication.recharge.fragment.CommWebViewFragment
 import com.example.myapplication.recharge.fragment.WaterfallFragment
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.recharge.property.Second
@@ -59,6 +59,14 @@ class RechargePageActivity : AppCompatActivity() {
         binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(2000)
             LoadMoreManager.triggerLoadMore()
+        }
+
+        binding.scrollerLayout.setOnStickyChangeListener { oldStickyView, newStickyView ->
+            if (newStickyView != null) {
+                // 当吸顶时
+                binding.tabLayout.setBackgroundColor(resources.getColor(R.color.white))
+            }
+
         }
 
 
@@ -103,7 +111,7 @@ class RechargePageActivity : AppCompatActivity() {
         for (i in tabList.tabList.indices) {
             when (i) {
                 0 -> adapter.addFragment(WaterfallFragment.newInstance(i))
-                1 -> adapter.addFragment(WapFragment.newInstance(i))
+                1 -> adapter.addFragment(CommWebViewFragment.newInstance(i))
                 else -> adapter.addFragment(WaterfallFragment.newInstance(i))
                 // ...为其他indexes添加对应的Fragment
             }

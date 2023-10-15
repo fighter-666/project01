@@ -1,40 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:scrollbars="vertical">
 
-    <View
+    <!-- 设置app:layout_isSticky="true"就可以使View吸顶 -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        />
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:text="吸顶View - 1"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_isSticky="true" />
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        app:layout_isSticky="true">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:tabIndicatorHeight="5dp"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicator="@drawable/shape_tab_indicator"
-            app:tabIndicatorColor="@color/black"
-            app:tabMaxWidth="200dp"
-            app:tabMinWidth="100dp"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/purple_700"
-            app:tabTextColor="@color/red"
-            />
+            android:padding="10dp"
+            android:text="吸顶View - 2 我是个LinearLayout"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal" />
     </LinearLayout>
-</LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:text="吸顶View - 3"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_isSticky="true" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:text="吸顶View - 4"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_isSticky="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>

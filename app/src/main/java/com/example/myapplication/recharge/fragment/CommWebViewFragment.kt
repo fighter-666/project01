@@ -11,7 +11,7 @@ import com.example.myapplication.databinding.FragmentRechargeWaterfallBaiduBindi
 import com.example.myapplication.widget.BaseLazyFragment
 
 
-class WapFragment : BaseLazyFragment() {
+class CommWebViewFragment : BaseLazyFragment() {
     private var _binding: FragmentRechargeWaterfallBaiduBinding? = null
     val binding get() = _binding!!
 
@@ -51,10 +51,10 @@ class WapFragment : BaseLazyFragment() {
     companion object {
         private const val ARG_TAB_NAME = "tabName"
 
-        fun newInstance(tabName: Int): WapFragment {
+        fun newInstance(tabName: Int): CommWebViewFragment {
             val args = Bundle()
             args.putString(ARG_TAB_NAME, tabName.toString())
-            val fragment = WapFragment()
+            val fragment = CommWebViewFragment()
             fragment.arguments = args
             return fragment
         }

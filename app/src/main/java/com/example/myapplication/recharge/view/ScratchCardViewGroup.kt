@@ -92,6 +92,7 @@ class ScratchCardViewGroup : ConstraintLayout {
       close.layoutParams = layoutParamsClose
     }
 
+
     private fun initView() {
 
         //获取子控件

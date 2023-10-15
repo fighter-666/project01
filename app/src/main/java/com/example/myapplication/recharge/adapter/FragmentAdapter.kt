@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.myapplication.recharge.fragment.WapFragment
+import com.example.myapplication.recharge.fragment.CommWebViewFragment
 import com.example.myapplication.recharge.fragment.WaterfallFragment
 
 class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
@@ -12,7 +12,7 @@ class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
 
     private val fragments = listOf (
         WaterfallFragment(),
-        WapFragment(),
+        CommWebViewFragment(),
         WaterfallFragment(),
         WaterfallFragment(),
         WaterfallFragment(),
