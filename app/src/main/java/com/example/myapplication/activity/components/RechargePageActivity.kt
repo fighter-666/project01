@@ -2,6 +2,7 @@ package com.example.myapplication.activity.components
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -56,15 +57,24 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
 
+        //加载更多
         binding.refreshLayout.setOnLoadMoreListener {
-            binding.refreshLayout.finishLoadMore(2000)
+            binding.refreshLayout.finishLoadMore(true)
+            //设置回调
             LoadMoreManager.triggerLoadMore()
         }
 
-        binding.scrollerLayout.setOnStickyChangeListener { oldStickyView, newStickyView ->
-            if (newStickyView != null) {
-                // 当吸顶时
+        //监听吸顶
+        binding.scrollerLayout.setOnPermanentStickyChangeListener {
+            /* if (it.contains( binding.toolbar)){
+                 binding.toolbar.setBackgroundColor(resources.getColor(R.color.white))
+                 binding.tvTitle.setBackgroundColor(resources.getColor(R.color.white))
+             }*/
+
+            if (it.contains(binding.tabLayout)) {
                 binding.tabLayout.setBackgroundColor(resources.getColor(R.color.white))
+            } else {
+                binding.tabLayout.setBackgroundColor(resources.getColor(R.color.gray_200))
             }
 
         }
@@ -92,7 +102,7 @@ class RechargePageActivity : AppCompatActivity() {
         //val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
         val adapter = Viewpager2Adapter(this)
 
-        binding.viewPager2.adapter =adapter
+        binding.viewPager2.adapter = adapter
 
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -259,7 +269,7 @@ class RechargePageActivity : AppCompatActivity() {
             }
             //fragmentTypes =tabItem
 
-                //isDefault : 10.0新增是否默认选中（0：否，1：是） string
+            //isDefault : 10.0新增是否默认选中（0：否，1：是） string
             if (tabItem.isDefault == "1") {
                 //通过 tabList.tabList.indexOf(tabItem) 获取 tabItem 在 tabList.tabList 中的索引
                 binding.viewPager2.setCurrentItem(

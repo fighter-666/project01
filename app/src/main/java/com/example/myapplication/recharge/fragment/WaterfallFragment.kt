@@ -10,17 +10,23 @@ import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
+import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.widget.LoadMoreManager
 import com.example.myapplication.widget.BaseLazyFragment
 import com.example.myapplication.widget.MyFragmentObserver
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.gson.Gson
 
 
@@ -30,7 +36,9 @@ class WaterfallFragment : BaseLazyFragment() {
     private lateinit var myAdapter: WaterfallAdapter
     private var contactNumber: String? = null
     private var mIntent: Intent? = null
+    private var tabName: Int = 0
     private lateinit var feedList: GetFeedListData
+    private lateinit var tabList: GetFeedTabData
 
     companion object {
         private const val ARG_TAB_NAME = "tabName"
@@ -161,6 +169,129 @@ class WaterfallFragment : BaseLazyFragment() {
                 myAdapter.notifyItemRangeInserted(startPosition, itemCount)
             }
         })
+        val jsonTab: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
+            requireContext().assets.open("getFeedTabData.json").bufferedReader().use { it.readText() }
+        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+        val gsonTab = Gson()
+        tabList = gsonTab.fromJson(jsonTab, GetFeedTabData::class.java)
+
+        setCustomIcon()
+
+      /* val tab = binding.tabLayout.newTab()
+        val tabView =
+            LayoutInflater.from(context).inflate(R.layout.view_fragment_tab, null)
+        val tabIcon = tabView.findViewById<ImageView>(R.id.tabIcon)
+        val tabName = tabView.findViewById<TextView>(R.id.tabName)
+
+        tabName.text = tabList.tabList[0].tagList[0].tagName
+        Glide.with(requireActivity())
+            .load(tabList.tabList[0].tagList[0].tagIcon)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(tabIcon)
+        tab.customView = tabView*/
+
+        /*binding.tabLayout.addTab(binding.tabLayout.newTab().setText(tabList.tabList[tabName].tagList[0].tagName))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(tabList.tabList[tabName].tagList[1].tagName))*/
+        //binding.tabLayout.addTab(binding.tabLayout.newTab().setIcon(tabList.tabList[0].tabIcon))
+
+        // 设置标签切换监听
+        binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                val position = tab.position
+                when (position) {
+                    0 -> {
+                        // 在这里触发加载更多数据的操作
+                        val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
+                        data.add(
+                            feedList.feedList[7]
+                        )
+                        data.add(
+                            feedList.feedList[6]
+                        )
+                        data.add(
+                            feedList.feedList[16]
+                        )
+                        data.add(
+                            feedList.feedList[15]
+                        )
+                        myAdapter.refreshValue(feedList.feedList, data)
+                        myAdapter.notifyDataSetChanged()
+
+                    }
+                    1 -> {
+                        // 在这里触发加载更多数据的操作
+                        val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
+                        data.add(
+                            feedList.feedList[7]
+                        )
+                        data.add(
+                            feedList.feedList[8]
+                        )
+                        data.add(
+                            feedList.feedList[17]
+                        )
+                        data.add(
+                            feedList.feedList[18]
+                        )
+                        myAdapter.refreshValue(feedList.feedList, data)
+                        myAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
+                val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
+                    .use { it.readText() }
+                //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+                val gson = Gson()
+                feedList = gson.fromJson(json, GetFeedListData::class.java)
+                myAdapter = WaterfallAdapter(feedList.feedList)
+                binding.rvComponentsWaterfall.apply {
+                    layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    adapter = myAdapter
+                }
+                //注册子组件的点击事件
+                myAdapter.addChildClickViewIds(R.id.btnSelect)
+
+                //监听条目子组件的点击事件
+                myAdapter.setOnItemChildClickListener { adapter, view, position ->
+                    if (view.id == R.id.btnSelect) {
+                        requestReadContactsPermission()
+                    }
+                }
+
+                myAdapter.setOnItemClickListener { _, _, position ->
+                    Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
+                }
+
+                // 设置回调监听器
+                // 在合适的地方触发加载更多事件
+                LoadMoreManager.setOnLoadMoreListener(object : LoadMoreManager.OnLoadMoreListener {
+                    override fun onLoadMore() {
+                        // 在这里触发加载更多数据的操作
+                        val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
+                        data.add(
+                            feedList.feedList[5]
+                        )
+                        data.add(
+                            feedList.feedList[6]
+                        )
+                        data.add(
+                            feedList.feedList[16]
+                        )
+                        data.add(
+                            feedList.feedList[15]
+                        )
+                        myAdapter.addMoreValue(feedList.feedList, data)
+                        val startPosition = feedList.feedList.size - 2 // 开始位置是已有数据的最后两个位置
+                        val itemCount = data.size // 添加的数据项数
+                        myAdapter.notifyItemRangeInserted(startPosition, itemCount)
+                    }
+                })
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 
     private fun getContactNumberByUri(data: Uri?): String? {
@@ -218,6 +349,36 @@ class WaterfallFragment : BaseLazyFragment() {
             }
         }
         return phoneNumber
+    }
+
+    /**
+     * 设置自定义位置图标
+     */
+    private fun setCustomIcon() {
+        for (i in 0 until tabList.tabList[0].tagList.size) {
+            binding.tabLayout.addTab(binding.tabLayout.newTab())
+        }
+        for (i in 0 until tabList.tabList[0].tagList.size) {
+            binding.tabLayout.getTabAt(i)?.setCustomView(makeTabView(i))
+        }
+    }
+
+    /**
+     * 引入布局设置图标和标题
+     * @param position
+     * @return
+     */
+    private fun makeTabView(position: Int): View {
+        val tabView: View = LayoutInflater.from(requireContext()).inflate(R.layout.view_fragment_tab, null)
+        val textView = tabView.findViewById<TextView>(com.example.myapplication.R.id.tabName)
+        val imageView = tabView.findViewById<ImageView>(R.id.tabIcon)
+        textView.setText(tabList.tabList[0].tagList[position].tagName)
+        Glide.with(requireActivity())
+            .load(tabList.tabList[0].tagList[position].tagIcon)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(imageView)
+        //imageView.setImageResource(tabList.tabList[0].tagList[position].tagIcon)
+        return tabView
     }
 }
 

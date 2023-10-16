@@ -11,19 +11,49 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:srlFooterTranslationViewId="@+id/viewPager2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewBar">
+        app:layout_constraintTop_toTopOf="parent"
+        app:srlEnableLoadMore="true"
+        app:srlEnableRefresh="true"
+        app:srlFooterTranslationViewId="@+id/viewPager2">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
             android:id="@+id/scrollerLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical">
+            android:scrollbars="vertical"
+            app:isPermanent="true">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f4f4f4"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_isSticky="true">
+
+                <com.example.myapplication.widget.CustomTitleBarViewGroup
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:background="#f4f4f4"
+                    android:gravity="center"
+                    android:textColor="#333333"
+                    app:back_src="@drawable/back"
+                    app:imageHeight3="18dp"
+                    app:imageWidth3="12dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_isSticky="true"
+                    app:right_title="评价" />
+            </androidx.appcompat.widget.Toolbar>
 
 
             <androidx.core.widget.NestedScrollView
@@ -604,47 +634,46 @@
                         app:layout_constraintTop_toBottomOf="@id/rechargeFlipCard" />
 
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
 
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@color/gray_200"
-                    android:minHeight="?attr/actionBarSize"
-                    android:paddingBottom="5dp"
-                    app:layout_isSticky="true"
-                    android:theme="@style/Theme.AppCompat"
-                    app:layout_constraintBottom_toTopOf="@id/viewPager2"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tabIndicator="@drawable/shape_tab_indicator"
-                    app:tabIndicatorColor="#1990ff"
-                    app:tabIndicatorFullWidth="false"
-                    app:tabIndicatorGravity="bottom"
-                    app:tabIndicatorHeight="4dp"
-                    app:tabMinWidth="50dp"
-                    app:tabMode="scrollable"
-                    app:tabPaddingBottom="3dp" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/gray_200"
+                android:minHeight="?attr/actionBarSize"
+                android:paddingBottom="5dp"
+                android:theme="@style/Theme.AppCompat"
+                app:layout_constraintBottom_toTopOf="@id/viewPager2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_isSticky="true"
+                app:tabIndicator="@drawable/shape_tab_indicator"
+                app:tabIndicatorColor="#1990ff"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorHeight="4dp"
+                app:tabMinWidth="50dp"
+                app:tabMode="scrollable"
+                app:tabPaddingBottom="3dp" />
 
             <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-               >
+                android:layout_height="wrap_content">
+
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
-                    android:layout_marginLeft="10dp"/>
 
             </androidx.core.widget.NestedScrollView>
         </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
@@ -654,36 +683,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
-    <View
-        android:id="@+id/viewBar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toTopOf="@id/refreshLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#f4f4f4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.example.myapplication.widget.CustomTitleBarViewGroup
-            android:id="@+id/tvTitle"
+    <!--
+        <View
+            android:id="@+id/viewBar"
             android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:gravity="center"
-            android:textColor="#333333"
-            app:back_src="@drawable/back"
-            app:imageHeight3="18dp"
-            app:imageWidth3="12dp"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toTopOf="@id/refreshLayout"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:right_title="评价" />
-    </androidx.appcompat.widget.Toolbar>
+            app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

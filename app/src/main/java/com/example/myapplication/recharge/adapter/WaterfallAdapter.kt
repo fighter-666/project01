@@ -305,6 +305,17 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
         // feedList.addAll(0, newData)
     }
 
+    fun refreshValue(feedList: MutableList<GetFeedListData.FeedListBean>, newData: List<GetFeedListData.FeedListBean>) {
+        // 创建临时变量保存删除前的数据
+        val deletedData = ArrayList(feedList)
+        // 清空现有的数据
+        feedList.clear()
+        // 添加新的数据
+        feedList.addAll(newData)
+        // 在需要恢复删除的数据时，将其添加回 feedList
+        feedList.addAll(deletedData)
+    }
+
 
 }
 

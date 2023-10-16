@@ -11,7 +11,21 @@
             "linkType": "",
             "type": "1",
             "isDefault": "1",
-            "subTitle": "大家在看"
+            "subTitle": "大家在看",
+            "tagList": [
+                {
+                    "tagType": "1",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183812268668.png",
+                    "tagName": "快捷功能",
+                    "tagID": "2"
+                },
+                {
+                    "tagType": null,
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183914574950.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
+                }
+            ]
         },
         {
             "tabName": "百度",
@@ -37,7 +51,21 @@
             "linkType": "",
             "type": "1",
             "isDefault": "0",
-            "subTitle": "3C数码"
+            "subTitle": "3C数码",
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253945380988.png",
+                    "tagName": "查询办理",
+                    "tagID": "2"
+                },
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253992144177.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
+                }
+            ]
         },
         {
             "tabName": "视频",
@@ -50,7 +78,15 @@
             "linkType": "",
             "type": "1",
             "isDefault": "0",
-            "subTitle": "高清影视"
+            "subTitle": "高清影视",
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690254196129940.png",
+                    "tagName": "全屋wifi",
+                    "tagID": "2"
+                }
+            ]
         },
         {
             "tabName": "彩铃",
@@ -63,7 +99,15 @@
             "linkType": "",
             "type": "1",
             "isDefault": "0",
-            "subTitle": "视频彩铃"
+            "subTitle": "视频彩铃",
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690254423923764.png",
+                    "tagName": "办套餐",
+                    "tagID": "2"
+                }
+            ]
         },
         {
             "tabName": "直播",
@@ -76,7 +120,21 @@
             "linkType": "",
             "type": "1",
             "isDefault": "0",
-            "subTitle": "精彩直播"
+            "subTitle": "精彩直播",
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253945380988.png",
+                    "tagName": "查询办理",
+                    "tagID": "2"
+                },
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253992144177.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
+                }
+            ]
         },
         {
             "tabName": "二手",
@@ -89,7 +147,21 @@
             "linkType": "",
             "type": "1",
             "isDefault": "0",
-            "subTitle": "手机换新"
+            "subTitle": "手机换新",
+            "tagList": [
+                {
+                    "tagType": "1",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183812268668.png",
+                    "tagName": "快捷功能",
+                    "tagID": "2"
+                },
+                {
+                    "tagType": null,
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183914574950.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
+                }
+            ]
         }
     ],
     "jumpGuideBar": {
