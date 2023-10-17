@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tvMainTitleTitle"
-        android:layout_width="136dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
@@ -196,6 +196,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvPicList" />
+    <TextView
+        android:id="@+id/tvMainNullTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="left"
+        android:visibility="gone"
+        android:text="您还想看哪方面？"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvNullTitleFirst"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvPicListDouble" />
 
     <TextView
         android:id="@+id/tvNullTitleFirst"
@@ -213,6 +229,6 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvPicListDouble" />
+        app:layout_constraintTop_toBottomOf="@id/tvMainNullTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

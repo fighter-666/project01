@@ -2,7 +2,6 @@ package com.example.myapplication.activity.components
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View

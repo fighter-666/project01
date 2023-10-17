@@ -350,6 +350,8 @@ class ContentAreaListAdapter(
 
             //9：末尾卡片按钮列表
             "9" -> {
+
+                //binding.tvMainNullTitle.visibility = View.VISIBLE
                 binding.tvNullTitleFirst.text =
                     item.completionInfo.title
                 binding.tvNullTitleFirst.visibility =

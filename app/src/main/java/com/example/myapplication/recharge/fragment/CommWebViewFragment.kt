@@ -34,6 +34,7 @@ class CommWebViewFragment : BaseLazyFragment() {
     override fun loadData() {
         //访问网页
         binding.webview.post {
+            //binding.webview.settings.setJavaScriptEnabled(true)
             binding.webview.loadUrl(RechargePageActivity.link)
             //系统默认会通过手机浏览器打开网页，为了能够直接通过WebView显示网页，则必须设置
             binding.webview.webViewClient = object : WebViewClient() {

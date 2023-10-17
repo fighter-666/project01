@@ -1,0 +1,347 @@
+{
+    "feedList": [
+
+
+        {
+            "type": "1",
+            "externalOfferCode": "3199600001",
+            "firstSecondThreeClass": "286####",
+            "link": "",
+            "linkType": "",
+            "title": "",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-12.eoc-3199600001",
+            "sceneId": "hg_sy_feedtg##100001##default##3199600001##010001002000##3##N##1##12##N##N##31996",
+            "picArea": {
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654670340734263.png",
+                "imageRatio": null,
+                "playType": null,
+                "videoStreamUrl": null,
+                "videoStreamUrlType": null,
+                "startTime": null,
+                "endTime": null,
+                "videoCommerceId": null,
+                "topImage": null,
+                "topImageBeforeLive": null,
+                "topImageLiving": null,
+                "videoDuration": null,
+                "type": null,
+                "stock": null,
+                "link": null,
+                "linkType": null,
+                "title": null,
+                "provinceCode": "1000000037",
+                "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-12.eoc-3199600001",
+                "sceneId": "hg_sy_feedtg##100001##default##3199600001##010001002000##3##N##1##12##N##N##31996",
+                "commentList": null,
+                "picList": null
+            },
+            "contentAreaList": [
+                {
+                    "type": "8",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": [
+                        {
+                            "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111648436671677158.jpg",
+                            "imageRatio": "1.041",
+                            "link": "https%3A%2F%2Fwapact.189.cn%3A9001%2FJinDouMall%2FJinDouMall_luckDraw.html%3Fticket%3D%24ticket%24%26cmpid%3Djt-khd-jindousc-sy_feed",
+                            "linkType": "5",
+                            "title": "兑话费",
+                            "provinceCode": "1000000037",
+                            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-12.eoc-3199600001",
+                            "sceneId": "hg_sy_feedtg##100001##default##3199600001##010001002000##3##N##1##12##N##N##31996"
+                        },
+                        {
+                            "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111648436683687149.jpg",
+                            "imageRatio": "1.041",
+                            "link": "https%3A%2F%2Fwapside.189.cn%3A9001%2Fresources%2Fdist%2FsignInActivity.html%3Fticket%3D%24ticket%24%26version%3D%24version%24%26cmpid%3Djt-khd-qiandao-sy_feed",
+                            "linkType": "33",
+                            "title": "赚金豆",
+                            "provinceCode": "1000000037",
+                            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-12.eoc-3199600001",
+                            "sceneId": "hg_sy_feedtg##100001##default##3199600001##010001002000##3##N##1##12##N##N##31996"
+                        }
+                    ],
+                    "completionInfo": null
+                }
+            ],
+            "adLists": null,
+            "quickRecharge": null
+        },
+        {
+            "type": "1",
+            "externalOfferCode": "3461800001",
+            "firstSecondThreeClass": "108##109##115",
+            "link": "https://www.189.cn/images/client/commonupload/2020/7/14/163338/xinxingka/index.html?cmpid=jt-khd-xingka-sy_feed&shopid=189.WAP.hk-xingka-2122",
+            "linkType": "2",
+            "title": "",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-13.eoc-3461800001",
+            "sceneId": "hg_sy_feedtg##100001##default##3461800001##010001002000##3##N##1##13##N##N##34618",
+            "picArea": {
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654670340734263.png",
+                "imageRatio": "1.002",
+                "playType": null,
+                "videoStreamUrl": null,
+                "videoStreamUrlType": null,
+                "startTime": null,
+                "endTime": null,
+                "videoCommerceId": null,
+                "topImage": null,
+                "topImageBeforeLive": null,
+                "topImageLiving": null,
+                "videoDuration": null,
+                "type": "1",
+                "stock": null,
+                "link": "https://www.189.cn/images/client/commonupload/2020/7/14/163338/xinxingka/index.html?cmpid=jt-khd-xingka-sy_feed&shopid=189.WAP.hk-xingka-2122",
+                "linkType": "2",
+                "title": "星卡",
+                "provinceCode": "1000000037",
+                "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-13.eoc-3461800001",
+                "sceneId": "hg_sy_feedtg##100001##default##3461800001##010001002000##3##N##1##13##N##N##34618",
+                "commentList": null,
+                "picList": []
+            },
+            "contentAreaList": [
+                {
+                    "type": "1",
+                    "mainTitle": {
+                        "title": "【星卡】办理享话费体验金",
+                        "color": "",
+                        "type": "2"
+                    },
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },{
+                    "type": "1",
+                    "mainTitle": {
+                        "title": "【星卡】办理享话费体验金",
+                        "color": "",
+                        "type": "2"
+                    },
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+
+                {
+                    "type": "2",
+                    "mainTitle": null,
+                    "saleTipList": [
+                        {
+                            "title": "29元档",
+                            "fontColor": "",
+                            "frameColor": "",
+                            "imageUrl": "",
+                            "type": "1"
+                        },
+                        {
+                            "title": "59元档",
+                            "fontColor": "",
+                            "frameColor": "",
+                            "imageUrl": "",
+                            "type": "1"
+                        }
+                    ],
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "3",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": {
+                        "isShowPriceUnit": "1",
+                        "priceInteger": "29",
+                        "priceDecimal": "起/月",
+                        "priceColor": "",
+                        "originalPrice": "",
+                        "originalPriceColor": "",
+                        "isOriginalPriceLine": ""
+                    },
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                }
+            ],
+            "adLists": null,
+            "quickRecharge": null
+        },
+        {
+            "type": "1",
+            "externalOfferCode": "3492900001",
+            "firstSecondThreeClass": "286##287##288",
+            "link": "https://xbk.189.cn/xbkapi/auth/sess/room?liveId=557&utm_ch=hg_app&utm_sch=hg_sy_feedtg&utm_as=dd_xbkbd",
+            "linkType": "2",
+            "title": "",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+            "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+            "picArea": null,
+            "contentAreaList": [
+
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "签到得金豆"
+                    }
+                },{
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "附近客户经理"
+                    }
+                },{
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "话费查询"
+                    }
+                }
+            ],
+            "quickRecharge": null
+        },
+        {
+            "type": "1",
+            "externalOfferCode": "3492900001",
+            "firstSecondThreeClass": "286##287##288",
+            "link": "https://xbk.189.cn/xbkapi/auth/sess/room?liveId=557&utm_ch=hg_app&utm_sch=hg_sy_feedtg&utm_as=dd_xbkbd",
+            "linkType": "2",
+            "title": "您还想看那方面",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+            "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+            "picArea": null,
+            "contentAreaList": [
+
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "签到得金豆"
+                    }
+                },
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "附近客户经理"
+                    }
+                },
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "话费查询"
+                    }
+                },
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "流量查询"
+                    }
+                }
+            ],
+            "quickRecharge": null
+        }
+
+    ]
+}

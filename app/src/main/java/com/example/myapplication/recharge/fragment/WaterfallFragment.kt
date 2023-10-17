@@ -4,9 +4,11 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
@@ -28,6 +31,9 @@ import com.example.myapplication.widget.MyFragmentObserver
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class WaterfallFragment : BaseLazyFragment() {
@@ -36,7 +42,7 @@ class WaterfallFragment : BaseLazyFragment() {
     private lateinit var myAdapter: WaterfallAdapter
     private var contactNumber: String? = null
     private var mIntent: Intent? = null
-    private var tabName: Int = 0
+    private var number: Int = 0
     private lateinit var feedList: GetFeedListData
     private lateinit var tabList: GetFeedTabData
 
@@ -45,6 +51,7 @@ class WaterfallFragment : BaseLazyFragment() {
         fun newInstance(tabName: Int): WaterfallFragment {
             val args = Bundle()
             args.putString(ARG_TAB_NAME, tabName.toString())
+            args.putInt(ARG_TAB_NAME, tabName)
             val fragment = WaterfallFragment()
             fragment.arguments = args
             return fragment
@@ -175,7 +182,14 @@ class WaterfallFragment : BaseLazyFragment() {
         val gsonTab = Gson()
         tabList = gsonTab.fromJson(jsonTab, GetFeedTabData::class.java)
 
-        setCustomIcon()
+        number = requireArguments().getInt(ARG_TAB_NAME)
+
+        val selectedTab: TabLayout.Tab? =
+            binding.tabLayout.getTabAt(binding.tabLayout.getSelectedTabPosition()) // 获取当前选中的选项卡
+
+        binding.tabLayout.selectTab(null) // 取消选中状态
+
+        setCustomIcon(number)
 
       /* val tab = binding.tabLayout.newTab()
         val tabView =
@@ -194,32 +208,53 @@ class WaterfallFragment : BaseLazyFragment() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(tabList.tabList[tabName].tagList[1].tagName))*/
         //binding.tabLayout.addTab(binding.tabLayout.newTab().setIcon(tabList.tabList[0].tabIcon))
 
+        // 刷新TabLayout时判断是否有选中标签
+
         // 设置标签切换监听
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                val position = tab.position
-                when (position) {
+
+           /*     val select = binding.tabLayout.getTabAt(binding.tabLayout.selectedTabPosition)
+                if (select != null) {
+                    // 有选中标签的处理逻辑
+                    // 可以调用 selectedTab.select() 重新触发选中逻辑
+                    updateTabFont(tab, true) /
+                } else {
+                    // 没有选中标签的处理逻辑
+                    updateTabFont(tab, false) // 取消选中标签字体加粗
+                }*/
+                updateTabFont(tab, true) // 设置选中标签字体加粗
+                when (tab.position) {
                     0 -> {
                         // 在这里触发加载更多数据的操作
-                        val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
-                        data.add(
-                            feedList.feedList[7]
-                        )
-                        data.add(
-                            feedList.feedList[6]
-                        )
-                        data.add(
-                            feedList.feedList[16]
-                        )
-                        data.add(
-                            feedList.feedList[15]
-                        )
-                        myAdapter.refreshValue(feedList.feedList, data)
-                        myAdapter.notifyDataSetChanged()
+                        //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
+                        val requireJson: String = requireContext().assets.open("getQueryListData.json").bufferedReader()
+                            .use { it.readText() }
+                        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+                        val requireGson = Gson()
+                        val requireList = requireGson.fromJson(requireJson, GetFeedListData::class.java)
+                        myAdapter = WaterfallAdapter(requireList.feedList)
+                        binding.rvComponentsWaterfall.apply {
+                            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                            adapter = myAdapter
+                        }
+
 
                     }
                     1 -> {
                         // 在这里触发加载更多数据的操作
+                        //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
+                        val requireJson: String = requireContext().assets.open("getQuery2ListData.json").bufferedReader()
+                            .use { it.readText() }
+                        //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+                        val requireGson = Gson()
+                        val requireList = requireGson.fromJson(requireJson, GetFeedListData::class.java)
+                        myAdapter = WaterfallAdapter(requireList.feedList)
+                        binding.rvComponentsWaterfall.apply {
+                            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                            adapter = myAdapter
+                        }
+                        /*// 在这里触发加载更多数据的操作
                         val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
                         data.add(
                             feedList.feedList[7]
@@ -234,19 +269,16 @@ class WaterfallFragment : BaseLazyFragment() {
                             feedList.feedList[18]
                         )
                         myAdapter.refreshValue(feedList.feedList, data)
-                        myAdapter.notifyDataSetChanged()
+                        myAdapter.notifyDataSetChanged()*/
                     }
+
                 }
+                myAdapter.notifyDataSetChanged()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
+                updateTabFont(tab, false) // 取消选中标签字体加粗
                 //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
-                val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
-                    .use { it.readText() }
-                //使用了Gson库来将JSON数据转换为GetFeedTabData对象
-                val gson = Gson()
-                feedList = gson.fromJson(json, GetFeedListData::class.java)
-                myAdapter = WaterfallAdapter(feedList.feedList)
                 binding.rvComponentsWaterfall.apply {
                     layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     adapter = myAdapter
@@ -290,8 +322,66 @@ class WaterfallFragment : BaseLazyFragment() {
                     }
                 })
             }
-            override fun onTabReselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                // Tab重新选中时的处理逻辑
+                binding.tabLayout.selectTab(null) // 取消选中状态
+
+                //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
+                val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
+                    .use { it.readText() }
+                //使用了Gson库来将JSON数据转换为GetFeedTabData对象
+                val gson = Gson()
+                feedList = gson.fromJson(json, GetFeedListData::class.java)
+                myAdapter = WaterfallAdapter(feedList.feedList)
+                binding.rvComponentsWaterfall.apply {
+                    layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    adapter = myAdapter
+                }
+            }
+
+
         })
+    }
+
+    // 辅助方法：更新标签字体样式
+    fun updateTabFont(tab: TabLayout.Tab, isSelected: Boolean) {
+        val customView: View? = tab.customView
+        if (customView != null) {
+            val tabName: TextView =
+                customView.findViewById(R.id.tabName) as TextView // 自定义布局中的 TextView
+            CoroutineScope(Dispatchers.Main).launch {
+
+                for (i in 0 until tabList.tabList[number].tagList.size) {
+                    Log.d("tagName", tabList.tabList[number].tagList[i].tagName)
+                    if (tabList.tabList[number].tagList[i].tagType == "2"){
+                        if (isSelected) {
+                            val drawable =
+                                ResourcesCompat.getDrawable(resources,R.drawable.shape_fragment_red_tab,null)
+                            customView.background = drawable // 设置背景色
+                            tabName.setTextColor(Color.parseColor("#ffffff"))
+                        } else {
+                            val drawable =
+                                ResourcesCompat.getDrawable(resources,R.drawable.shape_fragment_tab,null)
+                            customView.background = drawable // 设置背景色
+                            tabName.setTextColor(Color.parseColor("#f35656"))
+                        }
+                    } else{
+                        if (isSelected) {
+                            val drawable =
+                                ResourcesCompat.getDrawable(resources,R.drawable.shape_fragment_blue_tab,null)
+                            customView.background = drawable // 设置背景色
+                            tabName.setTextColor(Color.parseColor("#ffffff"))
+                        } else {
+                            val drawable =
+                                ResourcesCompat.getDrawable(resources,R.drawable.shape_fragment_tab,null)
+                            customView.background = drawable // 设置背景色
+                            tabName.setTextColor(Color.parseColor("#999999"))
+                        }
+                    }
+
+                }
+            }
+        }
     }
 
     private fun getContactNumberByUri(data: Uri?): String? {
@@ -354,12 +444,13 @@ class WaterfallFragment : BaseLazyFragment() {
     /**
      * 设置自定义位置图标
      */
-    private fun setCustomIcon() {
-        for (i in 0 until tabList.tabList[0].tagList.size) {
+    private fun setCustomIcon(number :Int) {
+        for (i in 0 until tabList.tabList[number].tagList.size) {
             binding.tabLayout.addTab(binding.tabLayout.newTab())
         }
-        for (i in 0 until tabList.tabList[0].tagList.size) {
-            binding.tabLayout.getTabAt(i)?.setCustomView(makeTabView(i))
+        for (i in 0 until tabList.tabList[number].tagList.size) {
+            binding.tabLayout.getTabAt(i)?.customView = makeTabView(i, number)
+
         }
     }
 
@@ -368,13 +459,13 @@ class WaterfallFragment : BaseLazyFragment() {
      * @param position
      * @return
      */
-    private fun makeTabView(position: Int): View {
+    private fun makeTabView(position: Int,number: Int): View {
         val tabView: View = LayoutInflater.from(requireContext()).inflate(R.layout.view_fragment_tab, null)
         val textView = tabView.findViewById<TextView>(com.example.myapplication.R.id.tabName)
         val imageView = tabView.findViewById<ImageView>(R.id.tabIcon)
-        textView.setText(tabList.tabList[0].tagList[position].tagName)
+        textView.setText(tabList.tabList[number].tagList[position].tagName)
         Glide.with(requireActivity())
-            .load(tabList.tabList[0].tagList[position].tagIcon)
+            .load(tabList.tabList[number].tagList[position].tagIcon)
             .error(R.drawable.ic_launcher_foreground)
             .into(imageView)
         //imageView.setImageResource(tabList.tabList[0].tagList[position].tagIcon)

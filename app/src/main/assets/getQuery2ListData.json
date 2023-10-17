@@ -1,0 +1,210 @@
+{
+    "feedList": [
+        {
+            "type": "5",
+            "externalOfferCode": null,
+            "firstSecondThreeClass": null,
+            "link": "30001",
+            "linkType": "1",
+            "title": "快速充值",
+            "provinceCode": null,
+            "recommender": null,
+            "sceneId": null,
+            "picArea": null,
+            "contentAreaList": null,
+            "adLists": null,
+            "quickRecharge": {
+                "title": "19996801970",
+                "link": "",
+                "linkType": "",
+                "withOutLoginRechargeFlag": "1",
+                "denominations": [
+                    {
+                        "mainTitle": "10元",
+                        "subtitle": "售9.95元",
+                        "price": "10"
+                    },
+                    {
+                        "mainTitle": "50元",
+                        "subtitle": "售49.75元",
+                        "price": "50"
+                    },
+                    {
+                        "mainTitle": "100元",
+                        "subtitle": "售99.50元",
+                        "price": "100"
+                    },
+                    {
+                        "mainTitle": "200元",
+                        "subtitle": "售199.00元",
+                        "price": "200"
+                    }
+                ],
+                "dialogText": "登录后，享充值%s权益\n（限电信号码）",
+                "loginRechargeText": "9.91"
+            }
+        },
+
+
+        {
+            "type": "1",
+            "externalOfferCode": "3196100028",
+            "firstSecondThreeClass": "108##109##227",
+            "link": "https%3A%2F%2Fah.189.cn%2Fiphone%2Fext%2Fxk29tc%2Findex.html%3FbyChannel%3Dhg-m-feed%26DevCode%3DCWWTAH011%26shopid%3D65701%26cmpid%3Dpro_hg_ah_Syjh-sjsy-feed-1_xk%26ticket%3D%24ticket%24",
+            "linkType": "5",
+            "title": "",
+            "provinceCode": "600301",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-2.eoc-3196100028",
+            "sceneId": "hg_sy_feedtg##100001##default##3196100028##010001002000##3##N##1##2##N##N##31961",
+            "picArea": {
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111662105176148988.jpg",
+                "imageRatio": "0.781",
+                "playType": null,
+                "videoStreamUrl": null,
+                "videoStreamUrlType": null,
+                "startTime": null,
+                "endTime": null,
+                "videoCommerceId": null,
+                "topImage": null,
+                "topImageBeforeLive": null,
+                "topImageLiving": null,
+                "videoDuration": null,
+                "type": "2",
+                "stock": null,
+                "link": "https://www.189.cn/images/client/commonupload/2022/3/17/143844/nuanxin/index.html?cmpid=jt-wap-sy-flzx&shopid=189.WAP.nxb-1012",
+                "linkType": "2",
+                "title": "5日暖心包 9.9元10GB全国流量",
+                "provinceCode": "600101,600102,600103,600105,600201,600202,600203,600204,600205,600301,600302,600303,600304,600305,600401,600402,600403,600405,600406,609001,609902,609904,609905,609903,609906,609907,609908,609909,609910",
+                "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-1.eoc-3184500006",
+                "sceneId": "hg_sy_feedtg##100001##default##3184500006##010001002000##3##N##1##1##N##N##31845",
+                "commentList": null,
+                "picList": [
+                    {
+                        "imageRatio": "1:1",
+                        "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111648436671677158.jpg",
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "string"
+                    },
+                    {
+                        "imageRatio": "1:1",
+                        "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111648436671677158.jpg",
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "string"
+                    },
+                    {
+                        "imageRatio": "1:1",
+                        "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111648436671677158.jpg",
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "string"
+                    }
+                ]
+            },
+            "contentAreaList": null,
+            "adLists": null,
+            "quickRecharge": null
+        },
+
+
+
+        {
+            "type": "1",
+            "externalOfferCode": "3492900001",
+            "firstSecondThreeClass": "286##287##288",
+            "link": "https://xbk.189.cn/xbkapi/auth/sess/room?liveId=557&utm_ch=hg_app&utm_sch=hg_sy_feedtg&utm_as=dd_xbkbd",
+            "linkType": "2",
+            "title": "您还想看那方面",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+            "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+            "picArea": null,
+            "contentAreaList": [
+
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "签到得金豆"
+                    }
+                },
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "附近客户经理"
+                    }
+                },
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "话费查询"
+                    }
+                },
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": {
+                        "link": "string",
+                        "linkType": "string",
+                        "provinceCode": "string",
+                        "recommender": "string",
+                        "sceneId": "string",
+                        "title": "流量查询"
+                    }
+                }
+            ],
+            "quickRecharge": null
+        }
+
+    ]
+}
