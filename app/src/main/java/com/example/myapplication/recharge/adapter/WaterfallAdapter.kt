@@ -149,7 +149,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             .transition(DrawableTransitionOptions.withCrossFade())
-                            .transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
+                            //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
                             //.apply(requestOptions
                             .error(R.drawable.ic_launcher_foreground)
                             .into(binding.ivPicAreaImageUrl)
@@ -165,7 +165,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                             //.transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
                             //.transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(requestOptions)
+                            //.apply(requestOptions)
                             .error(R.drawable.ic_launcher_foreground)
                             .into(binding.ivPicAreaImageUrl)
                     }
@@ -249,8 +249,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 }*/
 
                 //消除空格，并且第四位到第七位用*代替
-                binding.etPhone.text =
-                    hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""))
+               /* binding.tvLoginRechargeText.text =
+                    hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""))*/
 
                 val rechargeAdapter =
                     RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)

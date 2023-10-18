@@ -48,7 +48,7 @@ class ManyImageGridAdapter(
             Glide.with(context)
                 .load(item.imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(requestOptions)
+                //.apply(requestOptions)
                 .error(R.drawable.ic_launcher_foreground)
                     //每个图片都是正方形显示
                 //.override(imageWeight,imageWeight)//这里的单位是px

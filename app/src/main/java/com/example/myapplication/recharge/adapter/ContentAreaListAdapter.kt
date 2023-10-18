@@ -62,6 +62,7 @@ class ContentAreaListAdapter(
 
             //2：随销条、
             "2" -> {
+
                 //创建适配器
                 val myAdapter = SaleTipListAdapter(
                     R.layout.adapter_recharge_contentarealist_saletiplist,
@@ -81,6 +82,7 @@ class ContentAreaListAdapter(
             "3" -> {
                 //price : 价格
                 if (item.price != null) {
+                    binding.clIsShowPrice.visibility = View.VISIBLE
                     //售价字体颜色通过priceColor控制，默认颜色为#ea5858
                     binding.tvPriceInteger.text = item.price.priceInteger
                     if (item.price.priceColor != "") {
@@ -224,6 +226,7 @@ class ContentAreaListAdapter(
                 binding.ivLocationIcon.visibility = View.VISIBLE
                 binding.tvLocationTitle.visibility = View.VISIBLE
                 binding.clLocation.visibility = View.VISIBLE
+                binding.clLocationBackground.visibility = View.VISIBLE
             }
 
             //5：倒计时
@@ -315,6 +318,7 @@ class ContentAreaListAdapter(
                   binding.tvNumText.text = priceInTenThousand.toString()*/
                     binding.tvNumText.text = item.numText
                     binding.tvNumText.visibility = View.VISIBLE
+                    binding.clNumText.visibility = View.VISIBLE
                 }
             }
 

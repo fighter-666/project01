@@ -43,6 +43,7 @@ class WaterfallFragment : BaseLazyFragment() {
     private var contactNumber: String? = null
     private var mIntent: Intent? = null
     private var number: Int = 0
+    private var position: Int = 0
     private lateinit var feedList: GetFeedListData
     private lateinit var tabList: GetFeedTabData
 
@@ -108,14 +109,14 @@ class WaterfallFragment : BaseLazyFragment() {
                 //刷新指定item
                 //获取要刷新的position
 
-                val updatedItem = myAdapter.getItem(1)
+                val updatedItem = myAdapter.getItem(position)
                 if (updatedItem.quickRecharge != null) {
                     updatedItem.quickRecharge.title = contactNumber
                     Toast.makeText(context, updatedItem.quickRecharge.title, Toast.LENGTH_SHORT)
                         .show()
                     // 更新适配器中的数据集
-                    feedList.feedList[1] = updatedItem // 将索引为1的项替换为更新后的项
-                    myAdapter.notifyItemChanged(1)
+                    feedList.feedList[position] = updatedItem // 将索引为1的项替换为更新后的项
+                    myAdapter.notifyItemChanged(position)
                 }
             }
         }
@@ -144,7 +145,9 @@ class WaterfallFragment : BaseLazyFragment() {
         //监听条目子组件的点击事件
         myAdapter.setOnItemChildClickListener { adapter, view, position ->
             if (view.id == R.id.btnSelect) {
+                position
                 requestReadContactsPermission()
+
             }
         }
 

@@ -74,6 +74,9 @@ dependencies {
 
     implementation 'com.github.donkingliang:ConsecutiveScroller:4.6.4'  //吸顶
 
+    implementation 'androidx.cardview:cardview:1.0.0'   //CardView提供圆角
+
+
 
 
     //room

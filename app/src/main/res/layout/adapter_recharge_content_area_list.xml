@@ -11,123 +11,153 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:textColor="#333333"
         android:textSize="14sp"
-        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/rvSaleTipList"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSaleTipList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        app:layout_constraintBottom_toTopOf="@id/tvPriceInteger"
+        app:layout_constraintBottom_toTopOf="@id/clIsShowPrice"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvMainTitleTitle" />
 
-
-    <TextView
-        android:id="@+id/tvIsShowPriceUnit"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clIsShowPrice"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="￥"
-        android:textColor="#ea5858"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@id/tvPriceDecimal"
-        app:layout_constraintBottom_toBottomOf="@id/tvPriceInteger"
-        app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle" />
-
-    <TextView
-        android:id="@+id/tvPriceInteger"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="5dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="10"
-        android:textColor="#ea5858"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBaseline_toBaselineOf="@id/tvPriceDecimal"
-        app:layout_constraintBottom_toTopOf="@id/clLocation"
-        app:layout_constraintLeft_toRightOf="@id/tvIsShowPriceUnit"
-        app:layout_constraintTop_toBottomOf="@id/rvSaleTipList" />
-
-    <TextView
-        android:id="@+id/tvPriceDecimal"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="/月"
-        android:textColor="#ea5858"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/tvPriceInteger"
-        app:layout_constraintLeft_toRightOf="@id/tvPriceInteger" />
-
-    <TextView
-        android:id="@+id/tvOriginalPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:text="10"
-        android:textColor="#999999"
-        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/tvPriceDecimal"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/clLocation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvSaleTipList">
 
+        <TextView
+            android:id="@+id/tvIsShowPriceUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textColor="#ea5858"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tvPriceInteger"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPriceInteger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="10"
+            android:textColor="#ea5858"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvIsShowPriceUnit"
+            app:layout_constraintLeft_toRightOf="@id/tvIsShowPriceUnit"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tvPriceDecimal"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="/月"
+            android:textColor="#ea5858"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tvPriceInteger"
+            app:layout_constraintLeft_toRightOf="@id/tvPriceInteger" />
+
+        <TextView
+            android:id="@+id/tvOriginalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/tvPriceDecimal"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clLocation"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_recharge_location"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
         android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvCountDown"
-        app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle"
-        app:layout_constraintTop_toBottomOf="@id/tvPriceInteger">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clIsShowPrice"
+        >
 
-        <ImageView
-            android:id="@+id/ivLocationIcon"
-            android:layout_width="9dp"
-            android:layout_height="10dp"
-            android:src="@drawable/location"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvLocationTitle"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clLocationBackground"
             android:layout_width="wrap_content"
-            android:layout_height="17dp"
-            android:layout_marginLeft="1dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="河北省 石家庄市"
-            android:textColor="#ea5858"
-            android:textSize="11sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_recharge_location"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/ivLocationIcon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            >
+
+            <ImageView
+                android:id="@+id/ivLocationIcon"
+                android:layout_width="9dp"
+                android:layout_height="10dp"
+                android:src="@drawable/location"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tvLocationTitle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLocationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginLeft="1dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="河北省 石家庄市"
+                android:textColor="#ea5858"
+                android:textSize="11sp"
+                android:visibility="gone"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/ivLocationIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <TextView
         android:id="@+id/tvCountDownBackground"
@@ -141,7 +171,7 @@
         android:textSize="11sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/tvCountDown"
-        app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvCountDown" />
 
     <TextView
@@ -159,26 +189,39 @@
         android:textColor="#ea5858"
         android:textSize="11sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/tvNumText"
-        app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle"
+        app:layout_constraintBottom_toTopOf="@id/clNumText"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clLocation" />
 
-    <TextView
-        android:id="@+id/tvNumText"
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNumText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="75.3万人观看"
-        android:textColor="#999999"
-        android:textSize="12sp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/rvPicList"
-        app:layout_constraintLeft_toLeftOf="@id/tvMainTitleTitle"
-        app:layout_constraintTop_toBottomOf="@id/tvCountDown" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCountDown"
+        >
+        <TextView
+            android:id="@+id/tvNumText"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="75.3万人观看"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPicList"
@@ -186,7 +229,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/rvPicListDouble"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNumText" />
+        app:layout_constraintTop_toBottomOf="@id/clNumText" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPicListDouble"
@@ -196,22 +239,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvPicList" />
-    <TextView
-        android:id="@+id/tvMainNullTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="12dp"
-        android:gravity="left"
-        android:visibility="gone"
-        android:text="您还想看哪方面？"
-        android:textColor="#333333"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/tvNullTitleFirst"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvPicListDouble" />
+
 
     <TextView
         android:id="@+id/tvNullTitleFirst"
@@ -229,6 +257,6 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMainNullTitle" />
+        app:layout_constraintTop_toBottomOf="@id/rvPicListDouble" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
