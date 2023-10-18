@@ -60,6 +60,7 @@ class ScrollTextViewCommentListBackground @JvmOverloads constructor(
                 mBannerTV1.text = list!![position]
             }
 
+
             //设置平移动画
             startY1 = if (isShow) 0 else offsetY
             endY1 = if (isShow) -offsetY else 0

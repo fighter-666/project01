@@ -25,6 +25,7 @@ import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.data.GetFeedTabData
+import com.example.myapplication.recharge.widget.GetTelephoneNumberManager
 import com.example.myapplication.recharge.widget.LoadMoreManager
 import com.example.myapplication.widget.BaseLazyFragment
 import com.example.myapplication.widget.MyFragmentObserver
@@ -106,18 +107,7 @@ class WaterfallFragment : BaseLazyFragment() {
                 mIntent = result.data
                 val contactUri = mIntent?.data
                 contactNumber = getContactNumberByUri(contactUri)
-                //刷新指定item
-                //获取要刷新的position
-
-                val updatedItem = myAdapter.getItem(position)
-                if (updatedItem.quickRecharge != null) {
-                    updatedItem.quickRecharge.title = contactNumber
-                    Toast.makeText(context, updatedItem.quickRecharge.title, Toast.LENGTH_SHORT)
-                        .show()
-                    // 更新适配器中的数据集
-                    feedList.feedList[position] = updatedItem // 将索引为1的项替换为更新后的项
-                    myAdapter.notifyItemChanged(position)
-                }
+                contactNumber?.let { GetTelephoneNumberManager.triggerGetTelephoneNumber(it) }
             }
         }
 
@@ -145,8 +135,22 @@ class WaterfallFragment : BaseLazyFragment() {
         //监听条目子组件的点击事件
         myAdapter.setOnItemChildClickListener { adapter, view, position ->
             if (view.id == R.id.btnSelect) {
-                position
+                //刷新指定item
+                //获取要刷新的position
+                Log.d("TAG", position.toString())
+
                 requestReadContactsPermission()
+
+                myAdapter.notifyItemChanged(position)
+/*
+                val updatedItem = myAdapter.getItem(position)
+                if (updatedItem.quickRecharge != null) {
+                    updatedItem.quickRecharge.title = contactNumber
+
+                    // 更新适配器中的数据集
+                    feedList.feedList[position] = updatedItem // 将索引为1的项替换为更新后的项
+                    myAdapter.notifyItemChanged(position)
+                }*/
 
             }
         }

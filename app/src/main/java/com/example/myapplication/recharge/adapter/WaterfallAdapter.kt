@@ -1,12 +1,10 @@
 package com.example.myapplication.recharge.adapter
 
 import android.view.View
-import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -19,6 +17,7 @@ import com.example.myapplication.databinding.WidgetMultipleItemManyImageBinding
 import com.example.myapplication.databinding.WidgetMultipleItemNullBinding
 import com.example.myapplication.databinding.WidgetMultipleItemRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
+import com.example.myapplication.recharge.widget.GetTelephoneNumberManager
 import com.example.myapplication.recharge.widget.ScrollTextViewCommentListBackground
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
@@ -92,9 +91,6 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     layoutManager = GridLayoutManager(context, 2)
                     adapter = myAdapter
                 }
-
-                binding.tvMainTitleTitle.text = item.picArea.title
-                binding.tvMainTitleTitle.visibility = View.VISIBLE
             }
 
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE -> {
@@ -227,6 +223,19 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
                 // 处理充值布局
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
+                GetTelephoneNumberManager.setGetTelephoneNumberListener(object : GetTelephoneNumberManager.OnGetTelephoneNumberManager {
+                    override fun onGetTelephoneNumber(number: String) {
+
+                        if (number.replace(" ", "").length == 11){
+                            //消除空格，并且第四位到第七位用*代替
+                            binding.tvGetTelephoneNumber.text =
+                                hideCharactersFromIndex(number.replace(" ", ""))
+                        }else{
+
+                        }
+                    }
+
+                })
 
            /*     binding.btnSelect.setOnClickListener {
                     //设置点击事件监听器
