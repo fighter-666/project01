@@ -68,6 +68,7 @@ class WaterfallFragment : BaseLazyFragment() {
     ): View {
         _binding = FragmentRechargeWaterfallBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     //用于请求读取联系人权限并执行相应的操作。
@@ -116,9 +117,12 @@ class WaterfallFragment : BaseLazyFragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycle.addObserver(MyFragmentObserver())
 
+
+
     }
 
     override fun loadData() {
+       // binding.tabLayout.selectTab(null) // 取消选中状态
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
         val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
             .use { it.readText() }
@@ -194,10 +198,7 @@ class WaterfallFragment : BaseLazyFragment() {
 
         number = requireArguments().getInt(ARG_TAB_NAME)
 
-        val selectedTab: TabLayout.Tab? =
-            binding.tabLayout.getTabAt(binding.tabLayout.getSelectedTabPosition()) // 获取当前选中的选项卡
 
-        binding.tabLayout.selectTab(null) // 取消选中状态
 
         setCustomIcon(number)
 
@@ -234,6 +235,7 @@ class WaterfallFragment : BaseLazyFragment() {
                     updateTabFont(tab, false) // 取消选中标签字体加粗
                 }*/
                 updateTabFont(tab, true) // 设置选中标签字体加粗
+                Log.d("WaterfallActivity", tab.position.toString())
                 when (tab.position) {
                     0 -> {
                         // 在这里触发加载更多数据的操作
@@ -248,6 +250,7 @@ class WaterfallFragment : BaseLazyFragment() {
                             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                             adapter = myAdapter
                         }
+
 
 
                     }
@@ -283,12 +286,13 @@ class WaterfallFragment : BaseLazyFragment() {
                     }
 
                 }
-                myAdapter.notifyDataSetChanged()
+
+                //myAdapter.notifyDataSetChanged()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
                 updateTabFont(tab, false) // 取消选中标签字体加粗
-                //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
+           /*     //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
                 binding.rvComponentsWaterfall.apply {
                     layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     adapter = myAdapter
@@ -330,11 +334,12 @@ class WaterfallFragment : BaseLazyFragment() {
                         val itemCount = data.size // 添加的数据项数
                         myAdapter.notifyItemRangeInserted(startPosition, itemCount)
                     }
-                })
+                })*/
             }
             override fun onTabReselected(tab: TabLayout.Tab) {
                 // Tab重新选中时的处理逻辑
                 binding.tabLayout.selectTab(null) // 取消选中状态
+
 
                 //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
                 val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
@@ -455,8 +460,9 @@ class WaterfallFragment : BaseLazyFragment() {
      * 设置自定义位置图标
      */
     private fun setCustomIcon(number :Int) {
+
         for (i in 0 until tabList.tabList[number].tagList.size) {
-            binding.tabLayout.addTab(binding.tabLayout.newTab())
+            binding.tabLayout.addTab(binding.tabLayout.newTab(),false)
         }
         for (i in 0 until tabList.tabList[number].tagList.size) {
             binding.tabLayout.getTabAt(i)?.customView = makeTabView(i, number)
