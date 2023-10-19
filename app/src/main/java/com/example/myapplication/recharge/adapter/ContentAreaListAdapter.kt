@@ -41,6 +41,7 @@ class ContentAreaListAdapter(
     ) {
         val binding = AdapterRechargeContentAreaListBinding.bind(holder.itemView)
 
+
         when (item.type) {
             "1" -> {
                 //mainTitle : 主标题

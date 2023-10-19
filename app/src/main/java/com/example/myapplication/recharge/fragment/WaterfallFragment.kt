@@ -60,6 +60,7 @@ class WaterfallFragment : BaseLazyFragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -141,7 +142,9 @@ class WaterfallFragment : BaseLazyFragment() {
 
                 requestReadContactsPermission()
 
+
                 myAdapter.notifyItemChanged(position)
+
 /*
                 val updatedItem = myAdapter.getItem(position)
                 if (updatedItem.quickRecharge != null) {

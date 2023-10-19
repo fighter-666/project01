@@ -1,0 +1,13 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_item"
+    android:layout_width="wrap_content"
+    android:layout_height="19dp"
+    android:layout_gravity="right"
+    android:ellipsize="end"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:maxLines="1"
+    android:background="@drawable/shape_recharge_commentlist_second"
+    android:gravity="center"
+    android:textColor="#ffffff"
+    android:textSize="11sp"  />

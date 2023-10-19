@@ -12,6 +12,8 @@ open class BaseLazyFragment : Fragment() {
             loadData()
             isDataLoaded = true
         }
+
+
     }
 
      open fun loadData() {

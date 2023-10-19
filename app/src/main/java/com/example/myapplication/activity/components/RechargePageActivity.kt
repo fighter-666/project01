@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -96,6 +97,8 @@ class RechargePageActivity : AppCompatActivity() {
         binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
 
 
+
+
         // val fragmentTypes = listOf("Waterfall", "Wap", "Waterfall", /* ... 其他类型 ... */)
         // val adapter = FragmentAdapter(supportFragmentManager, lifecycle, fragmentTypes)
         //val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
@@ -112,6 +115,27 @@ class RechargePageActivity : AppCompatActivity() {
         })
 
 
+
+
+    /*    binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val view = (binding.viewPager2.getChildAt(0) as RecyclerView).layoutManager?.findViewByPosition(position)
+
+                view?.post {
+                    val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY)
+                    val hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                    view.measure(wMeasureSpec, hMeasureSpec)
+
+                    if (binding.viewPager2.layoutParams.height != view.measuredHeight) {
+                        binding.viewPager2.layoutParams = (binding.viewPager2.layoutParams).also { lp -> lp.height = view.measuredHeight }
+                    }
+                }
+            }
+        })*/
+
+
+
         /* for (tab in tabList.tabList) {
              adapter.addFragment(WapFragment.newInstance(tab))
          }*/
@@ -125,6 +149,10 @@ class RechargePageActivity : AppCompatActivity() {
                 // ...为其他indexes添加对应的Fragment
             }
         }
+      /*  binding.viewPager2.viewTreeObserver.addOnGlobalLayoutListener {
+
+            updatePagerHeightForChild(tabList.tabList[binding.viewPager2.currentItem].view, binding.viewPager2)
+        }*/
 
 
         /*   binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

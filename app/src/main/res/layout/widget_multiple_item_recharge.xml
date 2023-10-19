@@ -42,9 +42,9 @@
             android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="19996801970"
+            android:text="199****1970"
             android:textColor="#333333"
-            android:textSize="14dp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/rlRecharge"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -52,8 +52,8 @@
 
         <ImageView
             android:id="@+id/btnSelect"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:src="@drawable/phone"
             app:layout_constraintBottom_toBottomOf="@id/tvGetTelephoneNumber"
             app:layout_constraintRight_toRightOf="@id/rlRecharge"
