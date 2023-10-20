@@ -34,15 +34,15 @@ class ViewFlipperAdapter(private val context: Context, private val data: List<St
             view = convertView
             viewHolder = convertView.tag as ViewHolder
         }
-        viewHolder.tv_item.text = data!![position]
+        viewHolder.tvItem.text = data!![position]
         return view
     }
 
     internal class ViewHolder(view: View) {
-        var tv_item: TextView
+        var tvItem: TextView
 
         init {
-            tv_item = view.findViewById<TextView>(R.id.tv_item)
+            tvItem = view.findViewById(R.id.tv_item)
         }
     }
 }

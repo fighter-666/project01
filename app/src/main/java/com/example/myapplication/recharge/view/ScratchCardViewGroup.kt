@@ -29,7 +29,6 @@ class ScratchCardViewGroup : ConstraintLayout {
     private lateinit var imageView: ImageView
     private lateinit var imageView2: ImageView
     private lateinit var textview: TextView
-    private lateinit var close: ConstraintLayout
     private lateinit var container: ConstraintLayout
     private var screenWidth: Int = 0
     private var customAttrs: AttributeSet? = null
@@ -71,7 +70,7 @@ class ScratchCardViewGroup : ConstraintLayout {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        //获取图片宽度
+ /*       //获取图片宽度
       val imageWidth = (screenWidth - DensityUtils.dpToPx(context, 20f))
       val layoutParams1 = container.layoutParams
       val initialWidth = layoutParams1.width
@@ -89,7 +88,7 @@ class ScratchCardViewGroup : ConstraintLayout {
 
       //获取初始宽高
       layoutParamsClose.width = imageWidth
-      close.layoutParams = layoutParamsClose
+      close.layoutParams = layoutParamsClose*/
     }
 
 
@@ -100,7 +99,6 @@ class ScratchCardViewGroup : ConstraintLayout {
         imageView = findViewById(R.id.imageHand)
         imageView2 = findViewById(R.id.imageHand2)
         textview = findViewById(R.id.tvFlipCardChange)
-        close = findViewById(R.id.close)
         container = findViewById(R.id.container)
 
         //绑定刮卡view
@@ -121,21 +119,6 @@ class ScratchCardViewGroup : ConstraintLayout {
         imageView.setImageResource(R.drawable.button2)
         imageView2.setImageResource(R.drawable.hand)
 
-        //让按钮和手指消失
-        /* if (scratchCardView.number > 0) {
-             imageView.visibility = View.GONE
-             imageView2.visibility = View.GONE
-         }*/
-
-
-
-/*        // 使用示例
-        val scratchCardView = ScratchCardView()
-        val scratchCardViewGroup = ScratchCardViewGroup()
-
-        scratchCardView.setNumberChangeListener(scratchCardViewGroup) // 将 ScratchCardViewGroup 设置为回调接收者*/
-
-
         imageView.setOnClickListener {
             imageView.visibility = View.GONE
             imageView2.visibility = View.GONE
@@ -147,9 +130,6 @@ class ScratchCardViewGroup : ConstraintLayout {
                 imageView.visibility = View.GONE
                 imageView2.visibility = View.GONE
             }
-
-
-
         })
 
         //再刮一次
@@ -196,8 +176,5 @@ class ScratchCardViewGroup : ConstraintLayout {
             })
             animatorSet.start()
         }
-
     }
-
-
 }

@@ -1,18 +1,12 @@
 package com.example.myapplication.recharge.adapter
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.view.marginTop
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
@@ -101,12 +95,12 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE -> {
                 // 处理单图布局
                 val binding = WidgetMultipleItemCommonBinding.bind(holder.itemView)
-               /* //卡片锁宽等比缩放（imageRatio用来计算高度）
-                val lp = binding.ivTopImage.layoutParams as ConstraintLayout.LayoutParams
-                lp.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
+                /* //卡片锁宽等比缩放（imageRatio用来计算高度）
+                 val lp = binding.ivTopImage.layoutParams as ConstraintLayout.LayoutParams
+                 lp.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
 
-                binding.ivTopImage.layoutParams = lp*/
-                if (item.picArea.topImage != null){
+                 binding.ivTopImage.layoutParams = lp*/
+                if (item.picArea.topImage != null) {
                     binding.ivTopImage.visibility = View.VISIBLE
                     Glide.with(context)
                         .load(item.picArea.topImage)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
@@ -124,21 +118,21 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
                     for (tab in item.picArea.commentList) {
                         stars.add(tab.title) // 将每个标题添加到列表中
-                     /*   val textView=
-                            LayoutInflater.from(context)
-                                .inflate(R.layout.item_view, null) as TextView
-                        textView.text = tab.title
+                        /*   val textView=
+                               LayoutInflater.from(context)
+                                   .inflate(R.layout.item_view, null) as TextView
+                           textView.text = tab.title
 
-                        binding.tvCommentList.addView(textView)*/
+                           binding.tvCommentList.addView(textView)*/
                     }
                     val viewFlipperAdapter = ViewFlipperAdapter(context, stars)
                     binding.tvCommentList.adapter = viewFlipperAdapter
                     binding.tvCommentList.visibility = View.VISIBLE
                     binding.clCommentList.visibility = View.VISIBLE
 
-                  /*  val marqueeText2: ScrollTextViewCommentListBackground = binding.tvCommentList
-                    marqueeText2.setList(stars) // 将列表传递给跑马灯控件的setList方法
-                    marqueeText2.startScroll()*/
+                    /*  val marqueeText2: ScrollTextViewCommentListBackground = binding.tvCommentList
+                      marqueeText2.setList(stars) // 将列表传递给跑马灯控件的setList方法
+                      marqueeText2.startScroll()*/
                 }
 
                 //库存显示
@@ -153,54 +147,47 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
 
                 //卡片锁宽等比缩放（imageRatio用来计算高度）
-                val layoutParams = binding.ivPicAreaImageUrl.layoutParams as ConstraintLayout.LayoutParams
+                val layoutParams =
+                    binding.ivPicAreaImageUrl.layoutParams as ConstraintLayout.LayoutParams
                 layoutParams.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
-
                 binding.ivPicAreaImageUrl.layoutParams = layoutParams
 
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
-                        val rechargeAdapter = ContentAreaListAdapter(
-                            R.layout.adapter_recharge_content_area_list, item.contentAreaList
-                        )
-                    if (item.contentAreaList[0].type!="7" && item.contentAreaList[0].type!="8"
-                        && item.contentAreaList[item.contentAreaList.size-1].type!="7"
-                        && item.contentAreaList[item.contentAreaList.size-1].type!="8"){
-                        val layoutParams = binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
-                        layoutParams.topMargin = DensityUtils.dpToPx(context,5f)
-                        layoutParams.bottomMargin = DensityUtils.dpToPx(context,5f)
-                        binding.clContentAreaList.layoutParams = layoutParams
+                    val rechargeAdapter = ContentAreaListAdapter(
+                        R.layout.adapter_recharge_content_area_list, item.contentAreaList
+                    )
+                    if (item.contentAreaList[0].type != "7" && item.contentAreaList[0].type != "8"
+                        && item.contentAreaList[item.contentAreaList.size - 1].type != "7"
+                        && item.contentAreaList[item.contentAreaList.size - 1].type != "8"
+                    ) {
+                        val lp =
+                            binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
+                        lp.topMargin = DensityUtils.dpToPx(context, 5f)
+                        lp.bottomMargin = DensityUtils.dpToPx(context, 5f)
+                        binding.clContentAreaList.layoutParams = lp
                     }
 
-
-                        //设置布局管理器和给recyclerView 设置设配器
-                        binding.rvContentAreaList.apply {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = rechargeAdapter
-                        }
-                        // 设置圆角半径
-                        //val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                        Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
-                            //.apply(requestOptions
-                            .error(R.drawable.ic_launcher_foreground)
-                            .into(binding.ivPicAreaImageUrl)
+                    //设置布局管理器和给recyclerView 设置设配器
+                    binding.rvContentAreaList.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = rechargeAdapter
+                    }
+                    // 设置圆角半径
+                    //val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                    Glide.with(context)
+                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
+                        //.apply(requestOptions
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(binding.ivPicAreaImageUrl)
                 } else {
-                    //在协程中加载网络图片或在后台线程中加载大量图片。
-                    // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
-                        // 设置圆角半径
-                        val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                        Glide.with(context)
-                            .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
-                            //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
-                            //.transform( GranularRoundedCorners(20f,20f,0f,0f))//四个角单独指定角度
-                            //.transition(DrawableTransitionOptions.withCrossFade())
-                            //.apply(requestOptions)
-                            .error(R.drawable.ic_launcher_foreground)
-                            .into(binding.ivPicAreaImageUrl)
+                    Glide.with(context)
+                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(binding.ivPicAreaImageUrl)
                 }
             }
 
@@ -213,12 +200,14 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     val rechargeAdapter = ContentAreaListAdapter(
                         R.layout.adapter_recharge_content_area_list, item.contentAreaList
                     )
-                    if (item.contentAreaList[0].type!="7" && item.contentAreaList[0].type!="8"
-                        && item.contentAreaList[item.contentAreaList.size-1].type!="7"
-                        && item.contentAreaList[item.contentAreaList.size-1].type!="8"){
-                        val layoutParams = binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
-                        layoutParams.topMargin = DensityUtils.dpToPx(context,5f)
-                        layoutParams.bottomMargin = DensityUtils.dpToPx(context,5f)
+                    if (item.contentAreaList[0].type != "7" && item.contentAreaList[0].type != "8"
+                        && item.contentAreaList[item.contentAreaList.size - 1].type != "7"
+                        && item.contentAreaList[item.contentAreaList.size - 1].type != "8"
+                    ) {
+                        val layoutParams =
+                            binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
+                        layoutParams.topMargin = DensityUtils.dpToPx(context, 5f)
+                        layoutParams.bottomMargin = DensityUtils.dpToPx(context, 5f)
                         binding.clContentAreaList.layoutParams = layoutParams
                     }
 
@@ -267,15 +256,16 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
                 // 处理充值布局
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
-                GetTelephoneNumberManager.setGetTelephoneNumberListener(object : GetTelephoneNumberManager.OnGetTelephoneNumberManager {
+                GetTelephoneNumberManager.setGetTelephoneNumberListener(object :
+                    GetTelephoneNumberManager.OnGetTelephoneNumberManager {
                     override fun onGetTelephoneNumber(number: String) {
 
-                        if (number.replace(" ", "").length == 11){
+                        if (number.replace(" ", "").length == 11) {
                             //消除空格，并且第四位到第七位用*代替
                             binding.tvGetTelephoneNumber.text =
                                 hideCharactersFromIndex(number.replace(" ", ""))
-                        }else{
-                            val telephoneNumber = number.replace(" ", "").substring(0,12)
+                        } else {
+                            val telephoneNumber = number.replace(" ", "").substring(0, 11)
                             binding.tvGetTelephoneNumber.text =
                                 hideCharactersFromIndex(telephoneNumber)
 
@@ -284,9 +274,12 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
                 })
 
-           /*     binding.btnSelect.setOnClickListener {
-                    //设置点击事件监听器
-                    onItemClickListener?.invoke(item)*//* if (ContextCompat.checkSelfPermission(
+                //获取title
+                binding.tvTitle.text = item.quickRecharge.title
+
+                /*     binding.btnSelect.setOnClickListener {
+                         //设置点击事件监听器
+                         onItemClickListener?.invoke(item)*//* if (ContextCompat.checkSelfPermission(
                              context, Manifest.permission.READ_CONTACTS
                          ) != PackageManager.PERMISSION_GRANTED
                      ) {
@@ -305,8 +298,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 }*/
 
                 //消除空格，并且第四位到第七位用*代替
-               /* binding.tvLoginRechargeText.text =
-                    hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""))*/
+                /* binding.tvLoginRechargeText.text =
+                     hideCharactersFromIndex(item.quickRecharge.title.replace(" ", ""))*/
 
                 val rechargeAdapter =
                     RechargeAdapter(R.layout.adapter_recharge, item.quickRecharge.denominations)
@@ -354,14 +347,20 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
         return hiddenText.toString()
     }
 
-    fun addMoreValue(feedList: MutableList<GetFeedListData.FeedListBean>, newData: List<GetFeedListData.FeedListBean>) {
+    fun addMoreValue(
+        feedList: MutableList<GetFeedListData.FeedListBean>,
+        newData: List<GetFeedListData.FeedListBean>,
+    ) {
         // 将新数据（newData）添加到现有的 feedList 集合中
         feedList.addAll(newData)
         // 或者，如果你希望新数据添加到开头，可以使用以下方式
         // feedList.addAll(0, newData)
     }
 
-    fun refreshValue(feedList: MutableList<GetFeedListData.FeedListBean>, newData: List<GetFeedListData.FeedListBean>) {
+/*    fun refreshValue(
+        feedList: MutableList<GetFeedListData.FeedListBean>,
+        newData: List<GetFeedListData.FeedListBean>,
+    ) {
         // 创建临时变量保存删除前的数据
         val deletedData = ArrayList(feedList)
         // 清空现有的数据
@@ -370,7 +369,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
         feedList.addAll(newData)
         // 在需要恢复删除的数据时，将其添加回 feedList
         feedList.addAll(deletedData)
-    }
+    }*/
 
 
 }

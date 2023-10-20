@@ -9,7 +9,6 @@ import com.example.myapplication.recharge.property.Second
 
 class CrossExchangeAdapter(@LayoutRes layoutResId: Int, data: MutableList<Second>?) :
     BaseQuickAdapter<Second, BaseViewHolder>(layoutResId, data) {
-
     override fun convert(holder: BaseViewHolder, item: Second) {
         val binding = AdapterCrossExchengeBinding.bind(holder.itemView)
         binding.ivImage.setImageResource(item.image)

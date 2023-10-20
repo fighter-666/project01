@@ -3,9 +3,7 @@ package com.example.myapplication.recharge.adapter
 import androidx.annotation.LayoutRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
@@ -44,7 +42,7 @@ class ManyImageGridAdapter(
         // 确保在使用 Glide 加载图片时选择正确的 Dispatchers，以避免阻塞主线程
         CoroutineScope(Dispatchers.Main).launch {
             // 设置圆角半径
-            val requestOptions = RequestOptions().transform(RoundedCorners(20))
+            /*val requestOptions = RequestOptions().transform(RoundedCorners(20))*/
             Glide.with(context)
                 .load(item.imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())

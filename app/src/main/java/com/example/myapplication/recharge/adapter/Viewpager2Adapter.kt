@@ -22,7 +22,7 @@ class Viewpager2Adapter(activity: AppCompatActivity) : FragmentStateAdapter(acti
         fragments?.add(fragment)
     }
 
-    fun deleteFragment(fragment: Fragment) {
+/*    fun deleteFragment(fragment: Fragment) {
         fragments?.remove(fragment)
     }
 
@@ -31,7 +31,7 @@ class Viewpager2Adapter(activity: AppCompatActivity) : FragmentStateAdapter(acti
             fragments!!.clear()
             notifyDataSetChanged()
         }
-    }
+    }*/
 
     override fun createFragment(position: Int): Fragment {
         return fragments!![position]

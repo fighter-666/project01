@@ -9,10 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterAdvertiseBinding
-import com.example.myapplication.databinding.AdapterHelperBinding
-import com.example.myapplication.databinding.AdapterRechargeBinding
 import com.example.myapplication.recharge.data.GetFeedListData
-import com.example.myapplication.recharge.view.property.Piggy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
