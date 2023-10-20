@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@color/gray_200">
 
-
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
@@ -34,7 +33,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#f4f4f4"
+                android:background="@color/f4f4f4"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_isSticky="true">
@@ -43,9 +42,9 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="39dp"
-                    android:background="#f4f4f4"
+                    android:background="@color/f4f4f4"
                     android:gravity="center"
-                    android:textColor="#333333"
+                    android:textColor="@color/black_333333"
                     app:back_src="@drawable/back"
                     app:imageHeight3="18dp"
                     app:imageWidth3="12dp"
@@ -60,8 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbarSize="0dp"
-                android:scrollbars="none"
-                >
+                android:scrollbars="none">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -127,7 +125,7 @@
                         android:gravity="left"
                         android:paddingLeft="13dp"
                         android:text="支付金额"
-                        android:textColor="#999999"
+                        android:textColor="@color/black_999999"
                         android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvRechargeNumber" />
@@ -137,11 +135,11 @@
                         android:layout_width="52dp"
                         android:layout_height="15dp"
                         android:layout_marginTop="14dp"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         android:background="@drawable/shape_rectangle17"
                         android:gravity="center"
                         android:text="官方-0.5元"
-                        android:textColor="#fe5561"
+                        android:textColor="@color/fe5561"
                         android:textSize="9sp"
                         app:layout_constraintRight_toLeftOf="@id/tvActualAmount"
                         app:layout_constraintTop_toBottomOf="@id/tvRechargeNumber" />
@@ -150,11 +148,11 @@
                         android:id="@+id/tvActualAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="13dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="13dp"
                         android:gravity="right"
                         android:text="99.5元"
-                        android:textColor="#333333"
+                        android:textColor="@color/black_333333"
                         android:textSize="14sp"
                         app:layout_constraintBaseline_toBaselineOf="@id/tvRechargeAmount"
                         app:layout_constraintRight_toRightOf="parent"
@@ -164,12 +162,12 @@
                         android:id="@+id/tvContinueRecharge"
                         android:layout_width="0dp"
                         android:layout_height="36dp"
-                        android:layout_marginLeft="13dp"
+                        android:layout_marginStart="13dp"
                         android:layout_marginTop="27dp"
                         android:background="@drawable/shape_rectangle"
                         android:gravity="center"
                         android:text="继续充值"
-                        android:textColor="#333333"
+                        android:textColor="@color/black_333333"
                         android:textSize="16sp"
                         app:layout_constraintHorizontal_chainStyle="spread"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -180,9 +178,9 @@
                         android:id="@+id/tvBalanceInquiry"
                         android:layout_width="0dp"
                         android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="27dp"
-                        android:layout_marginRight="13dp"
+                        android:layout_marginEnd="13dp"
                         android:background="@drawable/shape_rectangle2"
                         app:ivLoadHeight="17dp"
                         app:ivLoadWidth="16dp"
@@ -224,7 +222,7 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="10dp"
                             android:text="充值奖励 "
-                            android:textColor="#666666"
+                            android:textColor="@color/gray_666666"
                             android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toRightOf="@id/imScroll"
@@ -270,7 +268,7 @@
                             android:layout_marginLeft="12dp"
                             android:layout_marginTop="15dp"
                             android:text="为您推荐以下服务"
-                            android:textColor="#333333"
+                            android:textColor="@color/black_333333"
                             android:textSize="16sp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -281,7 +279,7 @@
                             android:layout_marginTop="17dp"
                             android:layout_marginRight="6dp"
                             android:text="更多"
-                            android:textColor="#999999"
+                            android:textColor="@color/black_999999"
                             android:textSize="12sp"
                             app:layout_constraintRight_toLeftOf="@id/ivRecommendationServiceClose"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -330,7 +328,7 @@
                             android:layout_marginLeft="12dp"
                             android:layout_marginTop="15dp"
                             android:text="为您推荐以下服务"
-                            android:textColor="#333333"
+                            android:textColor="@color/black_333333"
                             android:textSize="16sp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -341,7 +339,7 @@
                             android:layout_marginTop="17dp"
                             android:layout_marginRight="6dp"
                             android:text="更多"
-                            android:textColor="#999999"
+                            android:textColor="@color/black_999999"
                             android:textSize="12sp"
                             app:layout_constraintRight_toLeftOf="@id/ivRecommendationServiceCloseCopy"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -398,7 +396,7 @@
                             android:layout_marginLeft="6dp"
                             android:layout_marginTop="16dp"
                             android:text="开启自动充值得金豆"
-                            android:textColor="#333333"
+                            android:textColor="@color/black_333333"
                             android:textSize="14sp"
                             app:layout_constraintLeft_toRightOf="@id/ivAutoRecharge"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -408,7 +406,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="首次开启得"
-                            android:textColor="#999999"
+                            android:textColor="@color/black_999999"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@id/ivAutoRecharge"
                             app:layout_constraintLeft_toLeftOf="@id/tvAutoRecharge" />
@@ -427,7 +425,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10金豆"
-                            android:textColor="#f3bb62"
+                            android:textColor="@color/f3bb62"
                             android:textSize="12sp"
                             app:layout_constraintBaseline_toBaselineOf="@id/tvFirstOpen"
                             app:layout_constraintLeft_toRightOf="@id/ivAutoRechargeBean" />
@@ -439,7 +437,7 @@
                             android:background="@drawable/shape_rectangle9"
                             android:gravity="center"
                             android:text="去开启"
-                            android:textColor="#5b82ff"
+                            android:textColor="@color/blue_5b82ff"
                             android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="@id/ivAutoRecharge"
                             app:layout_constraintLeft_toRightOf="@id/ivAutoRecharge"
@@ -475,7 +473,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="6dp"
                             android:text="看科普视频得金豆"
-                            android:textColor="#333333"
+                            android:textColor="@color/black_333333"
                             android:textSize="14sp"
                             app:layout_constraintLeft_toRightOf="@id/ivWatchVideo"
                             app:layout_constraintTop_toTopOf="@id/ivWatchVideo" />
@@ -485,7 +483,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="多看多得浏览15s得多看多得..."
-                            android:textColor="#999999"
+                            android:textColor="@color/black_999999"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@id/ivWatchVideo"
                             app:layout_constraintLeft_toLeftOf="@id/tvWatchVideo" />
@@ -505,7 +503,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5金豆"
-                            android:textColor="#f3bb62"
+                            android:textColor="@color/f3bb62"
                             android:textSize="12sp"
                             app:layout_constraintBaseline_toBaselineOf="@id/tvWatchVideoNote"
                             app:layout_constraintLeft_toRightOf="@id/ivWatchVideoBean" />
@@ -517,7 +515,7 @@
                             android:background="@drawable/shape_rectangle9"
                             android:gravity="center"
                             android:text="去看看"
-                            android:textColor="#5b82ff"
+                            android:textColor="@color/blue_5b82ff"
                             android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="@id/ivWatchVideo"
                             app:layout_constraintLeft_toRightOf="@id/ivWatchVideo"
@@ -543,7 +541,7 @@
                             android:layout_marginTop="12dp"
                             android:gravity="left"
                             android:text="推荐兑换好物："
-                            android:textColor="#333333"
+                            android:textColor="@color/black_333333"
                             android:textSize="14sp"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/viewLine2" />
@@ -553,7 +551,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
                             android:text="共有"
-                            android:textColor="#999999"
+                            android:textColor="@color/black_999999"
                             android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="@id/tvCrossExchange"
                             app:layout_constraintRight_toLeftOf="@id/ivCrossExchangeBean"
@@ -574,7 +572,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="14dp"
                             android:text="1356金豆"
-                            android:textColor="#f3bb62"
+                            android:textColor="@color/f3bb62"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@id/tvCrossExchange"
                             app:layout_constraintRight_toLeftOf="@id/tvCrossExchangeMore"
@@ -587,7 +585,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="4dp"
                             android:text="逛更多"
-                            android:textColor="#999999"
+                            android:textColor="@color/black_999999"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@id/tvCrossExchange"
                             app:layout_constraintRight_toLeftOf="@id/ivCrossExchangeMore"
@@ -677,8 +675,6 @@
                     android:layout_marginRight="10dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tabLayout" />
-
-
             </androidx.core.widget.NestedScrollView>
         </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
 

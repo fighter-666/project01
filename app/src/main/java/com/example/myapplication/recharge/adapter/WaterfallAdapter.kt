@@ -213,6 +213,14 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     val rechargeAdapter = ContentAreaListAdapter(
                         R.layout.adapter_recharge_content_area_list, item.contentAreaList
                     )
+                    if (item.contentAreaList[0].type!="7" && item.contentAreaList[0].type!="8"
+                        && item.contentAreaList[item.contentAreaList.size-1].type!="7"
+                        && item.contentAreaList[item.contentAreaList.size-1].type!="8"){
+                        val layoutParams = binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
+                        layoutParams.topMargin = DensityUtils.dpToPx(context,5f)
+                        layoutParams.bottomMargin = DensityUtils.dpToPx(context,5f)
+                        binding.clContentAreaList.layoutParams = layoutParams
+                    }
 
                     //设置布局管理器和给recyclerView 设置设配器
                     binding.rvContentAreaList.apply {

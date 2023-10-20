@@ -480,6 +480,12 @@ class WaterfallFragment : BaseLazyFragment() {
         val textView = tabView.findViewById<TextView>(com.example.myapplication.R.id.tabName)
         val imageView = tabView.findViewById<ImageView>(R.id.tabIcon)
         textView.setText(tabList.tabList[number].tagList[position].tagName)
+        if (tabList.tabList[number].tagList[position].tagType == "2"){
+            val drawable =
+                ResourcesCompat.getDrawable(resources,R.drawable.shape_fragment_tab,null)
+            tabView.background = drawable // 设置背景色
+            textView.setTextColor(Color.parseColor("#f35656"))
+            }
         Glide.with(requireActivity())
             .load(tabList.tabList[number].tagList[position].tagIcon)
             .error(R.drawable.ic_launcher_foreground)
