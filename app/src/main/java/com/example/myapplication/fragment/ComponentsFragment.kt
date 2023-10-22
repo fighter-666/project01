@@ -141,56 +141,56 @@ class ComponentsFragment : Fragment() {
                     val intent = Intent(context, CustomActivity::class.java)
                     startActivity(intent)
                 }
-/*
-                "CommonControlActivity" -> {
+
+                6 -> {
                     val intent = Intent(context, CommonControlActivity::class.java)
                     startActivity(intent)
                 }
 
-                "ViewModelTestActivity" -> {
+                7 -> {
                     val intent = Intent(context, ViewModelTestActivity::class.java)
                     startActivity(intent)
                 }
 
-                "LiveDataActivity" -> {
+                8 -> {
                     val intent = Intent(context, LiveDataActivity::class.java)
                     startActivity(intent)
                 }
 
-                "DataBindingActivity" -> {
+                9-> {
                     val intent = Intent(context, DataBindingActivity::class.java)
                     startActivity(intent)
                 }
 
-                "ScoreActivity" -> {
+                10 -> {
                     val intent = Intent(context, ScoreActivity::class.java)
                     startActivity(intent)
                 }
 
-                "SharedPreferencesActivity" -> {
+                11 -> {
                     val intent = Intent(context, SharedPreferencesActivity::class.java)
                     startActivity(intent)
                 }
 
-                "PhoneActivity" -> {
+               12 -> {
                     val intent = Intent(context, PhoneActivity::class.java)
                     startActivity(intent)
                 }
 
-                "BannerActivity" -> {
+                13 -> {
                     val intent = Intent(context, BannerActivity::class.java)
                     startActivity(intent)
                 }
 
-                "RoomActivity" -> {
+                14 -> {
                     val intent = Intent(context, RoomActivity::class.java)
                     startActivity(intent)
                 }
 
-                "Room2Activity" -> {
+                15 -> {
                     val intent = Intent(context, Room2Activity::class.java)
                     startActivity(intent)
-                }*/
+                }
                 // 其他Piggy对象的处理逻辑...
 
                 else -> {

@@ -96,9 +96,6 @@ class RechargePageActivity : AppCompatActivity() {
         // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
         binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
 
-
-
-
         // val fragmentTypes = listOf("Waterfall", "Wap", "Waterfall", /* ... 其他类型 ... */)
         // val adapter = FragmentAdapter(supportFragmentManager, lifecycle, fragmentTypes)
         //val adapter = FragmentAdapter(supportFragmentManager, lifecycle)
@@ -113,9 +110,6 @@ class RechargePageActivity : AppCompatActivity() {
                 // Here, position indicates the currently visible fragment's index.
             }
         })
-
-
-
 
     /*    binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
