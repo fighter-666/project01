@@ -44,39 +44,45 @@ class ContentAreaListAdapter(
         when (item.type) {
             //1: 标题
             "1" -> {
-                //mainTitle : 主标题
-                if (item.mainTitle.type == "1") {
-                    binding.tvMainTitleTitle.maxLines = 1
-                } else {
-                    binding.tvMainTitleTitle.maxLines = 2
+                if (item.mainTitle != null){
+                    //mainTitle : 主标题
+                    if (item.mainTitle.type == "1") {
+                        binding.tvMainTitleTitle.maxLines = 1
+                    } else {
+                        binding.tvMainTitleTitle.maxLines = 2
+                    }
+                    if (item.mainTitle.color != "") {
+                        binding.tvMainTitleTitle.setTextColor(
+                            Color.parseColor(item.mainTitle.color)
+                        )
+                    }
+                    binding.tvMainTitleTitle.ellipsize =
+                        TextUtils.TruncateAt.END
+                    binding.tvMainTitleTitle.text = item.mainTitle.title
+                    binding.tvMainTitleTitle.visibility = View.VISIBLE
                 }
-                if (item.mainTitle.color != "") {
-                    binding.tvMainTitleTitle.setTextColor(
-                        Color.parseColor(item.mainTitle.color)
-                    )
-                }
-                binding.tvMainTitleTitle.ellipsize =
-                    TextUtils.TruncateAt.END
-                binding.tvMainTitleTitle.text = item.mainTitle.title
-                binding.tvMainTitleTitle.visibility = View.VISIBLE
+
             }
 
             //2：随销条、
             "2" -> {
+                if (item.saleTipList != null){
+                    //创建适配器
+                    val myAdapter = SaleTipListAdapter(
+                        R.layout.adapter_recharge_contentarealist_saletiplist,
+                        item.saleTipList
+                    )
 
-                //创建适配器
-                val myAdapter = SaleTipListAdapter(
-                    R.layout.adapter_recharge_contentarealist_saletiplist,
-                    item.saleTipList
-                )
-
-                //设置布局管理器和给 recyclerView设置适配器
-                binding.rvSaleTipList.apply {
-                    layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = myAdapter
+                    //设置布局管理器和给 recyclerView设置适配器
+                    binding.rvSaleTipList.apply {
+                        layoutManager =
+                            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                        adapter = myAdapter
+                    }
+                    //saleTipList : 随销条
                 }
-                //saleTipList : 随销条
+
+
             }
 
             //3：价格
@@ -223,15 +229,18 @@ class ContentAreaListAdapter(
             }
             //4：位置
             "4" -> {
-                binding.tvLocationTitle.text = item.location.title
-                binding.ivLocationIcon.visibility = View.VISIBLE
-                binding.tvLocationTitle.visibility = View.VISIBLE
-                binding.clLocation.visibility = View.VISIBLE
-                binding.clLocationBackground.visibility = View.VISIBLE
+                if (item.location!= null){
+                    binding.tvLocationTitle.text = item.location.title
+                    binding.ivLocationIcon.visibility = View.VISIBLE
+                    binding.tvLocationTitle.visibility = View.VISIBLE
+                    binding.clLocation.visibility = View.VISIBLE
+                    binding.clLocationBackground.visibility = View.VISIBLE
+                }
+
             }
 
             //5：倒计时
-            "5" -> {
+            "5" ->{if (item.countDown != null){
                 // 获取倒计时数据结构
                 val countDownBean = item.countDown // 假设从接口获取到倒计时数据结构
 
@@ -314,7 +323,7 @@ class ContentAreaListAdapter(
                     countDownTimer.start()
                 }
 
-            }
+            }}
 
             //6：人数
             "6" -> {
@@ -332,45 +341,65 @@ class ContentAreaListAdapter(
 
             //7：配图：一行一个
             "7" -> {
+                if (item.picList != null) {
+                    val rechargeAdapter = ContentAreaListPicListAdapter(
+                        R.layout.adapter_recharge_contentarealist_piclist,
+                        item.picList
+                    )
 
-                val rechargeAdapter = ContentAreaListPicListAdapter(
-                    R.layout.adapter_recharge_contentarealist_piclist,
-                    item.picList
-                )
-
-                //设置布局管理器和给recyclerView 设置设配器
-                binding.rvPicList.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = rechargeAdapter
+                    //设置布局管理器和给recyclerView 设置设配器
+                    binding.rvPicList.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = rechargeAdapter
+                    }
                 }
+
+
 
             }
 
             //8：配图2：一行两个
             "8" -> {
-                val myAdapter = ContentAreaListGridAdapter(
-                    R.layout.adapter_recharge_contentarealist_piclist_double,
-                    item.picList
-                )
+                if (item.picList != null) {
+                    val myAdapter = ContentAreaListGridAdapter(
+                        R.layout.adapter_recharge_contentarealist_piclist_double,
+                        item.picList
+                    )
 
-                //设置布局管理器和给recyclerView设置适配器
-                binding.rvPicListDouble.apply {
-                    layoutManager = GridLayoutManager(context, 2)
-                    adapter = myAdapter
+                    //设置布局管理器和给recyclerView设置适配器
+                    binding.rvPicListDouble.apply {
+                        layoutManager = GridLayoutManager(context, 2)
+                        adapter = myAdapter
+                    }
                 }
+
             }
 
             //9：末尾卡片按钮列表
             "9" -> {
+                if (item.completionInfo != null) {
+                    binding.tvNullTitleFirst.visibility = View.VISIBLE
+                }
 
-                //binding.tvMainNullTitle.visibility = View.VISIBLE
-                binding.tvNullTitleFirst.text =
-                    item.completionInfo.title
-                binding.tvNullTitleFirst.visibility =
-                    View.VISIBLE
+
             }
 
             else -> {
+                //mainTitle : 主标题
+                if (item.mainTitle.type == "1") {
+                    binding.tvMainTitleTitle.maxLines = 1
+                } else {
+                    binding.tvMainTitleTitle.maxLines = 2
+                }
+                if (item.mainTitle.color != "") {
+                    binding.tvMainTitleTitle.setTextColor(
+                        Color.parseColor(item.mainTitle.color)
+                    )
+                }
+                binding.tvMainTitleTitle.ellipsize =
+                    TextUtils.TruncateAt.END
+                binding.tvMainTitleTitle.text = item.mainTitle.title
+                binding.tvMainTitleTitle.visibility = View.VISIBLE
             }
         }
     }

@@ -100,6 +100,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                  lp.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
 
                  binding.ivTopImage.layoutParams = lp*/
+                //顶部标签
                 if (item.picArea.topImage != null) {
                     binding.ivTopImage.visibility = View.VISIBLE
                     Glide.with(context)
@@ -141,6 +142,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     binding.tvStockout.visibility = View.VISIBLE
                 }
                 // imageWeight = recyclerView.measuredWidth
+                //比例
                 if (item.picArea.imageRatio == null) {
                     item.picArea.imageRatio = 1.0f.toString()
                 }
@@ -311,17 +313,106 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 }
             }
 
-            /*GetFeedListData.FEED_LIST_ITEM_TYPE.BANNER.toInt() -> {
-                *//*val binding = WidgetMultipleItemAdvertiseBinding.bind(holder.itemView)
-                val rechargeAdapter = AdvertiseAdapter(R.layout.adapter_advertise, item.adLists)
+            else  -> {
+                // 处理单图布局
+                val binding = WidgetMultipleItemCommonBinding.bind(holder.itemView)
+                /* //卡片锁宽等比缩放（imageRatio用来计算高度）
+                 val lp = binding.ivTopImage.layoutParams as ConstraintLayout.LayoutParams
+                 lp.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
 
-                //设置布局管理器和给recyclerView 设置设配器
-                binding.rvAdList.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = rechargeAdapter
-                }*//*
-            }*/
+                 binding.ivTopImage.layoutParams = lp*/
+                //顶部标签
+                if (item.picArea.topImage != null) {
+                    binding.ivTopImage.visibility = View.VISIBLE
+                    Glide.with(context)
+                        .load(item.picArea.topImage)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
+                        //.apply(requestOptions
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(binding.ivTopImage)
+                }
 
+                //commentList : 评论列表
+                if (item.picArea.commentList != null) {
+                    val stars: MutableList<String> = mutableListOf() // 创建空的可变列表
+
+                    for (tab in item.picArea.commentList) {
+                        stars.add(tab.title) // 将每个标题添加到列表中
+                        /*   val textView=
+                               LayoutInflater.from(context)
+                                   .inflate(R.layout.item_view, null) as TextView
+                           textView.text = tab.title
+
+                           binding.tvCommentList.addView(textView)*/
+                    }
+                    val viewFlipperAdapter = ViewFlipperAdapter(context, stars)
+                    binding.tvCommentList.adapter = viewFlipperAdapter
+                    binding.tvCommentList.visibility = View.VISIBLE
+                    binding.clCommentList.visibility = View.VISIBLE
+
+                    /*  val marqueeText2: ScrollTextViewCommentListBackground = binding.tvCommentList
+                      marqueeText2.setList(stars) // 将列表传递给跑马灯控件的setList方法
+                      marqueeText2.startScroll()*/
+                }
+
+                //库存显示
+                if (item.picArea.stock != null) {
+                    binding.tvStockout.text = item.picArea.stock
+                    binding.tvStockout.visibility = View.VISIBLE
+                }
+                // imageWeight = recyclerView.measuredWidth
+                //比例
+                if (item.picArea.imageRatio == null) {
+                    item.picArea.imageRatio = 1.0f.toString()
+                }
+
+
+                //卡片锁宽等比缩放（imageRatio用来计算高度）
+                val layoutParams =
+                    binding.ivPicAreaImageUrl.layoutParams as ConstraintLayout.LayoutParams
+                layoutParams.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
+                binding.ivPicAreaImageUrl.layoutParams = layoutParams
+
+                //contentAreaList : 内容区域
+                if (item.contentAreaList != null) {
+                    val rechargeAdapter = ContentAreaListAdapter(
+                        R.layout.adapter_recharge_content_area_list, item.contentAreaList
+                    )
+                    if (item.contentAreaList[0].type != "7" && item.contentAreaList[0].type != "8"
+                        && item.contentAreaList[item.contentAreaList.size - 1].type != "7"
+                        && item.contentAreaList[item.contentAreaList.size - 1].type != "8"
+                    ) {
+                        val lp =
+                            binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
+                        lp.topMargin = DensityUtils.dpToPx(context, 5f)
+                        lp.bottomMargin = DensityUtils.dpToPx(context, 5f)
+                        binding.clContentAreaList.layoutParams = lp
+                    }
+
+                    //设置布局管理器和给recyclerView 设置设配器
+                    binding.rvContentAreaList.apply {
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = rechargeAdapter
+                    }
+                    // 设置圆角半径
+                    //val requestOptions = RequestOptions().transform(RoundedCorners(20))
+                    Glide.with(context)
+                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
+                        //.apply(requestOptions
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(binding.ivPicAreaImageUrl)
+                } else {
+                    Glide.with(context)
+                        .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(binding.ivPicAreaImageUrl)
+                }
+            }
         }
     }
 

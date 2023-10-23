@@ -21,6 +21,14 @@ class ContentAreaListPicListAdapter(
 ) :
     BaseQuickAdapter<GetFeedListData.FeedListBean.PicListBean, BaseViewHolder>(layoutResId, data) {
 
+   /* override fun getItemCount(): Int {
+        val picListSize = data.size
+        return when (picListSize) {
+            0 -> 0
+            else -> picListSize
+        }
+    }*/
+
     override fun convert(holder: BaseViewHolder, item: GetFeedListData.FeedListBean.PicListBean) {
         val binding = AdapterRechargeContentarealistPiclistBinding.bind(holder.itemView)
         //卡片锁宽等比缩放（imageRatio用来计算高度）

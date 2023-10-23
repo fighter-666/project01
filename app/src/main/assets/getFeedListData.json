@@ -716,6 +716,56 @@
         },
         {
             "type": "1",
+            "externalOfferCode": "3199600001",
+            "firstSecondThreeClass": "286####",
+            "link": "",
+            "linkType": "",
+            "title": "",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-12.eoc-3199600001",
+            "sceneId": "hg_sy_feedtg##100001##default##3199600001##010001002000##3##N##1##12##N##N##31996",
+            "picArea": {
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654670340734263.png",
+                "imageRatio": null,
+                "playType": null,
+                "videoStreamUrl": null,
+                "videoStreamUrlType": null,
+                "startTime": null,
+                "endTime": null,
+                "videoCommerceId": null,
+                "topImage": null,
+                "topImageBeforeLive": null,
+                "topImageLiving": null,
+                "videoDuration": null,
+                "type": null,
+                "stock": null,
+                "link": null,
+                "linkType": null,
+                "title": null,
+                "provinceCode": "1000000037",
+                "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-12.eoc-3199600001",
+                "sceneId": "hg_sy_feedtg##100001##default##3199600001##010001002000##3##N##1##12##N##N##31996",
+                "commentList": null,
+                "picList": null
+            },
+            "contentAreaList": [
+                {
+                    "type": "8",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList":null,
+                    "completionInfo": null
+                }
+            ],
+            "adLists": null,
+            "quickRecharge": null
+        },
+        {
+            "type": "1",
             "externalOfferCode": "3461800001",
             "firstSecondThreeClass": "108##109##115",
             "link": "https://www.189.cn/images/client/commonupload/2020/7/14/163338/xinxingka/index.html?cmpid=jt-khd-xingka-sy_feed&shopid=189.WAP.hk-xingka-2122",
@@ -1609,6 +1659,109 @@
             "provinceCode": "1000000037",
             "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
             "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+            "picArea": {
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111649401921381447.png",
+                "imageRatio": "3.630",
+                "playType": null,
+                "videoStreamUrl": null,
+                "videoStreamUrlType": null,
+                "startTime": null,
+                "endTime": null,
+                "videoCommerceId": null,
+                "topImage": null,
+                "topImageBeforeLive": null,
+                "topImageLiving": null,
+                "videoDuration": null,
+                "type": "1",
+                "stock": null,
+                "link": "",
+                "linkType": "",
+                "title": "榜单",
+                "provinceCode": "1000000037",
+                "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+                "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+                "commentList": null,
+                "picList": []
+            },
+            "contentAreaList": [
+                {
+                    "type": "7",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": [
+
+                    ],
+                    "completionInfo": null
+                }
+            ],
+            "adLists": null,
+            "quickRecharge": null
+        },
+        {
+            "type": "1",
+            "externalOfferCode": "3492900001",
+            "firstSecondThreeClass": "286##287##288",
+            "link": "https://xbk.189.cn/xbkapi/auth/sess/room?liveId=557&utm_ch=hg_app&utm_sch=hg_sy_feedtg&utm_as=dd_xbkbd",
+            "linkType": "2",
+            "title": "",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+            "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+            "picArea": {
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111649401921381447.png",
+                "imageRatio": "3.630",
+                "playType": null,
+                "videoStreamUrl": null,
+                "videoStreamUrlType": null,
+                "startTime": null,
+                "endTime": null,
+                "videoCommerceId": null,
+                "topImage": null,
+                "topImageBeforeLive": null,
+                "topImageLiving": null,
+                "videoDuration": null,
+                "type": "1",
+                "stock": null,
+                "link": "",
+                "linkType": "",
+                "title": "榜单",
+                "provinceCode": "1000000037",
+                "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+                "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+                "commentList": null,
+                "picList": []
+            },
+            "contentAreaList": [
+                {
+                    "type": "7",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                }
+            ],
+            "adLists": null,
+            "quickRecharge": null
+        },
+
+        {
+            "type": "1",
+            "externalOfferCode": "3492900001",
+            "firstSecondThreeClass": "286##287##288",
+            "link": "https://xbk.189.cn/xbkapi/auth/sess/room?liveId=557&utm_ch=hg_app&utm_sch=hg_sy_feedtg&utm_as=dd_xbkbd",
+            "linkType": "2",
+            "title": "",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+            "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
             "picArea": null,
             "contentAreaList": [
                 {
@@ -1780,6 +1933,33 @@
                         "sceneId": "string",
                         "title": "流量查询"
                     }
+                }
+            ],
+            "quickRecharge": null
+        },
+        {
+            "type": "1",
+            "externalOfferCode": "3492900001",
+            "firstSecondThreeClass": "286##287##288",
+            "link": "https://xbk.189.cn/xbkapi/auth/sess/room?liveId=557&utm_ch=hg_app&utm_sch=hg_sy_feedtg&utm_as=dd_xbkbd",
+            "linkType": "2",
+            "title": "您还想看那方面",
+            "provinceCode": "1000000037",
+            "recommender": "cc-010001002000.rmc-hg_sy_feedtg.fd-2.od-20.eoc-3492900001",
+            "sceneId": "hg_sy_feedtg##100001##default##3492900001##010001002000##3##N##1##20##N##N##34929",
+            "picArea": null,
+            "contentAreaList": [
+
+                {
+                    "type": "9",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": null,
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
                 }
             ],
             "quickRecharge": null
