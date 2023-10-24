@@ -40,6 +40,7 @@ import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Math.abs
 
 
 class RechargePageActivity : AppCompatActivity() {
@@ -65,18 +66,25 @@ class RechargePageActivity : AppCompatActivity() {
         }
 
         //监听吸顶
-        binding.scrollerLayout.setOnPermanentStickyChangeListener {
-            /* if (it.contains( binding.toolbar)){
-                 binding.toolbar.setBackgroundColor(resources.getColor(R.color.white))
-                 binding.tvTitle.setBackgroundColor(resources.getColor(R.color.white))
-             }*/
+        binding.appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            //binding.refreshLayout.isEnabled = verticalOffset >= 0;//页面滑动到顶部，才可以下拉刷新
+            // 计算AppBarLayout的滚动偏移与其总高度的比例
+            val offsetRatio = abs(verticalOffset).toFloat() / appBarLayout.totalScrollRange
 
-            if (it.contains(binding.tabLayout)) {
+            //binding.refreshLayout.setEnabled(false); //否则关闭
+            // 设置TabLayout的背景颜色，你可以根据需要进行定制
+            if (offsetRatio == 1f) {
+                // 当吸顶时
                 binding.tabLayout.setBackgroundColor(resources.getColor(R.color.white))
+                /*if ( DesignViewUtils.isSlideToBottom(b.rvComponentsWaterfall)) {
+                    binding.refreshLayout.setEnabled(true); //当滑动到顶部的时候开启
+                } else {
+
+                }*/
             } else {
+                // 当未吸顶时，或者根据需要设置渐变效果
                 binding.tabLayout.setBackgroundColor(resources.getColor(R.color.gray_200))
             }
-
         }
 
 
@@ -111,23 +119,22 @@ class RechargePageActivity : AppCompatActivity() {
             }
         })
 
-    /*    binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                val view = (binding.viewPager2.getChildAt(0) as RecyclerView).layoutManager?.findViewByPosition(position)
+        /*    binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    val view = (binding.viewPager2.getChildAt(0) as RecyclerView).layoutManager?.findViewByPosition(position)
 
-                view?.post {
-                    val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY)
-                    val hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-                    view.measure(wMeasureSpec, hMeasureSpec)
+                    view?.post {
+                        val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY)
+                        val hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                        view.measure(wMeasureSpec, hMeasureSpec)
 
-                    if (binding.viewPager2.layoutParams.height != view.measuredHeight) {
-                        binding.viewPager2.layoutParams = (binding.viewPager2.layoutParams).also { lp -> lp.height = view.measuredHeight }
+                        if (binding.viewPager2.layoutParams.height != view.measuredHeight) {
+                            binding.viewPager2.layoutParams = (binding.viewPager2.layoutParams).also { lp -> lp.height = view.measuredHeight }
+                        }
                     }
                 }
-            }
-        })*/
-
+            })*/
 
 
         /* for (tab in tabList.tabList) {
@@ -143,10 +150,10 @@ class RechargePageActivity : AppCompatActivity() {
                 // ...为其他indexes添加对应的Fragment
             }
         }
-      /*  binding.viewPager2.viewTreeObserver.addOnGlobalLayoutListener {
+        /*  binding.viewPager2.viewTreeObserver.addOnGlobalLayoutListener {
 
-            updatePagerHeightForChild(tabList.tabList[binding.viewPager2.currentItem].view, binding.viewPager2)
-        }*/
+              updatePagerHeightForChild(tabList.tabList[binding.viewPager2.currentItem].view, binding.viewPager2)
+          }*/
 
 
         /*   binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
