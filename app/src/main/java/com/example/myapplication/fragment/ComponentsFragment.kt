@@ -25,6 +25,7 @@ import com.example.myapplication.activity.components.bilibili.activity.ViewModel
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.RechargePageActivity
+import com.example.myapplication.activity.components.ServiceActivity
 import com.example.myapplication.activity.components.bilibili.activity.Room2Activity
 import com.example.myapplication.activity.components.bilibili.activity.RoomActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
@@ -87,7 +88,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "RoomActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "Room2Activity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "OkhttpActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "ServiceActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
@@ -194,6 +195,10 @@ class ComponentsFragment : Fragment() {
                 }
                 16 -> {
                     val intent = Intent(context, OkhttpActivity::class.java)
+                    startActivity(intent)
+                }
+                17 -> {
+                    val intent = Intent(context, ServiceActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

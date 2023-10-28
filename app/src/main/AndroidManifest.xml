@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
+            android:name=".activity.components.ServiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.components.OkhttpActivity"
             android:exported="false" />
         <activity
@@ -87,6 +90,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <service android:name=".service.MyService" />"
     </application>
+
+
 
 </manifest>
