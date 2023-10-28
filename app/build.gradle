@@ -76,7 +76,7 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'   //CardView提供圆角
 
-
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
 
 
     //room
