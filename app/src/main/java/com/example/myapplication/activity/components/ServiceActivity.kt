@@ -18,6 +18,8 @@ class ServiceActivity : AppCompatActivity() {
 
     }
 
+
+
     //启动服务
     fun startService(view: View) {
         startService(Intent(this, MyService::class.java))
