@@ -16,7 +16,6 @@
         app:layout_isSticky="true"
         app:tabIndicatorHeight="0dp"
         app:tabMinWidth="50dp"
-        android:visibility="gone"
         app:tabMode="scrollable"
          />
 

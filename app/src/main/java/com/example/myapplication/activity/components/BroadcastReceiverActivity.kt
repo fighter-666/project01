@@ -15,8 +15,8 @@ class BroadcastReceiverActivity : AppCompatActivity() {
 
         //第二步，在onCreate()方法中注册广播接收器
         //动态注册一个广播接收者
-        val updateIpSelectCity = object : UpdateIpSelectCity(){}
-        val filter = object : IntentFilter() {}
+        val updateIpSelectCity = UpdateIpSelectCity()
+        val filter = IntentFilter()
         filter
             .addAction("com.example.myapplication.broadcast.UpdateIpSelectCity")
         registerReceiver(updateIpSelectCity, filter)
