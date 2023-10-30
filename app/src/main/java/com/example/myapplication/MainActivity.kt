@@ -1,11 +1,14 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.activity.components.AdvertisingActivity
 import com.example.myapplication.adapter.DynamicFragmentAdapter
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -51,5 +54,13 @@ class MainActivity : AppCompatActivity() {
             tab.customView = tabView
         }
         mediator.attach()
+    }
+
+    companion object {
+        fun actionStart(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+
+        }
     }
 }

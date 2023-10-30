@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.activity.components.AdvertisingActivity
 import com.example.myapplication.activity.components.BannerActivity
 import com.example.myapplication.activity.components.BroadcastReceiverActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
@@ -91,7 +92,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "OkhttpActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "ServiceActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "BroadcastReceiverActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "AdvertisingActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
@@ -204,6 +205,10 @@ class ComponentsFragment : Fragment() {
                 }
                 18 -> {
                     val intent = Intent(context, BroadcastReceiverActivity::class.java)
+                    startActivity(intent)
+                }
+                19 -> {
+                    val intent = Intent(context, AdvertisingActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...
