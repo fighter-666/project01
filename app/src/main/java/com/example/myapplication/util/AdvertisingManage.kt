@@ -1,9 +1,14 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.myapplication.util
 
 import android.os.CountDownTimer
 import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 
-class AdvertisingManage {
+object AdvertisingManage:LifecycleObserver {
 
 
     var TAG = "AdvertisingManage"
@@ -25,6 +30,7 @@ class AdvertisingManage {
     /*
     * 开始计时
     * */
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun start() {
         Log.d(TAG, "开始计时")
         countDownTimer?.start()
@@ -33,6 +39,7 @@ class AdvertisingManage {
     /*
     * 停止计时
     * */
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onCancle() {
         Log.d(TAG, "停止计时")
         countDownTimer?.cancel()

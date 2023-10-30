@@ -14,16 +14,19 @@ class AdvertisingActivity : AppCompatActivity() {
     //广告时间
     lateinit var tvAdvertisingTime: TextView
 
-    private var advertisingManage: AdvertisingManage? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_advertising)
+        val advertisingManage =
+            AdvertisingManage
+        //在activity中注册addObserver方法注册AdvertisingManage
+        lifecycle.addObserver(advertisingManage)
+
         btnIngore = findViewById(R.id.btnIgnore)
         tvAdvertisingTime = findViewById(R.id.tvAdvertisingTime)
-        advertisingManage =
-            AdvertisingManage()
-        advertisingManage?.advertisingManageListener =
+
+        advertisingManage.advertisingManageListener =
             object : AdvertisingManage.AdvertisingManageListener {
                 override fun timing(second: Int) {
                     tvAdvertisingTime.text = "广告剩余时间：$second"
@@ -39,14 +42,9 @@ class AdvertisingActivity : AppCompatActivity() {
             MainActivity.actionStart(this)
             finish()
         }
-        //开始广告
-        advertisingManage?.start()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        advertisingManage?.onCancle()
-    }
+
 }
 
 
