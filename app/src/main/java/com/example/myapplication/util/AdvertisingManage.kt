@@ -8,17 +8,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
-object AdvertisingManage:LifecycleObserver {
-
-
+class AdvertisingManage(millisInFuture:Long = 5000) : LifecycleObserver {
     var TAG = "AdvertisingManage"
     //监听事件
-    var advertisingManageListener:  AdvertisingManageListener? = null
+    var advertisingManageListener: AdvertisingManageListener? = null
     //定时器
-    private var countDownTimer: CountDownTimer? = object: CountDownTimer(5000, 1000) {
+    private var countDownTimer: CountDownTimer? = object : CountDownTimer(millisInFuture, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            Log.d(TAG, "广告剩余${(millisUntilFinished/1000).toInt()}秒")
-            advertisingManageListener?.timing((millisUntilFinished/1000).toInt())
+            Log.d(TAG, "广告剩余${(millisUntilFinished / 1000).toInt()}秒")
+            advertisingManageListener?.timing((millisUntilFinished / 1000).toInt())
         }
 
         override fun onFinish() {

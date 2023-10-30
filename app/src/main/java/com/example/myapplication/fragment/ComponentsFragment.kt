@@ -116,12 +116,12 @@ class ComponentsFragment : Fragment() {
         myAdapter.setOnItemClickListener { _, view, position ->
             Toast.makeText(context, "onItemClick $position", Toast.LENGTH_SHORT).show()
             when (position) {
-                0-> {
+                0 -> {
                     val intent = Intent(context, RechargePageActivity::class.java)
                     startActivity(intent)
                 }
 
-                1-> {
+                1 -> {
                     val intent = Intent(context, VariousTextviewActivity::class.java)
                     startActivity(intent)
                 }
@@ -161,7 +161,7 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                9-> {
+                9 -> {
                     val intent = Intent(context, DataBindingActivity::class.java)
                     startActivity(intent)
                 }
@@ -176,7 +176,7 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
 
-               12 -> {
+                12 -> {
                     val intent = Intent(context, PhoneActivity::class.java)
                     startActivity(intent)
                 }
@@ -195,18 +195,22 @@ class ComponentsFragment : Fragment() {
                     val intent = Intent(context, Room2Activity::class.java)
                     startActivity(intent)
                 }
+
                 16 -> {
                     val intent = Intent(context, OkhttpActivity::class.java)
                     startActivity(intent)
                 }
+
                 17 -> {
                     val intent = Intent(context, ServiceActivity::class.java)
                     startActivity(intent)
                 }
+
                 18 -> {
                     val intent = Intent(context, BroadcastReceiverActivity::class.java)
                     startActivity(intent)
                 }
+
                 19 -> {
                     val intent = Intent(context, AdvertisingActivity::class.java)
                     startActivity(intent)
@@ -220,115 +224,115 @@ class ComponentsFragment : Fragment() {
                 }
             }
         }
-       /* myAdapter.setOnItemClickListener { piggy ->
-            // 处理列表项点击事件
-            Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
-            when (piggy.name) {
-                "RechargePageActivity" -> {
-                    val intent = Intent(context, RechargePageActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+        /* myAdapter.setOnItemClickListener { piggy ->
+             // 处理列表项点击事件
+             Toast.makeText(context, piggy.name, Toast.LENGTH_SHORT).show()
+             when (piggy.name) {
+                 "RechargePageActivity" -> {
+                     val intent = Intent(context, RechargePageActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "VariousTextviewActivity" -> {
-                    val intent = Intent(context, VariousTextviewActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "VariousTextviewActivity" -> {
+                     val intent = Intent(context, VariousTextviewActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "QWUIDrawableHelper" -> {
-                    val intent = Intent(context, ThirdActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "QWUIDrawableHelper" -> {
+                     val intent = Intent(context, ThirdActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "FeedStreamHomePageActivity" -> {
-                    val intent = Intent(context, FeedStreamHomePageActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "FeedStreamHomePageActivity" -> {
+                     val intent = Intent(context, FeedStreamHomePageActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "WebViewActivity" -> {
-                    val intent = Intent(context, WebViewActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "WebViewActivity" -> {
+                     val intent = Intent(context, WebViewActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "CustomActivity" -> {
-                    val intent = Intent(context, CustomActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "CustomActivity" -> {
+                     val intent = Intent(context, CustomActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "CommonControlActivity" -> {
-                    val intent = Intent(context, CommonControlActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "CommonControlActivity" -> {
+                     val intent = Intent(context, CommonControlActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "ViewModelTestActivity" -> {
-                    val intent = Intent(context, ViewModelTestActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "ViewModelTestActivity" -> {
+                     val intent = Intent(context, ViewModelTestActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "LiveDataActivity" -> {
-                    val intent = Intent(context, LiveDataActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "LiveDataActivity" -> {
+                     val intent = Intent(context, LiveDataActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "DataBindingActivity" -> {
-                    val intent = Intent(context, DataBindingActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "DataBindingActivity" -> {
+                     val intent = Intent(context, DataBindingActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "ScoreActivity" -> {
-                    val intent = Intent(context, ScoreActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "ScoreActivity" -> {
+                     val intent = Intent(context, ScoreActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "SharedPreferencesActivity" -> {
-                    val intent = Intent(context, SharedPreferencesActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "SharedPreferencesActivity" -> {
+                     val intent = Intent(context, SharedPreferencesActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "PhoneActivity" -> {
-                    val intent = Intent(context, PhoneActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "PhoneActivity" -> {
+                     val intent = Intent(context, PhoneActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "BannerActivity" -> {
-                    val intent = Intent(context, BannerActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "BannerActivity" -> {
+                     val intent = Intent(context, BannerActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "RoomActivity" -> {
-                    val intent = Intent(context, RoomActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
+                 "RoomActivity" -> {
+                     val intent = Intent(context, RoomActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
 
-                "Room2Activity" -> {
-                    val intent = Intent(context, Room2Activity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
-                // 其他Piggy对象的处理逻辑...
+                 "Room2Activity" -> {
+                     val intent = Intent(context, Room2Activity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
+                 // 其他Piggy对象的处理逻辑...
 
-                else -> {
-                    // 默认的页面跳转逻辑
-                    val intent = Intent(context, RechargePageActivity::class.java)
-                    intent.putExtra("piggyName", piggy.name)
-                    startActivity(intent)
-                }
-            }
-        }*/
+                 else -> {
+                     // 默认的页面跳转逻辑
+                     val intent = Intent(context, RechargePageActivity::class.java)
+                     intent.putExtra("piggyName", piggy.name)
+                     startActivity(intent)
+                 }
+             }
+         }*/
 
     }
 

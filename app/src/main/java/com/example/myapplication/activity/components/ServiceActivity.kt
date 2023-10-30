@@ -10,11 +10,16 @@ import android.os.IBinder
 import android.view.View
 import com.example.myapplication.R
 import com.example.myapplication.service.MyService
+import com.gyf.immersionbar.ImmersionBar
 
 class ServiceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_service)
+        //沉浸式处理
+        ImmersionBar.with(this)
+            .transparentStatusBar()  //透明状态栏，不写默认透明色
+            .init()
 
     }
 

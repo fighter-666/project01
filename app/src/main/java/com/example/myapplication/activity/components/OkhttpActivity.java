@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.IOException;
 
@@ -28,6 +29,10 @@ public class OkhttpActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_okhttp);
+        //沉浸式处理
+        ImmersionBar.with(this)
+                .transparentStatusBar()  //透明状态栏，不写默认透明色
+                .init();
         okHttpClient = new OkHttpClient();
         //getSync();
     }

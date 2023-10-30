@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         fun actionStart(context: Context) {
             val intent = Intent(context, MainActivity::class.java)
             context.startActivity(intent)
-
         }
     }
 }
