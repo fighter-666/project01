@@ -16,12 +16,13 @@ class AdvertisingManage(advertiseViewModel: AdvertiseViewModel) : LifecycleObser
     private var countDownTimer: CountDownTimer? = object : CountDownTimer(advertiseViewModel.millisInFuture, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             Log.d(TAG, "广告剩余${(millisUntilFinished / 1000).toInt()}秒")
-            advertisingManageListener?.timing((millisUntilFinished / 1000).toInt())
+            advertiseViewModel.setTimingResult((millisUntilFinished / 1000))
+            //advertisingManageListener?.timing((millisUntilFinished / 1000).toInt())
         }
 
         override fun onFinish() {
             Log.d(TAG, "广告结束，准备进入主页面 ")
-            advertisingManageListener?.enterMainActivity()
+            //advertisingManageListener?.enterMainActivity()
         }
     }
 
@@ -58,8 +59,6 @@ class AdvertisingManage(advertiseViewModel: AdvertiseViewModel) : LifecycleObser
         * 计时结束，进入主页面
         * */
         fun enterMainActivity()
-
-
     }
 }
 

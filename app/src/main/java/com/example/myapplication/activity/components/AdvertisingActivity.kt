@@ -2,9 +2,11 @@ package com.example.myapplication.activity.components
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.myapplication.R
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.MainActivity
 import com.example.myapplication.util.AdvertiseViewModel
@@ -38,8 +40,16 @@ class AdvertisingActivity : AppCompatActivity() {
 
         btnIngore = findViewById(R.id.btnIgnore)
         tvAdvertisingTime = findViewById(R.id.tvAdvertisingTime)
+        advertiseViewModel._timingResult.observe(this, Observer{
+            tvAdvertisingTime.text = "广告剩余时间：$it"
+            if (it == 0L){
+                Log.d("TAG", "广告结束，准备进入主页面 ")
+                MainActivity.actionStart(this)
+                finish()
+            }
+        })
 
-        //回调
+      /*  //回调
         advertisingManage.advertisingManageListener =
             object : AdvertisingManage.AdvertisingManageListener {
                 override fun timing(second: Int) {
@@ -51,7 +61,7 @@ class AdvertisingActivity : AppCompatActivity() {
                     MainActivity.actionStart(this@AdvertisingActivity)
                     finish()
                 }
-            }
+            }*/
         //跳过广告
         btnIngore.setOnClickListener {
             MainActivity.actionStart(this)

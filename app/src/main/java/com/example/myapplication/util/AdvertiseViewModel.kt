@@ -21,10 +21,10 @@ class AdvertiseViewModel : ViewModel() {
     * */
     private var timingResult = MutableLiveData<Long>()
 
-    /*val _timingResult: LiveData<Long>
-        get() = timingResult*/
+    val _timingResult: LiveData<Long>
+        get() = timingResult
 
-    fun setTimingResult(result: Long) {
+    fun setTimingResult(millisInFuture: Long) {
         timingResult.value = millisInFuture
     }
 
