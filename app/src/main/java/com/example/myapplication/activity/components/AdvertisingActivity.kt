@@ -18,6 +18,8 @@ class AdvertisingActivity : AppCompatActivity() {
     lateinit var tvAdvertisingTime: TextView
 
     private lateinit var advertiseViewModel: AdvertiseViewModel
+    /*
+    * suo*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +32,7 @@ class AdvertisingActivity : AppCompatActivity() {
 
         advertiseViewModel = ViewModelProvider(this).get(AdvertiseViewModel::class.java)
         val advertisingManage =
-            AdvertisingManage(advertiseViewModel.millisInFuture)
+            AdvertisingManage(advertiseViewModel)
         //在activity中注册addObserver方法注册AdvertisingManage
         lifecycle.addObserver(advertisingManage)
 

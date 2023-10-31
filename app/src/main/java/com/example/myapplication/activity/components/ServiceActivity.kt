@@ -8,22 +8,27 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import android.view.View
-import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivityServiceBinding
 import com.example.myapplication.service.MyService
-import com.gyf.immersionbar.ImmersionBar
 
 class ServiceActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityServiceBinding
+    lateinit var downloadBinder: MyService.DownloadBinder
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service)
-        //沉浸式处理
+        binding = ActivityServiceBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+     /*   //沉浸式处理
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
-            .init()
+            .init()*/
+
 
     }
-
-
 
     //启动服务
     fun startService(view: View) {
@@ -42,8 +47,21 @@ class ServiceActivity : AppCompatActivity() {
     fun unBindService(view: View) {
         unbindService(connect)
     }
-
     private val connect = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            downloadBinder = service as MyService.DownloadBinder
+            downloadBinder.startDownload()
+            downloadBinder.getProgress()
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            TODO("Not yet implemented")
+        }
+
+    }
+
+
+/*    private val connect = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             TODO("Not yet implemented")
         }
@@ -51,5 +69,5 @@ class ServiceActivity : AppCompatActivity() {
         override fun onServiceDisconnected(name: ComponentName?) {
             TODO("Not yet implemented")
         }
-    }
+    }*/
 }

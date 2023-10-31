@@ -78,7 +78,7 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.9.0")  //okhttp网络
 
-    implementation"androidx.lifecycle:lifecycle-livedata-ktx:2.2.0" //lifecucle
+    implementation"androidx.lifecycle:lifecycle-livedata-ktx:2.5.1" //lifecucle
 
 
     //room

@@ -10,6 +10,8 @@ import com.example.myapplication.broadcast.UpdateIpSelectCity
 import com.gyf.immersionbar.ImmersionBar
 
 class BroadcastReceiverActivity : AppCompatActivity() {
+    private lateinit var updateIpSelectCity: UpdateIpSelectCity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_broadcast_receiver)
@@ -20,12 +22,16 @@ class BroadcastReceiverActivity : AppCompatActivity() {
 
         //第二步，在onCreate()方法中注册广播接收器
         //动态注册一个广播接收者
-        val updateIpSelectCity = UpdateIpSelectCity()
+        updateIpSelectCity = UpdateIpSelectCity()
         val filter = IntentFilter()
         filter
             .addAction("com.example.myapplication.broadcast.UpdateIpSelectCity")
         registerReceiver(updateIpSelectCity, filter)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(updateIpSelectCity)
     }
 
     //第三步
@@ -36,7 +42,6 @@ class BroadcastReceiverActivity : AppCompatActivity() {
         intent.action =
             "com.example.myapplication.broadcast.UpdateIpSelectCity"
         sendBroadcast(intent)
-
     }
 }
 
