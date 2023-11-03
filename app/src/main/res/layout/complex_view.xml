@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标题"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
+        android:textColor="@color/white_33ffffff"
+        android:textSize="9sp"
+        android:gravity="left"
+        android:background="@drawable/complex_view_title"
+         />
+
+    <TextView
+        android:id="@+id/secondTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="副标题"
+        android:gravity="left"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/white_99ffffff"
+        android:textSize="11sp"
+         />
+
+    <TextView
+        android:id="@+id/thirdTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2016-12-20 18:18"
+        android:gravity="left"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/white_33ffffff"
+        android:textSize="11sp"/>
+
+    <TextView
+        android:id="@+id/fourthTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:text="2016-12-20 18:18"
+        android:textColor="@color/e6c590"
+        android:paddingStart="6dp"
+        android:layout_marginStart="9dp"
+        android:paddingEnd="6dp"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:background="@drawable/complex_view_fourth_title"
+         />
+
+</LinearLayout>

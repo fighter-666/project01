@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="CustomMarqueViewLibrary">
+        <attr name="leftTitle" format="reference" />
+        <attr name="centerTitle" format="reference" />
+        <attr name="site" format="reference" />
+        <attr name="rightTitle" format="reference" />
+    </declare-styleable>
+
     <declare-styleable name="ScratchCardViewGroup">
         <attr name="scratchSrc" format="reference" />
         <attr name="scratchSrc2" format="reference" />

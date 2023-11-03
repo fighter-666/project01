@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Style for "1073" -->
+    <!-- Add this snippet to layer-list xml in drawable. -->
+    <item android:width="42dp" android:height="18dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="9dp" />
+            <solid android:color="#1affffff" />
+        </shape>
+    </item>
+</selector>

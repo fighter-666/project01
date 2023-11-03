@@ -80,6 +80,7 @@ dependencies {
 
     implementation"androidx.lifecycle:lifecycle-livedata-ktx:2.5.1" //lifecucle
 
+    implementation 'com.gongwen:marqueelibrary:1.1.3' //轮播图
 
     //room
     implementation 'androidx.room:room-runtime:2.4.2'

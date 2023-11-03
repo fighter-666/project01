@@ -24,4 +24,8 @@
     <color name="gray_666666">#666666</color>
     <color name="f3bb62">#f3bb62</color>
     <color name="blue_5b82ff">#5b82ff</color>
+    <color name="black_1c1b1a">#1c1b1a</color>
+    <color name="white_33ffffff">#33ffffff</color>
+    <color name="white_99ffffff">#99ffffff</color>
+    <color name="e6c590">#e6c590</color>
 </resources>

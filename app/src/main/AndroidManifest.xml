@@ -18,11 +18,14 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
+        <activity
+            android:name=".activity.components.StudentActivity"
+            android:exported="false" />
+
         <receiver
             android:name=".broadcast.BootCompleteReceiver"
             android:enabled="true"
-            android:exported="true"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

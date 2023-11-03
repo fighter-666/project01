@@ -17,14 +17,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 class CustomBalanceInquiryViewGroup : ConstraintLayout {
 
     /**
      * 这个构造方法是在代码中new的时候调用的
      * @param context
      */
-    constructor(context: Context?) : super(context!!)
+    @RequiresApi(Build.VERSION_CODES.O)
+    constructor(context: Context) : this(context, null)
 
     /**
      * 这个构造方法是在xml文件中初始化调用的
@@ -32,8 +32,8 @@ class CustomBalanceInquiryViewGroup : ConstraintLayout {
      * @param attrs            View的xml属性
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        initView(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs,0) {
+
     }
 
     /**
@@ -42,11 +42,15 @@ class CustomBalanceInquiryViewGroup : ConstraintLayout {
      * @param attrs
      * @param defStyleAttr        应用到View的主题风格（定义在主题中）
      */
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context!!,
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
         attrs,
         defStyleAttr
-    )
+    ){
+        if (attrs != null) {
+            initView(context, attrs)
+        }
+    }
 
 
     private fun initView(context: Context, attrs: AttributeSet) {

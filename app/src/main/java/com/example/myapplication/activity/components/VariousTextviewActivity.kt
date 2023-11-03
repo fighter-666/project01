@@ -16,12 +16,19 @@ import android.text.style.SubscriptSpan
 import android.text.style.SuperscriptSpan
 import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.myapplication.R
+import com.example.myapplication.data.ComplexItemEntity
 import com.example.myapplication.databinding.ActivityVariousTextviewBinding
+import com.example.myapplication.widget.ComplexViewMF
 import com.example.myapplication.widget.MyClickableSpan
+import com.gongwen.marqueen.MarqueeFactory
+import com.gongwen.marqueen.SimpleMF
+import com.gongwen.marqueen.SimpleMarqueeView
 import com.gyf.immersionbar.ImmersionBar
+import java.util.Arrays
 
 
 class VariousTextviewActivity : AppCompatActivity() {
@@ -162,6 +169,75 @@ class VariousTextviewActivity : AppCompatActivity() {
         binding.tvText10.setHighlightColor(Color.parseColor("#36969696"))
         binding.tvText10.setText(spannableString10)
 
+        val datas = Arrays.asList(
+            "《赋得古原草送别》",
+            "离离原上草，一岁一枯荣。",
+            "野火烧不尽，春风吹又生。",
+            "远芳侵古道，晴翠接荒城。",
+            "又送王孙去，萋萋满别情。"
+        )
+//SimpleMarqueeView<T>，SimpleMF<T>：泛型T指定其填充的数据类型，比如String，Spanned等
+//SimpleMarqueeView<T>，SimpleMF<T>：泛型T指定其填充的数据类型，比如String，Spanned等
+        val marqueeView: SimpleMarqueeView<String> =
+            findViewById(R.id.simpleMarqueeView)
+        val marqueeFactory0: SimpleMF<String?> = SimpleMF<String?>(this)
+        marqueeFactory0.setData(datas)
+        marqueeView.setMarqueeFactory(marqueeFactory0)
+        marqueeView.startFlipping()
+
+        //initMarqueeView()
+
+        val complexDatas: MutableList<ComplexItemEntity> = ArrayList()
+        for (i in 0..4) {
+            complexDatas.add(ComplexItemEntity("标题 $i", "副标题 $i", "时间 $i", "内容 $i"))
+        }
+
+
+        val marqueeFactory = ComplexViewMF(this)
+        marqueeFactory.data = complexDatas
+        binding.marqueeView4.setMarqueeFactory(marqueeFactory)
+        binding.marqueeView4.startFlipping()
+
+      /*  val complexDatas: MutableList<ComplexItemEntity> = ArrayList()
+        for (i in 0..4) {
+            complexDatas.add(ComplexItemEntity("标题 $i", "副标题 $i", "时间 $i", "内容 $i"))
+        }
+
+        val complexViewHelper = ComplexViewHelper(binding.marqueeView4)
+        complexViewHelper.setComplexData(complexDatas)*/
+
+
+
+ /*       marqueeView4.setOnItemClickListener(object :
+            OnItemClickListener<RelativeLayout?, ComplexItemEntity?>() {
+            fun onItemClickListener(
+                mView: RelativeLayout?,
+                mData: ComplexItemEntity?,
+                mPosition: Int,
+            ) {
+                Toast.makeText(
+                    this@MainActivity,
+                    String.format("mPosition:%s,mData:%s,mView:%s,.", mPosition, mData, mView),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })*/
+
+
+    }
+
+    private fun initMarqueeView() {
+        val complexDatas: MutableList<ComplexItemEntity> = ArrayList()
+        for (i in 0..4) {
+            complexDatas.add(ComplexItemEntity("标题 $i", "副标题 $i", "时间 $i", "内容 $i"))
+        }
+        val marqueeFactory: MarqueeFactory<LinearLayout, ComplexItemEntity> =
+            ComplexViewMF(this)
+
+        marqueeFactory.setData(complexDatas)
+        binding.marqueeView4.setInAndOutAnim(R.anim.in_bottom,R.anim.out_top)
+        binding.marqueeView4.setMarqueeFactory(marqueeFactory)
+        binding.marqueeView4.startFlipping()
     }
 
 }

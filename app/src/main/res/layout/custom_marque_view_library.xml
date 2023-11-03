@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl">
+
+
+    <com.gongwen.marqueen.SimpleMarqueeView
+        android:id="@+id/leftTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:flipInterval="2500"
+        android:inAnimation="@anim/in_right"
+        android:outAnimation="@anim/out_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:marqueeAnimDuration="2000"
+        app:smvTextColor="@color/white"
+        app:smvTextEllipsize="end"
+        app:smvTextGravity="center_vertical"
+        app:smvTextSingleLine="true"
+        app:smvTextSize="15sp" />
+
+    <com.gongwen.marqueen.SimpleMarqueeView
+        android:id="@+id/centerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:flipInterval="2500"
+        android:inAnimation="@anim/in_right"
+        android:outAnimation="@anim/out_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:marqueeAnimDuration="2000"
+        app:smvTextColor="@color/white"
+        app:smvTextEllipsize="end"
+        app:smvTextGravity="center_vertical"
+        app:smvTextSingleLine="true"
+        app:smvTextSize="15sp" />
+
+    <com.gongwen.marqueen.SimpleMarqueeView
+        android:id="@+id/site"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:flipInterval="2500"
+        android:inAnimation="@anim/in_right"
+        android:outAnimation="@anim/out_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:marqueeAnimDuration="2000"
+        app:smvTextColor="@color/white"
+        app:smvTextEllipsize="end"
+        app:smvTextGravity="center_vertical"
+        app:smvTextSingleLine="true"
+        app:smvTextSize="15sp" />
+
+    <com.gongwen.marqueen.SimpleMarqueeView
+        android:id="@+id/rightTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:flipInterval="2500"
+        android:inAnimation="@anim/in_right"
+        android:outAnimation="@anim/out_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:marqueeAnimDuration="2000"
+        app:smvTextColor="@color/white"
+        app:smvTextEllipsize="end"
+        app:smvTextGravity="center_vertical"
+        app:smvTextSingleLine="true"
+        app:smvTextSize="15sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

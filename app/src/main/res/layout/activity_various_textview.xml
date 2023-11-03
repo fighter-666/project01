@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black_1c1b1a"
+    >
 
     <TextView
         android:id="@+id/tvText"
@@ -135,5 +137,30 @@
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvText9" />
+        app:layout_constraintTop_toBottomOf="@id/tvText9"
+        app:layout_constraintBottom_toTopOf="@id/simpleMarqueeView"/>
+
+    <com.gongwen.marqueen.SimpleMarqueeView
+        android:id="@+id/simpleMarqueeView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:flipInterval="2500"
+        android:inAnimation="@anim/in_bottom"
+        android:outAnimation="@anim/out_top"
+        app:marqueeAnimDuration="2000"
+        app:smvTextColor="@color/black_999999"
+        app:smvTextEllipsize="end"
+        app:smvTextGravity="center_vertical"
+        app:smvTextSingleLine="true"
+        app:smvTextSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvText10"/>
+
+    <com.gongwen.marqueen.MarqueeView
+        android:id="@+id/marqueeView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/simpleMarqueeView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

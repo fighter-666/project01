@@ -29,10 +29,10 @@ import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.activity.components.ServiceActivity
+import com.example.myapplication.activity.components.StudentActivity
 import com.example.myapplication.activity.components.bilibili.activity.Room2Activity
 import com.example.myapplication.activity.components.bilibili.activity.RoomActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
-import com.example.myapplication.feed.activity.FeedStreamHomePageActivity
 import com.example.myapplication.recharge.view.property.Piggy
 import com.gyf.immersionbar.ImmersionBar
 
@@ -95,7 +95,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "BroadcastReceiverActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "AdvertisingActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "AsyncServiceActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "18"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "StudentActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "18"),
             Pair(R.mipmap.icon_grid_tip_dialog, "19"),
             Pair(R.mipmap.icon_grid_tip_dialog, "19"),
@@ -133,7 +133,7 @@ class ComponentsFragment : Fragment() {
                 }
 
                 3 -> {
-                    val intent = Intent(context, FeedStreamHomePageActivity::class.java)
+                    val intent = Intent(context, ThirdActivity::class.java)
                     startActivity(intent)
                 }
 
@@ -218,6 +218,10 @@ class ComponentsFragment : Fragment() {
                 }
                 20 -> {
                     val intent = Intent(context, AsyncServiceActivity::class.java)
+                    startActivity(intent)
+                }
+                21 -> {
+                    val intent = Intent(context, StudentActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...
