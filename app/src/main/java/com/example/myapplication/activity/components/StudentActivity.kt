@@ -26,9 +26,9 @@ class StudentActivity : AppCompatActivity() {
         editText = findViewById(R.id.edittext)
         studentViewModel = ViewModelProvider(this).get(StudentViewModel::class.java)
 
-     /*   studentViewModel.newScore.observe(this, Observer{
+        studentViewModel.newScore.observe(this, Observer{
             tvMessage.text = "分数：$it"
-        })*/
+        })
 
         button.setOnClickListener {
             studentViewModel.setStudentId(editText.text.toString().trim())

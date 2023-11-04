@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.components.UserActivity">
+
+    <data>
+        <variable
+            name="user"
+            type="com.example.myapplication.data.User"/>
+        <variable
+            name="clickHandlers"
+            type="com.example.myapplication.util.ClickHandlers" />
+        <import type="android.view.View"/>
+    </data>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/etId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        layout="@layout/user_data"
+        bind:user="@{user}"/>
+
+    <!--<TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{user.userName}"/>
+
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{user.userId}"
+        android:visibility='@{user.userId.equals("001")?View.GONE:View.VISIBLE}'
+        />-->
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确定" />
+
+    <Button
+        android:id="@+id/btnConfirmOnClick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{clickHandlers::confirm}"
+        android:text="确定" />
+
+<!--
+    <Button
+        android:id="@+id/btnConfirm2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> clickHandlers.confirm2(view,user)}"
+        android:text="确定2" />-->
+
+
+</LinearLayout>
+</layout>

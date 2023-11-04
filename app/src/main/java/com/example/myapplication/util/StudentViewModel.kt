@@ -18,11 +18,16 @@ class StudentViewModel : ViewModel() {
         studentIdLiveData.value = studentId
     }
 
- /*   var newScore: LiveData<Int> = Transformations.switchMap(studentIdLiveData, object : Function<String, LiveData<Int>> {
+   /* val newScore: LiveData<Int> = Transformations.switchMap(studentIdLiveData, object : Function<String, LiveData<Int>> {
         override fun apply(input: String): LiveData<Int> {
             return StudentRespository().getStudentScore(input)
         }
     })*/
+
+    var newScore: LiveData<Int> = Transformations.switchMap(studentIdLiveData) {
+        StudentRespository().getStudentScore(it)
+
+    }
 
     /*val _student: LiveData<Student>
         get() = studentLiveData*/
