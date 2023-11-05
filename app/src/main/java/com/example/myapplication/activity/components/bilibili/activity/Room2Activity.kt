@@ -33,7 +33,7 @@ class Room2Activity : AppCompatActivity() {
         binding.btGetAll.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 userDao.getAll().forEach {
-                    Log.e(TAG, it.toString())
+                   binding.tvShow.append("账号：${it.account} 昵称：${it.nickname}\n")
                 }
             }
         }

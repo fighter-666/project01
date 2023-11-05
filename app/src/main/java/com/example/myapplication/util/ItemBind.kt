@@ -5,9 +5,8 @@ import com.squareup.picasso.Picasso
 import kotlin.experimental.ExperimentalTypeInference
 
 class ItemBind {
-  /*  @JvmStatic
-    @BuilderInference(value = ["android:imgUrl"])
+    //@BuilderInference(value = ["android:imgUrl"])
     fun setUserPhoto(iView: ImageView,imageUrl:String){
         Picasso.get().load(imageUrl).into(iView)
-    }*/
+    }
 }

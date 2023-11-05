@@ -1,5 +1,6 @@
 package com.example.myapplication.activity.components
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -22,15 +23,22 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.myapplication.R
 import com.example.myapplication.data.ComplexItemEntity
 import com.example.myapplication.databinding.ActivityVariousTextviewBinding
+import com.example.myapplication.widget.ComplexViewHelper
 import com.example.myapplication.widget.ComplexViewMF
 import com.example.myapplication.widget.MyClickableSpan
 import com.gongwen.marqueen.MarqueeFactory
+import com.gongwen.marqueen.MarqueeView
 import com.gongwen.marqueen.SimpleMF
 import com.gongwen.marqueen.SimpleMarqueeView
 import com.gyf.immersionbar.ImmersionBar
 import java.util.Arrays
 
-
+fun setMarqueeViewData(context: Context, binding: ActivityVariousTextviewBinding, complexDatas: List<ComplexItemEntity>) {
+    val marqueeFactory = ComplexViewMF(context)
+    marqueeFactory.data = complexDatas
+    binding.marqueeView4.setMarqueeFactory(marqueeFactory)
+    binding.marqueeView4.startFlipping()
+}
 class VariousTextviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityVariousTextviewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -193,18 +201,23 @@ class VariousTextviewActivity : AppCompatActivity() {
         }
 
 
-        val marqueeFactory = ComplexViewMF(this)
+     /*   val marqueeFactory = ComplexViewMF(this)
         marqueeFactory.data = complexDatas
         binding.marqueeView4.setMarqueeFactory(marqueeFactory)
-        binding.marqueeView4.startFlipping()
+        binding.marqueeView4.startFlipping()*/
+
+        //setMarqueeViewData(this ,binding, complexDatas)
 
       /*  val complexDatas: MutableList<ComplexItemEntity> = ArrayList()
         for (i in 0..4) {
             complexDatas.add(ComplexItemEntity("标题 $i", "副标题 $i", "时间 $i", "内容 $i"))
-        }
+        }*/
 
-        val complexViewHelper = ComplexViewHelper(binding.marqueeView4)
+/*        val complexViewHelper = ComplexViewHelper(binding.marqueeView4 as MarqueeView<LinearLayout, ComplexItemEntity>)
         complexViewHelper.setComplexData(complexDatas)*/
+
+       ComplexViewHelper(binding.marqueeView4 as MarqueeView<LinearLayout, ComplexItemEntity>)
+       .setComplexData(complexDatas)
 
 
 
