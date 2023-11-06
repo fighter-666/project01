@@ -17,16 +17,17 @@ import android.text.style.SubscriptSpan
 import android.text.style.SuperscriptSpan
 import android.text.style.URLSpan
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.data.ComplexItemEntity
 import com.example.myapplication.data.MobilePhone
 import com.example.myapplication.data.UserManager
 import com.example.myapplication.databinding.ActivityVariousTextviewBinding
-import com.example.myapplication.util.MainViewModel
 import com.example.myapplication.widget.ComplexViewHelper
 import com.example.myapplication.widget.ComplexViewMF
 import com.example.myapplication.widget.MyClickableSpan
@@ -36,6 +37,9 @@ import com.gongwen.marqueen.SimpleMF
 import com.gongwen.marqueen.SimpleMarqueeView
 import com.gyf.immersionbar.ImmersionBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -59,10 +63,18 @@ class VariousTextviewActivity : AppCompatActivity() {
     lateinit var mobilePhone: MobilePhone
     @Inject
     lateinit var okHttpClient: OkHttpClient
-    @Inject
-    lateinit var mainViewModel: MainViewModel
+/*    @Inject
+    lateinit var mainViewModel: MainViewModel*/
 
     private lateinit var binding: ActivityVariousTextviewBinding
+
+    private fun loadData() = flow{
+        Log.d("VariousTextviewActivity", "进入loadData方法")
+        for (i in 1..5){
+            delay(1000)
+            emit(i)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVariousTextviewBinding.inflate(layoutInflater)
@@ -72,11 +84,17 @@ class VariousTextviewActivity : AppCompatActivity() {
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init()
 
+       /* lifecycleScope.launch{
+            loadData().collect(
+                Log.d("VariousTextviewActivity",it.toString())
+            )
+        }*/
+
         userManager.getUserToken()
         //val mobilePhone = MobilePhone()
         mobilePhone.dialNumber()
 
-        val mainViewModel  = ViewModelProvider(this).get(MainViewModel::class.java)
+        //val mainViewModel  = ViewModelProvider(this).get(MainViewModel::class.java)
 
        /* okHttpClient.newCall(request).enqueue(object : Callback{
             override fun onFailure(call: Call, e: IOException) {
