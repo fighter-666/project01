@@ -116,10 +116,5 @@ public class OkhttpActivity extends AppCompatActivity{
 
             }
         });
-
     }
-
-
-
-
 }

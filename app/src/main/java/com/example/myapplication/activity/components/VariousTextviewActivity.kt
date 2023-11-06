@@ -20,9 +20,13 @@ import android.text.style.UnderlineSpan
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.data.ComplexItemEntity
+import com.example.myapplication.data.MobilePhone
+import com.example.myapplication.data.UserManager
 import com.example.myapplication.databinding.ActivityVariousTextviewBinding
+import com.example.myapplication.util.MainViewModel
 import com.example.myapplication.widget.ComplexViewHelper
 import com.example.myapplication.widget.ComplexViewMF
 import com.example.myapplication.widget.MyClickableSpan
@@ -31,7 +35,14 @@ import com.gongwen.marqueen.MarqueeView
 import com.gongwen.marqueen.SimpleMF
 import com.gongwen.marqueen.SimpleMarqueeView
 import com.gyf.immersionbar.ImmersionBar
+import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import java.io.IOException
 import java.util.Arrays
+import javax.inject.Inject
 
 fun setMarqueeViewData(context: Context, binding: ActivityVariousTextviewBinding, complexDatas: List<ComplexItemEntity>) {
     val marqueeFactory = ComplexViewMF(context)
@@ -39,7 +50,18 @@ fun setMarqueeViewData(context: Context, binding: ActivityVariousTextviewBinding
     binding.marqueeView4.setMarqueeFactory(marqueeFactory)
     binding.marqueeView4.startFlipping()
 }
+
+@AndroidEntryPoint
 class VariousTextviewActivity : AppCompatActivity() {
+    @Inject
+    lateinit var userManager: UserManager
+    @Inject
+    lateinit var mobilePhone: MobilePhone
+    @Inject
+    lateinit var okHttpClient: OkHttpClient
+    @Inject
+    lateinit var mainViewModel: MainViewModel
+
     private lateinit var binding: ActivityVariousTextviewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +71,23 @@ class VariousTextviewActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init()
+
+        userManager.getUserToken()
+        //val mobilePhone = MobilePhone()
+        mobilePhone.dialNumber()
+
+        val mainViewModel  = ViewModelProvider(this).get(MainViewModel::class.java)
+
+       /* okHttpClient.newCall(request).enqueue(object : Callback{
+            override fun onFailure(call: Call, e: IOException) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                TODO("Not yet implemented")
+            }
+
+        })*/
 
         //设置文字的前景色为淡蓝色
         val spannableString = SpannableString("设置文字的前景色为淡蓝色")
@@ -235,6 +274,11 @@ class VariousTextviewActivity : AppCompatActivity() {
                 ).show()
             }
         })*/
+
+
+
+
+
 
 
     }

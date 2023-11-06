@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true"
+        android:name=".BaseApplication"
         tools:targetApi="33">
         <activity
             android:name=".activity.BaseApplicationActivity"
@@ -79,9 +80,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.components.PhoneActivity"
-            android:exported="false" />
-        <activity
-            android:name=".feed.activity.FeedStreamHomePageActivity"
             android:exported="false" />
         <activity
             android:name=".activity.components.bilibili.activity.SharedPreferencesActivity"

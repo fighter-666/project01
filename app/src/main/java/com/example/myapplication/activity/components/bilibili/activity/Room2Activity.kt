@@ -33,8 +33,19 @@ class Room2Activity : AppCompatActivity() {
         binding.btGetAll.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 userDao.getAll().forEach {
-                   binding.tvShow.append("账号：${it.account} 昵称：${it.nickname}\n")
+                    Log.e(TAG, it.toString())
+
                 }
+
+             /*   val userList = userDao.getAll()
+                userList?.let {
+                    binding.tvShow.text = ""
+                    userList.forEach {
+                        binding.tvShow.append("账号：${it.account} 昵称：${it.nickname}\n")
+                    }
+                }*/
+
+
             }
         }
 
@@ -43,6 +54,13 @@ class Room2Activity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 userDao.getInfoByAct(inputSearch).forEach {
                     Log.e(TAG, it.toString())
+
+                }
+                userDao.getInfoByAct(inputSearch)?.let {
+                    for (i in it.indices){
+                  /*      binding.tvShow.append("账号：${it[i].account} ")
+                        binding.tvShowNickName.append("昵称：${it[i].nickname} ")*/
+                    }
                 }
             }
         }
