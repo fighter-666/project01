@@ -128,6 +128,14 @@ class WaterfallFragment : BaseLazyFragment() {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = myAdapter
         }
+
+        binding.refreshLayout.setOnLoadMoreListener {
+            binding.refreshLayout.finishLoadMore(true)
+            //设置回调
+            LoadMoreManager.triggerLoadMore()
+        }
+
+        //binding.rvComponentsWaterfall.isNestedScrollingEnabled = false
         //注册子组件的点击事件
         myAdapter.addChildClickViewIds(R.id.btnSelect)
 
@@ -192,10 +200,10 @@ class WaterfallFragment : BaseLazyFragment() {
         number = requireArguments().getInt(ARG_TAB_NAME)
 
         //设置自定义tab
-        setCustomIcon(number)
+        //setCustomIcon(number)
 
         // 设置标签切换监听
-        binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+        /*binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 updateTabFont(tab, true) // 设置选中标签字体加粗
                 when (tab.position) {
@@ -258,7 +266,7 @@ class WaterfallFragment : BaseLazyFragment() {
                     adapter = myAdapter
                 }
             }
-        })
+        })*/
     }
 
     // 辅助方法：更新标签字体样式
@@ -378,7 +386,7 @@ class WaterfallFragment : BaseLazyFragment() {
     /**
      * 设置自定义位置图标
      */
-    private fun setCustomIcon(number: Int) {
+/*    private fun setCustomIcon(number: Int) {
         //使用binding.tabLayout.newTab()创建一个新的Tab，
         // 并通过binding.tabLayout.addTab()方法将其添加到binding.tabLayout中。
         // 第二个参数false表示不选中该Tab。
@@ -390,7 +398,7 @@ class WaterfallFragment : BaseLazyFragment() {
         for (i in 0 until tabList.tabList[number].tagList.size) {
             binding.tabLayout.getTabAt(i)?.customView = makeTabView(i, number)
         }
-    }
+    }*/
 
     /**
      * 引入布局设置图标和标题

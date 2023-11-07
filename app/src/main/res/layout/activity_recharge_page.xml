@@ -1,62 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/gray_200">
+
+    <com.example.myapplication.widget.CustomTitleBarViewGroup
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f4f4f4"
+        android:gravity="center"
+        android:paddingStart="13dp"
+        android:textColor="#333333"
+        app:back_src="@drawable/back"
+        app:imageHeight3="18dp"
+        app:imageWidth3="12dp"
+        app:layout_collapseMode="pin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:right_title="评价" />
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srlEnableLoadMore="false"
+        android:layout_below="@+id/tvTitle"
         android:background="@color/gray_200"
-        app:srlEnableLoadMoreWhenContentNotFull="false"
-        app:srlFooterTranslationViewId="@+id/viewPager2">
+        app:srlFooterTranslationViewId="@+id/rvComponentsWaterfall">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#f4f4f4"
-                app:layout_collapseMode="none"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_scrollFlags="snap">
-
-                <com.example.myapplication.widget.CustomTitleBarViewGroup
-                    android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="39dp"
-                    android:background="#f4f4f4"
-                    android:gravity="center"
-                    android:textColor="#333333"
-                    app:back_src="@drawable/back"
-                    app:imageHeight3="18dp"
-                    app:imageWidth3="12dp"
-                    app:layout_collapseMode="pin"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:right_title="评价" />
-            </androidx.appcompat.widget.Toolbar>
-
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/coordinator"
-                android:layout_width="match_parent"
-
-                android:layout_height="match_parent">
+            android:layout_height="match_parent">
 
                 <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/appbar"
@@ -66,16 +50,12 @@
                     android:background="@color/gray_200"
                     app:layout_behavior=".recharge.widget.CustomBehavior">
 
-                    <com.google.android.material.appbar.CollapsingToolbarLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elevation="0dp"
-                        app:expandedTitleGravity="center"
-                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_scrollFlags="scroll"
                             tools:ignore="ExtraText">
 
                             <!-- 在这里添加你的约束布局内容 -->
@@ -647,7 +627,6 @@
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-                    </com.google.android.material.appbar.CollapsingToolbarLayout>
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabLayout"
@@ -671,29 +650,26 @@
 
                 </com.google.android.material.appbar.AppBarLayout>
 
-                <androidx.core.widget.NestedScrollView
+               <!-- <androidx.core.widget.NestedScrollView
                     android:id="@+id/nestedScrollView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_anchorGravity="bottom"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/viewPager2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:nestedScrollingEnabled="false"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-                </androidx.core.widget.NestedScrollView>
+           <!--     </androidx.core.widget.NestedScrollView>-->
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        </LinearLayout>
 
         <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

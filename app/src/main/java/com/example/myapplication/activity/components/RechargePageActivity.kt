@@ -36,7 +36,9 @@ import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
 import com.scwang.smart.refresh.footer.BallPulseFooter
 import com.scwang.smart.refresh.header.BezierRadarHeader
+import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.SpinnerStyle
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -58,12 +60,22 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
 
-        //加载更多
+      /*  //加载更多
         binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(true)
             //设置回调
             LoadMoreManager.triggerLoadMore()
-        }
+        }*/
+
+      /*  binding.refreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener{
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                //设置回调
+                LoadMoreManager.triggerLoadMore()
+            }
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+
+            }
+        })*/
 
         //监听吸顶
         binding.appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -111,13 +123,13 @@ class RechargePageActivity : AppCompatActivity() {
 
         binding.viewPager2.adapter = adapter
 
-        binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+   /*     binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 Toast.makeText(applicationContext, "position:$position", Toast.LENGTH_SHORT).show()
                 // Here, position indicates the currently visible fragment's index.
             }
-        })
+        })*/
 
         /*    binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

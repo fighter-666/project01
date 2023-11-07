@@ -37,9 +37,15 @@ import com.gongwen.marqueen.SimpleMF
 import com.gongwen.marqueen.SimpleMarqueeView
 import com.gyf.immersionbar.ImmersionBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -75,6 +81,51 @@ class VariousTextviewActivity : AppCompatActivity() {
             emit(i)
         }
     }
+    private suspend fun load(){
+        delay(2000)
+        Log.d("VariousTextviewActivity", "进入load方法")
+    }
+
+    private fun loadDataFromNetWork(){
+        Thread{
+            //网络请求、结果回调
+            runOnUiThread {
+                //切换为 UI 线程
+            }
+        }
+    }
+    val job = Job()
+    private fun loadDataFromNetWork2(){
+        CoroutineScope(job).launch(Dispatchers.Main) {
+            val result = getResult()
+            showUI(result)
+            val result2 = getResult2()
+            showUI2(result2)
+        }
+    }
+
+    private suspend fun getResult2() =
+        withContext(Dispatchers.IO){
+            delay(2000)
+            "你好"
+        }
+
+
+    private fun showUI2(result2: String) {
+        TODO("Not yet implemented")
+    }
+
+    private suspend fun getResult(): String =
+        withContext(Dispatchers.IO){
+            delay(2000)
+            "你好"
+        }
+
+
+    private fun showUI(result: String) {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVariousTextviewBinding.inflate(layoutInflater)
@@ -83,6 +134,59 @@ class VariousTextviewActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
             .init()
+
+        loadDataFromNetWork2()
+
+        var job = GlobalScope.launch(Dispatchers.IO) {
+            Log.d("VariousTextviewActivity", "进入GlobalScope")
+        }
+        //job.cancel()
+
+        val job2 = Job()
+        CoroutineScope(job2).launch {
+            val result = async {
+               try {
+                   //模拟耗时操作
+                   delay(300)
+                   "result"+3 / 0
+               }catch (e:Exception){
+                   "结果异常"
+               }
+            }.await()
+            Log.d("VariousTextviewActivity", "result = $result")
+        }
+        //job2.cancel()
+
+        CoroutineScope(job2).launch {
+            val startTime = System.currentTimeMillis()
+            val result = async {
+                delay(2000)
+                "操作成功"
+            }
+
+            val result2 = async {
+                delay(1000)
+                "获取成功"
+            }
+            Log.d("VariousTextviewActivity", "result = ${result.await()}-${result2.await()}")
+            val endTime = System.currentTimeMillis()
+            Log.d("VariousTextviewActivity", "耗时 = ${endTime - startTime}")
+        }
+
+        CoroutineScope(job2).launch {
+            load()
+        }
+
+        CoroutineScope(job2).launch {
+            val result = withContext(Dispatchers.IO){
+                delay(2000)
+                "操作成功"
+            }
+            Log.d("VariousTextviewActivity", result)
+        }
+
+
+
 
        /* lifecycleScope.launch{
             loadData().collect(
@@ -276,8 +380,6 @@ class VariousTextviewActivity : AppCompatActivity() {
        ComplexViewHelper(binding.marqueeView4 as MarqueeView<LinearLayout, ComplexItemEntity>)
        .setComplexData(complexDatas)
 
-
-
  /*       marqueeView4.setOnItemClickListener(object :
             OnItemClickListener<RelativeLayout?, ComplexItemEntity?>() {
             fun onItemClickListener(
@@ -292,13 +394,6 @@ class VariousTextviewActivity : AppCompatActivity() {
                 ).show()
             }
         })*/
-
-
-
-
-
-
-
     }
 
     private fun initMarqueeView() {
