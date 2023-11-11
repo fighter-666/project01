@@ -1,7 +1,9 @@
 package com.example.myapplication.recharge.adapter
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
@@ -40,4 +42,12 @@ class Viewpager2Adapter(activity: AppCompatActivity) : FragmentStateAdapter(acti
     override fun getItemCount(): Int {
         return fragments!!.size
     }
+
+  /*  override fun getCount(): Int {
+        return fragments!!.size
+    }
+
+    override fun getItem(position: Int): Fragment {
+        return fragments!![position]
+    }*/
 }

@@ -2,10 +2,11 @@ package com.example.myapplication.recharge.adapter
 
 import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.BaseViewHolder
 import com.example.myapplication.databinding.AdapterRecommendationServiceBinding
 import com.example.myapplication.recharge.property.Piggy
 import com.example.myapplication.util.DensityUtils
+import com.example.myapplication.util.GetScreenUtils
 
 
 class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableList<Piggy>?) :
@@ -24,8 +25,7 @@ class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableLi
             val initialWidth = lp.width
 
             //三等分的item的宽度
-            lp?.width = (recyclerView.measuredWidth - DensityUtils.dpToPx(context, 30f)) / data.size
-            lp?.height = lp.width
+            lp?.width = (GetScreenUtils.getScreenWidth(mContext) - DensityUtils.dpToPx(mContext, 66f)) / data.size
 
             //缩放比例
             val widthScale = lp.width.toFloat() / initialWidth.toFloat()
@@ -47,9 +47,9 @@ class RecommendationServiceAdapteer(@LayoutRes layoutResId: Int, data: MutableLi
             val initialWidth = lp1.width
 
             //3.5等分的item的宽度
-            lp1?.width = ((recyclerView.measuredWidth - DensityUtils.dpToPx(
-                context,
-                30f
+            lp1?.width = ((GetScreenUtils.getScreenWidth(mContext) - DensityUtils.dpToPx(
+                mContext,
+                66f
             )).toFloat() / 3.5).toInt()
             lp1?.height = lp1.width
             holder.itemView.layoutParams = lp1

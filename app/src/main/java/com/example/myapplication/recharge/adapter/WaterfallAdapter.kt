@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityBannerBinding
 import com.example.myapplication.databinding.WidgetMultipleItemCommonBinding
@@ -103,7 +103,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //顶部标签
                 if (item.picArea.topImage != null) {
                     binding.ivTopImage.visibility = View.VISIBLE
-                    Glide.with(context)
+                    Glide.with(mContext)
                         .load(item.picArea.topImage)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                         .transition(DrawableTransitionOptions.withCrossFade())
@@ -126,7 +126,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
                            binding.tvCommentList.addView(textView)*/
                     }
-                    val viewFlipperAdapter = ViewFlipperAdapter(context, stars)
+                    val viewFlipperAdapter = ViewFlipperAdapter(mContext, stars)
                     binding.tvCommentList.adapter = viewFlipperAdapter
                     binding.tvCommentList.visibility = View.VISIBLE
                     binding.clCommentList.visibility = View.VISIBLE
@@ -165,8 +165,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     ) {
                         val lp =
                             binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
-                        lp.topMargin = DensityUtils.dpToPx(context, 5f)
-                        lp.bottomMargin = DensityUtils.dpToPx(context, 5f)
+                        lp.topMargin = DensityUtils.dpToPx(mContext, 5f)
+                        lp.bottomMargin = DensityUtils.dpToPx(mContext, 5f)
                         binding.clContentAreaList.layoutParams = lp
                     }
 
@@ -177,7 +177,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     }
                     // 设置圆角半径
                     //val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                    Glide.with(context)
+                    Glide.with(mContext)
                         .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                         .transition(DrawableTransitionOptions.withCrossFade())
@@ -186,7 +186,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                         .error(R.drawable.ic_launcher_foreground)
                         .into(binding.ivPicAreaImageUrl)
                 } else {
-                    Glide.with(context)
+                    Glide.with(mContext)
                         .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         .error(R.drawable.ic_launcher_foreground)
                         .into(binding.ivPicAreaImageUrl)
@@ -208,8 +208,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     ) {
                         val layoutParams =
                             binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
-                        layoutParams.topMargin = DensityUtils.dpToPx(context, 5f)
-                        layoutParams.bottomMargin = DensityUtils.dpToPx(context, 5f)
+                        layoutParams.topMargin = DensityUtils.dpToPx(mContext, 5f)
+                        layoutParams.bottomMargin = DensityUtils.dpToPx(mContext, 5f)
                         binding.clContentAreaList.layoutParams = layoutParams
                     }
 
@@ -230,6 +230,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             }
 
             GetFeedListData.FEED_LIST_ITEM_TYPE.ADVERTISE.toInt() -> {
+
                 // 处理广告布局
                 val binding = ActivityBannerBinding.bind(holder.itemView)
                 binding.banner.setAdapter(object :
@@ -250,12 +251,13 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 binding.banner.setBannerRound2(20f)
                 //设置轮播时间间隔
                 binding.banner.setLoopTime(5000)
-                binding.banner.indicator = CircleIndicator(context) // 设置指示器为圆圈样式
+                binding.banner.indicator = CircleIndicator(mContext) // 设置指示器为圆圈样式
                 binding.banner.setIndicatorWidth(15, 15)
 
             }
 
             GetFeedListData.FEED_LIST_ITEM_TYPE.RECHARGE.toInt() -> {
+                holder.addOnClickListener(R.id.btnSelect)
                 // 处理充值布局
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
                 GetTelephoneNumberManager.setGetTelephoneNumberListener(object :
@@ -324,7 +326,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 //顶部标签
                 if (item.picArea.topImage != null) {
                     binding.ivTopImage.visibility = View.VISIBLE
-                    Glide.with(context)
+                    Glide.with(mContext)
                         .load(item.picArea.topImage)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                         .transition(DrawableTransitionOptions.withCrossFade())
@@ -347,7 +349,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
                            binding.tvCommentList.addView(textView)*/
                     }
-                    val viewFlipperAdapter = ViewFlipperAdapter(context, stars)
+                    val viewFlipperAdapter = ViewFlipperAdapter(mContext, stars)
                     binding.tvCommentList.adapter = viewFlipperAdapter
                     binding.tvCommentList.visibility = View.VISIBLE
                     binding.clCommentList.visibility = View.VISIBLE
@@ -386,8 +388,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     ) {
                         val lp =
                             binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
-                        lp.topMargin = DensityUtils.dpToPx(context, 5f)
-                        lp.bottomMargin = DensityUtils.dpToPx(context, 5f)
+                        lp.topMargin = DensityUtils.dpToPx(mContext, 5f)
+                        lp.bottomMargin = DensityUtils.dpToPx(mContext, 5f)
                         binding.clContentAreaList.layoutParams = lp
                     }
 
@@ -398,7 +400,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     }
                     // 设置圆角半径
                     //val requestOptions = RequestOptions().transform(RoundedCorners(20))
-                    Glide.with(context)
+                    Glide.with(mContext)
                         .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
                         .transition(DrawableTransitionOptions.withCrossFade())
@@ -407,7 +409,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                         .error(R.drawable.ic_launcher_foreground)
                         .into(binding.ivPicAreaImageUrl)
                 } else {
-                    Glide.with(context)
+                    Glide.with(mContext)
                         .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         .error(R.drawable.ic_launcher_foreground)
                         .into(binding.ivPicAreaImageUrl)

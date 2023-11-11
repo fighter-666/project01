@@ -35,6 +35,7 @@ import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 
 class WaterfallFragment : BaseLazyFragment() {
@@ -129,19 +130,19 @@ class WaterfallFragment : BaseLazyFragment() {
             adapter = myAdapter
         }
 
-        binding.refreshLayout.setOnLoadMoreListener {
+      /*  binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(true)
             //设置回调
             LoadMoreManager.triggerLoadMore()
-        }
+        }*/
 
         //binding.rvComponentsWaterfall.isNestedScrollingEnabled = false
         //注册子组件的点击事件
-        myAdapter.addChildClickViewIds(R.id.btnSelect)
 
         //监听条目子组件的点击事件
         myAdapter.setOnItemChildClickListener { _, view, position ->
             if (view.id == R.id.btnSelect) {
+                Log.d("点击了选中按钮","aaa")
                 //获取通讯录
                 requestReadContactsPermission()
 

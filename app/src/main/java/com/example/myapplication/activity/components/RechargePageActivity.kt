@@ -60,12 +60,12 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
 
-      /*  //加载更多
+        //加载更多
         binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(true)
             //设置回调
             LoadMoreManager.triggerLoadMore()
-        }*/
+        }
 
       /*  binding.refreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener{
             override fun onLoadMore(refreshLayout: RefreshLayout) {
@@ -101,9 +101,9 @@ class RechargePageActivity : AppCompatActivity() {
 
 
 // 设置 Header 为贝塞尔雷达样式
-        binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))
+        //binding.refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true))
 // 设置 Footer 为球脉冲样式
-        binding.refreshLayout.setRefreshFooter(BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Translate))
+        //binding.refreshLayout.setRefreshFooter(BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Translate))
 
         val json: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
             application.assets.open("getFeedTabData.json").bufferedReader().use { it.readText() }

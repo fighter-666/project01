@@ -2,7 +2,7 @@ package com.example.myapplication.recharge.adapter
 
 import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.BaseViewHolder
 import com.example.myapplication.databinding.AdapterCrossExchengeBinding
 import com.example.myapplication.recharge.property.Second
 

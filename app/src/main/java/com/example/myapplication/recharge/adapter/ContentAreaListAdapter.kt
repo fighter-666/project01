@@ -12,7 +12,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterRechargeContentAreaListBinding
 import com.example.myapplication.recharge.data.GetFeedListData
@@ -99,19 +99,19 @@ class ContentAreaListAdapter(
                             binding.tvPriceInteger.setTextColor(Color.parseColor(color))
                         } catch (e: Exception) {
                             e.printStackTrace()
-                            binding.tvPriceInteger.setTextColor(context.resources.getColor(R.color.ea5858))
+                            binding.tvPriceInteger.setTextColor(mContext.resources.getColor(R.color.ea5858))
                         }
                         try {
                             binding.tvPriceDecimal.setTextColor(Color.parseColor(color))
                         } catch (e: Exception) {
                             e.printStackTrace()
-                            binding.tvPriceDecimal.setTextColor(context.resources.getColor(R.color.ea5858))
+                            binding.tvPriceDecimal.setTextColor(mContext.resources.getColor(R.color.ea5858))
                         }
                         try {
                             binding.tvIsShowPriceUnit.setTextColor(Color.parseColor(color))
                         } catch (e: Exception) {
                             e.printStackTrace()
-                            binding.tvIsShowPriceUnit.setTextColor(context.resources.getColor(R.color.ea5858))
+                            binding.tvIsShowPriceUnit.setTextColor(mContext.resources.getColor(R.color.ea5858))
                         }
 
                     }
@@ -126,7 +126,7 @@ class ContentAreaListAdapter(
                             binding.tvOriginalPrice.setTextColor(Color.parseColor(color2))
                         } catch (e: Exception) {
                             e.printStackTrace()
-                            binding.tvOriginalPrice.setTextColor(context.resources.getColor(R.color.black_999999))
+                            binding.tvOriginalPrice.setTextColor(mContext.resources.getColor(R.color.black_999999))
                         }
                     }
 
@@ -175,10 +175,10 @@ class ContentAreaListAdapter(
                                                     if (item.price.priceInteger != "" && item.price.originalPrice != "") {
                                                         val totalWidth =
                                                             tvIsShowPriceUnitWidth + tvOriginalPriceWidth + tvPriceDecimalWidth + tvPriceIntegerWidth + DensityUtils.dpToPx(
-                                                                context,
+                                                                mContext,
                                                                 20f
                                                             )
-                                                        if (totalWidth > recyclerView.measuredWidth) {
+                                                        if (totalWidth > holder.itemView.measuredWidth) {
                                                             binding.tvOriginalPrice.visibility =
                                                                 View.GONE
 
@@ -186,8 +186,8 @@ class ContentAreaListAdapter(
                                                     } else {
                                                         binding.tvOriginalPrice.maxLines = 1
                                                         binding.tvOriginalPrice.maxWidth =
-                                                            recyclerView.measuredWidth - DensityUtils.dpToPx(
-                                                                context,
+                                                            holder.itemView.measuredWidth - DensityUtils.dpToPx(
+                                                                mContext,
                                                                 20f
                                                             )
                                                         binding.tvOriginalPrice.isSingleLine = true
@@ -199,14 +199,14 @@ class ContentAreaListAdapter(
                                                     //当仅有原价或售价且超过一行宽度时右侧…展示
                                                     val totalWidth2 =
                                                         tvIsShowPriceUnitWidth + tvPriceDecimalWidth + tvPriceIntegerWidth + DensityUtils.dpToPx(
-                                                            context,
+                                                            mContext,
                                                             20f
                                                         )
-                                                    if (totalWidth2 >= recyclerView.measuredWidth) {
+                                                    if (totalWidth2 >= holder.itemView.measuredWidth) {
                                                         binding.tvPriceInteger.maxLines = 1
                                                         binding.tvPriceInteger.maxWidth =
-                                                            recyclerView.measuredWidth - tvIsShowPriceUnitWidth - DensityUtils.dpToPx(
-                                                                context,
+                                                            holder.itemView.measuredWidth - tvIsShowPriceUnitWidth - DensityUtils.dpToPx(
+                                                                mContext,
                                                                 20f
                                                             )
                                                         binding.tvPriceInteger.isSingleLine = true

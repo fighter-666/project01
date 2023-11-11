@@ -2,7 +2,7 @@ package com.example.myapplication.adapter
 
 import androidx.annotation.LayoutRes
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.BaseViewHolder
 import com.example.myapplication.databinding.AdapterWaterfallBinding
 import com.example.myapplication.recharge.view.property.Card
 import com.example.myapplication.util.DensityUtils
@@ -25,7 +25,7 @@ class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :
             onItemClickListener?.invoke(item)
         }
 
-        setCardView(holder, binding, item)
+        //setCardView(holder, binding, item)
     }
 
     fun setOnItemClickListener(listener: (Card) -> Unit) {
@@ -39,7 +39,7 @@ class WaterfallAdapter(@LayoutRes layoutResId: Int, data: MutableList<Card>) :
         val layoutParams = binding.ivWaterfallAdapter.layoutParams
 
         //获取边距
-        val space = DensityUtils.dpToPx(context, 20f)
+        val space = DensityUtils.dpToPx(mContext, 20f)
 
         //2列的瀑布流，屏幕宽度减去两列间的间距space所的值再除以2，
         // 计算出单列的imageview的宽度，space的值在RecyclerView初始化时传入

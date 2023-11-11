@@ -2,7 +2,6 @@ package com.example.myapplication.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
-import com.example.myapplication.activity.BaseApplicationActivity
+import com.example.myapplication.activity.BaseApplication
 import com.example.myapplication.activity.components.AdvertisingActivity
 import com.example.myapplication.activity.components.AsyncServiceActivity
 import com.example.myapplication.activity.components.BannerActivity
@@ -231,7 +230,7 @@ class ComponentsFragment : Fragment() {
                     startActivity(intent)
                 }
                 23 -> {
-                    val intent = Intent(context, BaseApplicationActivity::class.java)
+                    val intent = Intent(context, BaseApplication::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

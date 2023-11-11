@@ -3,12 +3,9 @@ package com.example.myapplication.activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myapplication.R
-import com.example.myapplication.data.AccountBean
 import com.example.myapplication.databinding.ActivityBaseApplicationBinding
-import com.example.myapplication.util.AccountDataBase
 
-class BaseApplicationActivity : AppCompatActivity() {
+class BaseApplication : AppCompatActivity() {
     val context: Context = this
     private lateinit var binding: ActivityBaseApplicationBinding
 

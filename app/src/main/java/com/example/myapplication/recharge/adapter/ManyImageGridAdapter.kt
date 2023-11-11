@@ -5,7 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.databinding.AdapterRechargeManyImageGridBinding
 import com.example.myapplication.recharge.data.GetFeedListData
@@ -43,7 +43,7 @@ class ManyImageGridAdapter(
         CoroutineScope(Dispatchers.Main).launch {
             // 设置圆角半径
             /*val requestOptions = RequestOptions().transform(RoundedCorners(20))*/
-            Glide.with(context)
+            Glide.with(mContext)
                 .load(item.imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 //.apply(requestOptions)
