@@ -61,12 +61,12 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
 
-        //加载更多
+   /*     //加载更多
         binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(true)
             //设置回调
             LoadMoreManager.triggerLoadMore()
-        }
+        }*/
 
       /*  binding.refreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener{
             override fun onLoadMore(refreshLayout: RefreshLayout) {

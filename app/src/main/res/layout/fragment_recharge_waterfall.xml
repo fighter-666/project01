@@ -6,20 +6,21 @@
     android:orientation="vertical"
     >
 
-   <!-- <com.scwang.smart.refresh.layout.SmartRefreshLayout
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srlEnableRefresh="false"
         android:background="@color/gray_200"
         app:srlFooterTranslationViewId="@+id/rvComponentsWaterfall">
 
         <com.scwang.smart.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />-->
-
-<!--    <com.google.android.material.tabs.TabLayout
+            android:layout_height="wrap_content" />
+<!--
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -33,17 +34,18 @@
         app:tabMode="scrollable"
          />-->
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComponentsWaterfall"
         android:layout_width="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="match_parent"
     />
-      <!--  <com.scwang.smart.refresh.footer.ClassicsFooter
+        <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>-->
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 
 </LinearLayout>

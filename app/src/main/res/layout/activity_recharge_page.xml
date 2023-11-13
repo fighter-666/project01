@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tvTitle"
-
+        app:srlEnableLoadMore="false"
         android:background="@color/gray_200"
         app:srlFooterTranslationViewId="@+id/rvComponentsWaterfall"
         tools:visibility="visible">
