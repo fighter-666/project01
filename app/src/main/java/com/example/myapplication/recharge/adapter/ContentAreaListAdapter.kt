@@ -375,31 +375,34 @@ class ContentAreaListAdapter(
 
             }
 
-            //9：末尾卡片按钮列表
+            /*//9：末尾卡片按钮列表
             "9" -> {
                 if (item.completionInfo != null) {
                     binding.tvNullTitleFirst.visibility = View.VISIBLE
                 }
 
 
-            }
+            }*/
 
             else -> {
-                //mainTitle : 主标题
-                if (item.mainTitle.type == "1") {
-                    binding.tvMainTitleTitle.maxLines = 1
-                } else {
-                    binding.tvMainTitleTitle.maxLines = 2
+                if (item.mainTitle != null){
+                    //mainTitle : 主标题
+                    if (item.mainTitle.type == "1") {
+                        binding.tvMainTitleTitle.maxLines = 1
+                    } else {
+                        binding.tvMainTitleTitle.maxLines = 2
+                    }
+                    if (item.mainTitle.color != "") {
+                        binding.tvMainTitleTitle.setTextColor(
+                            Color.parseColor(item.mainTitle.color)
+                        )
+                    }
+                    binding.tvMainTitleTitle.ellipsize =
+                        TextUtils.TruncateAt.END
+                    binding.tvMainTitleTitle.text = item.mainTitle.title
+                    binding.tvMainTitleTitle.visibility = View.VISIBLE
                 }
-                if (item.mainTitle.color != "") {
-                    binding.tvMainTitleTitle.setTextColor(
-                        Color.parseColor(item.mainTitle.color)
-                    )
-                }
-                binding.tvMainTitleTitle.ellipsize =
-                    TextUtils.TruncateAt.END
-                binding.tvMainTitleTitle.text = item.mainTitle.title
-                binding.tvMainTitleTitle.visibility = View.VISIBLE
+
             }
         }
     }

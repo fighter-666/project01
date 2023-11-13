@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--圆角属性-->
+    <attr name="round_corner" format="dimension" />
+    <attr name="round_corner_top_left" format="dimension" />
+    <attr name="round_corner_top_right" format="dimension" />
+    <attr name="round_corner_bottom_left" format="dimension" />
+    <attr name="round_corner_bottom_right" format="dimension" />
+    <declare-styleable name="RCAttrs">
+        <attr name="round_as_circle" format="boolean" />
+        <attr name="round_corner" />
+        <attr name="round_corner_top_left" />
+        <attr name="round_corner_top_right" />
+        <attr name="round_corner_bottom_left" />
+        <attr name="round_corner_bottom_right" />
+        <attr name="stroke_color" format="reference|color" />
+        <attr name="stroke_width" format="dimension" />
+        <attr name="clip_background" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="FeedTabView">
+        <attr name="isCare" format="string" />
+    </declare-styleable>
+    <declare-styleable name="FeedViewPager">
+        <attr name="isCare" />
+        <attr name="feedScene" format="string"/>
+        <attr name="feedPaddingBottom" format="string"/>
+        <attr name="isNeedRefresh" format="string"/>
+    </declare-styleable>
 
     <declare-styleable name="CustomMarqueViewLibrary">
         <attr name="leftTitle" format="reference" />

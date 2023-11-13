@@ -53,7 +53,7 @@
         android:layout_marginLeft="-2dp"
         android:layout_marginBottom="-5dp"
         android:visibility="gone"
-        android:src="@drawable/recharge_tab_red_dot"
+        android:src="@drawable/red_dot"
         app:layout_constraintBottom_toTopOf="@id/tabName"
         app:layout_constraintLeft_toRightOf="@id/tabName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

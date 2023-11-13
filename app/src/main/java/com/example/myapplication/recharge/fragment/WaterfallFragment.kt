@@ -22,25 +22,25 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
+import com.example.myapplication.recharge.adapter.FeedAdapter
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
 import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.data.GetFeedTabData
+import com.example.myapplication.recharge.view.property.Piggy
 import com.example.myapplication.recharge.widget.GetTelephoneNumberManager
-import com.example.myapplication.recharge.widget.LoadMoreManager
 import com.example.myapplication.widget.BaseLazyFragment
 import com.example.myapplication.widget.MyFragmentObserver
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 
 class WaterfallFragment : BaseLazyFragment() {
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
+    //private lateinit var myAdapter: FeedAdapter
     private lateinit var myAdapter: WaterfallAdapter
     private var contactNumber: String? = null
     private var mIntent: Intent? = null
@@ -117,6 +117,47 @@ class WaterfallFragment : BaseLazyFragment() {
     }
 
     override fun loadData() {
+
+        val piggies = listOf(
+            Pair(R.mipmap.icon_grid_color_helper, "RechargePageActivity"),
+            Pair(R.mipmap.icon_grid_device_helper, "VariousTextviewActivity"),
+            Pair(R.mipmap.icon_grid_drawable_helper, "QWUIDrawableHelper"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "FeedStreamHomePageActivity"),
+            Pair(R.mipmap.icon_grid_view_helper, "WebViewActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "CustomActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "CommonControlActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "ViewModelTestActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "LiveDataActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "DataBindingActivity"),
+            Pair(R.mipmap.icon_grid_view_helper, "ScoreActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "SharedPreferencesActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "PhoneActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "BannerActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "RoomActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "Room2Activity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "OkhttpActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "ServiceActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "BroadcastReceiverActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "AdvertisingActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "AsyncServiceActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "StudentActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "UserActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "BaseApplicationActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "66"),
+        ).map { (imageResId, helperText) ->
+            Piggy(imageResId, helperText)
+        }.toMutableList()
+
+        //创建适配器
+        /*val myAdapter = ComponentsAdapter(R.layout.adapter_components, piggies)
+
+        //设置布局管理器和给recyclerView设置适配器
+        binding.rvComponentsWaterfall.apply {
+            layoutManager = GridLayoutManager(context, 3)
+            adapter = myAdapter
+        }*/
         // binding.tabLayout.selectTab(null) // 取消选中状态
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
         val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
@@ -125,8 +166,13 @@ class WaterfallFragment : BaseLazyFragment() {
         val gson = Gson()
         feedList = gson.fromJson(json, GetFeedListData::class.java)
         myAdapter = WaterfallAdapter(feedList.feedList)
+
+        //掌厅
+        /*myAdapter = FeedAdapter(false)
+        myAdapter.setNewData(feedList.feedList)*/
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            (layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
             adapter = myAdapter
         }
 
@@ -140,7 +186,7 @@ class WaterfallFragment : BaseLazyFragment() {
         //注册子组件的点击事件
 
         //监听条目子组件的点击事件
-        myAdapter.setOnItemChildClickListener { _, view, position ->
+       /* myAdapter.setOnItemChildClickListener { _, view, position ->
             if (view.id == R.id.btnSelect) {
                 Log.d("点击了选中按钮","aaa")
                 //获取通讯录
@@ -149,7 +195,7 @@ class WaterfallFragment : BaseLazyFragment() {
                 //刷新指定item
                 myAdapter.notifyItemChanged(position)
 
-                /*
+                *//*
                                 val updatedItem = myAdapter.getItem(position)
                                 if (updatedItem.quickRecharge != null) {
                                     updatedItem.quickRecharge.title = contactNumber
@@ -157,7 +203,7 @@ class WaterfallFragment : BaseLazyFragment() {
                                     // 更新适配器中的数据集
                                     feedList.feedList[position] = updatedItem // 将索引为1的项替换为更新后的项
                                     myAdapter.notifyItemChanged(position)
-                                }*/
+                                }*//*
 
             }
         }
@@ -196,9 +242,9 @@ class WaterfallFragment : BaseLazyFragment() {
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gsonTab = Gson()
         tabList = gsonTab.fromJson(jsonTab, GetFeedTabData::class.java)
-
+*/
         //获取传过来的id
-        number = requireArguments().getInt(ARG_TAB_NAME)
+        //number = requireArguments().getInt(ARG_TAB_NAME)
 
         //设置自定义tab
         //setCustomIcon(number)
@@ -431,6 +477,7 @@ class WaterfallFragment : BaseLazyFragment() {
         //imageView.setImageResource(tabList.tabList[0].tagList[position].tagIcon)
         return tabView
     }
+
 }
 
 

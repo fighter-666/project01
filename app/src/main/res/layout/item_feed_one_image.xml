@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/llFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--主图区-->
+        <RelativeLayout
+            android:id="@+id/rlPicArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ivImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/ivTopImage"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_margin="8dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                android:adjustViewBounds="true"/>
+
+            <LinearLayout
+                android:id="@+id/llBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="8dp"
+                android:layout_alignBottom="@id/ivImg"
+                android:layout_alignParentRight="true">
+
+                <!--评论区-->
+                <com.gongwen.marqueen.MarqueeView
+                    android:id="@+id/marqueeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inAnimation="@anim/in_bottom"
+                    android:outAnimation="@anim/out_top"
+                    android:flipInterval="3000"
+                    android:layout_gravity="right"
+                    app:marqueeAnimDuration="1000" />
+
+                <!--库存-->
+                <TextView
+                    android:id="@+id/tvStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="11dp"
+                    android:ellipsize="end"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_gray_80_corner_15dp"
+                    android:paddingHorizontal="6dp"
+                    android:layout_gravity="right"
+                    android:paddingVertical="3dp" />
+            </LinearLayout>
+        </RelativeLayout>
+        <!--内容区-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

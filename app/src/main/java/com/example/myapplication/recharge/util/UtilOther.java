@@ -11,4 +11,20 @@ public class UtilOther {
         }
         return num;
     }
+
+    /**
+     * 强制转换为float
+     * @param number
+     * @return
+     */
+    public static float parseFloat(String number){
+        float num;
+        try {
+            num = Float.parseFloat(number);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return num;
+    }
 }

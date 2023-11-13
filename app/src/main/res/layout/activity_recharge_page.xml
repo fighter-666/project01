@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tvTitle"
+
         android:background="@color/gray_200"
         app:srlFooterTranslationViewId="@+id/rvComponentsWaterfall"
         tools:visibility="visible">
@@ -644,7 +645,38 @@
                     app:tabMode="scrollable"
                     app:tabPaddingBottom="3dp" />
 
+        <!--        <com.example.myapplication.widget.FeedTabView
+                    android:id="@+id/feedTabView"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:layout_collapseMode="pin"
+                    app:tabGravity="fill"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMinWidth="0dp"
+                    app:tabMode="scrollable"
+                    app:tabPaddingEnd="0dp"
+                    app:tabPaddingStart="0dp"
+                    app:tabRippleColor="@null" />-->
+
+
+
             </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+           <!-- <com.example.myapplication.widget.FeedViewPager
+                android:id="@+id/feedViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:feedScene="6"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+-->
 
             <!-- <androidx.core.widget.NestedScrollView
                  android:id="@+id/nestedScrollView"
@@ -652,15 +684,14 @@
                  android:layout_height="match_parent"
                  app:layout_anchorGravity="bottom"
                  app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-            <androidx.viewpager2.widget.ViewPager2
+          <!--  <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-            <!--     </androidx.core.widget.NestedScrollView>-->
+       -->     <!--     </androidx.core.widget.NestedScrollView>-->
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
