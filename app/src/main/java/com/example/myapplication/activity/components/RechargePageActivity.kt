@@ -113,7 +113,7 @@ class RechargePageActivity : AppCompatActivity() {
         val tabList = gson.fromJson(json, GetFeedTabData::class.java)
 
         //viewpage
-        val fragments: MutableList<Fragment> = ArrayList()
+ /*       val fragments: MutableList<Fragment> = ArrayList()
         fragments.add(WaterfallFragment())
         fragments.add(WaterfallFragment())
 
@@ -123,7 +123,7 @@ class RechargePageActivity : AppCompatActivity() {
 
         for (i in tabList.tabList.indices) {
             binding.tabLayout.getTabAt(i)?.text = tabList.tabList[i].tabName   // 设置标题
-        }
+        }*/
 
         //项目
       /*  binding.feedViewPager.fragmentManager = supportFragmentManager
@@ -135,7 +135,7 @@ class RechargePageActivity : AppCompatActivity() {
         //binding.tabLayout.setupWithViewPager()
 
         //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
-  /*      // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
+        // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
         // 延迟设置offscreenPageLimit属性，防止进入activity时的等待
         binding.viewPager2.offscreenPageLimit = tabList.tabList.size - 1
 
@@ -303,7 +303,7 @@ class RechargePageActivity : AppCompatActivity() {
                 ) // 设置默认选中项
             }
         }
-        mediator.attach()*/
+        mediator.attach()
 
         //消息条
         //右边textview跑马灯

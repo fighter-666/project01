@@ -664,12 +664,12 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.viewpager.widget.ViewPager
+           <!-- <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-           <!-- <com.example.myapplication.widget.FeedViewPager
+      -->     <!-- <com.example.myapplication.widget.FeedViewPager
                 android:id="@+id/feedViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -684,14 +684,14 @@
                  android:layout_height="match_parent"
                  app:layout_anchorGravity="bottom"
                  app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-          <!--  <androidx.viewpager2.widget.ViewPager2
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-       -->     <!--     </androidx.core.widget.NestedScrollView>-->
+            <!--     </androidx.core.widget.NestedScrollView>-->
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
