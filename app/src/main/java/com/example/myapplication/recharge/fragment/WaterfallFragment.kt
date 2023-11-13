@@ -18,9 +18,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
 import com.example.myapplication.recharge.adapter.FeedAdapter
 import com.example.myapplication.recharge.adapter.WaterfallAdapter
@@ -151,13 +153,13 @@ class WaterfallFragment : BaseLazyFragment() {
         }.toMutableList()
 
         //创建适配器
-        /*val myAdapter = ComponentsAdapter(R.layout.adapter_components, piggies)
+        val myAdapter = ComponentsAdapter(R.layout.adapter_components, piggies)
 
         //设置布局管理器和给recyclerView设置适配器
         binding.rvComponentsWaterfall.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = myAdapter
-        }*/
+        }
         // binding.tabLayout.selectTab(null) // 取消选中状态
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
         val json: String = requireContext().assets.open("getFeedListData.json").bufferedReader()
@@ -165,16 +167,18 @@ class WaterfallFragment : BaseLazyFragment() {
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         feedList = gson.fromJson(json, GetFeedListData::class.java)
-        myAdapter = WaterfallAdapter(feedList.feedList)
+        //myAdapter = WaterfallAdapter(feedList.feedList)
 
         //掌厅
         /*myAdapter = FeedAdapter(false)
         myAdapter.setNewData(feedList.feedList)*/
-        binding.rvComponentsWaterfall.apply {
+
+        //自己的
+      /*  binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             (layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
             adapter = myAdapter
-        }
+        }*/
 
       /*  binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(true)
