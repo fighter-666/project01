@@ -1,0 +1,243 @@
+{
+    "hotList": [
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "string",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+            ],
+            "id": "string",
+            "imageBean": {
+                "iconUrl": "string",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "string",
+            "isTop": "string",
+            "order": "string",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "type": "1",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "云游四川",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        },
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+
+            ],
+            "id": "string",
+            "imageBean": {
+                "iconUrl": "string",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "string",
+            "isTop": "string",
+            "order": "string",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "云游四川"
+            },
+            "type": "2",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "string",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        },
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+
+            ],
+            "id": "string",
+            "imageBean": {
+                "iconUrl": "string",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "string",
+            "isTop": "string",
+            "order": "string",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "云游四川"
+            },
+            "type": "2",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "string",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        }
+    ]
+}

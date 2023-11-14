@@ -144,7 +144,7 @@ class WaterfallFragment : BaseLazyFragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "StudentActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "UserActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "BaseApplicationActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "HotListActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "19"),
             Pair(R.mipmap.icon_grid_tip_dialog, "66"),
         ).map { (imageResId, helperText) ->

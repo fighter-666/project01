@@ -16,6 +16,8 @@ import com.example.myapplication.activity.components.BannerActivity
 import com.example.myapplication.activity.components.BroadcastReceiverActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
 import com.example.myapplication.activity.components.CustomActivity
+import com.example.myapplication.activity.components.FirstRoomActivity
+import com.example.myapplication.activity.components.HotListActivity
 import com.example.myapplication.activity.components.OkhttpActivity
 import com.example.myapplication.activity.components.PhoneActivity
 import com.example.myapplication.activity.components.ThirdActivity
@@ -99,8 +101,8 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "StudentActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "UserActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "BaseApplicationActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "19"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "FirstRoomActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "HotListActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "66"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
@@ -231,6 +233,14 @@ class ComponentsFragment : Fragment() {
                 }
                 23 -> {
                     val intent = Intent(context, BaseApplication::class.java)
+                    startActivity(intent)
+                }
+                24 -> {
+                    val intent = Intent(context, FirstRoomActivity::class.java)
+                    startActivity(intent)
+                }
+                25 -> {
+                    val intent = Intent(context, HotListActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

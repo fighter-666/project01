@@ -2,9 +2,14 @@ package com.example.myapplication.recharge.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterViewFlipper
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.SnackbarUtils.getView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
@@ -93,8 +98,15 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
             }
 
             GetFeedListData.FEED_ADAPTER_ITEM_TYPE.ONE_IMAGE -> {
+                val ivTopImage = holder.getView<ImageView>(R.id.ivTopImage)
+                val ivPicAreaImageUrl = holder.getView<ImageView>(R.id.ivPicAreaImageUrl)
+                val tvCommentList = holder.getView<AdapterViewFlipper>(R.id.tvCommentList)
+                val clCommentList = holder.getView<ConstraintLayout>(R.id.clCommentList)
+                val clContentAreaList = holder.getView<ConstraintLayout>(R.id.clContentAreaList)
+                val tvStockout = holder.getView<TextView>(R.id.tvStockout)
+                val rvContentAreaList = holder.getView<RecyclerView>(R.id.rvContentAreaList)
                 // 处理单图布局
-                val binding = WidgetMultipleItemCommonBinding.bind(holder.itemView)
+                //val binding = WidgetMultipleItemCommonBinding.bind(holder.itemView)
                 /* //卡片锁宽等比缩放（imageRatio用来计算高度）
                  val lp = binding.ivTopImage.layoutParams as ConstraintLayout.LayoutParams
                  lp.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
@@ -102,7 +114,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                  binding.ivTopImage.layoutParams = lp*/
                 //顶部标签
                 if (item.picArea.topImage != null) {
-                    binding.ivTopImage.visibility = View.VISIBLE
+                    ivTopImage.visibility = View.VISIBLE
                     Glide.with(mContext)
                         .load(item.picArea.topImage)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
@@ -110,7 +122,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                         //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
                         //.apply(requestOptions
                         .error(R.drawable.ic_launcher_foreground)
-                        .into(binding.ivTopImage)
+                        .into(ivTopImage)
                 }
 
                 //commentList : 评论列表
@@ -127,9 +139,9 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                            binding.tvCommentList.addView(textView)*/
                     }
                     val viewFlipperAdapter = ViewFlipperAdapter(mContext, stars)
-                    binding.tvCommentList.adapter = viewFlipperAdapter
-                    binding.tvCommentList.visibility = View.VISIBLE
-                    binding.clCommentList.visibility = View.VISIBLE
+                    tvCommentList.adapter = viewFlipperAdapter
+                    tvCommentList.visibility = View.VISIBLE
+                    clCommentList.visibility = View.VISIBLE
 
                     /*  val marqueeText2: ScrollTextViewCommentListBackground = binding.tvCommentList
                       marqueeText2.setList(stars) // 将列表传递给跑马灯控件的setList方法
@@ -138,8 +150,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
                 //库存显示
                 if (item.picArea.stock != null) {
-                    binding.tvStockout.text = item.picArea.stock
-                    binding.tvStockout.visibility = View.VISIBLE
+                    tvStockout.text = item.picArea.stock
+                    tvStockout.visibility = View.VISIBLE
                 }
                 // imageWeight = recyclerView.measuredWidth
                 //比例
@@ -150,9 +162,9 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
 
                 //卡片锁宽等比缩放（imageRatio用来计算高度）
                 val layoutParams =
-                    binding.ivPicAreaImageUrl.layoutParams as ConstraintLayout.LayoutParams
+                    ivPicAreaImageUrl.layoutParams as ConstraintLayout.LayoutParams
                 layoutParams.dimensionRatio = item.picArea.imageRatio // 例如，设置宽高比为16:9
-                binding.ivPicAreaImageUrl.layoutParams = layoutParams
+                ivPicAreaImageUrl.layoutParams = layoutParams
 
                 //contentAreaList : 内容区域
                 if (item.contentAreaList != null) {
@@ -164,14 +176,14 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                         && item.contentAreaList[item.contentAreaList.size - 1].type != "8"
                     ) {
                         val lp =
-                            binding.clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
+                            clContentAreaList.layoutParams as ViewGroup.MarginLayoutParams
                         lp.topMargin = DensityUtils.dpToPx(mContext, 5f)
                         lp.bottomMargin = DensityUtils.dpToPx(mContext, 5f)
-                        binding.clContentAreaList.layoutParams = lp
+                        clContentAreaList.layoutParams = lp
                     }
 
                     //设置布局管理器和给recyclerView 设置设配器
-                    binding.rvContentAreaList.apply {
+                    rvContentAreaList.apply {
                         layoutManager = LinearLayoutManager(context)
                         adapter = rechargeAdapter
                     }
@@ -184,12 +196,12 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                         //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
                         //.apply(requestOptions
                         .error(R.drawable.ic_launcher_foreground)
-                        .into(binding.ivPicAreaImageUrl)
+                        .into(ivPicAreaImageUrl)
                 } else {
                     Glide.with(mContext)
                         .load(item.picArea.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
                         .error(R.drawable.ic_launcher_foreground)
-                        .into(binding.ivPicAreaImageUrl)
+                        .into(ivPicAreaImageUrl)
                 }
             }
 
