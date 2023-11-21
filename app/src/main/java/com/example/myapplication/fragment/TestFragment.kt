@@ -1,20 +1,44 @@
-package com.example.myapplication.activity.components
+package com.example.myapplication.fragment
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback
 import com.chad.library.adapter.base.listener.OnItemDragListener
+import com.example.myapplication.R
 import com.example.myapplication.data.GetHotListData
-import com.example.myapplication.databinding.ActivityHotListBinding
+import com.example.myapplication.databinding.FragmentRechargeWaterfallBinding
+import com.example.myapplication.databinding.FragmentTestBinding
+import com.example.myapplication.recharge.adapter.FeedAdapter
 import com.example.myapplication.recharge.adapter.HotListAdapter
-import com.example.myapplication.recharge.adapter.MyPagerAdapter
+import com.example.myapplication.recharge.adapter.WaterfallAdapter
+import com.example.myapplication.recharge.data.GetFeedListData
 import com.example.myapplication.recharge.data.GetFeedTabData
-import com.example.myapplication.recharge.fragment.WaterfallFragment
+import com.example.myapplication.recharge.view.property.Piggy
+import com.example.myapplication.recharge.widget.GetTelephoneNumberManager
+import com.example.myapplication.recharge.widget.LoadMoreManager
+import com.example.myapplication.widget.BaseLazyFragment
+import com.example.myapplication.widget.MyFragmentObserver
+import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.coroutines.CoroutineScope
@@ -22,16 +46,44 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class HotListActivity : AppCompatActivity() {
-    /*val database: CardDatabase by lazy {
-        CardDatabase.getDatabase(applicationContext)
-    }*/
-    private lateinit var binding: ActivityHotListBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHotListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+class TestFragment : BaseLazyFragment() {
+    private var _binding: FragmentTestBinding? = null
+    val binding get() = _binding!!
+    //private lateinit var myAdapter: FeedAdapter
+    private lateinit var myAdapter: WaterfallAdapter
+    private var contactNumber: String? = null
+    private var mIntent: Intent? = null
+    private var number: Int = 0
+    private lateinit var feedList: GetFeedListData
+    private lateinit var tabList: GetFeedTabData
 
+    companion object {
+        private const val ARG_TAB_NAME = "tabName"
+        fun newInstance(tabName: Int): TestFragment {
+            val args = Bundle()
+            args.putString(ARG_TAB_NAME, tabName.toString())
+            args.putInt(ARG_TAB_NAME, tabName)
+            val fragment = TestFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentTestBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    //用于请求读取联系人权限并执行相应的操作。
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycle.addObserver(MyFragmentObserver())
         //沉浸式
         ImmersionBar.with(this).transparentStatusBar()  //透明状态栏，不写默认透明色
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
@@ -40,7 +92,7 @@ class HotListActivity : AppCompatActivity() {
 
 
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
-        val json: String = application.assets.open("getHotListData.json").bufferedReader()
+        val json: String = requireContext().assets.open("getHotListData.json").bufferedReader()
             .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
@@ -71,9 +123,9 @@ class HotListActivity : AppCompatActivity() {
                 //val sortCards = mutableListOf<GetHotListData>()
                 //val cardDao = CardDatabase.getDatabase(applicationContext).cardDao()
 
-               /* // 在适当的位置使用数据库
-                val cardDao = database.cardDao()
-                cardDao.getAllCards()*/
+                /* // 在适当的位置使用数据库
+                 val cardDao = database.cardDao()
+                 cardDao.getAllCards()*/
                 /*val  cardList = cardDao.getAllCards()
                 for (i in 0 until cardList.size){
                     Log.d("sortCards", "onItemDragEnd: ${cardList[i].type}")
@@ -105,10 +157,10 @@ class HotListActivity : AppCompatActivity() {
                     }*/
                 }
             }
-           /* // 获取数据集合
-            fun getData(): List<GetHotListData> {
-                return cardList
-            }*/
+            /* // 获取数据集合
+             fun getData(): List<GetHotListData> {
+                 return cardList
+             }*/
         }
 
 
@@ -121,10 +173,19 @@ class HotListActivity : AppCompatActivity() {
         myAdapter.setOnItemDragListener(onItemDragListener)
 
 // 开启滑动删除
-       // mAdapter.enableSwipeItem()
+        // mAdapter.enableSwipeItem()
         //mAdapter.setOnItemSwipeListener(onItemSwipeListener)
         for (item in hotList.hotList){
             Log.d("HotListActivity", item.videoBean.title)
         }
     }
+
+    override fun loadData() {
+
+
+    }
+
+
 }
+
+

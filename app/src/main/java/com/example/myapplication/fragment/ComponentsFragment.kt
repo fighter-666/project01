@@ -33,6 +33,7 @@ import com.example.myapplication.activity.components.RechargePageActivity
 import com.example.myapplication.activity.components.ServiceActivity
 import com.example.myapplication.activity.components.StudentActivity
 import com.example.myapplication.activity.components.UserActivity
+import com.example.myapplication.activity.components.ViewpageActivity
 import com.example.myapplication.activity.components.bilibili.activity.Room2Activity
 import com.example.myapplication.activity.components.bilibili.activity.RoomActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
@@ -57,7 +58,7 @@ class ComponentsFragment : Fragment() {
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
             .titleBar(binding.toolbar)    //解决状态栏和布局重叠问题，任选其一
-            .init();
+            .init()
         return view
 
     }
@@ -103,7 +104,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "BaseApplicationActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "FirstRoomActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "HotListActivity"),
-            Pair(R.mipmap.icon_grid_tip_dialog, "66"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "ViewpageActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -241,6 +242,10 @@ class ComponentsFragment : Fragment() {
                 }
                 25 -> {
                     val intent = Intent(context, HotListActivity::class.java)
+                    startActivity(intent)
+                }
+                26 -> {
+                    val intent = Intent(context, ViewpageActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...
