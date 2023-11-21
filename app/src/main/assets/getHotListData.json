@@ -46,7 +46,7 @@
                 "recommender": "string",
                 "sceneId": "string",
                 "startTime": "string",
-                "title": "云游四川",
+                "title": "福州",
                 "topImage": "string",
                 "topImageBeforeLive": "string",
                 "topImageLiving": "string",
@@ -198,7 +198,7 @@
             ],
             "id": "string",
             "imageBean": {
-                "iconUrl": "string",
+                "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654669856674710.png",
                 "link": "string",
                 "linkType": "string",
                 "provinceCode": "string",
@@ -217,7 +217,7 @@
                 "sceneId": "string",
                 "title": "云游四川"
             },
-            "type": "2",
+            "type": "3",
             "videoBean": {
                 "endTime": "string",
                 "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",

@@ -156,7 +156,6 @@ class ScratchCardView : View {
             }
         }
         performClick()
-
         return true
     }
 

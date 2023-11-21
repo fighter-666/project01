@@ -341,6 +341,34 @@
                     "numText": null,
                     "picList": null,
                     "completionInfo": null
+                },
+                {
+                    "type": "5",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": {
+                        "startTime" : "20230124120000",
+                        "endTime" : null
+                    },
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
+                },
+                {
+                    "type": "5",
+                    "mainTitle": null,
+                    "saleTipList": null,
+                    "price": null,
+                    "location": null,
+                    "countDown": {
+                        "startTime" : null,
+                        "endTime" : "20230124120000"
+                    },
+                    "numText": null,
+                    "picList": null,
+                    "completionInfo": null
                 }
             ],
             "adLists": null,

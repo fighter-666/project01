@@ -47,8 +47,10 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
             "1"->{
                 val tvTitle = holder.getView<TextView>(R.id.tvTitle)
                 val ivImage = holder.getView<ImageView>(R.id.ivImage)
+                val ivArrow = holder.getView<ImageView>(R.id.ivArrow)
                 tvTitle.visibility = View.VISIBLE
                 ivImage.visibility = View.VISIBLE
+                ivArrow.visibility = View.VISIBLE
                 tvTitle.text = item.topTitle.title
                 Glide.with(mContext)
                     .load(item.videoBean.imageUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
@@ -62,7 +64,9 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
             "2"->{
                 val cvAdvertisingList = holder.getView<RecyclerView>(R.id.cvAdvertisingList)
                 val tvTitle = holder.getView<TextView>(R.id.tvTitle)
+                val ivArrow = holder.getView<ImageView>(R.id.ivArrow)
                 tvTitle.visibility = View.VISIBLE
+                ivArrow.visibility = View.VISIBLE
                 tvTitle.text = item.topTitle.title
                 cvAdvertisingList.visibility = View.VISIBLE
                 val myAdapter = ManyImageHotAdapter(
@@ -74,6 +78,18 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
                     layoutManager = GridLayoutManager(context, 2)
                     adapter = myAdapter
                 }
+            }
+            else -> {
+                val ivIconUrl = holder.getView<ImageView>(R.id.ivIconUrl)
+                ivIconUrl.visibility = View.VISIBLE
+                Glide.with(mContext)
+                    .load(item.imageBean.iconUrl)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    //.transform(GranularRoundedCorners(20f, 20f, 0f, 0f))//四个角单独指定角度
+                    //.apply(requestOptions
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(ivIconUrl)
             }
         }
 
