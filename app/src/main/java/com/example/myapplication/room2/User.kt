@@ -16,12 +16,16 @@ data class User (
     @Ignore
     var avatar: String = ""
 ){
-    constructor(aliiasName: String,age: Int,ads: String,avatar: String): this(){
+    //次构造函数，使用以下方式创建User对象：val user = User("John", 25, "123 Main St", "avatar.jpg")
+    constructor(aliasName: String,age: Int,ads: String,avatar: String): this(){
         this.aliasName = aliasName
         this.age = age
         this.ads = ads
         this.avatar = avatar
     }
 
-
+    //这是一个重写的toString()函数，用于以字符串形式返回User对象的信息。
+    override fun toString(): String {
+        return "User(id $id, aliasName='$aliasName', age=$age, ads='$ads', avatar='$avatar')"
+    }
 }

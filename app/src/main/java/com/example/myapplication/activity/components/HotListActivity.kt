@@ -1,7 +1,9 @@
 package com.example.myapplication.activity.components
 
+import HotDatabase
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -9,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback
 import com.chad.library.adapter.base.listener.OnItemDragListener
+import com.example.myapplication.activity.MyApplication
 import com.example.myapplication.data.GetHotListData
 import com.example.myapplication.databinding.ActivityHotListBinding
 import com.example.myapplication.recharge.adapter.HotListAdapter
 import com.example.myapplication.recharge.adapter.MyPagerAdapter
 import com.example.myapplication.recharge.data.GetFeedTabData
 import com.example.myapplication.recharge.fragment.WaterfallFragment
+import com.example.myapplication.room.Hot
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
 import kotlinx.coroutines.CoroutineScope
@@ -23,8 +27,8 @@ import kotlinx.coroutines.launch
 
 
 class HotListActivity : AppCompatActivity() {
-    /*val database: CardDatabase by lazy {
-        CardDatabase.getDatabase(applicationContext)
+    /*val database: HotDatabase by lazy {
+        HotDatabase.getDatabase(applicationContext)
     }*/
     private lateinit var binding: ActivityHotListBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,12 +36,11 @@ class HotListActivity : AppCompatActivity() {
         binding = ActivityHotListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         //沉浸式
         ImmersionBar.with(this).transparentStatusBar()  //透明状态栏，不写默认透明色
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
-
-
 
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
         val json: String = application.assets.open("getHotListData.json").bufferedReader()
@@ -51,6 +54,14 @@ class HotListActivity : AppCompatActivity() {
             //(layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
             adapter = myAdapter
         }
+
+        // 使用数据库
+        val hotDao = HotDatabase.getDatabase(applicationContext).hotDao()
+        // 插入数据
+        val hot = Hot(id = 1, cardId = "1", type = "0", cardOrder = 1)
+        //val hot2 = Hot(id = 2, type = "0", cardOrder = 2)
+        //hotDao.insert(hot)
+        //hotDao.insert(hot2)
         val onItemDragListener = object : OnItemDragListener {
             //private val cardList: MutableList<GetHotListData> = mutableListOf()
             override fun onItemDragStart(viewHolder: RecyclerView.ViewHolder, pos: Int) {
@@ -67,50 +78,13 @@ class HotListActivity : AppCompatActivity() {
             }
 
             override  fun onItemDragEnd(viewHolder: RecyclerView.ViewHolder, pos: Int) {
-                // Implementation for onItemDragEnd
-                //val sortCards = mutableListOf<GetHotListData>()
-                //val cardDao = CardDatabase.getDatabase(applicationContext).cardDao()
-
-               /* // 在适当的位置使用数据库
-                val cardDao = database.cardDao()
-                cardDao.getAllCards()*/
-                /*val  cardList = cardDao.getAllCards()
-                for (i in 0 until cardList.size){
-                    Log.d("sortCards", "onItemDragEnd: ${cardList[i].type}")
-                }*/
-
-
-
 // 将newCard对象插入数据库
                 CoroutineScope(Dispatchers.IO).launch {
                     //cardDao.insertCard(newCard)
-                }
-
-
-                /*for (i in 0 until  myAdapter.itemCount){
-                    cardList.add(getData()[i])
-                    CoroutineScope(Dispatchers.IO).launch {
-                        //cardDao.insertCard(sortCards[i])
-                    }
-
-                    Log.d("sortCards", "onItemDragEnd: ${cardList[i].hotList[i].type}")
-                }*/
-
-
-                CoroutineScope(Dispatchers.IO).launch {
-                    //cardDao.updateCard(sortCards)
-                    /*cardDao.getAllCards()
-                    for (card in cardDao.getAllCards()){
-                        Log.d("FirstRoomActivity",card.title)
-                    }*/
+                    //insertShowCard(hotList.hotList)
                 }
             }
-           /* // 获取数据集合
-            fun getData(): List<GetHotListData> {
-                return cardList
-            }*/
         }
-
 
         val itemDragAndSwipeCallback = ItemDragAndSwipeCallback(myAdapter)
         val itemTouchHelper = ItemTouchHelper(itemDragAndSwipeCallback)
@@ -125,6 +99,16 @@ class HotListActivity : AppCompatActivity() {
         //mAdapter.setOnItemSwipeListener(onItemSwipeListener)
         for (item in hotList.hotList){
             Log.d("HotListActivity", item.videoBean.title)
+        }
+    }
+    fun insertShowCard(hotList: MutableList<GetHotListData.HotListBean>){
+        for (i in 0 until hotList.size){
+            val item = hotList[i]
+            val hot = Hot()
+            //hot.cardId = item.id
+            hot.type = item.type
+            hot.cardOrder = i
+            HotDatabase.getDatabase(applicationContext).hotDao().insert(hot)
         }
     }
 }
