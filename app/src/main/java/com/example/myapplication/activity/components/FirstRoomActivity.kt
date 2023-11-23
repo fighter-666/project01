@@ -10,8 +10,8 @@ import com.example.myapplication.R
 import com.example.myapplication.activity.MyApplication
 import com.example.myapplication.adapter.UserAdapter
 import com.example.myapplication.databinding.ActivityFirstRoomBinding
-import com.example.myapplication.room.AppDatabase
-import com.example.myapplication.room.User
+import com.example.myapplication.room3.AppDatabase
+import com.example.myapplication.room3.User
 import com.example.myapplication.room2.DbManager
 import com.example.myapplication.room2.UserDao
 import kotlin.concurrent.thread

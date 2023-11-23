@@ -95,6 +95,12 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
 
     }
 
+    fun updateDataSet(newData: MutableList<GetHotListData.HotListBean?>) {
+        data.clear()
+        data.addAll(newData)
+        notifyDataSetChanged()
+    }
+
 }
 
 

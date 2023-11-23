@@ -4,9 +4,6 @@ package com.example.myapplication.activity;
 import android.app.Application;
 import android.content.Context;
 
-/**
- * Created by root on 15-10-1.
- */
 public class MyApplication extends Application {
     // 静态的Context对象，用于在应用程序中获取全局的Context实例
     private static Context context;

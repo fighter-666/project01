@@ -1,6 +1,5 @@
 package com.example.myapplication.adapter
 
-
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -10,10 +9,6 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.example.myapplication.R
 import com.example.myapplication.room2.User
 
-/**
- * Author: zqf
- * Date: 2022/05/11
- */
 class UserAdapter(layoutResId: Int) : BaseQuickAdapter<User, BaseViewHolder>(layoutResId) {
     override fun convert(holder: BaseViewHolder, item: User) {
         holder.addOnClickListener(R.id.item_delete,R.id.item_modify)
