@@ -101,6 +101,10 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
         notifyDataSetChanged()
     }
 
+    fun getDataList(): MutableList<GetHotListData.HotListBean> {
+        return data
+    }
+
 }
 
 

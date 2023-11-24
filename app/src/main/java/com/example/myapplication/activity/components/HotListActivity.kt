@@ -1,6 +1,5 @@
 package com.example.myapplication.activity.components
 
-import com.example.myapplication.room3.HotDatabase
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -15,15 +14,16 @@ import com.example.myapplication.data.GetHotListData
 import com.example.myapplication.databinding.ActivityHotListBinding
 import com.example.myapplication.recharge.adapter.HotListAdapter
 import com.example.myapplication.room3.Hot
+import com.example.myapplication.room3.HotDatabase
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
-
 
 class HotListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHotListBinding
     private var myList = mutableListOf<GetHotListData.HotListBean>()
-
+    private var convertedList = mutableListOf<Hot>()
+    private lateinit var myAdapter:HotListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,23 +38,24 @@ class HotListActivity : AppCompatActivity() {
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
         val json: String = application.assets.open("getHotListData.json").bufferedReader()
             .use { it.readText() }
+        val json2: String = application.assets.open("getHotListData2.json").bufferedReader()
+            .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         val hotList = gson.fromJson(json, GetHotListData::class.java)
+        val hotList2 = gson.fromJson(json2, GetHotListData::class.java)
 
-       /*     for (i in 0 until hotList.hotList.size){
-                val item = hotList.hotList[i]
-                if (item.type == "1"){
-                    myList.add(item)
-                }
-            }
+        val list = HotDatabase.getDatabase().hotDao().getAllUsers()
 
-        insertCard(hotList.hotList)
+        val locals = HotDatabase.getDatabase().hotDao().getRowCount()
+        val newList = getNewList(hotList.hotList)
+        if (locals > 0){
+             myAdapter = HotListAdapter(newList)
+        }else{
+            insertCard(hotList.hotList)
+             myAdapter = HotListAdapter(hotList.hotList)
+        }
 
-        val newList: List<Hot> = HotDatabase.getDatabase().hotDao().update()*/
-
-
-        val myAdapter = HotListAdapter(hotList.hotList)
         binding.recyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             //(layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
@@ -65,11 +66,7 @@ class HotListActivity : AppCompatActivity() {
 
         }
 
-
-        //hotDao.addBatchUser(mutableList)
-
         val onItemDragListener = object : OnItemDragListener {
-            //private val cardList: MutableList<GetHotListData> = mutableListOf()
             override fun onItemDragStart(viewHolder: RecyclerView.ViewHolder, pos: Int) {
                 // Implementation for onItemDragStart
             }
@@ -85,13 +82,16 @@ class HotListActivity : AppCompatActivity() {
 
             override  fun onItemDragEnd(viewHolder: RecyclerView.ViewHolder, pos: Int) {
                 // 获取拖拽后的新顺序
-                val sortedList = mutableListOf<GetHotListData.HotListBean?>()
-                for (i in 0 until myAdapter.itemCount) {
-                    sortedList.add(myAdapter.getItem(i))
-                }
+                val items = myAdapter.data
+                val updatedItems = mutableListOf<GetHotListData.HotListBean>()
 
-                myAdapter
-                    .updateDataSet(sortedList)
+                for (i in items.indices) {
+                    val item = items[i]
+                    item.order = (i+9).toString()
+                    updatedItems.add(item)
+                }
+                insertCard(updatedItems)
+                //convertedList = convertToHotList(updatedItems) // 将 GetHotListData.HotListBean 转换为 Hot 对象列表
             }
         }
 
@@ -109,10 +109,21 @@ class HotListActivity : AppCompatActivity() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        HotDatabase.getDatabase().hotDao().deleteAllUser()
+    private fun getNewList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+        val localShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
+        val locals = HotDatabase.getDatabase().hotDao().getAllUsers()
+        for (data in hotList){
+            for (localData in locals){
+                if (data.id == localData.cardId){
+                    data.order = localData.cardOrder.toString()
+                    localShowList.add(data)
+                }
+            }
+        }
+        localShowList.sort()
+        return localShowList
     }
+
 
     private fun insertCard(hotList: MutableList<GetHotListData.HotListBean>){
         for (i in 0 until hotList.size){
@@ -123,7 +134,6 @@ class HotListActivity : AppCompatActivity() {
                 hot.type = item.type
                 hot.cardOrder = i
                 HotDatabase.getDatabase().hotDao().insert(hot)
-                Toast.makeText(MyApplication.getContext(),"批量新增数据成功",Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -188,6 +198,29 @@ class HotListActivity : AppCompatActivity() {
         return showCardList
     }
 
+    fun convertToHotList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<Hot> {
+        val convertedList = mutableListOf<Hot>()
 
+        for (item in hotList) {
+            val hot = Hot()
+            hot.cardId = item.id
+            hot.type = item.type
+            hot.cardOrder = item.order.toInt()
+            convertedList.add(hot)
+            Log.d("TAG", "convertToHotList: ${hot.cardOrder}")
+        }
 
+        return convertedList
+    }
+
+    private fun singleModify(hot:  MutableList<Hot>,newList: MutableList<Hot>){
+        for (item in newList) {
+           /* hot.cardId = item.cardId
+            hot.type = item.type
+            hot.cardOrder = item.cardOrder*/
+            HotDatabase.getDatabase().hotDao().updateUser(convertedList[0])
+            HotDatabase.getDatabase().hotDao().updateItems(newList)
+           // Log.d("TAG", "update: ${hot.cardOrder}")
+        }
+    }
 }

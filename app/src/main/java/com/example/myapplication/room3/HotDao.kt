@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.myapplication.room2.User
 
 @Dao
 interface HotDao {
@@ -14,14 +15,25 @@ interface HotDao {
     //
     //函数的返回类型为List<Long>，表示在插入数据后，返回插入的每个数据的行ID（或主键值）的列表。
     //添加批量数据
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg hot: Hot)/*: List<Long>*/
+    fun insert(vararg hot: Hot): List<Long>
 
     @Update
-    suspend fun updateCard(hot: Hot)
+     fun updateCard(hot: Hot)
+
+    //更新某一条数据
+    @Update
+    fun updateUser(vararg hot: Hot)
+
+    @Update
+     fun updateItems(items:  MutableList<Hot>)
 
     @Query("SELECT * FROM Hot")
-    fun getAllUsers(): List<Hot>
+    fun getAllUsers():  MutableList<Hot>
+
+    @Query("SELECT COUNT(*) FROM Hot")
+    fun getRowCount(): Int
 
     @Query("SELECT * FROM Hot WHERE type='2' ORDER BY cardOrder")
     fun getShowCard(): List<Hot>

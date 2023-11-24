@@ -1,0 +1,426 @@
+{
+    "hotList": [
+
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+
+            ],
+            "id": "1",
+            "imageBean": {
+                "iconUrl": "string",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "1",
+            "isTop": "0",
+            "order": "1",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "云游四川1"
+            },
+            "type": "1",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "string",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        },
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "string",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+            ],
+            "id": "2",
+            "imageBean": {
+                "iconUrl": "22222",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "1",
+            "isTop": "1",
+            "order": "2",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "222222"
+            },
+            "type": "1",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "福州",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        },
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+
+            ],
+            "id": "3",
+            "imageBean": {
+                "iconUrl": "string",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "1",
+            "isTop": "0",
+            "order": "3",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "333333"
+            },
+            "type": "2",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "string",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        },
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+
+            ],
+            "id": "4",
+            "imageBean": {
+                "iconUrl": "string",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "1",
+            "isTop": "0",
+            "order": "4",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "444444"
+            },
+            "type": "2",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "string",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        },
+        {
+            "advertisingList": [
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                },
+                {
+                    "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                    "link": "string",
+                    "linkType": "string",
+                    "priceTitle": "string",
+                    "provinceCode": "string",
+                    "recommender": "string",
+                    "sceneId": "string",
+                    "subTitle": "string",
+                    "title": "string"
+                }
+
+            ],
+            "id": "5",
+            "imageBean": {
+                "iconUrl": "https://w.189.cn/bigdata/2023/1/10/111654669856674710.png",
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "string"
+            },
+            "isShowOnHomepage": "1",
+            "isTop": "0",
+            "order": "5",
+            "topTitle": {
+                "link": "string",
+                "linkType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "title": "555555"
+            },
+            "type": "3",
+            "videoBean": {
+                "endTime": "string",
+                "imageUrl": "https://w.189.cn/bigdata/2023/1/10/111654674164033852.png",
+                "link": "string",
+                "linkType": "string",
+                "playType": "string",
+                "provinceCode": "string",
+                "recommender": "string",
+                "sceneId": "string",
+                "startTime": "string",
+                "title": "string",
+                "topImage": "string",
+                "topImageBeforeLive": "string",
+                "topImageLiving": "string",
+                "type": "1",
+                "videoCommerceId": "string",
+                "videoDuration": "string",
+                "videoStreamUrl": "string",
+                "videoStreamUrlType": "string"
+            }
+        }
+    ]
+}
