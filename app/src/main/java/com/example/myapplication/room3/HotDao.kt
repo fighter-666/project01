@@ -27,8 +27,20 @@ interface HotDao {
     @Query("SELECT * FROM Hot")
     fun getAllUsers():  MutableList<Hot>
 
+    //获取所有卡片
+    @Query("SELECT * FROM Hot WHERE isTakeDown='0'" )
+    fun getAllLoadUsers():  MutableList<Hot>
+
+    @Query("SELECT * FROM Hot WHERE isTakeDown='0' and type='0'  ORDER BY cardOrder")
+    fun getShowCard(): MutableList<Hot>
+
     //获取所有卡片数量
     @Query("SELECT COUNT(*) FROM Hot")
     fun getRowCount(): Int
+
+
+    // 获取所有上架卡片的最大位置
+    @Query("SELECT MAX(cardOrder) FROM Hot WHERE isTakeDown='0' ")
+    fun getMaxUpLoadCard(): Int
 
 }

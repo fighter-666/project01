@@ -23,8 +23,9 @@ class HotListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHotListBinding
     private var noShowCardList = mutableListOf<GetHotListData.HotListBean>()
     private var convertedList = mutableListOf<Hot>()
-    private lateinit var myAdapter:HotListAdapter
-    private lateinit var myNoAdapter:HotListAdapter
+    private lateinit var myAdapter: HotListAdapter
+    private lateinit var myNoAdapter: HotListAdapter
+    private var isDrag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,21 +46,20 @@ class HotListActivity : AppCompatActivity() {
         val gson = Gson()
         val hotList = gson.fromJson(json, GetHotListData::class.java)
 
-        val topList =getShowCardList(hotList.hotList)
+        val topList = getShowCardList(hotList.hotList)
         val noShowCardList = getNoShowCard(hotList.hotList)
 
-        val locals = HotDatabase.getDatabase().hotDao().getRowCount()
-        val all = HotDatabase.getDatabase().hotDao().getAllUsers()
+        val count = HotDatabase.getDatabase().hotDao().getRowCount()
+        val localShowDragList = getLocalShowList(hotList.hotList)
         //val newList = getNewList(hotList.hotList)
-        if (locals > 0){
-             myAdapter = HotListAdapter(topList)
-             myNoAdapter = HotListAdapter(noShowCardList)
-        }else{
-
-            insertCard(topList)
+        if (count > 0) {
+            myAdapter = HotListAdapter(localShowDragList)
+            myNoAdapter = HotListAdapter(noShowCardList)
+        } else {
+            insertShowCard(topList)
             myAdapter = HotListAdapter(topList)
 
-            insertCard(noShowCardList)
+            insertNoShowCard(noShowCardList)
             myNoAdapter = HotListAdapter(noShowCardList)
         }
 
@@ -75,7 +75,6 @@ class HotListActivity : AppCompatActivity() {
         }
 
 
-
         val onItemDragListener = object : OnItemDragListener {
             override fun onItemDragStart(viewHolder: RecyclerView.ViewHolder, pos: Int) {
                 // Implementation for onItemDragStart
@@ -85,25 +84,27 @@ class HotListActivity : AppCompatActivity() {
                 source: RecyclerView.ViewHolder,
                 from: Int,
                 target: RecyclerView.ViewHolder,
-                to: Int
+                to: Int,
             ) {
                 // Implementation for onItemDragMoving
             }
 
-            override  fun onItemDragEnd(viewHolder: RecyclerView.ViewHolder, pos: Int) {
+            override fun onItemDragEnd(viewHolder: RecyclerView.ViewHolder, pos: Int) {
                 // 获取拖拽后的新顺序
                 val items = myAdapter.data
                 val updatedItems = mutableListOf<GetHotListData.HotListBean>()
 
-                for (i in items.indices) {
+                val max = HotDatabase.getDatabase().hotDao().getMaxUpLoadCard()
+                for (i in 0..max) {
                     val item = items[i]
-                    item.order = (i+9).toString()
                     updatedItems.add(item)
                 }
 
                 binding.btnInsert.setOnClickListener {
-                    insertCard(updatedItems)
-                    Toast.makeText(MyApplication.getContext(),"保存成功",Toast.LENGTH_SHORT).show()
+                    isDrag = true
+                    insertShowCard(updatedItems)
+                    Toast.makeText(MyApplication.getContext(), "保存成功", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
                 //convertedList = convertToHotList(updatedItems) // 将 GetHotListData.HotListBean 转换为 Hot 对象列表
@@ -119,17 +120,18 @@ class HotListActivity : AppCompatActivity() {
         myAdapter.setOnItemDragListener(onItemDragListener)
 
 // 开启滑动删除
-       // mAdapter.enableSwipeItem()
+        // mAdapter.enableSwipeItem()
         //mAdapter.setOnItemSwipeListener(onItemSwipeListener)
 
     }
 
-    private fun getNewList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+
+    private fun getNewList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val localShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
         val locals = HotDatabase.getDatabase().hotDao().getAllUsers()
-        for (data in hotList){
-            for (localData in locals){
-                if (data.id == localData.cardId){
+        for (data in hotList) {
+            for (localData in locals) {
+                if (data.id == localData.cardId) {
                     data.order = localData.cardOrder.toString()
                     localShowList.add(data)
                 }
@@ -140,26 +142,13 @@ class HotListActivity : AppCompatActivity() {
     }
 
 
-    private fun insertCard(hotList: MutableList<GetHotListData.HotListBean>){
-        for (i in 0 until hotList.size){
-            val item = hotList[i]
-            if (true/*item.type == "2"*/){
-                val hot = Hot()
-                hot.cardId = item.id
-                hot.type = item.type
-                hot.cardOrder = i
-                HotDatabase.getDatabase().hotDao().insert(hot)
-            }
-        }
-    }
-
     /**
      * 获取新的（数据库没有的卡片）且标记置顶的显示在首页的卡片
      */
-    private fun getNewTopShowList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+    private fun getNewTopShowList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val newTopList: MutableList<GetHotListData.HotListBean> = mutableListOf()
-        for (data in hotList){
-            if (/*isNewCard(data.id) && */data.isTop == GetHotListData.HotListBean.IS_TOP.YES && data.isShowOnHomepage == GetHotListData.HotListBean.IS_SHOW_ON_HOMEPAGE.YES){
+        for (data in hotList) {
+            if (/*isNewCard(data.id) && */data.isTop == GetHotListData.HotListBean.IS_TOP.YES && data.isShowOnHomepage == GetHotListData.HotListBean.IS_SHOW_ON_HOMEPAGE.YES) {
                 newTopList.add(data)
             }
         }
@@ -170,10 +159,10 @@ class HotListActivity : AppCompatActivity() {
     /**
      * 获取新的（数据库没有的卡片）且非置顶的显示在首页的卡片
      */
-    private fun getNewShowList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+    private fun getNewShowList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val newShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
-        for (data in hotList){
-            if (/*isNewCard(data.id) && */data.isTop != GetHotListData.HotListBean.IS_TOP.YES && data.isShowOnHomepage == GetHotListData.HotListBean.IS_SHOW_ON_HOMEPAGE.YES){
+        for (data in hotList) {
+            if (/*isNewCard(data.id) && */data.isTop != GetHotListData.HotListBean.IS_TOP.YES && data.isShowOnHomepage == GetHotListData.HotListBean.IS_SHOW_ON_HOMEPAGE.YES) {
                 newShowList.add(data)
             }
         }
@@ -182,16 +171,16 @@ class HotListActivity : AppCompatActivity() {
     }
 
 
-     /*
-     *获取本地设为显示的上架卡片顺序赋予接口卡片
-     * */
+    /*
+    *获取本地设为显示的上架卡片顺序赋予接口卡片
+    * */
 
-/*    private fun getLocalShowList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+    private fun getLocalShowList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val localShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
         val locals = HotDatabase.getDatabase().hotDao().getShowCard()
-        for (data in hotList){
-            for (localData in locals){
-                if (data.id == localData.cardId){
+        for (data in hotList) {
+            for (localData in locals) {
+                if (data.id == localData.cardId) {
                     data.order = localData.cardOrder.toString()
                     localShowList.add(data)
                 }
@@ -199,11 +188,10 @@ class HotListActivity : AppCompatActivity() {
         }
         localShowList.sort()
         return localShowList
-    }*/
+    }
 
 
-
-    fun getShowCardList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+    fun getShowCardList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val showCardList: MutableList<GetHotListData.HotListBean> = mutableListOf()
         val newTopList = getNewTopShowList(hotList)
         //val localShowList = getLocalShowList(hotList)
@@ -218,10 +206,10 @@ class HotListActivity : AppCompatActivity() {
     /**
      * 获取新的（数据库没有的卡片）的不显示在首页的卡片
      */
-    private fun getNewNoShowList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+    private fun getNewNoShowList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val newShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
-        for (data in hotList){
-            if (/*isNewCard(data.id) && */data.isShowOnHomepage != GetHotListData.HotListBean.IS_SHOW_ON_HOMEPAGE.YES){
+        for (data in hotList) {
+            if (/*isNewCard(data.id) && */data.isShowOnHomepage != GetHotListData.HotListBean.IS_SHOW_ON_HOMEPAGE.YES) {
                 newShowList.add(data)
             }
         }
@@ -229,7 +217,7 @@ class HotListActivity : AppCompatActivity() {
         return newShowList
     }
 
-    fun getNoShowCard(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+    fun getNoShowCard(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val noShowCardList: MutableList<GetHotListData.HotListBean> = mutableListOf()
         //val localNoShowList = getLocalNoShowList(hotList)
         val newNoShowList = getNewNoShowList(hotList)
@@ -254,12 +242,40 @@ class HotListActivity : AppCompatActivity() {
         return convertedList
     }
 
-    private fun singleModify(hot:  MutableList<Hot>,newList: MutableList<Hot>){
-        for (item in newList) {
-           /* hot.cardId = item.cardId
-            hot.type = item.type
-            hot.cardOrder = item.cardOrder*/
-           // Log.d("TAG", "update: ${hot.cardOrder}")
+    private fun insertCard(hotList: MutableList<GetHotListData.HotListBean>) {
+        for (i in 0 until hotList.size) {
+            val item = hotList[i]
+            if (true/*item.type == "2"*/) {
+                val hot = Hot()
+                hot.cardId = item.id
+                hot.type = item.type
+                hot.cardOrder = i
+                HotDatabase.getDatabase().hotDao().insert(hot)
+            }
+        }
+    }
+
+    fun insertShowCard(hotList: MutableList<GetHotListData.HotListBean>) {
+        for (i in 0 until hotList.size) {
+            val item = hotList[i]
+            val hot = Hot()
+            hot.cardId = item.id
+            hot.type = "0"
+            hot.isTakeDown = "0"
+            hot.cardOrder = i
+            HotDatabase.getDatabase().hotDao().insert(hot)
+        }
+    }
+
+    fun insertNoShowCard(hotList: MutableList<GetHotListData.HotListBean>) {
+        for (i in 0 until hotList.size) {
+            val item = hotList[i]
+            val hot = Hot()
+            hot.cardId = item.id
+            hot.type = "1"
+            hot.isTakeDown = "0"
+            hot.cardOrder = i
+            HotDatabase.getDatabase().hotDao().insert(hot)
         }
     }
 }
