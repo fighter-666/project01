@@ -32,11 +32,11 @@
         app:layout_constraintLeft_toRightOf="@id/tvHotTitle"
         app:layout_constraintTop_toTopOf="@id/tvHotTitle" />
 
-    <Button
+    <TextView
         android:id="@+id/btnInsert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="保存"
+        android:text="开始"
         app:layout_constraintTop_toTopOf="@id/tvHotTitle"
         app:layout_constraintBottom_toBottomOf="@id/tvHotTitle"
         app:layout_constraintRight_toRightOf="parent"

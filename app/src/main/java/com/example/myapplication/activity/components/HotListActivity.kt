@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.room.Database
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback
 import com.chad.library.adapter.base.listener.OnItemDragListener
+import com.example.myapplication.R
 import com.example.myapplication.activity.MyApplication
 import com.example.myapplication.data.GetHotListData
 import com.example.myapplication.databinding.ActivityHotListBinding
@@ -18,6 +21,7 @@ import com.example.myapplication.room3.HotDatabase
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
 
+
 class HotListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHotListBinding
@@ -26,6 +30,9 @@ class HotListActivity : AppCompatActivity() {
     private lateinit var myAdapter: HotListAdapter
     private lateinit var myNoAdapter: HotListAdapter
     private var isDrag: Boolean = false
+    private var isUpAndDowm: Boolean = false
+    private lateinit var takeDownId: String
+    private lateinit var upLoadId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +58,7 @@ class HotListActivity : AppCompatActivity() {
 
         val count = HotDatabase.getDatabase().hotDao().getRowCount()
         val localShowDragList = getLocalShowList(hotList.hotList)
+        val localNoShowDragList = getLocalNoShowList(hotList.hotList)
         //val newList = getNewList(hotList.hotList)
         if (count > 0) {
             myAdapter = HotListAdapter(localShowDragList)
@@ -59,8 +67,8 @@ class HotListActivity : AppCompatActivity() {
             insertShowCard(topList)
             myAdapter = HotListAdapter(topList)
 
-            insertNoShowCard(noShowCardList)
-            myNoAdapter = HotListAdapter(noShowCardList)
+            insertNoShowCard(localNoShowDragList)
+            myNoAdapter = HotListAdapter(localNoShowDragList)
         }
 
         binding.recyclerView.apply {
@@ -73,6 +81,38 @@ class HotListActivity : AppCompatActivity() {
             //(layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
             adapter = myNoAdapter
         }
+
+        binding.btnInsert.setOnClickListener {
+            binding.btnInsert.text = "编辑"
+            isUpAndDowm = true
+
+        }
+
+        myAdapter.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            val clickedItem = adapter.getItem(position) as GetHotListData.HotListBean
+            takeDownId = clickedItem.id
+            when(view.id){
+                R.id.ivClose -> {
+                    /*HotDatabase.getDatabase().hotDao().updateTakeDown(takeDownId)
+                    val maxUpLoadCard = HotDatabase.getDatabase().hotDao().getMaxUpLoadCard()
+                    HotDatabase.getDatabase().hotDao().updatePosition(maxUpLoadCard+1,takeDownId)
+                    val localCloseList = getLocalShowList(localShowDragList)
+                    insertShowCard(localCloseList)
+                    myAdapter = HotListAdapter(topList)
+
+                    val localNoShowCloseList = getLocalNoShowList(localNoShowDragList)
+                    insertNoShowCard(localNoShowCloseList)
+                    myNoAdapter = HotListAdapter(localNoShowCloseList)
+                    Toast.makeText(this,"$position+$takeDownId",Toast.LENGTH_SHORT).show()*/
+                }
+
+            }
+
+        })
+
+
+
+
 
 
         val onItemDragListener = object : OnItemDragListener {
@@ -103,6 +143,8 @@ class HotListActivity : AppCompatActivity() {
                 binding.btnInsert.setOnClickListener {
                     isDrag = true
                     insertShowCard(updatedItems)
+                    binding.btnInsert.text = "开始"
+                    isUpAndDowm = false
                     Toast.makeText(MyApplication.getContext(), "保存成功", Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -190,6 +232,25 @@ class HotListActivity : AppCompatActivity() {
         return localShowList
     }
 
+    /**
+     * 获取本地设为不显示的上架卡片
+     */
+    private fun getLocalNoShowList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+        val localNoShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
+        val locals = HotDatabase.getDatabase().hotDao().getNoShowCard()
+        for (data in hotList){
+            for (localData in locals){
+                if (data.id == localData.cardId){
+                    data.order = localData.cardOrder.toString()
+                    localNoShowList.add(data)
+                }
+            }
+        }
+        localNoShowList.sort()
+        return localNoShowList
+    }
+
+
 
     fun getShowCardList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val showCardList: MutableList<GetHotListData.HotListBean> = mutableListOf()
@@ -273,7 +334,7 @@ class HotListActivity : AppCompatActivity() {
             val hot = Hot()
             hot.cardId = item.id
             hot.type = "1"
-            hot.isTakeDown = "0"
+            hot.isTakeDown = "1"
             hot.cardOrder = i
             HotDatabase.getDatabase().hotDao().insert(hot)
         }
