@@ -19,29 +19,16 @@ interface HotDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg hot: Hot): List<Long>
 
-    @Update
-     fun updateCard(hot: Hot)
+    // 更新卡片位置
+    @Query("UPDATE Hot SET cardOrder=:cardOrder WHERE cardId=:cardId")
+    fun updatePosition(cardOrder: Int, cardId: String): Int
 
-    //更新某一条数据
-    @Update
-    fun updateUser(vararg hot: Hot)
-
-    @Update
-     fun updateItems(items:  MutableList<Hot>)
-
+    //获取所有卡片
     @Query("SELECT * FROM Hot")
     fun getAllUsers():  MutableList<Hot>
 
+    //获取所有卡片数量
     @Query("SELECT COUNT(*) FROM Hot")
     fun getRowCount(): Int
 
-    @Query("SELECT * FROM Hot WHERE type='2' ORDER BY cardOrder")
-    fun getShowCard(): List<Hot>
-
-    @Query("SELECT * FROM Hot ORDER BY type ASC")
-    fun update(): List<Hot>
-
-    //删除表里所有数据
-    @Query("delete from Hot")
-    fun deleteAllUser()
 }

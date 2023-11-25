@@ -5,6 +5,7 @@ import androidx.room.Ignore
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+//定义实体类对应的数据表，并指定一个唯一索引。
 @Entity(indices = [Index(value = ["cardId"], unique = true)])
 data class Hot(
     // 使用@PrimaryKey注解将它设为了主键，再把autoGenerate参数指定成true，使得主键的值是自动生成的
