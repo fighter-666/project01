@@ -35,7 +35,10 @@ import kotlinx.coroutines.launch
 
 
 class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
-    BaseItemDraggableAdapter<GetHotListData.HotListBean, BaseViewHolder>(R.layout.item_drggble_view,data) {
+    BaseItemDraggableAdapter<GetHotListData.HotListBean, BaseViewHolder>(
+        R.layout.item_drggble_view,
+        data
+    ) {
 
 
     init {
@@ -43,8 +46,8 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
     }
 
     override fun convert(holder: BaseViewHolder, item: GetHotListData.HotListBean) {
-        when(item.type){
-            "1"->{
+        when (item.type) {
+            "1" -> {
                 val tvTitle = holder.getView<TextView>(R.id.tvTitle)
                 val ivImage = holder.getView<ImageView>(R.id.ivImage)
                 val ivArrow = holder.getView<ImageView>(R.id.ivArrow)
@@ -61,7 +64,8 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
                     .error(R.drawable.ic_launcher_foreground)
                     .into(ivImage)
             }
-            "2"->{
+
+            "2" -> {
                 val cvAdvertisingList = holder.getView<RecyclerView>(R.id.cvAdvertisingList)
                 val tvTitle = holder.getView<TextView>(R.id.tvTitle)
                 val ivArrow = holder.getView<ImageView>(R.id.ivArrow)
@@ -79,6 +83,7 @@ class HotListAdapter(data: MutableList<GetHotListData.HotListBean>) :
                     adapter = myAdapter
                 }
             }
+
             else -> {
                 val ivIconUrl = holder.getView<ImageView>(R.id.ivIconUrl)
                 ivIconUrl.visibility = View.VISIBLE

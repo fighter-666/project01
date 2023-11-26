@@ -7,7 +7,7 @@ import com.example.myapplication.activity.MyApplication
 
 
 @Database(entities = [Hot::class], version = 1, exportSchema = false)
-abstract class HotDatabase: RoomDatabase() {
+abstract class HotDatabase : RoomDatabase() {
     abstract fun hotDao(): HotDao
 
     companion object {

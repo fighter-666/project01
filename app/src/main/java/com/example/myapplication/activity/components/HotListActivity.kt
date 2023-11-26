@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.room.Database
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback
 import com.chad.library.adapter.base.listener.OnItemDragListener
@@ -25,14 +24,10 @@ import com.gyf.immersionbar.ImmersionBar
 class HotListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHotListBinding
-    private var noShowCardList = mutableListOf<GetHotListData.HotListBean>()
-    private var convertedList = mutableListOf<Hot>()
     private lateinit var myAdapter: HotListAdapter
     private lateinit var myNoAdapter: HotListAdapter
     private var isDrag: Boolean = false
     private var isUpAndDowm: Boolean = false
-    private lateinit var takeDownId: String
-    private lateinit var upLoadId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,13 +57,13 @@ class HotListActivity : AppCompatActivity() {
         //val newList = getNewList(hotList.hotList)
         if (count > 0) {
             myAdapter = HotListAdapter(localShowDragList)
-            myNoAdapter = HotListAdapter(noShowCardList)
+            myNoAdapter = HotListAdapter(localNoShowDragList)
         } else {
             insertShowCard(topList)
             myAdapter = HotListAdapter(topList)
 
-            insertNoShowCard(localNoShowDragList)
-            myNoAdapter = HotListAdapter(localNoShowDragList)
+            insertNoShowCard(noShowCardList)
+            myNoAdapter = HotListAdapter(noShowCardList)
         }
 
         binding.recyclerView.apply {
@@ -90,29 +85,30 @@ class HotListActivity : AppCompatActivity() {
 
         myAdapter.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val clickedItem = adapter.getItem(position) as GetHotListData.HotListBean
-            takeDownId = clickedItem.id
-            when(view.id){
-                R.id.ivClose -> {
-                    /*HotDatabase.getDatabase().hotDao().updateTakeDown(takeDownId)
-                    val maxUpLoadCard = HotDatabase.getDatabase().hotDao().getMaxUpLoadCard()
-                    HotDatabase.getDatabase().hotDao().updatePosition(maxUpLoadCard+1,takeDownId)
-                    val localCloseList = getLocalShowList(localShowDragList)
-                    insertShowCard(localCloseList)
-                    myAdapter = HotListAdapter(topList)
-
-                    val localNoShowCloseList = getLocalNoShowList(localNoShowDragList)
-                    insertNoShowCard(localNoShowCloseList)
-                    myNoAdapter = HotListAdapter(localNoShowCloseList)
-                    Toast.makeText(this,"$position+$takeDownId",Toast.LENGTH_SHORT).show()*/
-                }
-
+            val locals = HotDatabase.getDatabase().hotDao().getShowCard()
+            Toast.makeText(this, "11111", Toast.LENGTH_SHORT).show()
+            val maxTakeDownCard = HotDatabase.getDatabase().hotDao().getMaxTakeDownCard()
+            locals[position].cardId?.let {
+                HotDatabase.getDatabase().hotDao().updateTakeDown(
+                    it
+                )
             }
 
+            val localCloseList = getLocalShowList(localShowDragList)
+            insertShowCard(localCloseList)
+            val topList2 = getShowCardList(hotList.hotList)
+            myAdapter = HotListAdapter(topList2)
+            HotDatabase.getDatabase().hotDao().updatePosition(maxTakeDownCard + 1, clickedItem.id)
+
+            val localNoShowDragList2 = getTakeDownCard(hotList.hotList)
+               val localNoShowCloseList = getTakeDownCard(localNoShowDragList2)
+               insertNoShowCard(localNoShowCloseList)
+               myNoAdapter = HotListAdapter(localNoShowCloseList)
+            when (view.id) {
+                R.id.ivClose -> {
+                }
+            }
         })
-
-
-
-
 
 
         val onItemDragListener = object : OnItemDragListener {
@@ -235,12 +231,12 @@ class HotListActivity : AppCompatActivity() {
     /**
      * 获取本地设为不显示的上架卡片
      */
-    private fun getLocalNoShowList(hotList: MutableList<GetHotListData.HotListBean>):MutableList<GetHotListData.HotListBean>{
+    private fun getLocalNoShowList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
         val localNoShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
         val locals = HotDatabase.getDatabase().hotDao().getNoShowCard()
-        for (data in hotList){
-            for (localData in locals){
-                if (data.id == localData.cardId){
+        for (data in hotList) {
+            for (localData in locals) {
+                if (data.id == localData.cardId) {
                     data.order = localData.cardOrder.toString()
                     localNoShowList.add(data)
                 }
@@ -250,6 +246,20 @@ class HotListActivity : AppCompatActivity() {
         return localNoShowList
     }
 
+    private fun getTakeDownCard(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
+        val localNoShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
+        val locals = HotDatabase.getDatabase().hotDao().getTakeDownCard()
+        for (data in hotList) {
+            for (localData in locals) {
+                if (data.id == localData.cardId) {
+                    data.order = localData.cardOrder.toString()
+                    localNoShowList.add(data)
+                }
+            }
+        }
+        localNoShowList.sort()
+        return localNoShowList
+    }
 
 
     fun getShowCardList(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {

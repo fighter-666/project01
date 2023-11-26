@@ -15,7 +15,7 @@ data class Hot(
     var type: String? = null, // 显示类型 0.本地显示 1.本地不显示
     var cardOrder: Int = 0,
     var isTakeDown: String? = null, // 下架标志 0.已上架 1.已下架
-){
+) {
     @Ignore
-    constructor():this(0)
+    constructor() : this(0)
 }

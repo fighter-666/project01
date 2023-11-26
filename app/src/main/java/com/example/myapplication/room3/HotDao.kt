@@ -44,6 +44,9 @@ interface HotDao {
     @Query("SELECT * FROM Hot WHERE isTakeDown='1' and type='1'")
     fun getNoShowCard(): List<Hot>
 
+    @Query("SELECT * FROM Hot WHERE isTakeDown='1' ORDER BY cardOrder ")
+    fun getTakeDownCard(): List<Hot>
+
     //获取所有卡片数量
     @Query("SELECT COUNT(*) FROM Hot")
     fun getRowCount(): Int
@@ -52,5 +55,9 @@ interface HotDao {
     // 获取所有上架卡片的最大位置
     @Query("SELECT MAX(cardOrder) FROM Hot WHERE isTakeDown='0' ")
     fun getMaxUpLoadCard(): Int
+
+    // 获取所有上架卡片的最大位置
+    @Query("SELECT MAX(cardOrder) FROM Hot WHERE isTakeDown='1' ")
+    fun getMaxTakeDownCard(): Int
 
 }
