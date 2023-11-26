@@ -83,6 +83,7 @@ class HotListActivity : AppCompatActivity() {
 
         }
 
+        //下架
         myAdapter.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
             val clickedItem = adapter.getItem(position) as GetHotListData.HotListBean
             val locals = HotDatabase.getDatabase().hotDao().getShowCard()
@@ -108,6 +109,30 @@ class HotListActivity : AppCompatActivity() {
                 R.id.ivClose -> {
                 }
             }
+        })
+
+        //上架
+        myNoAdapter.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            val clickedItem = adapter.getItem(position) as GetHotListData.HotListBean
+            val locals = HotDatabase.getDatabase().hotDao().getNoShowCard()
+            Toast.makeText(this, "11111", Toast.LENGTH_SHORT).show()
+            val maxUpLoadCard = HotDatabase.getDatabase().hotDao().getMaxUpLoadCard()
+            locals[position].cardId?.let {
+                HotDatabase.getDatabase().hotDao().updateUpLoad(
+                    it
+                )
+            }
+
+            val localCloseList = getLocalNoShowList(localShowDragList)
+            insertNoShowCard(localCloseList)
+            val noShowCardList2 = getNoShowCard(hotList.hotList)
+            myNoAdapter = HotListAdapter(noShowCardList2)
+            HotDatabase.getDatabase().hotDao().updatePosition(maxUpLoadCard + 1, clickedItem.id)
+
+            val localNoShowDragList2 = getTakeDownCard(hotList.hotList)
+            val localNoShowCloseList = getUpLoadCard(hotList.hotList)
+            insertShowCard(localNoShowCloseList)
+            myAdapter = HotListAdapter(localNoShowCloseList)
         })
 
 
@@ -259,6 +284,21 @@ class HotListActivity : AppCompatActivity() {
         }
         localNoShowList.sort()
         return localNoShowList
+    }
+
+    private fun getUpLoadCard(hotList: MutableList<GetHotListData.HotListBean>): MutableList<GetHotListData.HotListBean> {
+        val localShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
+        val locals = HotDatabase.getDatabase().hotDao().getUpLoadCard()
+        for (data in hotList) {
+            for (localData in locals) {
+                if (data.id == localData.cardId) {
+                    data.order = localData.cardOrder.toString()
+                    localShowList.add(data)
+                }
+            }
+        }
+        localShowList.sort()
+        return localShowList
     }
 
 

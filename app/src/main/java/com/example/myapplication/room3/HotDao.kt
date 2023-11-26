@@ -47,6 +47,9 @@ interface HotDao {
     @Query("SELECT * FROM Hot WHERE isTakeDown='1' ORDER BY cardOrder ")
     fun getTakeDownCard(): List<Hot>
 
+    @Query("SELECT * FROM Hot WHERE isTakeDown='0' ORDER BY cardOrder ")
+    fun getUpLoadCard(): List<Hot>
+
     //获取所有卡片数量
     @Query("SELECT COUNT(*) FROM Hot")
     fun getRowCount(): Int
