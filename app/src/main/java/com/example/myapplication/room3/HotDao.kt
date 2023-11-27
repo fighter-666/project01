@@ -41,7 +41,7 @@ interface HotDao {
     @Query("SELECT * FROM Hot WHERE isTakeDown='0' and type='0'  ORDER BY cardOrder")
     fun getShowCard(): MutableList<Hot>
 
-    @Query("SELECT * FROM Hot WHERE isTakeDown='1' and type='1'")
+    @Query("SELECT * FROM Hot WHERE isTakeDown='1' and type='1'  ORDER BY cardOrder")
     fun getNoShowCard(): List<Hot>
 
     @Query("SELECT * FROM Hot WHERE isTakeDown='1' ORDER BY cardOrder ")
@@ -59,7 +59,7 @@ interface HotDao {
     @Query("SELECT MAX(cardOrder) FROM Hot WHERE isTakeDown='0' ")
     fun getMaxUpLoadCard(): Int
 
-    // 获取所有上架卡片的最大位置
+    // 获取所有下架卡片的最大位置
     @Query("SELECT MAX(cardOrder) FROM Hot WHERE isTakeDown='1' ")
     fun getMaxTakeDownCard(): Int
 
