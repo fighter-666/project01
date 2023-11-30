@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -26,8 +27,8 @@ class HotListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHotListBinding
     private lateinit var myAdapter: HotListAdapter
     private lateinit var myNoAdapter: HotListAdapter
-    private lateinit var showList: MutableList<GetHotListData.HotListBean>
-    private lateinit var noShowList: MutableList<GetHotListData.HotListBean>
+    private  var showList: MutableList<GetHotListData.HotListBean> = mutableListOf()
+    private  var noShowList: MutableList<GetHotListData.HotListBean> = mutableListOf()
     private var isDrag: Boolean = false
     private var isUpAndDowm: Boolean = false
 
@@ -35,8 +36,6 @@ class HotListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHotListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        showList = mutableListOf()
-        noShowList = mutableListOf()
 
         //沉浸式
         ImmersionBar.with(this).transparentStatusBar()  //透明状态栏，不写默认透明色
@@ -46,51 +45,49 @@ class HotListActivity : AppCompatActivity() {
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
         val json: String = application.assets.open("getHotListData.json").bufferedReader()
             .use { it.readText() }
-        val json2: String = application.assets.open("getHotListData2.json").bufferedReader()
-            .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         val hotList = gson.fromJson(json, GetHotListData::class.java)
 
-        val topList = getShowCardList(hotList.hotList)
-        val noShowCardList = getNoShowCard(hotList.hotList)
-
+        //获取本地存储数据的行数
         val count = HotDatabase.getDatabase().hotDao().getRowCount()
-        val localShowDragList = getLocalShowList(hotList.hotList)
-        val localNoShowDragList = getLocalNoShowList(hotList.hotList)
-        //val newList = getNewList(hotList.hotList)
+
+        //判断本地是否有缓存数据
         if (count > 0) {
+            val localShowDragList = getLocalShowList(hotList.hotList)
+            val localNoShowDragList = getLocalNoShowList(hotList.hotList)
+            showList.clear()
             showList.addAll(localShowDragList)
             myAdapter = HotListAdapter(showList)
 
+            noShowList.clear()
             noShowList.addAll(localNoShowDragList)
             myNoAdapter = HotListAdapter(noShowList)
         } else {
-            showList.addAll(topList)
+            val showCardList = getShowCardList(hotList.hotList)
+            val noShowCardList = getNoShowCard(hotList.hotList)
+            showList.clear()
+            showList.addAll(showCardList)
             insertShowCard(showList)
             myAdapter = HotListAdapter(showList)
 
+            noShowList.clear()
             noShowList.addAll(noShowCardList)
             insertNoShowCard(noShowList)
             myNoAdapter = HotListAdapter(noShowList)
         }
 
         binding.recyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = GridLayoutManager(context, 2)
             //(layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
             adapter = myAdapter
         }
         binding.noShowRecyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            layoutManager = GridLayoutManager(context, 2)
             //(layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
             adapter = myNoAdapter
         }
 
-        /*binding.btnInsert.setOnClickListener {
-            binding.btnInsert.text = "编辑"
-            isUpAndDowm = true
-
-        }*/
 
         //下架
         myAdapter.setOnItemClickListener(BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
@@ -108,30 +105,24 @@ class HotListActivity : AppCompatActivity() {
                 )
             }
 
+            // 更新卡片位置，把下架的顺序置于下架商品的最后
+            HotDatabase.getDatabase().hotDao().updatePosition(maxTakeDownCard, clickedItem.id)
+
             //获取本地设为显示的上架卡片顺序赋予接口卡片
             val localCloseList = getLocalShowList(showList)
             //重新排序
             insertShowCard(localCloseList)
-            //myAdapter = HotListAdapter(topList2)
             //刷新数据
             showList.clear()
             showList.addAll(localCloseList)
             myAdapter.notifyDataSetChanged()
 
-            // 更新卡片位置，把下架的顺序置于下架商品的最后
-            HotDatabase.getDatabase().hotDao().updatePosition(maxTakeDownCard + 1, clickedItem.id)
-
             ////得到下架的卡片
             val localNoShowDragList2 = getTakeDownCard(hotList.hotList)
-            ////得到下架的卡片
-            //val localNoShowCloseList = getTakeDownCard(localNoShowDragList2)
             //重新排序
             insertNoShowCard(localNoShowDragList2)
-            //myNoAdapter = HotListAdapter(localNoShowCloseList)
             //刷新数据
-            noShowList.clear()
-            noShowList.addAll(localNoShowDragList2)
-            myNoAdapter.notifyDataSetChanged()
+            myNoAdapter.updateDataSet(localNoShowDragList2)
         })
 
         //上架
@@ -150,35 +141,23 @@ class HotListActivity : AppCompatActivity() {
                 )
             }
 
-            //更新卡片位置，把上架的顺序置于上架商品的最后
-            HotDatabase.getDatabase().hotDao().updatePosition(maxUpLoadCard + 1, clickedItem.id)
+            HotDatabase.getDatabase().hotDao().updatePosition(maxUpLoadCard , clickedItem.id)
 
-            //得到上架卡片
-            val localNoShowDragList2 = getLocalShowList(showList)
             //得到上架卡片
             val localNoShowCloseList = getUpLoadCard(hotList.hotList)
             insertShowCard(localNoShowCloseList)
-            //myAdapter = HotListAdapter(localNoShowCloseList)
-            showList.clear()
-            showList.addAll(localNoShowCloseList)
-            myAdapter.notifyDataSetChanged()
+            myAdapter.updateDataSet(localNoShowCloseList)
 
             //获取本地设为不显示的下架卡片顺序接口卡片
             val localCloseList = getTakeDownCard(noShowList)
             //重新排序
             insertNoShowCard(localCloseList)
             val localCloseList2 = getTakeDownCard(noShowList)
-            //得到不显示在首页的卡片
-            //myNoAdapter = HotListAdapter(noShowCardList2)
             //刷新数据
-            noShowList.clear()
-            noShowList.addAll(localCloseList2)
-            myNoAdapter.notifyDataSetChanged()
-
-
+            myNoAdapter.updateDataSet(localCloseList2)
         })
 
-
+        //拖拽排序
         val onItemDragListener = object : OnItemDragListener {
             override fun onItemDragStart(viewHolder: RecyclerView.ViewHolder, pos: Int) {
                 // Implementation for onItemDragStart
@@ -426,7 +405,7 @@ class HotListActivity : AppCompatActivity() {
         }
     }
 
-    //插入本地不现实的数据
+    //插入本地不显示的数据
     fun insertNoShowCard(hotList: MutableList<GetHotListData.HotListBean>) {
         for (i in 0 until hotList.size) {
             val item = hotList[i]
