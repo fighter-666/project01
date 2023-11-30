@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.activity.BaseApplication
+import com.example.myapplication.activity.TreeListActivity
 import com.example.myapplication.activity.components.AdvertisingActivity
 import com.example.myapplication.activity.components.AsyncServiceActivity
 import com.example.myapplication.activity.components.BannerActivity
@@ -105,6 +106,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "FirstRoomActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "HotListActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "ViewpageActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "TreeListActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -246,6 +248,10 @@ class ComponentsFragment : Fragment() {
                 }
                 26 -> {
                     val intent = Intent(context, ViewpageActivity::class.java)
+                    startActivity(intent)
+                }
+                27 -> {
+                    val intent = Intent(context, TreeListActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

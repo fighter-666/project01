@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvProvince"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" />
+
+    <!-- 标识该 Item 的子列表是否展开，图片是 → ，通过旋转控制状态 -->
+    <ImageView
+        android:id="@+id/ivExpandIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:src="@drawable/auto_recharge" />
+
+</FrameLayout>
