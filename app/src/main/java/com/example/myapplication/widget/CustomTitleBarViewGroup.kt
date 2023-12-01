@@ -82,10 +82,10 @@ class CustomTitleBarViewGroup : RelativeLayout {
         val content2 = typedArray.getString(R.styleable.CustomTitleBarViewGroup_right_title)
         val barImageWidth = typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageWidth3, 20)
         val rightImageWidth =
-            typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageWidth3, 20)
+            typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_right_imageWidth3, 20)
         val barImageHeight = typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageHeight3, 20)
         val rightImageHeight =
-            typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_imageHeight3, 20)
+            typedArray.getDimensionPixelSize(R.styleable.CustomTitleBarViewGroup_right_imageHeight3, 20)
         typedArray.recycle()
 
         // 将获取到的属性值应用到您的视图或逻辑中
