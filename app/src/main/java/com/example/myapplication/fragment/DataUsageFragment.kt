@@ -47,11 +47,6 @@ class DataUsageFragment : BaseLazyFragment() {
     }
 
     override fun loadData() {
-
-
-       /* feedList = gson.fromJson(json, GetFeedListData::class.java)
-        myAdapter = WaterfallAdapter(feedList.feedList)
-        mRecyclerView = findViewById(R.id.recyclerView)*/
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
         }
@@ -60,18 +55,20 @@ class DataUsageFragment : BaseLazyFragment() {
         }
         initAdapter()
 
-        //mAdapter.expandAll()
-
-        }
+    }
 
     private fun initAdapter() {
         //从应用程序的资产文件夹中读取名为"getFeedListData.json"的JSON文件并将其内容作为字符串进行处理
-        val json: String = requireContext().assets.open("getUserFluxPackageData.json").bufferedReader()
-            .use { it.readText() }
+        val json: String =
+            requireContext().assets.open("getUserFluxPackageData.json").bufferedReader()
+                .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         val fluxPackage = gson.fromJson(json, UserFluxPackageData::class.java)
-        Log.d("fluxPackageList", fluxPackage.productOFFRatable.ratableResourcePackages[0].title.toString())
+        Log.d(
+            "fluxPackageList",
+            fluxPackage.productOFFRatable.ratableResourcePackages[0].title.toString()
+        )
 
 
         mAdapter = TestAdapter(multiItemEntities)

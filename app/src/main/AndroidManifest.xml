@@ -134,20 +134,23 @@
             android:exported="false" />
         <activity android:name=".activity.components.ThirdActivity" />
         <activity android:name=".activity.components.FourthActivity" />
-        <activity android:name=".activity.components.WebViewActivity" />
-        <activity android:name=".activity.components.CustomActivity" />
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".activity.components.WebViewActivity"
             android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.components.CustomActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+
         </activity> <!-- 组件必须在清单文件里面注册 -->
         <service android:name=".service.MyService" />
     </application>

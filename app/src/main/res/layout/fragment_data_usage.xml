@@ -95,7 +95,7 @@
         <TextView
             android:layout_width="220dp"
             android:layout_height="38dp"
-            android:text="充油量"
+            android:text="充流量"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_marginTop="30dp"
