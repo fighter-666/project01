@@ -46,6 +46,7 @@ class DataUsageActivity : AppCompatActivity() {
         fragments.add(WaterfallFragment())
 
         val adapter = MyPagerAdapter(supportFragmentManager, fragments)
+        binding.viewPager.offscreenPageLimit = fragments.size
         binding.viewPager.adapter = adapter              // 绑定adapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)    // 绑定viewPager
 

@@ -19,6 +19,8 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/study"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
@@ -132,23 +134,20 @@
             android:exported="false" />
         <activity android:name=".activity.components.ThirdActivity" />
         <activity android:name=".activity.components.FourthActivity" />
-        <activity android:name=".activity.components.WebViewActivity"
+        <activity android:name=".activity.components.WebViewActivity" />
+        <activity android:name=".activity.components.CustomActivity" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".activity.components.CustomActivity" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-
-
         </activity> <!-- 组件必须在清单文件里面注册 -->
         <service android:name=".service.MyService" />
     </application>

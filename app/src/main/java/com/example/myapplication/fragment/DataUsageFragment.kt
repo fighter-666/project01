@@ -6,23 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.entity.MultiItemEntity
-import com.example.myapplication.adapter.LocationAdapter
-import com.example.myapplication.data.City
-import com.example.myapplication.data.Province
-import com.example.myapplication.data.Town
+import com.example.myapplication.R
 import com.example.myapplication.data.UserFluxPackageData
 import com.example.myapplication.databinding.FragmentDataUsageBinding
+import com.example.myapplication.util.UtilText
 import com.example.myapplication.widget.BaseLazyFragment
 import com.google.gson.Gson
-import java.util.Random
 
 
 class DataUsageFragment : BaseLazyFragment() {
     private var _binding: FragmentDataUsageBinding? = null
     val binding get() = _binding!!
     private lateinit var mAdapter: TestAdapter
-    private lateinit var mAdapter2: LocationAdapter
     private val multiItemEntities = mutableListOf<MultiItemEntity>()
 
     companion object {
@@ -50,9 +48,7 @@ class DataUsageFragment : BaseLazyFragment() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
         }
-        binding.recyclerView2.apply {
-            layoutManager = LinearLayoutManager(context)
-        }
+
         initAdapter()
 
     }
@@ -75,46 +71,43 @@ class DataUsageFragment : BaseLazyFragment() {
         generateData(fluxPackage.productOFFRatable.ratableResourcePackages)
         binding.recyclerView.adapter = mAdapter
 
-
-        val dataList = mockData(1)
-        mAdapter2 = LocationAdapter(dataList)
-
-        binding.recyclerView2.adapter = mAdapter2
-    }
-
-    // 模拟数据
-    private fun mockData(pageSize: Int): List<MultiItemEntity> {
-        val mRandom = Random()
-        val provinceList: MutableList<Province> = ArrayList()
-
-        // 生成指定数量的省份数据
-        for (i in 0 until pageSize) {
-            // 创建一个省份对象
-            val province = Province(String.format("Province %s", pageSize + i))
-            provinceList.add(province)
-
-            // 生成该省份下的随机数量的城市数据
-            val cityCount: Int = mRandom.nextInt(5)
-            for (j in 0 until cityCount) {
-                // 创建一个城市对象
-                val city = City(String.format("City %s-%s", i, j))
-                // 将城市对象添加到省份的子项列表中
-                province.addSubItem(city)
-
-                // 生成该城市下的随机数量的乡镇数据
-                val townCount: Int = mRandom.nextInt(5)
-                for (k in 0 until townCount) {
-                    // 创建一个乡镇对象
-                    val town = Town(String.format("Town %s-%s-%s", i, j, k))
-                    // 将乡镇对象添加到城市的子项列表中
-                    city.addSubItem(town)
-                }
+        // 阈值提醒
+        fluxPackage.warnInfo?.run {
+            if (UtilText.isEmptyOrNull(title) && UtilText.isEmptyOrNull(describe)){
+                binding.rlWarn.visibility = View.GONE
+            }else{
+                binding.rlWarn.visibility = View.VISIBLE
+                /*rlWarn.setOnVisibilityChange { view, isVisible ->
+                    if (isVisible){
+                        HgCxblExpose.exposeTips("流量", this)
+                    }
+                }*/
             }
+
+            if (UtilText.isEmptyOrNull(icon)) {
+                binding.ivIcon.visibility = View.GONE
+            } else {
+                Glide.with(requireActivity())
+                    .load(icon)//使用 load() 方法传入 URL 字符串 imageUrl 来指定要加载的图片资源
+                    //使用 transition() 方法可以设置过渡效果，例如交叉淡入淡出效果
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(binding.ivIcon)
+            }
+            if (UtilText.isEmptyOrNull(title)) {
+                binding.btnWarn.visibility = View.GONE
+            } else {
+                binding.btnWarn.visibility = View.VISIBLE
+                binding.btnWarn.setOnClickListener {
+                }
+                binding.btnWarn.setText(title)
+            }
+            binding.tvWarnTitle.setText(describe)
         }
 
-        // 返回生成的省份列表
-        return provinceList
+
+
     }
+
 
     private fun generateData(item: List<UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean>) {
         val lv0Count = item.size
