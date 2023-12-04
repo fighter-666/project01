@@ -1,188 +1,178 @@
-{
-    "headerInfos": {
-        "code": "0000",
-        "reason": "操作成功"
-    },
-    "responseData": {
-        "resultCode": "0000",
-        "resultDesc": "操作成功",
-        "attach": "",
-        "data": {
-            "mainProductOFFInfo": {
-                "prodOFFNameLink": "83005",
-                "prodOFFNameLinkType": "1",
-                "productOFFName": "天翼畅享40GB(199元)套餐",
-                "shareLink": "83009",
-                "shareLinkType": "1",
-                "shareTipDesc": "当前号码180****0831，有5个号码共享此套餐",
-                "shareTitle": "共享用量"
-            },
-            "productOFFRatable": {
-                "exceedingUsages": null,
-                "ratableResourcePackages": [
-                    {
-                        "linkType": "",
-                        "link": "",
-                        "title": "国内通用流量",
-                        "leftStructure": {
-                            "redFlag": "0",
-                            "num": "48.24",
-                            "unit": "GB",
-                            "titleCornerMark": null,
-                            "title": "已共用"
-                        },
-                        "rightStructure": null,
-                        "productInfos": [
-                            {
-                                "linkType": "",
-                                "link": "",
-                                "title": "天翼畅享40GB(199元)套餐-[共享]国内上网流量",
-                                "progressBar": null,
-                                "leftTitle": null,
-                                "leftHighlight": null,
-                                "leftIcon": "http://www.189.cn/client/iconUrl/DSLL.png",
-                                "titleIcon": "http://www.189.cn/client/iconUrl/ZTC.png",
-                                "rightTitle": null,
-                                "rightHighlight": null,
-                                "rightCommon": null,
-                                "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
-                                "isInvalid": "0",
-                                "isInfiniteAmount": "1",
-                                "infiniteTitle": "已用",
-                                "infiniteValue": "41.65",
-                                "infiniteUnit": "GB",
-                                "orderLevel": 2
-                            },
-                            {
-                                "linkType": "",
-                                "link": "",
-                                "title": "10元5G流量包（含天翼云盘）",
-                                "progressBar": "16",
-                                "leftTitle": "已用",
-                                "leftHighlight": "599.98MB",
-                                "leftIcon": null,
-                                "titleIcon": null,
-                                "rightTitle": "剩余",
-                                "rightHighlight": "3.25GB",
-                                "rightCommon": "/共3.83GB",
-                                "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
-                                "isInvalid": "0",
-                                "isInfiniteAmount": "0",
-                                "infiniteTitle": null,
-                                "infiniteValue": null,
-                                "infiniteUnit": null,
-                                "orderLevel": 4
-                            },
-                            {
-                                "linkType": "",
-                                "link": "",
-                                "title": "5G升级包清单用户专享 (9.9元号码级版)",
-                                "progressBar": "100",
-                                "leftTitle": "已用",
-                                "leftHighlight": "5.00GB",
-                                "leftIcon": null,
-                                "titleIcon": null,
-                                "rightTitle": "剩余",
-                                "rightHighlight": "0KB",
-                                "rightCommon": "/共5.00GB",
-                                "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
-                                "isInvalid": "0",
-                                "isInfiniteAmount": "0",
-                                "infiniteTitle": null,
-                                "infiniteValue": null,
-                                "infiniteUnit": null,
-                                "orderLevel": 4
-                            },
-                            {
-                                "linkType": "",
-                                "link": "",
-                                "title": "魔力大转盘专用流量-7天包国内流量1G",
-                                "progressBar": "100",
-                                "leftTitle": "已用",
-                                "leftHighlight": "1.00GB",
-                                "leftIcon": null,
-                                "titleIcon": null,
-                                "rightTitle": "剩余",
-                                "rightHighlight": "0KB",
-                                "rightCommon": "/共1.00GB",
-                                "outOfServiceTime": "失效时间：2023-11-03 23:59:59",
-                                "isInvalid": "1",
-                                "isInfiniteAmount": "0",
-                                "infiniteTitle": null,
-                                "infiniteValue": null,
-                                "infiniteUnit": null,
-                                "orderLevel": 10
-                            }
-                        ]
+
+     {
+        "mainProductOFFInfo": {
+            "prodOFFNameLink": "83005",
+            "prodOFFNameLinkType": "1",
+            "productOFFName": "天翼畅享40GB(199元)套餐",
+            "shareLink": "83009",
+            "shareLinkType": "1",
+            "shareTipDesc": "当前号码180****0831，有5个号码共享此套餐",
+            "shareTitle": "共享用量"
+        },
+        "productOFFRatable": {
+            "exceedingUsages": null,
+            "ratableResourcePackages": [
+                {
+                    "linkType": "",
+                    "link": "",
+                    "title": "国内通用流量",
+                    "leftStructure": {
+                        "redFlag": "0",
+                        "num": "48.24",
+                        "unit": "GB",
+                        "titleCornerMark": null,
+                        "title": "已共用"
                     },
-                    {
-                        "linkType": "",
-                        "link": "",
-                        "title": "专用流量",
-                        "leftStructure": {
-                            "redFlag": "0",
-                            "num": "2.62",
-                            "unit": "GB",
-                            "titleCornerMark": null,
-                            "title": "已用18%"
+                    "rightStructure": null,
+                    "productInfos": [
+                        {
+                            "linkType": "",
+                            "link": "",
+                            "title": "天翼畅享40GB(199元)套餐-[共享]国内上网流量",
+                            "progressBar": null,
+                            "leftTitle": null,
+                            "leftHighlight": null,
+                            "leftIcon": "http://www.189.cn/client/iconUrl/DSLL.png",
+                            "titleIcon": "http://www.189.cn/client/iconUrl/ZTC.png",
+                            "rightTitle": null,
+                            "rightHighlight": null,
+                            "rightCommon": null,
+                            "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
+                            "isInvalid": "0",
+                            "isInfiniteAmount": "1",
+                            "infiniteTitle": "已用",
+                            "infiniteValue": "41.65",
+                            "infiniteUnit": "GB",
+                            "orderLevel": 2
                         },
-                        "rightStructure": {
-                            "redFlag": "0",
-                            "num": "12.38",
-                            "unit": "GB",
-                            "titleCornerMark": null,
-                            "title": "剩余82%"
+                        {
+                            "linkType": "",
+                            "link": "",
+                            "title": "10元5G流量包（含天翼云盘）",
+                            "progressBar": "16",
+                            "leftTitle": "已用",
+                            "leftHighlight": "599.98MB",
+                            "leftIcon": null,
+                            "titleIcon": null,
+                            "rightTitle": "剩余",
+                            "rightHighlight": "3.25GB",
+                            "rightCommon": "/共3.83GB",
+                            "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
+                            "isInvalid": "0",
+                            "isInfiniteAmount": "0",
+                            "infiniteTitle": null,
+                            "infiniteValue": null,
+                            "infiniteUnit": null,
+                            "orderLevel": 4
                         },
-                        "productInfos": [
-                            {
-                                "linkType": "",
-                                "link": "",
-                                "title": "15GB定向流量包（头条系）",
-                                "progressBar": "18",
-                                "leftTitle": "已用",
-                                "leftHighlight": "2.62GB",
-                                "leftIcon": "http://www.189.cn/client/iconUrl/DXflux.png",
-                                "titleIcon": null,
-                                "rightTitle": "剩余",
-                                "rightHighlight": "12.38GB",
-                                "rightCommon": "/共15.00GB",
-                                "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
-                                "isInvalid": "0",
-                                "isInfiniteAmount": "0",
-                                "infiniteTitle": null,
-                                "infiniteValue": null,
-                                "infiniteUnit": null,
-                                "orderLevel": 6
-                            }
-                        ]
-                    }
-                ],
-                "exceedResourcePackages": [],
-                "linkType": null,
-                "link": null,
-                "exceedLinkType": null,
-                "exceedLink": null,
-                "exceedTitle": null
-            },
-            "warnInfo": {
-                "describe": "流量查询文字栏提示",
-                "icon": "https://zsc.189.cn/bigdata/2023/2/27/111677478068877812.jpg",
-                "link": "http://www.baidu.com",
-                "linkType": "2",
-                "provinceCode": "600305",
-                "sceneId": "100214##2799##default##1977600336##010001002000##3##N##N##1##N##N##19776",
-                "title": "温馨提示",
-                "recommender": null
-            },
-            "buttonInfo": {
-                "buttonImageUrl": null,
-                "buttonLink": null,
-                "buttonLinkType": null,
-                "buttonTitle": null
-            },
-            "tips": "",
-            "queryFailInfo": null,
-            "voiceMessage": "尊敬的尾号零八三一用户，您的国内通用流量已使用48.24G。,其中主套餐流量已用41.65G，其他流量1已用599.98兆， 剩余3.25G。其他流量2已用5G， 剩余0KB。您的专用流量已使用2.62G,剩余12.38G。,其中定向流量已用2.62G， 剩余12.38G。"
-        }
+                        {
+                            "linkType": "",
+                            "link": "",
+                            "title": "5G升级包清单用户专享 (9.9元号码级版)",
+                            "progressBar": "100",
+                            "leftTitle": "已用",
+                            "leftHighlight": "5.00GB",
+                            "leftIcon": null,
+                            "titleIcon": null,
+                            "rightTitle": "剩余",
+                            "rightHighlight": "0KB",
+                            "rightCommon": "/共5.00GB",
+                            "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
+                            "isInvalid": "0",
+                            "isInfiniteAmount": "0",
+                            "infiniteTitle": null,
+                            "infiniteValue": null,
+                            "infiniteUnit": null,
+                            "orderLevel": 4
+                        },
+                        {
+                            "linkType": "",
+                            "link": "",
+                            "title": "魔力大转盘专用流量-7天包国内流量1G",
+                            "progressBar": "100",
+                            "leftTitle": "已用",
+                            "leftHighlight": "1.00GB",
+                            "leftIcon": null,
+                            "titleIcon": null,
+                            "rightTitle": "剩余",
+                            "rightHighlight": "0KB",
+                            "rightCommon": "/共1.00GB",
+                            "outOfServiceTime": "失效时间：2023-11-03 23:59:59",
+                            "isInvalid": "1",
+                            "isInfiniteAmount": "0",
+                            "infiniteTitle": null,
+                            "infiniteValue": null,
+                            "infiniteUnit": null,
+                            "orderLevel": 10
+                        }
+                    ]
+                },
+                {
+                    "linkType": "",
+                    "link": "",
+                    "title": "专用流量",
+                    "leftStructure": {
+                        "redFlag": "0",
+                        "num": "2.62",
+                        "unit": "GB",
+                        "titleCornerMark": null,
+                        "title": "已用18%"
+                    },
+                    "rightStructure": {
+                        "redFlag": "0",
+                        "num": "12.38",
+                        "unit": "GB",
+                        "titleCornerMark": null,
+                        "title": "剩余82%"
+                    },
+                    "productInfos": [
+                        {
+                            "linkType": "",
+                            "link": "",
+                            "title": "15GB定向流量包（头条系）",
+                            "progressBar": "18",
+                            "leftTitle": "已用",
+                            "leftHighlight": "2.62GB",
+                            "leftIcon": "http://www.189.cn/client/iconUrl/DXflux.png",
+                            "titleIcon": null,
+                            "rightTitle": "剩余",
+                            "rightHighlight": "12.38GB",
+                            "rightCommon": "/共15.00GB",
+                            "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
+                            "isInvalid": "0",
+                            "isInfiniteAmount": "0",
+                            "infiniteTitle": null,
+                            "infiniteValue": null,
+                            "infiniteUnit": null,
+                            "orderLevel": 6
+                        }
+                    ]
+                }
+            ],
+            "exceedResourcePackages": [],
+            "linkType": null,
+            "link": null,
+            "exceedLinkType": null,
+            "exceedLink": null,
+            "exceedTitle": null
+        },
+        "warnInfo": {
+            "describe": "流量查询文字栏提示",
+            "icon": "https://zsc.189.cn/bigdata/2023/2/27/111677478068877812.jpg",
+            "link": "http://www.baidu.com",
+            "linkType": "2",
+            "provinceCode": "600305",
+            "sceneId": "100214##2799##default##1977600336##010001002000##3##N##N##1##N##N##19776",
+            "title": "温馨提示",
+            "recommender": null
+        },
+        "buttonInfo": {
+            "buttonImageUrl": null,
+            "buttonLink": null,
+            "buttonLinkType": null,
+            "buttonTitle": null
+        },
+        "tips": "",
+        "queryFailInfo": null,
+        "voiceMessage": "尊敬的尾号零八三一用户，您的国内通用流量已使用48.24G。,其中主套餐流量已用41.65G，其他流量1已用599.98兆， 剩余3.25G。其他流量2已用5G， 剩余0KB。您的专用流量已使用2.62G,剩余12.38G。,其中定向流量已用2.62G， 剩余12.38G。"
     }
-}

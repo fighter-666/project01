@@ -10,7 +10,9 @@
         android:id="@+id/ivLeft"
         android:layout_width="9dp"
         android:layout_height="15dp"
-        android:src="@drawable/back" />
+        android:src="@drawable/back"
+        android:layout_alignTop="@id/tvTitleBar"
+        android:layout_alignBottom="@id/tvTitleBar"/>
 
     <TextView
         android:id="@+id/tvTitleBar"
@@ -35,5 +37,7 @@
         android:id="@+id/ivRight"
         android:layout_width="22dp"
         android:layout_height="20dp"
+        android:layout_alignTop="@id/tvTitleBar"
+        android:layout_alignBottom="@id/tvTitleBar"
         android:layout_alignParentRight="true" />
 </RelativeLayout>

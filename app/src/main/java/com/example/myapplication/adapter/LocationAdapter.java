@@ -71,13 +71,13 @@ public class LocationAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, 
     }
 
     private void showProvince(@NonNull BaseViewHolder helper, Province province) {
-        helper.setText(R.id.tvProvince, province.getName());
-        helper.getView(R.id.ivExpandIcon).setRotation(province.isExpanded() ? 90 : 0);
+        helper.setText(R.id.tvTitle, province.getName());
+        helper.getView(R.id.ivExpandIcon).setRotation(province.isExpanded() ? 180 : 0);
     }
 
     private void showCity(@NonNull BaseViewHolder helper, City city) {
         helper.setText(R.id.tvCity, city.getName());
-        helper.getView(R.id.ivExpandIcon).setRotation(city.isExpanded() ? 90 : 0);
+        helper.getView(R.id.ivExpandIcon).setRotation(city.isExpanded() ? 180 : 0);
     }
 
     private void showTown(@NonNull BaseViewHolder helper, Town town) {
