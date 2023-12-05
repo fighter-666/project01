@@ -19,6 +19,8 @@ import java.util.Random
 class TreeListActivity : AppCompatActivity() {
     private lateinit var mAdapter: LocationAdapter
     private lateinit var mRecyclerView: RecyclerView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tree_list)

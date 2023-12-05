@@ -53,6 +53,8 @@ public class LocationAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, 
         setOnItemClickListener(onItemClickListener);
     }
 
+
+
     @Override
     protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
         switch (helper.getItemViewType()) {

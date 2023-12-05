@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvBottomTitle"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="15dp"
+        android:gravity="left"
+        android:text="1、新订购流量的展示会有一定延迟，如有请稍后再查。
+
+           2、结转流量，是上月未使用完、且可在本月继续"
+        android:textColor="@color/black_999999"
+        android:textSize="13sp"
+        />
+
+    <TextView
+        android:id="@+id/tvRecharge"
+        android:layout_width="220dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/shape_rectangle_button"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="充流量"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>

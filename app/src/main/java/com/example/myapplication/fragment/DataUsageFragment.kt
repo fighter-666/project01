@@ -5,15 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.example.myapplication.R
 import com.example.myapplication.data.UserFluxPackageData
 import com.example.myapplication.databinding.FragmentDataUsageBinding
-import com.example.myapplication.util.UtilText
 import com.example.myapplication.widget.BaseLazyFragment
 import com.google.gson.Gson
 
@@ -72,18 +68,35 @@ class DataUsageFragment : BaseLazyFragment() {
         generateData(fluxPackage.productOFFRatable.ratableResourcePackages)
         binding.recyclerView.adapter = mAdapter
         //binding.recyclerView.isNestedScrollingEnabled = false
+        val headerView = getHeaderView(
+            0
+        ) { mAdapter.addHeaderView(getHeaderView(1, getRemoveHeaderListener()), 0) }
+        mAdapter.addHeaderView(headerView)
 
-        // 阈值提醒
+        val footerView: View = getFooterView(0,
+            View.OnClickListener {
+                mAdapter.addFooterView(
+                    getFooterView(
+                        1,
+                        getRemoveFooterListener()
+                    ), 0
+                )
+            })
+        mAdapter.addFooterView(footerView, 0)
+
+
+
+        /*// 阈值提醒
         fluxPackage.warnInfo?.run {
             if (UtilText.isEmptyOrNull(title) && UtilText.isEmptyOrNull(describe)){
                 binding.rlWarn.visibility = View.GONE
             }else{
                 binding.rlWarn.visibility = View.VISIBLE
-                /*rlWarn.setOnVisibilityChange { view, isVisible ->
+                *//*rlWarn.setOnVisibilityChange { view, isVisible ->
                     if (isVisible){
                         HgCxblExpose.exposeTips("流量", this)
                     }
-                }*/
+                }*//*
             }
 
             if (UtilText.isEmptyOrNull(icon)) {
@@ -104,8 +117,44 @@ class DataUsageFragment : BaseLazyFragment() {
                 binding.btnWarn.setText(title)
             }
             binding.tvWarnTitle.setText(describe)
-        }
+        }*/
 
+    }
+
+    private fun getFooterView(type: Int, listener: View.OnClickListener): View {
+        val view: View = layoutInflater.inflate(
+            R.layout.recycleview_footer,
+            binding.recyclerView.getParent() as ViewGroup,
+            false
+        )
+        if (type == 1) {
+            /*val imageView = view.findViewById<View>(R.id.iv) as ImageView
+            imageView.setImageResource(R.mipmap.rm_icon)*/
+        }
+        //view.setOnClickListener(listener)
+        return view
+    }
+
+    private fun getRemoveFooterListener(): View.OnClickListener {
+        return View.OnClickListener { v -> mAdapter.removeFooterView(v) }
+    }
+
+    private fun getHeaderView(type: Int, listener: View.OnClickListener): View {
+        val view: View = layoutInflater.inflate(
+            R.layout.head_view,
+            binding.recyclerView.getParent() as ViewGroup,
+            false
+        )
+        if (type == 1) {
+            /*val imageView = view.findViewById<View>(R.id.iv) as ImageView
+            imageView.setImageResource(R.drawable.rm_icon)*/
+        }
+        //view.setOnClickListener(listener)
+        return view
+    }
+
+    private fun getRemoveHeaderListener(): View.OnClickListener {
+        return View.OnClickListener { v -> mAdapter.removeHeaderView(v) }
     }
 
 
