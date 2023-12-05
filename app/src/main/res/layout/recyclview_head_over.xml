@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="9dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/rounded_rectangle"
+        app:layout_constraintBottom_toBottomOf="@id/tvMealOver"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvMealOver" />
+
+    <TextView
+        android:id="@+id/tvMealOver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="20.5dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:text="已订购流量"
+        android:textColor="@color/black_333333"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

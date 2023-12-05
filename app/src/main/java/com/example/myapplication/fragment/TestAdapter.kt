@@ -30,7 +30,6 @@ import com.example.myapplication.util.DensityUtils
     }
 
     override fun convert(helper: BaseViewHolder, item: MultiItemEntity) {
-        //helper.addOnClickListener(R.id.ivTips)
         when (helper.itemViewType) {
             R.layout.item_normal_meal -> {
                 val lv0 = item as UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean

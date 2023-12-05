@@ -18,7 +18,9 @@ class DataUsageFragment : BaseLazyFragment() {
     private var _binding: FragmentDataUsageBinding? = null
     val binding get() = _binding!!
     private lateinit var mAdapter: TestAdapter
+    private lateinit var mOverAdapter: TestAdapter
     private val multiItemEntities = mutableListOf<MultiItemEntity>()
+    private val multiItemOverEntities = mutableListOf<MultiItemEntity>()
 
     companion object {
         private const val ARG_TAB_NAME = "tabName"
@@ -45,6 +47,9 @@ class DataUsageFragment : BaseLazyFragment() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
         }
+        binding.recyclerOverView.apply {
+            layoutManager = LinearLayoutManager(context)
+        }
 
         initAdapter()
 
@@ -60,14 +65,26 @@ class DataUsageFragment : BaseLazyFragment() {
         val fluxPackage = gson.fromJson(json, UserFluxPackageData::class.java)
         Log.d(
             "fluxPackageList",
-            fluxPackage.productOFFRatable.ratableResourcePackages[0].title.toString()
+            fluxPackage.productOFFRatable.exceedResourcePackages
+                .toString()
         )
 
 
         mAdapter = TestAdapter(multiItemEntities)
+        mOverAdapter = TestAdapter(multiItemOverEntities)
+
         generateData(fluxPackage.productOFFRatable.ratableResourcePackages)
+        generateOverData(fluxPackage.productOFFRatable.exceedResourcePackages)
+
         binding.recyclerView.adapter = mAdapter
+        binding.recyclerOverView.adapter = mOverAdapter
         //binding.recyclerView.isNestedScrollingEnabled = false
+        val headerOverView = getOverHeaderView(
+            0
+        ) { mOverAdapter.addHeaderView(getOverHeaderView(1, getRemoveHeaderListener()), 0) }
+
+        mOverAdapter.addHeaderView(headerOverView)
+
         val headerView = getHeaderView(
             0
         ) { mAdapter.addHeaderView(getHeaderView(1, getRemoveHeaderListener()), 0) }
@@ -139,9 +156,23 @@ class DataUsageFragment : BaseLazyFragment() {
         return View.OnClickListener { v -> mAdapter.removeFooterView(v) }
     }
 
-    private fun getHeaderView(type: Int, listener: View.OnClickListener): View {
+    private fun getOverHeaderView(type: Int, listener: View.OnClickListener): View {
         val view: View = layoutInflater.inflate(
             R.layout.head_view,
+            binding.recyclerOverView.getParent() as ViewGroup,
+            false
+        )
+        if (type == 1) {
+            /*val imageView = view.findViewById<View>(R.id.iv) as ImageView
+            imageView.setImageResource(R.drawable.rm_icon)*/
+        }
+        //view.setOnClickListener(listener)
+        return view
+    }
+
+    private fun getHeaderView(type: Int, listener: View.OnClickListener): View {
+        val view: View = layoutInflater.inflate(
+            R.layout.recyclview_head_over,
             binding.recyclerView.getParent() as ViewGroup,
             false
         )
@@ -174,6 +205,24 @@ class DataUsageFragment : BaseLazyFragment() {
             //llMealNormal.visibility = View.VISIBLE
         }
         mAdapter.notifyDataSetChanged()
+    }
+
+    private fun generateOverData(item: List<UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean>) {
+        val lv0Count = item.size
+        for (i in 0 until lv0Count) {
+            val lv0 = item[i]
+            val lv1Count = lv0.productInfos.size
+            for (j in 0 until lv1Count) {
+                val lv1 = lv0.productInfos[j]
+                lv0.addSubItem(lv1)
+            }
+            multiItemOverEntities.add(lv0)
+        }
+
+        if (multiItemOverEntities.size > 0) {
+            //llMealNormal.visibility = View.VISIBLE
+        }
+        mOverAdapter.notifyDataSetChanged()
     }
 
 }
