@@ -1,13 +1,16 @@
 package com.example.myapplication.fragment
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.entity.IExpandable
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.example.myapplication.R
 import com.example.myapplication.data.UserFluxPackageData
@@ -27,6 +30,7 @@ import com.example.myapplication.util.DensityUtils
     }
 
     override fun convert(helper: BaseViewHolder, item: MultiItemEntity) {
+        //helper.addOnClickListener(R.id.ivTips)
         when (helper.itemViewType) {
             R.layout.item_normal_meal -> {
                 val lv0 = item as UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean
@@ -51,6 +55,9 @@ import com.example.myapplication.util.DensityUtils
                         setGone(R.id.ivTips, false)
                     }else{
                         setGone(R.id.ivTips, true)
+                        setOnClickListener(R.id.ivTips, View.OnClickListener {
+                            Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show()
+                        })
                     }
 
                     // 左结构
@@ -127,6 +134,10 @@ import com.example.myapplication.util.DensityUtils
                     ivExpand.setImageResource(R.drawable.arrow_down)
                     helper.setBackgroundRes(R.id.llbg, R.drawable.bg_gray_stroke_10)
                 }
+
+
+
+
 
                 // 点击展开
                 helper.itemView.setOnClickListener {
@@ -226,6 +237,20 @@ import com.example.myapplication.util.DensityUtils
                         }
                     }
                 }
+
+                //删除子列表
+                helper.itemView.setOnClickListener(View.OnClickListener {
+                    val pos: Int = helper.adapterPosition
+                    // 先获取到当前 item 的父 positon，再移除自己
+                    val positionAtAll = getParentPositionInAll(pos)
+                    remove(pos)
+                    if (positionAtAll != -1) {
+                        val multiItemEntity = data[positionAtAll] as IExpandable<*>
+                        if (!hasSubItems(multiItemEntity)) {
+                            remove(positionAtAll)
+                        }
+                    }
+                })
 
                 val pos = getParentPosition(item)
                 (data[pos] as UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean).run {
