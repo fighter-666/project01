@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/tvBottomTitle"
         android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginStart="11dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:gravity="left"
         android:text="1、新订购流量的展示会有一定延迟，如有请稍后再查。
-
-           2、结转流量，是上月未使用完、且可在本月继续"
+                    2、结转流量，是上月未使用完、且可在本月继续"
         android:textColor="@color/black_999999"
         android:textSize="13sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         />
+
+    <TextView
+        android:id="@+id/tvExpand"
+        android:layout_width="55dp"
+        android:layout_height="18dp"
+        android:textSize="13dp"
+        android:text="展开"
+        android:drawablePadding="3.5dp"
+        android:gravity="right"
+        android:drawableRight="@drawable/ic_blue_arrow_down"
+        android:textColor="@color/blue_1990ff"
+        android:layout_gravity="bottom|right"
+        app:layout_constraintBottom_toBottomOf="@id/tvBottomTitle"
+        app:layout_constraintRight_toRightOf="@id/tvBottomTitle"
+        android:background="@drawable/bg_text_expand"
+        />
+
 
     <TextView
         android:id="@+id/tvRecharge"
@@ -30,6 +47,10 @@
         android:layout_gravity="center"
         android:text="充流量"
         android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBottomTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:textSize="14sp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

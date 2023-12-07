@@ -1,173 +1,154 @@
 {
-    "headerInfos": {
-        "code": "0000",
-        "reason": "操作成功"
-    },
-    "responseData": {
-        "resultCode": "0000",
-        "resultDesc": "操作成功",
-        "attach": "",
-        "data": {
-            "tabList": [
+    "tabList": [
+        {
+            "tabName": "流量",
+            "tabIcon": "",
+            "redFlag": "",
+            "timestamp": "20230920175441",
+            "tabType": "1",
+            "order": "1",
+            "link": "",
+            "linkType": "",
+            "type": "1",
+            "isDefault": "1",
+            "subTitle": null,
+            "tagList": [
                 {
-                    "tabName": "推荐",
-                    "tabIcon": "",
-                    "redFlag": "",
-                    "timestamp": "20230920175441",
-                    "tabType": "1",
-                    "order": "1",
-                    "link": "",
-                    "linkType": "",
-                    "type": "1",
-                    "isDefault": "1",
-                    "subTitle": null,
-                    "tagList": [
-                        {
-                            "tagType": "1",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183812268668.png",
-                            "tagName": "快捷功能",
-                            "tagID": "2"
-                        },
-                        {
-                            "tagType": null,
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183914574950.png",
-                            "tagName": "电信带货",
-                            "tagID": "4"
-                        }
-                    ]
+                    "tagType": "1",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183812268668.png",
+                    "tagName": "快捷功能",
+                    "tagID": "2"
                 },
                 {
-                    "tabName": "商城",
-                    "tabIcon": "",
-                    "redFlag": "",
-                    "timestamp": "20230901134858",
-                    "tabType": "1",
-                    "order": "2",
-                    "link": "",
-                    "linkType": "",
-                    "type": "1",
-                    "isDefault": "0",
-                    "subTitle": null,
-                    "tagList": [
-                        {
-                            "tagType": "2",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253945380988.png",
-                            "tagName": "查询办理",
-                            "tagID": "2"
-                        },
-                        {
-                            "tagType": "2",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253992144177.png",
-                            "tagName": "电信带货",
-                            "tagID": "4"
-                        }
-                    ]
-                },
-                {
-                    "tabName": "视频",
-                    "tabIcon": "",
-                    "redFlag": "0",
-                    "timestamp": "20230831164909",
-                    "tabType": "1",
-                    "order": "5",
-                    "link": "",
-                    "linkType": "",
-                    "type": "1",
-                    "isDefault": "0",
-                    "subTitle": null,
-                    "tagList": [
-                        {
-                            "tagType": "2",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690254196129940.png",
-                            "tagName": "全屋wifi",
-                            "tagID": "2"
-                        }
-                    ]
-                },
-                {
-                    "tabName": "彩铃",
-                    "tabIcon": "",
-                    "redFlag": "0",
-                    "timestamp": "20230901140141",
-                    "tabType": "1",
-                    "order": "6",
-                    "link": "https%3A%2F%2Fxbk.189.cn%2FluntanSafe%2Fexternal%2Fredirect.do%3Fticket%3D%24ticket%24%26cmpid%3Dkhd-xbktgtokhd-syjh-jt%26indexUri%3DstarCenter%26userId%3D1307893457309810688%26utm_ch%3Dhg_app%26utm_sch%3Dhg_sy_feedtg%26utm_as%3Ddd",
-                    "linkType": "5",
-                    "type": "2",
-                    "isDefault": "0",
-                    "subTitle": null,
-                    "tagList": [
-                        {
-                            "tagType": "2",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690254423923764.png",
-                            "tagName": "办套餐",
-                            "tagID": "2"
-                        }
-                    ]
-                },
-                {
-                    "tabName": "测试",
-                    "tabIcon": "",
-                    "redFlag": "",
-                    "timestamp": "20230901140244",
-                    "tabType": "",
-                    "order": "7",
-                    "link": "",
-                    "linkType": "",
-                    "type": "1",
-                    "isDefault": "0",
-                    "subTitle": null,
-                    "tagList": [
-                        {
-                            "tagType": "2",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253945380988.png",
-                            "tagName": "查询办理",
-                            "tagID": "2"
-                        },
-                        {
-                            "tagType": "2",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253992144177.png",
-                            "tagName": "电信带货",
-                            "tagID": "4"
-                        }
-                    ]
-                },
-                {
-                    "tabName": "我的商品",
-                    "tabIcon": "",
-                    "redFlag": "",
-                    "timestamp": "20230901152157",
-                    "tabType": "",
-                    "order": "8",
-                    "link": "",
-                    "linkType": "",
-                    "type": "1",
-                    "isDefault": "1",
-                    "subTitle": null,
-                    "tagList": [
-                        {
-                            "tagType": "1",
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183812268668.png",
-                            "tagName": "快捷功能",
-                            "tagID": "2"
-                        },
-                        {
-                            "tagType": null,
-                            "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183914574950.png",
-                            "tagName": "电信带货",
-                            "tagID": "4"
-                        }
-                    ]
+                    "tagType": null,
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183914574950.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
                 }
-            ],
-            "jumpGuideBar": {
-                "title": "滑动feed查看更多视频与你喜欢的大v，更有精选好礼等你挑选",
-                "iconUrl": "https://zsc.189.cn/bigdata/2023/4/4/111680596286841598.png",
-                "provinceCode": "1000000037",
-                "recommender": "cc-010001002000.rmc-hg_cxbl_fc.fd-2.od-1.eoc-1977600383",
-                "sceneId": "hg_cxbl_fc##2786##default##1977600383##010001002000##3##N##1977600381##1##N##N##19776"
-            },
-            "isShowSubTitle": null
+            ]
+        },
+        {
+            "tabName": "语音",
+            "tabIcon": "",
+            "redFlag": "",
+            "timestamp": "20230901134858",
+            "tabType": "1",
+            "order": "2",
+            "link": "",
+            "linkType": "",
+            "type": "1",
+            "isDefault": "0",
+            "subTitle": null,
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253945380988.png",
+                    "tagName": "查询办理",
+                    "tagID": "2"
+                },
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253992144177.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
+                }
+            ]
+        },
+        {
+            "tabName": "短信",
+            "tabIcon": "",
+            "redFlag": "0",
+            "timestamp": "20230831164909",
+            "tabType": "1",
+            "order": "5",
+            "link": "",
+            "linkType": "",
+            "type": "1",
+            "isDefault": "0",
+            "subTitle": null,
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690254196129940.png",
+                    "tagName": "全屋wifi",
+                    "tagID": "2"
+                }
+            ]
+        },
+        {
+            "tabName": "彩铃",
+            "tabIcon": "",
+            "redFlag": "0",
+            "timestamp": "20230901140141",
+            "tabType": "1",
+            "order": "6",
+            "link": "https%3A%2F%2Fxbk.189.cn%2FluntanSafe%2Fexternal%2Fredirect.do%3Fticket%3D%24ticket%24%26cmpid%3Dkhd-xbktgtokhd-syjh-jt%26indexUri%3DstarCenter%26userId%3D1307893457309810688%26utm_ch%3Dhg_app%26utm_sch%3Dhg_sy_feedtg%26utm_as%3Ddd",
+            "linkType": "5",
+            "type": "2",
+            "isDefault": "0",
+            "subTitle": null,
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690254423923764.png",
+                    "tagName": "办套餐",
+                    "tagID": "2"
+                }
+            ]
+        },
+        {
+            "tabName": "测试",
+            "tabIcon": "",
+            "redFlag": "",
+            "timestamp": "20230901140244",
+            "tabType": "",
+            "order": "7",
+            "link": "",
+            "linkType": "",
+            "type": "1",
+            "isDefault": "0",
+            "subTitle": null,
+            "tagList": [
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253945380988.png",
+                    "tagName": "查询办理",
+                    "tagID": "2"
+                },
+                {
+                    "tagType": "2",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/25/111690253992144177.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
+                }
+            ]
+        },
+        {
+            "tabName": "我的商品",
+            "tabIcon": "",
+            "redFlag": "",
+            "timestamp": "20230901152157",
+            "tabType": "",
+            "order": "8",
+            "link": "",
+            "linkType": "",
+            "type": "1",
+            "isDefault": "1",
+            "subTitle": null,
+            "tagList": [
+                {
+                    "tagType": "1",
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183812268668.png",
+                    "tagName": "快捷功能",
+                    "tagID": "2"
+                },
+                {
+                    "tagType": null,
+                    "tagIcon": "https://zsc.189.cn/bigdata/2023/7/24/111690183914574950.png",
+                    "tagName": "电信带货",
+                    "tagID": "4"
+                }
+            ]
         }
-    }
+    ]
 }

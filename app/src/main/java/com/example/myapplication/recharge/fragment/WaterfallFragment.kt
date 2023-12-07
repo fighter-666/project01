@@ -41,6 +41,7 @@ import kotlinx.coroutines.launch
 class WaterfallFragment : BaseLazyFragment() {
     private var _binding: FragmentRechargeWaterfallBinding? = null
     val binding get() = _binding!!
+
     //private lateinit var myAdapter: FeedAdapter
     private lateinit var myAdapter: WaterfallAdapter
     private var contactNumber: String? = null
@@ -173,7 +174,8 @@ class WaterfallFragment : BaseLazyFragment() {
         myAdapter.setNewData(feedList.feedList)*/
         binding.rvComponentsWaterfall.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            (layoutManager as StaggeredGridLayoutManager).gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
+            (layoutManager as StaggeredGridLayoutManager).gapStrategy =
+                StaggeredGridLayoutManager.GAP_HANDLING_NONE // 避免瀑布流跳动
             adapter = myAdapter
         }
 
@@ -187,24 +189,23 @@ class WaterfallFragment : BaseLazyFragment() {
         //注册子组件的点击事件
 
         //监听条目子组件的点击事件
-       /* myAdapter.setOnItemChildClickListener { _, view, position ->
+        myAdapter.setOnItemChildClickListener { _, view, position ->
             if (view.id == R.id.btnSelect) {
-                Log.d("点击了选中按钮","aaa")
+                Log.d("点击了选中按钮", "aaa")
                 //获取通讯录
                 requestReadContactsPermission()
 
                 //刷新指定item
                 myAdapter.notifyItemChanged(position)
 
-                *//*
-                                val updatedItem = myAdapter.getItem(position)
-                                if (updatedItem.quickRecharge != null) {
-                                    updatedItem.quickRecharge.title = contactNumber
+                val updatedItem = myAdapter.getItem(position)
+                if (updatedItem?.quickRecharge != null) {
+                    updatedItem.quickRecharge.title = contactNumber
 
-                                    // 更新适配器中的数据集
-                                    feedList.feedList[position] = updatedItem // 将索引为1的项替换为更新后的项
-                                    myAdapter.notifyItemChanged(position)
-                                }*//*
+                    // 更新适配器中的数据集
+                    feedList.feedList[position] = updatedItem // 将索引为1的项替换为更新后的项
+                    myAdapter.notifyItemChanged(position)
+                }
 
             }
         }
@@ -232,7 +233,7 @@ class WaterfallFragment : BaseLazyFragment() {
                     feedList.feedList[15]
                 )
                 myAdapter.addMoreValue(feedList.feedList, data)
-                val startPosition = feedList.feedList.size - 2 // 开始位置是已有数据的最后两个位置
+                val startPosition = feedList.feedList.size // 开始位置是已有数据的最后两个位置
                 val itemCount = data.size // 添加的数据项数
                 myAdapter.notifyItemRangeInserted(startPosition, itemCount)
             }
@@ -243,7 +244,7 @@ class WaterfallFragment : BaseLazyFragment() {
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gsonTab = Gson()
         tabList = gsonTab.fromJson(jsonTab, GetFeedTabData::class.java)
-*/
+
         //获取传过来的id
         //number = requireArguments().getInt(ARG_TAB_NAME)
 
@@ -251,7 +252,7 @@ class WaterfallFragment : BaseLazyFragment() {
         //setCustomIcon(number)
 
         // 设置标签切换监听
-        /*binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+       /* binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 updateTabFont(tab, true) // 设置选中标签字体加粗
                 when (tab.position) {
@@ -434,19 +435,19 @@ class WaterfallFragment : BaseLazyFragment() {
     /**
      * 设置自定义位置图标
      */
-/*    private fun setCustomIcon(number: Int) {
-        //使用binding.tabLayout.newTab()创建一个新的Tab，
-        // 并通过binding.tabLayout.addTab()方法将其添加到binding.tabLayout中。
-        // 第二个参数false表示不选中该Tab。
-        for (i in 0 until tabList.tabList[number].tagList.size) {
-            binding.tabLayout.addTab(binding.tabLayout.newTab(), false)
-        }
-        //使用binding.tabLayout.getTabAt(i)获取第i个Tab，
-        // 并通过.customView属性将自定义的Tab视图设置为该Tab的自定义视图
-        for (i in 0 until tabList.tabList[number].tagList.size) {
-            binding.tabLayout.getTabAt(i)?.customView = makeTabView(i, number)
-        }
-    }*/
+    /*    private fun setCustomIcon(number: Int) {
+            //使用binding.tabLayout.newTab()创建一个新的Tab，
+            // 并通过binding.tabLayout.addTab()方法将其添加到binding.tabLayout中。
+            // 第二个参数false表示不选中该Tab。
+            for (i in 0 until tabList.tabList[number].tagList.size) {
+                binding.tabLayout.addTab(binding.tabLayout.newTab(), false)
+            }
+            //使用binding.tabLayout.getTabAt(i)获取第i个Tab，
+            // 并通过.customView属性将自定义的Tab视图设置为该Tab的自定义视图
+            for (i in 0 until tabList.tabList[number].tagList.size) {
+                binding.tabLayout.getTabAt(i)?.customView = makeTabView(i, number)
+            }
+        }*/
 
     /**
      * 引入布局设置图标和标题

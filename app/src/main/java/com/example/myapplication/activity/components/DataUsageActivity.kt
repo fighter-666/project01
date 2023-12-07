@@ -34,7 +34,7 @@ class DataUsageActivity : AppCompatActivity() {
             .init()
 
         val json: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
-            application.assets.open("getFeedTabData.json").bufferedReader().use { it.readText() }
+            application.assets.open("getFeedTab.json").bufferedReader().use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
         val tabList = gson.fromJson(json, GetFeedTabData::class.java)

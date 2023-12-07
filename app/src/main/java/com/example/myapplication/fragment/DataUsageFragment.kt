@@ -189,6 +189,17 @@ class DataUsageFragment : BaseLazyFragment() {
     }
 
 
+    /*这段代码是一个 Kotlin 函数，名为 generateData，它接受一个参数 item，类型为 List<UserFluxPackageData.
+    ProductOFFRatableBean.RatableResourcePackagesBean>。这个函数的作用是根据传入的数据生成特定的数据结构，
+    并更新 RecyclerView 的显示。
+在函数中，首先通过 item.size 获取了列表 item 的大小，并存储在变量 lv0Count 中。
+然后使用一个循环遍历 item 列表中的每个元素，假设当前元素为 lv0。
+在内部的循环中，对于每个 lv0 元素，通过 lv0.productInfos.size 获取了其子元素（假设是 lv1）列表的大小，
+并存储在变量 lv1Count 中。然后再次使用循环遍历 lv0 元素中的每个 lv1 子元素，并将其添加到 lv0 中。
+
+最后，将经过处理的 lv0 元素添加到 multiItemEntities 列表中。在所有数据处理完成后，
+如果 multiItemEntities 列表的大小大于0，则会执行一些操作（在代码中被注释掉了），最后调用
+ mAdapter.notifyDataSetChanged() 来通知适配器数据集发生了变化，需要进行更新显示。*/
     private fun generateData(item: List<UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean>) {
         val lv0Count = item.size
         for (i in 0 until lv0Count) {

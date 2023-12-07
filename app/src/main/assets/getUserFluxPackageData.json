@@ -17,7 +17,7 @@
                     "link": "",
                     "title": "国内通用流量",
                     "leftStructure": {
-                        "redFlag": "1",
+                        "redFlag": "0",
                         "num": "48.24",
                         "unit": "GB",
                         "titleCornerMark": null,
@@ -145,6 +145,26 @@
                             "infiniteValue": null,
                             "infiniteUnit": null,
                             "orderLevel": 6
+                        },
+                        {
+                            "linkType": "",
+                            "link": "",
+                            "title": "天翼畅享40GB(199元)套餐-[共享]国内上网流量",
+                            "progressBar": null,
+                            "leftTitle": null,
+                            "leftHighlight": null,
+                            "leftIcon": "http://www.189.cn/client/iconUrl/DSLL.png",
+                            "titleIcon": "http://www.189.cn/client/iconUrl/ZTC.png",
+                            "rightTitle": null,
+                            "rightHighlight": null,
+                            "rightCommon": null,
+                            "outOfServiceTime": "失效时间：2023-11-30 23:59:59",
+                            "isInvalid": "0",
+                            "isInfiniteAmount": "1",
+                            "infiniteTitle": "已用",
+                            "infiniteValue": "41.65",
+                            "infiniteUnit": "GB",
+                            "orderLevel": 2
                         }
                     ]
                 }
@@ -153,7 +173,7 @@
                 {
                     "linkType": "",
                     "link": "",
-                    "title": "国内通用666流量",
+                    "title": "国内通用流量",
                     "leftStructure": {
                         "redFlag": "1",
                         "num": "1.92",

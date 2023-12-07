@@ -42,6 +42,7 @@ import com.example.myapplication.util.DensityUtils
                         setGone(R.id.tvExpand, true)
                     }
 
+                    //顶部边距设置
                     val llNormal = getView<LinearLayout>(R.id.llNormal)
                     if (adapterPosition == 0){
                         llNormal.setPadding(0, DensityUtils.dpToPx(mContext,9f), 0, 0)
@@ -65,7 +66,7 @@ import com.example.myapplication.util.DensityUtils
                         setText(R.id.tvUsageAmountPercent, title)
                         setText(R.id.tvUsageAmount, num)
                         setText(R.id.tvUnit, unit)
-                        if ("1 "== redFlag) {
+                        if (redFlag == "1") {
                             setTextColor(R.id.tvUsageAmountPercent, mContext.resources.getColor(R.color.red_e64b4b))
                             setTextColor(R.id.tvUsageAmount, mContext.resources.getColor(R.color.red_e64b4b))
                             setTextColor(R.id.tvUnit, mContext.resources.getColor(R.color.red_e64b4b))
@@ -95,7 +96,7 @@ import com.example.myapplication.util.DensityUtils
                         setText(R.id.tvBalanceAmountPercent, title)
                         setText(R.id.tvBalanceAmount, num)
                         setText(R.id.tvBalanceAmountUnit, unit)
-                        if ("1" == redFlag) {
+                        if (redFlag == "1") {
                             setTextColor(R.id.tvBalanceAmountPercent, mContext.resources.getColor(R.color.red_e64b4b))
                             setTextColor(R.id.tvBalanceAmount, mContext.resources.getColor(R.color.red_e64b4b))
                             setTextColor(R.id.tvBalanceAmountUnit, mContext.resources.getColor(R.color.red_e64b4b))
@@ -185,14 +186,14 @@ import com.example.myapplication.util.DensityUtils
                         }
 
                         // 是否不限量
-                        if ("1" == isInfiniteAmount) {
+                        if (isInfiniteAmount == "1") {
                             helper.setGone(R.id.llInfinite, true)
                             helper.setGone(R.id.llNormal, false)
                             setText(R.id.tvUsageTitle, infiniteTitle)
                             setText(R.id.tvInfiniteUsageAmount, infiniteValue)
                             setText(R.id.tvUsageUnit, infiniteUnit)
                             // 失效
-                            if ("1" == isInvalid) {
+                            if (isInvalid == "1") {
                                 setTextColor(R.id.tvInfiniteUsageAmount, mContext.resources.getColor(R.color.gray_999999))
                                 setTextColor(R.id.tvUsageUnit, mContext.resources.getColor(R.color.gray_999999))
                                 helper.setGone(R.id.ivInvalid, true)
@@ -205,7 +206,7 @@ import com.example.myapplication.util.DensityUtils
                             helper.setGone(R.id.llInfinite, false)
                             helper.setGone(R.id.llNormal, true)
                             // 失效
-                            if ("1" == isInvalid) {
+                            if (isInvalid == "1") {
                                 helper.setGone(R.id.ivInvalid, true)
                                 // 灰色进度
                                 val progressDrawable = mContext.resources.getDrawable(R.drawable.progressbar_mini_gray)
@@ -251,6 +252,16 @@ import com.example.myapplication.util.DensityUtils
                     }
                 })
 
+  /*首先，通过 getParentPosition(item) 方法获取当前条目在父列表中的位置，并将结果赋值给 pos 变量。
+接下来，通过 (data[pos] as UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean).run { }
+的方式获取到特定位置的数据，并使用 run 函数对该数据进行操作。
+
+在 run 函数中，通过 productInfos.indexOf(item) 获取当前条目在 productInfos 列表中的索引。根据索引的不同，分别执行以下逻辑：
+
+如果当前条目是 productInfos 列表中的最后一个元素，则将 llbg 的背景设置为 R.drawable.bg_gray_stroke_no_top_10，并将 viewLine 设置为可见。
+如果当前条目不是 productInfos 列表中的最后一个元素，则将 llbg 的背景设置为 R.drawable.bg_gray_stroke_middle，并将 viewLine 设置为不可见。
+如果当前条目是 productInfos 列表中的第一个元素，则将 llLine 设置为可见。
+如果当前条目不是 productInfos 列表中的第一个元素，则将 llLine 设置为不可见。*/
                 val pos = getParentPosition(item)
                 (data[pos] as UserFluxPackageData.ProductOFFRatableBean.RatableResourcePackagesBean).run {
                     when (productInfos.indexOf(item)) {

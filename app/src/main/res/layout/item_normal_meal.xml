@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/llNormal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,57 +31,56 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:textColor="@color/gray_666666"
                     android:textSize="13dp"
-                    android:maxLines="2"
-                    android:ellipsize="end"
                     app:layout_constrainedWidth="true"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/ivTips"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/ivTips"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="国内通用流量" />
 
                 <ImageView
                     android:id="@+id/ivTips"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
+                    android:layout_marginStart="2dp"
                     android:layout_marginTop="1dp"
-                    android:scaleType="fitXY"
-                    android:padding="15dp"
                     android:adjustViewBounds="true"
                     android:background="@drawable/ic_meal_question_gray"
                     android:contentDescription="说明"
-                    app:layout_constraintLeft_toRightOf="@+id/tvTitle"
+                    android:padding="15dp"
+                    android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/tvTitle"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tvExpand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="4.5dp"
-                android:layout_toLeftOf="@id/ivExpand"
                 android:layout_marginEnd="4.5dp"
-                android:text="展开详情"
-                android:scaleType="fitXY"
+                android:layout_toLeftOf="@id/ivExpand"
                 android:adjustViewBounds="true"
-                android:textColor="@color/gray_999999"
-                android:textSize="12dp"
                 android:contentDescription="说明"
-                />
+                android:drawablePadding="4.5dp"
+                android:scaleType="fitXY"
+                android:text="展开详情"
+                android:textColor="@color/gray_999999"
+                android:textSize="12dp" />
 
             <ImageView
                 android:id="@+id/ivExpand"
                 android:layout_width="10.5dp"
                 android:layout_height="6dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/arrow_down"
                 android:layout_alignParentRight="true"
-                />
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow_down" />
         </RelativeLayout>
 
         <LinearLayout
