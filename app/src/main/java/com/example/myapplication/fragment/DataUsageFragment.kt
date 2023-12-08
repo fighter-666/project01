@@ -5,11 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.example.myapplication.R
 import com.example.myapplication.data.UserFluxPackageData
 import com.example.myapplication.databinding.FragmentDataUsageBinding
+import com.example.myapplication.util.UtilText
 import com.example.myapplication.widget.BaseLazyFragment
 import com.google.gson.Gson
 
@@ -19,6 +22,7 @@ class DataUsageFragment : BaseLazyFragment() {
     val binding get() = _binding!!
     private lateinit var mAdapter: TestAdapter
     private lateinit var mOverAdapter: TestAdapter
+    private lateinit var fluxPackage: UserFluxPackageData
     private val multiItemEntities = mutableListOf<MultiItemEntity>()
     private val multiItemOverEntities = mutableListOf<MultiItemEntity>()
 
@@ -62,7 +66,7 @@ class DataUsageFragment : BaseLazyFragment() {
                 .use { it.readText() }
         //使用了Gson库来将JSON数据转换为GetFeedTabData对象
         val gson = Gson()
-        val fluxPackage = gson.fromJson(json, UserFluxPackageData::class.java)
+        fluxPackage = gson.fromJson(json, UserFluxPackageData::class.java)
         Log.d(
             "fluxPackageList",
             fluxPackage.productOFFRatable.exceedResourcePackages
@@ -100,7 +104,6 @@ class DataUsageFragment : BaseLazyFragment() {
                 )
             })
         mAdapter.addFooterView(footerView, 0)
-
 
 
         /*// 阈值提醒
@@ -144,10 +147,47 @@ class DataUsageFragment : BaseLazyFragment() {
             binding.recyclerView.getParent() as ViewGroup,
             false
         )
-        if (type == 1) {
-            /*val imageView = view.findViewById<View>(R.id.iv) as ImageView
-            imageView.setImageResource(R.mipmap.rm_icon)*/
+
+        val tvBottomTitle = view.findViewById<TextView>(R.id.tvBottomTitle)
+        val tvExpand = view.findViewById<TextView>(R.id.tvExpand)
+        if (UtilText.isEmptyOrNull(fluxPackage.tips)) {
+            //mExpandLayout.visibility = View.GONE
+        } else {
+            //mExpandLayout.visibility = View.VISIBLE
+            tvBottomTitle.text = fluxPackage.tips
+
+// 监听布局变化
+            tvBottomTitle.viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    // 移除监听器，避免重复调用
+                    tvBottomTitle.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                    // 获取行数
+                    if (tvBottomTitle.lineCount < 3) {
+                        tvExpand.visibility = View.GONE
+                    } else {
+                        tvBottomTitle.maxLines = 2
+                    }
+                }
+            })
+
+            /* if (tvBottomTitle.text !=null){
+                 if (tvBottomTitle.lineCount < 2 ){
+                     tvExpand.visibility = View.GONE
+                 }
+             }*/
+
+            //KUtilView.setTextForLimit(tvTips, tvExpand, tips, 2)
         }
+
+
+        tvExpand.setOnClickListener {
+            tvBottomTitle.maxLines = Int.MAX_VALUE
+            tvExpand.visibility = View.GONE
+        }
+
+
         //view.setOnClickListener(listener)
         return view
     }
@@ -162,6 +202,7 @@ class DataUsageFragment : BaseLazyFragment() {
             binding.recyclerOverView.getParent() as ViewGroup,
             false
         )
+
         if (type == 1) {
             /*val imageView = view.findViewById<View>(R.id.iv) as ImageView
             imageView.setImageResource(R.drawable.rm_icon)*/

@@ -1,5 +1,6 @@
 package com.example.myapplication.fragment
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -243,7 +244,7 @@ import com.example.myapplication.util.DensityUtils
                     val pos: Int = helper.adapterPosition
                     // 先获取到当前 item 的父 positon，再移除自己
                     val positionAtAll = getParentPositionInAll(pos)
-                    remove(pos)
+                    remove(pos - 1)
                     if (positionAtAll != -1) {
                         val multiItemEntity = data[positionAtAll] as IExpandable<*>
                         if (!hasSubItems(multiItemEntity)) {
