@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.AdapterViewFlipper
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -83,6 +84,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     binding.rvContentAreaList.apply {
                         layoutManager = LinearLayoutManager(context)
                         adapter = rechargeAdapter
+                        isNestedScrollingEnabled = false
                     }
                 }
 
@@ -94,6 +96,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 binding.rvPicAreaImageUrl.apply {
                     layoutManager = GridLayoutManager(context, 2)
                     adapter = myAdapter
+                    isNestedScrollingEnabled = false
                 }
             }
 
@@ -186,6 +189,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     rvContentAreaList.apply {
                         layoutManager = LinearLayoutManager(context)
                         adapter = rechargeAdapter
+                        isNestedScrollingEnabled = false
                     }
                     // 设置圆角半径
                     //val requestOptions = RequestOptions().transform(RoundedCorners(20))
@@ -229,6 +233,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     binding.rvContentAreaList.apply {
                         layoutManager = LinearLayoutManager(context)
                         adapter = rechargeAdapter
+                        isNestedScrollingEnabled = false
                     }
                 }
             }
@@ -260,6 +265,8 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                     }
                 })
                 //设置圆角
+                binding.cvBanner.isNestedScrollingEnabled = false
+                binding.banner.isNestedScrollingEnabled = false
                 binding.banner.setBannerRound2(20f)
                 //设置轮播时间间隔
                 binding.banner.setLoopTime(5000)
@@ -272,6 +279,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 holder.addOnClickListener(R.id.btnSelect)
                 // 处理充值布局
                 val binding = WidgetMultipleItemRechargeBinding.bind(holder.itemView)
+                binding.cvRecharge.isNestedScrollingEnabled = false
                 GetTelephoneNumberManager.setGetTelephoneNumberListener(object :
                     GetTelephoneNumberManager.OnGetTelephoneNumberManager {
                     override fun onGetTelephoneNumber(number: String) {
@@ -281,9 +289,10 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                             binding.tvGetTelephoneNumber.text =
                                 hideCharactersFromIndex(number.replace(" ", ""))
                         } else {
-                            val telephoneNumber = number.replace(" ", "").substring(0, 11)
-                            binding.tvGetTelephoneNumber.text =
-                                hideCharactersFromIndex(telephoneNumber)
+                            //val telephoneNumber = number.replace(" ", "").substring(0, 11)
+                            binding.tvGetTelephoneNumber.text = number
+                            Toast.makeText(mContext,"请输入有效号码！",Toast.LENGTH_SHORT).show()
+                                //hideCharactersFromIndex(telephoneNumber)
 
                         }
                     }
@@ -291,7 +300,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 })
 
                 //获取title
-                binding.tvTitle.text = item.quickRecharge.title
+                //binding.tvTitle.text = item.quickRecharge.title
 
                 /*     binding.btnSelect.setOnClickListener {
                          //设置点击事件监听器
@@ -324,6 +333,7 @@ class WaterfallAdapter(data: MutableList<GetFeedListData.FeedListBean>) :
                 binding.rlRecharge.apply {
                     layoutManager = LinearLayoutManager(context)
                     adapter = rechargeAdapter
+                    isNestedScrollingEnabled = false
                 }
             }
 

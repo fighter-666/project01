@@ -32,6 +32,7 @@ import com.example.myapplication.activity.components.bilibili.activity.ViewModel
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.RechargePageActivity
+import com.example.myapplication.activity.components.SQLiteActivity
 import com.example.myapplication.activity.components.ServiceActivity
 import com.example.myapplication.activity.components.StudentActivity
 import com.example.myapplication.activity.components.UserActivity
@@ -109,6 +110,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "ViewpageActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "TreeListActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "DataUsageActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "SQLiteActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -258,6 +260,10 @@ class ComponentsFragment : Fragment() {
                 }
                 28 -> {
                     val intent = Intent(context, DataUsageActivity::class.java)
+                    startActivity(intent)
+                }
+                29 -> {
+                    val intent = Intent(context, SQLiteActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

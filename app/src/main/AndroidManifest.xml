@@ -27,6 +27,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
+            android:name=".activity.components.SQLiteActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.components.DataUsageActivity"
             android:exported="false" />
         <activity

@@ -25,7 +25,7 @@ class DataUsageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityDataUsageBinding.inflate(layoutInflater)
+        binding = ActivityDataUsageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //沉浸式
@@ -53,18 +53,9 @@ class DataUsageActivity : AppCompatActivity() {
         for (i in tabList.tabList.indices) {
             binding.tabLayout.getTabAt(i)?.text = tabList.tabList[i].tabName   // 设置标题
         }
-
-
-
-
-
     }
 
-    fun num1AndNum2(num1: Int, num2: Int , operation:(Int, Int) -> Int) {
+    fun num1AndNum2(num1: Int, num2: Int, operation: (Int, Int) -> Int) {
 
     }
-
-
-
-
 }

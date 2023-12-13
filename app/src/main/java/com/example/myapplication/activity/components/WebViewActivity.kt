@@ -14,7 +14,7 @@ class WebViewActivity : AppCompatActivity() {
         binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.webview.loadUrl("https://www.baidu.com/")
-       /* //系统默认会通过手机浏览器打开网页，为了能够直接通过WebView显示网页，则必须设置
+        //系统默认会通过手机浏览器打开网页，为了能够直接通过WebView显示网页，则必须设置
         binding.webview.setWebViewClient(object : WebViewClient() {
             @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
@@ -23,6 +23,6 @@ class WebViewActivity : AppCompatActivity() {
                 //返回true
                 return true
             }
-        })*/
+        })
     }
 }

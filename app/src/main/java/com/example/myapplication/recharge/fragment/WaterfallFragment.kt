@@ -47,6 +47,7 @@ class WaterfallFragment : BaseLazyFragment() {
     private var contactNumber: String? = null
     private var mIntent: Intent? = null
     private var number: Int = 0
+    private var adapterPosition: Int = 0
     private lateinit var feedList: GetFeedListData
     private lateinit var tabList: GetFeedTabData
 
@@ -110,6 +111,8 @@ class WaterfallFragment : BaseLazyFragment() {
                 val contactUri = mIntent?.data
                 contactNumber = getContactNumberByUri(contactUri)
                 contactNumber?.let { GetTelephoneNumberManager.triggerGetTelephoneNumber(it) }
+                //刷新指定item
+                //myAdapter.notifyItemChanged(adapterPosition)
             }
         }
 
@@ -194,18 +197,18 @@ class WaterfallFragment : BaseLazyFragment() {
                 Log.d("点击了选中按钮", "aaa")
                 //获取通讯录
                 requestReadContactsPermission()
+                adapterPosition = position
 
-                //刷新指定item
-                myAdapter.notifyItemChanged(position)
 
-                val updatedItem = myAdapter.getItem(position)
+
+                /*val updatedItem = myAdapter.getItem(position)
                 if (updatedItem?.quickRecharge != null) {
                     updatedItem.quickRecharge.title = contactNumber
 
                     // 更新适配器中的数据集
                     feedList.feedList[position] = updatedItem // 将索引为1的项替换为更新后的项
                     myAdapter.notifyItemChanged(position)
-                }
+                }*/
 
             }
         }

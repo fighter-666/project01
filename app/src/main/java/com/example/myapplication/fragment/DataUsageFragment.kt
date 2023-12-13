@@ -54,7 +54,6 @@ class DataUsageFragment : BaseLazyFragment() {
         binding.recyclerOverView.apply {
             layoutManager = LinearLayoutManager(context)
         }
-
         initAdapter()
 
     }

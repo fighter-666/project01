@@ -10,9 +10,9 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/top_background"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:background="@drawable/top_background" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.myapplication.widget.CustomTitleBarViewGroup
         android:id="@+id/tvTitle"
@@ -27,102 +27,101 @@
         app:imageHeight3="16dp"
         app:imageWidth3="8dp"
         app:layout_collapseMode="pin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:right_imageHeight3="20dp"
         app:right_imageWidth3="22dp"
         app:right_src="@drawable/service"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:title="流量查询" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/coordinator"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tvTitle"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            >
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:elevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:elevation="0dp">
+                android:layout_marginStart="27dp"
+                app:layout_scrollFlags="scroll"
+                tools:ignore="ExtraText">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <!-- 在这里添加你的约束布局内容 -->
+                <TextView
+                    android:id="@+id/tvMainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="乐享4G套餐59元"
+                    android:textColor="#fffbf7"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/arrow_white_right"
+                    app:layout_constraintBottom_toBottomOf="@id/tvMainTitle"
+                    app:layout_constraintLeft_toRightOf="@id/tvMainTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvMainTitle" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="27dp"
-                    app:layout_scrollFlags="scroll"
-                    tools:ignore="ExtraText">
-
-                    <!-- 在这里添加你的约束布局内容 -->
-                    <TextView
-                        android:id="@+id/tvMainTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="乐享4G套餐59元"
-                        android:textColor="#fffbf7"
-                        android:textSize="15sp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:layout_width="6dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/arrow_white_right"
-                        app:layout_constraintBottom_toBottomOf="@id/tvMainTitle"
-                        app:layout_constraintLeft_toRightOf="@id/tvMainTitle"
-                        app:layout_constraintTop_toTopOf="@id/tvMainTitle" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="left"
-                        android:text="当前号码17700001234，有3个号码共享此套餐"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:layout_marginTop="6dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="@id/tvMainTitle"
-                        app:layout_constraintTop_toBottomOf="@id/tvMainTitle" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="left"
+                    android:text="当前号码17700001234，有3个号码共享此套餐"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@id/tvMainTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvMainTitle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@android:color/transparent"
-                    android:elevation="0dp"
-                    android:minHeight="?attr/actionBarSize"
-                    android:layout_centerVertical="true"
-                    android:layout_marginHorizontal="13dp"
-                    app:tabIndicator="@drawable/shape_tab_indicator_usage"
-                    app:layout_collapseMode="pin"
-                    android:layout_marginBottom="5dp"
-                    app:tabIndicatorColor="#ffffff"
-                    app:tabIndicatorFullWidth="false"
-                    app:tabIndicatorGravity="bottom"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/white"
-                    app:tabTextColor="@color/white" />
-
-
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/gray_200"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="13dp"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:tabIndicator="@drawable/shape_tab_indicator_usage"
+                app:tabIndicatorColor="#ffffff"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/white" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_200"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>
