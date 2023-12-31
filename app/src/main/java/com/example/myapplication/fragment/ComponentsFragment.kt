@@ -32,6 +32,7 @@ import com.example.myapplication.activity.components.bilibili.activity.ViewModel
 import com.example.myapplication.adapter.ComponentsAdapter
 import com.example.myapplication.activity.components.WebViewActivity
 import com.example.myapplication.activity.components.RechargePageActivity
+import com.example.myapplication.activity.components.RecyclerViewActivity
 import com.example.myapplication.activity.components.SQLiteActivity
 import com.example.myapplication.activity.components.ServiceActivity
 import com.example.myapplication.activity.components.StudentActivity
@@ -111,6 +112,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "TreeListActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "DataUsageActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "SQLiteActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "RecyclerViewActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -264,6 +266,10 @@ class ComponentsFragment : Fragment() {
                 }
                 29 -> {
                     val intent = Intent(context, SQLiteActivity::class.java)
+                    startActivity(intent)
+                }
+                30 -> {
+                    val intent = Intent(context, RecyclerViewActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

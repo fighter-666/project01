@@ -185,7 +185,7 @@ class WaterfallFragment : BaseLazyFragment() {
         binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(true)
             //设置回调
-            LoadMoreManager.triggerLoadMore()
+            LoadMoreManager.ontLoadMoreManager("key1")
         }
 
         //binding.rvComponentsWaterfall.isNestedScrollingEnabled = false
@@ -219,8 +219,7 @@ class WaterfallFragment : BaseLazyFragment() {
 
         // 设置回调监听器
         // 在合适的地方触发加载更多事件
-        LoadMoreManager.setOnLoadMoreListener(object : LoadMoreManager.OnLoadMoreListener {
-            override fun onLoadMore() {
+        LoadMoreManager.setOnLoadMoreListener("key1") {
                 // 在这里触发加载更多数据的操作
                 val data: MutableList<GetFeedListData.FeedListBean> = mutableListOf()
                 data.add(
@@ -240,7 +239,6 @@ class WaterfallFragment : BaseLazyFragment() {
                 val itemCount = data.size // 添加的数据项数
                 myAdapter.notifyItemRangeInserted(startPosition, itemCount)
             }
-        })
         val jsonTab: String = // 从文件中读取 JSON 数据，这里使用 assets 文件夹中的示例
             requireContext().assets.open("getFeedTabData.json").bufferedReader()
                 .use { it.readText() }

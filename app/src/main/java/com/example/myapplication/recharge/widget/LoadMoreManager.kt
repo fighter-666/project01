@@ -1,22 +1,21 @@
 package com.example.myapplication.recharge.widget
 
+import java.util.Hashtable
+
 // LoadMoreManager.kt
 
 object LoadMoreManager {
-    // 定义一个回调接口
-    interface OnLoadMoreListener {
-        fun onLoadMore()
+    private val callbackMap = mutableMapOf<String, () -> Unit>()
+
+    fun ontLoadMoreManager(key: String) {
+        callbackMap[key]?.invoke()
     }
 
-    private var onLoadMoreListener: OnLoadMoreListener? = null
-
-    // 设置回调监听器
-    fun setOnLoadMoreListener(listener: OnLoadMoreListener) {
-        onLoadMoreListener = listener
+    fun setOnLoadMoreListener(key: String, listener: () -> Unit) {
+        callbackMap[key] = listener
     }
 
-    // 触发加载更多事件
-    fun triggerLoadMore() {
-        onLoadMoreListener?.onLoadMore()
+    fun removeLoadMoreListener(key: String) {
+        callbackMap.remove(key)
     }
 }

@@ -19,6 +19,8 @@ class CustomTitleBarViewGroup : RelativeLayout {
     private lateinit var imageView2: ImageView
     private lateinit var textView: TextView
     private lateinit var textView2: TextView
+    // 自定义按钮1回调
+    lateinit var onCusBtn1ClickListener: () -> Unit
 
     /**
      * 这个构造方法是在代码中new的时候调用的
@@ -74,6 +76,16 @@ class CustomTitleBarViewGroup : RelativeLayout {
             val intent = Intent(getContext(), ReturnActivity::class.java)
             myActivityLauncher.launch(intent)
         }
+
+
+
+        textView2.setOnClickListener {
+            if (::onCusBtn1ClickListener.isInitialized) {
+                this.onCusBtn1ClickListener()
+            }
+        }
+
+
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomTitleBarViewGroup)
         val drawable = typedArray.getDrawable(R.styleable.CustomTitleBarViewGroup_back_src)

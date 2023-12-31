@@ -25,14 +25,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tvTitle"
-        app:srlEnableLoadMore="false"
         android:background="@color/gray_200"
+        app:srlEnableLoadMore="false"
         app:srlFooterTranslationViewId="@+id/rvComponentsWaterfall"
         tools:visibility="visible">
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinator"
@@ -43,10 +43,8 @@
                 android:id="@+id/appbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:elevation="0dp"
                 android:background="@color/gray_200"
-               >
-
+                app:elevation="0dp">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -645,31 +643,30 @@
                     app:tabMode="scrollable"
                     app:tabPaddingBottom="3dp" />
 
-        <!--        <com.example.myapplication.widget.FeedTabView
-                    android:id="@+id/feedTabView"
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_centerVertical="true"
-                    android:visibility="gone"
-                    app:layout_collapseMode="pin"
-                    app:tabGravity="fill"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabMinWidth="0dp"
-                    app:tabMode="scrollable"
-                    app:tabPaddingEnd="0dp"
-                    app:tabPaddingStart="0dp"
-                    app:tabRippleColor="@null" />-->
-
+                <!--        <com.example.myapplication.widget.FeedTabView
+                            android:id="@+id/feedTabView"
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            app:layout_collapseMode="pin"
+                            app:tabGravity="fill"
+                            app:tabIndicatorHeight="0dp"
+                            app:tabMinWidth="0dp"
+                            app:tabMode="scrollable"
+                            app:tabPaddingEnd="0dp"
+                            app:tabPaddingStart="0dp"
+                            app:tabRippleColor="@null" />-->
 
 
             </com.google.android.material.appbar.AppBarLayout>
 
-           <!-- <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-      -->     <!-- <com.example.myapplication.widget.FeedViewPager
+            <!-- <androidx.viewpager.widget.ViewPager
+                 android:id="@+id/viewPager"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+       -->     <!-- <com.example.myapplication.widget.FeedViewPager
                 android:id="@+id/feedViewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -696,6 +693,6 @@
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </RelativeLayout>

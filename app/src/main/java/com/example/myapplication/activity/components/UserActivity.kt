@@ -2,7 +2,9 @@ package com.example.myapplication.activity.components
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.myapplication.R
+import com.example.myapplication.data.PersonTest
 import com.example.myapplication.data.User
 import com.example.myapplication.databinding.ActivityUserBinding
 import com.example.myapplication.util.ClickHandlers
@@ -24,6 +26,10 @@ class UserActivity : AppCompatActivity() {
             binding.tvName.text = user.userName
             binding.tvId.text = user.userId
         }*/
+
+        val person = intent.getSerializableExtra("person_data") as PersonTest
+        Log.d("person",person.name)
+        Log.d("person",person.age.toString())
     }
 
     private fun getUser(): User {

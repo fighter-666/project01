@@ -3,6 +3,7 @@ package com.example.myapplication.activity.components
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -61,11 +62,15 @@ class RechargePageActivity : AppCompatActivity() {
             .statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
             .init()
 
-   /*     //加载更多
+        binding.tvTitle.onCusBtn1ClickListener ={
+            Log.d("娃哈哈","娃哈哈")
+        }
+
+     /*   //加载更多
         binding.refreshLayout.setOnLoadMoreListener {
             binding.refreshLayout.finishLoadMore(true)
             //设置回调
-            LoadMoreManager.triggerLoadMore()
+            LoadMoreManager.ontLoadMoreManager()
         }*/
 
       /*  binding.refreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener{
@@ -85,6 +90,22 @@ class RechargePageActivity : AppCompatActivity() {
             val offsetRatio = abs(verticalOffset).toFloat() / appBarLayout.totalScrollRange
 
             //binding.refreshLayout.setEnabled(false); //否则关闭
+
+            if (offsetRatio > 0f){
+                binding.tvTitle.setBackgroundColor(resources.getColor(R.color.white))
+                LoadMoreManager.ontLoadMoreManager("key2")
+            }else {
+                // 当未吸顶时，或者根据需要设置渐变效果
+                binding.tvTitle.setBackgroundColor(resources.getColor(R.color.f4f4f4))
+                LoadMoreManager.ontLoadMoreManager("key3")
+            }
+
+            LoadMoreManager.setOnLoadMoreListener("key2") {
+                binding.tvRechargeResult.text = "娃哈哈"
+            }
+            LoadMoreManager.setOnLoadMoreListener("key3") {
+                binding.tvRechargeResult.text = "成功充值 100元"
+            }
             // 设置TabLayout的背景颜色，你可以根据需要进行定制
             if (offsetRatio == 1f) {
                 // 当吸顶时
@@ -112,27 +133,6 @@ class RechargePageActivity : AppCompatActivity() {
         val gson = Gson()
         val tabList = gson.fromJson(json, GetFeedTabData::class.java)
 
-        //viewpage
- /*       val fragments: MutableList<Fragment> = ArrayList()
-        fragments.add(WaterfallFragment())
-        fragments.add(WaterfallFragment())
-
-        val adapter = MyPagerAdapter(supportFragmentManager, fragments)
-        binding.viewPager.adapter = adapter              // 绑定adapter
-        binding.tabLayout.setupWithViewPager(binding.viewPager)    // 绑定viewPager
-
-        for (i in tabList.tabList.indices) {
-            binding.tabLayout.getTabAt(i)?.text = tabList.tabList[i].tabName   // 设置标题
-        }*/
-
-        //项目
-      /*  binding.feedViewPager.fragmentManager = supportFragmentManager
-        binding.feedViewPager.setData(tabList)
-        binding.feedTabView.setData(tabList, binding.feedViewPager)*/
-
-
-
-        //binding.tabLayout.setupWithViewPager()
 
         //将 offscreenPageLimit 属性设置为 tab的数量，表示 ViewPager 会在当前页面的左右各保留 tab数量 个页面的缓存。
         // 这样可以提高用户体验，因为用户在滑动 ViewPager 时，相邻的页面已经被缓存，可以更快地进行加载和显示
@@ -143,9 +143,6 @@ class RechargePageActivity : AppCompatActivity() {
 
         binding.viewPager2.adapter = adapter
 
-
-
-
         // 添加  frament
         for (i in tabList.tabList.indices) {
             when (i) {
@@ -155,11 +152,6 @@ class RechargePageActivity : AppCompatActivity() {
                 // ...为其他indexes添加对应的Fragment
             }
         }
-
-
-
-
-
 
         //创建了一个TabLayoutMediator对象，并将其与TabLayout和ViewPager2进行关联。
         val mediator = TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
