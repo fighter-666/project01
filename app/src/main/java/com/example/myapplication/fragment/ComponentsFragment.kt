@@ -65,6 +65,8 @@ class ComponentsFragment : Fragment() {
             .init()
         return view
 
+
+
     }
 
     /*  companion object {

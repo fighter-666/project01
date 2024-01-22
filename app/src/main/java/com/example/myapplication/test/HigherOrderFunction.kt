@@ -23,6 +23,27 @@ fun main() {
         append("Yummy, I'm full now!")
     }
     println(result.toString())
+
+    val myClass = MyClass<Int>()
+    val result3 = myClass.method(3)
+    println(result3)
+
+    val myClass2 = MyClass2()
+    val result4 = myClass2.method(3)
+    println(result4)
+}
+
+class MyClass2{
+    fun <T: Number> method(param: T): T{
+        return param
+    }
+}
+
+//MyClass就是一个泛型类，MyClass中的方法允许使用T类型的参数和返回值
+class MyClass<T> {
+    fun method(param: T): T {
+        return param
+    }
 }
 
 fun StringBuilder.build(block: StringBuilder.() -> Unit): java.lang.StringBuilder {
