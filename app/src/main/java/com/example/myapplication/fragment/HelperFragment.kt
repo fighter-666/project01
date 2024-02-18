@@ -34,7 +34,7 @@ class HelperFragment : Fragment() {
 
         //沉浸式处理
         ImmersionBar.with(this)
-            .transparentStatusBar()  //透明状态栏，不写默认透明色
+            .transparentStatusBar()  //巴巴爸爸透明状态栏，不写默认透明色
             .titleBar(binding.toolbar)    //解决状态栏和布局重叠问题，任选其一
             .init();
         return view
