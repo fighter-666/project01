@@ -65,35 +65,37 @@ class BallView(context: Context, attrs: AttributeSet? = null) : View(context, at
         canvas.drawCircle(ballX, ballY, ballRadius, ballPaint)
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (!isGravityModeEnabled) {
-            ballX = event.x
-            ballY = event.y
-            invalidate()
-        }
-        return true
+   override fun onTouchEvent(event: MotionEvent): Boolean {
+    if (!isGravityModeEnabled) {
+        ballX = max(ballRadius, min(event.x, width - ballRadius))
+        ballY = max(ballRadius, min(event.y, height - ballRadius))
+        invalidate()
     }
+    return true
+}
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // 不需要实现
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER && isGravityModeEnabled) {
-            val curTime = System.currentTimeMillis()
-            if ((curTime - lastUpdate) > 100) {
-                val x = event.values[0]
-                val y = event.values[1]
-                ballX -= x * 2
-                ballY += y * 2
-                // 确保小球不会移出屏幕
-                ballX = max(0f, min(ballX, width.toFloat() - ballRadius))
-                ballY = max(0f, min(ballY, height.toFloat() - ballRadius))
-                invalidate()
-                lastUpdate = curTime
-            }
+    if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER && isGravityModeEnabled) {
+        val curTime = System.currentTimeMillis()
+        if ((curTime - lastUpdate) > 100) {
+            val x = event.values[0]
+            val y = event.values[1]
+            ballX -= x * 2
+            ballY += y * 2
+
+            // 确保小球不会移出屏幕
+            ballX = max(ballRadius, min(ballX, width - ballRadius))
+            ballY = max(ballRadius, min(ballY, height - ballRadius))
+
+            invalidate()
+            lastUpdate = curTime
         }
     }
+}
 
     fun setGravityMode(enabled: Boolean) {
         isGravityModeEnabled = enabled
