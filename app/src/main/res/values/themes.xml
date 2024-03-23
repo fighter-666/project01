@@ -14,8 +14,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.CtTest" parent="Theme.AppCompat.Light.DarkActionBar" />
-
     <style name="TranslucentStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item> <!-- 背景色透明 -->
         <item name="android:windowIsTranslucent">true</item> <!-- 是否有透明属性 -->

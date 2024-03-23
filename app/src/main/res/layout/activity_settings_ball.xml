@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="小球大小"
+        android:paddingBottom="8dp"/>
+
+    <SeekBar
+        android:id="@+id/seekBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="50"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="小球颜色"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/radioButtonBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="蓝色"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/radioButtonRed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="红色"/>
+        <RadioButton
+            android:id="@+id/radioButtonGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绿色"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="玩法模式"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"/>
+
+    <Switch
+        android:id="@+id/switchMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="启用重力感应"/>
+
+</LinearLayout>

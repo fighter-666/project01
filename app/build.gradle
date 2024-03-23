@@ -83,6 +83,11 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.9.0")  //okhttp网络
 
+    // 如果使用了 viewbinding-nonreflection-ktx 可以不添加
+    implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-nonreflection-ktx:2.1.0'
+
+    implementation 'com.drakeet.multitype:multitype:4.3.0'
+
     //retrofit网络请求
     implementation"com.squareup.retrofit2:retrofit:2.9.0"
     implementation"com.squareup.retrofit2:converter-gson:2.9.0"

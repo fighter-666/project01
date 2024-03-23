@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         //沉浸式处理
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
+
             .init()
 
 

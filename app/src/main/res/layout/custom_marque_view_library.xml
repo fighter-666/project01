@@ -23,7 +23,6 @@
         app:smvTextSize="15sp" />
 
     <com.gongwen.marqueen.SimpleMarqueeView
-        android:id="@+id/centerTitle"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:flipInterval="2500"
@@ -39,7 +38,6 @@
         app:smvTextSize="15sp" />
 
     <com.gongwen.marqueen.SimpleMarqueeView
-        android:id="@+id/site"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:flipInterval="2500"
@@ -55,7 +53,6 @@
         app:smvTextSize="15sp" />
 
     <com.gongwen.marqueen.SimpleMarqueeView
-        android:id="@+id/rightTitle"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:flipInterval="2500"

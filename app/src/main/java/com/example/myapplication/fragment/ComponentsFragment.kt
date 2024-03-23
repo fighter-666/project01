@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.activity.BaseApplication
+import com.example.myapplication.activity.InterviewsActivity
 import com.example.myapplication.activity.TreeListActivity
 import com.example.myapplication.activity.components.AdvertisingActivity
 import com.example.myapplication.activity.components.AsyncServiceActivity
+import com.example.myapplication.activity.components.BallViewActivity
 import com.example.myapplication.activity.components.BannerActivity
 import com.example.myapplication.activity.components.BroadcastReceiverActivity
 import com.example.myapplication.activity.components.VariousTextviewActivity
@@ -115,6 +117,8 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "DataUsageActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "SQLiteActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "RecyclerViewActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "InterviewsActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "BallViewActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -272,6 +276,14 @@ class ComponentsFragment : Fragment() {
                 }
                 30 -> {
                     val intent = Intent(context, RecyclerViewActivity::class.java)
+                    startActivity(intent)
+                }
+                31 -> {
+                    val intent = Intent(context, InterviewsActivity::class.java)
+                    startActivity(intent)
+                }
+                32 -> {
+                    val intent = Intent(context, BallViewActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

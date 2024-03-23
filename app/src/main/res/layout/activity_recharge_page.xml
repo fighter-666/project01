@@ -117,7 +117,6 @@
                         app:layout_constraintTop_toBottomOf="@id/tvRechargeNumber" />
 
                     <TextView
-                        android:id="@+id/tvDiscount"
                         android:layout_width="52dp"
                         android:layout_height="15dp"
                         android:layout_marginTop="14dp"
@@ -610,7 +609,6 @@
                         tools:ignore="MissingConstraints" />
 
                     <com.example.myapplication.recharge.view.ScratchCardViewGroup
-                        android:id="@+id/rechargeScratchCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="13dp"

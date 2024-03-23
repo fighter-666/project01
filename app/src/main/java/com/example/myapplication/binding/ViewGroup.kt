@@ -18,7 +18,9 @@
 
 package com.example.myapplication.binding
 
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import kotlin.LazyThreadSafetyMode.*
@@ -26,6 +28,9 @@ import kotlin.LazyThreadSafetyMode.*
 inline fun <reified VB : ViewBinding> ViewGroup.inflate() =
   inflateBinding<VB>(LayoutInflater.from(context), this, true)
 
-inline fun <reified VB : ViewBinding> ViewGroup.binding(attachToParent: Boolean = false) = lazy(NONE) {
+inline fun <reified VB : ViewBinding> ViewGroup.binding(
+    attachToParent1: (Context, Int, ViewGroup) -> View,
+    attachToParent: Boolean = false
+) = lazy(NONE) {
   inflateBinding<VB>(LayoutInflater.from(context), if (attachToParent) this else null, attachToParent)
 }

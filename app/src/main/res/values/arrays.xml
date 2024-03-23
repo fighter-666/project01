@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="image_array">
+        <item>@drawable/image1</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image2</item>
+        <!-- 更多图片资源 -->
+    </array>
+    <string-array name="text_array">
+        <item>Text 1</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <item>Text 2</item>
+        <!-- 更多文字资源 -->
+    </string-array>
+</resources>
