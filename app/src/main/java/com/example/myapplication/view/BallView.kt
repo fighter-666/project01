@@ -64,6 +64,19 @@ class BallView(context: Context, attrs: AttributeSet? = null) : View(context, at
         canvas.drawCircle(ballX, ballY, ballRadius, ballPaint)
     }
 
+    /*event.x 和 event.y 获取的是触摸事件发生时的坐标位置。
+min(event.x, width - ballRadius) 确保了小球的中心点 x 坐标不会超过视图的宽度减去小球半径的值。
+这是为了防止小球的一部分超出视图的右边界。如果触摸事件的 x 坐标大于 width - ballRadius，
+则小球的 x 坐标会被设置为 width - ballRadius。
+
+max(ballRadius, ...) 确保了小球的中心点 x 坐标不会小于小球的半径。这是为了防止小球的一部分超出视图的左边界。
+如果上一步计算的结果小于 ballRadius，则小球的 x 坐标会被设置为 ballRadius。
+同样的逻辑也适用于 y 坐标，min(event.y, height - ballRadius) 确保小球不会超出视图的下边界，
+而 max(ballRadius, ...) 确保小球不会超出视图的上边界。
+
+总之，这两行代码结合使用 max 和 min 函数，有效地限制了小球的位置，确保它始终在视图的边界内移动，
+即使在触摸事件导致的位置更新时也是如此。*/
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (!isGravityModeEnabled) {
             // 如果重力感应模式未启用，允许通过触摸移动小球
@@ -81,12 +94,18 @@ class BallView(context: Context, attrs: AttributeSet? = null) : View(context, at
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
+        //个条件检查确保当前处理的是加速度传感器的事件，并且重力感应模式已经被启用。
         if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER && isGravityModeEnabled) {
             // 在重力感应模式下，根据加速度传感器的数据更新小球位置
             val curTime = System.currentTimeMillis()
+            //这个条件判断自上次更新以来是否已经过去了至少100毫秒。这是为了限制更新频率，避免过于频繁的更新导致的性能问题。
             if ((curTime - lastUpdate) > 100) {
+                /*从加速度传感器事件中获取x轴和y轴的加速度值。
+                在Android设备中，加速度传感器返回的是一个三元素的数组，分别代表x轴、y轴和z轴的加速度。*/
                 val x = event.values[0]
                 val y = event.values[1]
+                //根据加速度值更新小球的位置。这里乘以2是为了增加移动的速度，使效果更明显。
+                // 注意y轴的加速度用来更新ballY时是加上的，因为屏幕坐标系中向下是y轴的正方向。
                 ballX -= x * 2
                 ballY += y * 2
 

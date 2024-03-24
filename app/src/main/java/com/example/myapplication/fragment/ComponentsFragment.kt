@@ -22,6 +22,7 @@ import com.example.myapplication.activity.components.CustomActivity
 import com.example.myapplication.activity.components.DataUsageActivity
 import com.example.myapplication.activity.components.FirstRoomActivity
 import com.example.myapplication.activity.components.HotListActivity
+import com.example.myapplication.activity.components.NotifyActivity
 import com.example.myapplication.activity.components.OkhttpActivity
 import com.example.myapplication.activity.components.PhoneActivity
 import com.example.myapplication.activity.components.ThirdActivity
@@ -119,6 +120,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "RecyclerViewActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "InterviewsActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "BallViewActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "NotifyActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -284,6 +286,10 @@ class ComponentsFragment : Fragment() {
                 }
                 32 -> {
                     val intent = Intent(context, BallViewActivity::class.java)
+                    startActivity(intent)
+                }
+                33 -> {
+                    val intent = Intent(context, NotifyActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

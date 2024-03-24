@@ -1,5 +1,6 @@
 package com.example.myapplication.activity.components
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
@@ -82,6 +83,22 @@ class RechargePageActivity : AppCompatActivity() {
 
             }
         })*/
+
+        binding.tvContinueRecharge.setOnClickListener {
+            AlertDialog.Builder(this).apply {
+                setTitle("提示")
+                setMessage("确定要充值吗？")
+                setCancelable(true);
+                setPositiveButton("确定"){ dialog,which->
+
+                }
+                setNegativeButton("取消"){dialog,which->
+
+                }
+                show()
+            }
+        }
+
 
         //监听吸顶
         binding.appbar.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
