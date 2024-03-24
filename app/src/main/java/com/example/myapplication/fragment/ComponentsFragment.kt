@@ -22,6 +22,7 @@ import com.example.myapplication.activity.components.CustomActivity
 import com.example.myapplication.activity.components.DataUsageActivity
 import com.example.myapplication.activity.components.FirstRoomActivity
 import com.example.myapplication.activity.components.HotListActivity
+import com.example.myapplication.activity.components.NotificationActivity
 import com.example.myapplication.activity.components.NotifyActivity
 import com.example.myapplication.activity.components.OkhttpActivity
 import com.example.myapplication.activity.components.PhoneActivity
@@ -39,6 +40,7 @@ import com.example.myapplication.activity.components.RecyclerViewActivity
 import com.example.myapplication.activity.components.SQLiteActivity
 import com.example.myapplication.activity.components.ServiceActivity
 import com.example.myapplication.activity.components.StudentActivity
+import com.example.myapplication.activity.components.ThreadsActivity
 import com.example.myapplication.activity.components.UserActivity
 import com.example.myapplication.activity.components.ViewpageActivity
 import com.example.myapplication.activity.components.bilibili.activity.Room2Activity
@@ -121,6 +123,8 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "InterviewsActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "BallViewActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "NotifyActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "NotificationActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "ThreadsActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -290,6 +294,14 @@ class ComponentsFragment : Fragment() {
                 }
                 33 -> {
                     val intent = Intent(context, NotifyActivity::class.java)
+                    startActivity(intent)
+                }
+                34 -> {
+                    val intent = Intent(context, NotificationActivity::class.java)
+                    startActivity(intent)
+                }
+                35 -> {
+                    val intent = Intent(context, ThreadsActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

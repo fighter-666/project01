@@ -175,9 +175,9 @@ class TestFragment : BaseLazyFragment() {
 // 开启滑动删除
         // mAdapter.enableSwipeItem()
         //mAdapter.setOnItemSwipeListener(onItemSwipeListener)
-        for (item in hotList.hotList){
+       /* for (item in hotList.hotList){
             Log.d("HotListActivity", item.videoBean.title)
-        }
+        }*/
     }
 
     override fun loadData() {

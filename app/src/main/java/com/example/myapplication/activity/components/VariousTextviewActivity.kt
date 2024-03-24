@@ -21,12 +21,8 @@ import android.util.Log
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.data.ComplexItemEntity
-import com.example.myapplication.data.MobilePhone
-import com.example.myapplication.data.UserManager
 import com.example.myapplication.databinding.ActivityVariousTextviewBinding
 import com.example.myapplication.widget.ComplexViewHelper
 import com.example.myapplication.widget.ComplexViewMF
@@ -36,7 +32,6 @@ import com.gongwen.marqueen.MarqueeView
 import com.gongwen.marqueen.SimpleMF
 import com.gongwen.marqueen.SimpleMarqueeView
 import com.gyf.immersionbar.ImmersionBar
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -46,29 +41,22 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Response
-import java.io.IOException
 import java.util.Arrays
-import javax.inject.Inject
 
-fun setMarqueeViewData(context: Context, binding: ActivityVariousTextviewBinding, complexDatas: List<ComplexItemEntity>) {
+/*fun setMarqueeViewData(context: Context, binding: ActivityVariousTextviewBinding, complexDatas: List<ComplexItemEntity>) {
     val marqueeFactory = ComplexViewMF(context)
     marqueeFactory.data = complexDatas
     binding.marqueeView4.setMarqueeFactory(marqueeFactory)
     binding.marqueeView4.startFlipping()
-}
+}*/
 
-@AndroidEntryPoint
 class VariousTextviewActivity : AppCompatActivity() {
-    @Inject
+  /*  @Inject
     lateinit var userManager: UserManager
     @Inject
     lateinit var mobilePhone: MobilePhone
     @Inject
-    lateinit var okHttpClient: OkHttpClient
+    lateinit var okHttpClient: OkHttpClient*/
 /*    @Inject
     lateinit var mainViewModel: MainViewModel*/
 
@@ -194,9 +182,9 @@ class VariousTextviewActivity : AppCompatActivity() {
             )
         }*/
 
-        userManager.getUserToken()
+        //userManager.getUserToken()
         //val mobilePhone = MobilePhone()
-        mobilePhone.dialNumber()
+        //mobilePhone.dialNumber()
 
         //val mainViewModel  = ViewModelProvider(this).get(MainViewModel::class.java)
 

@@ -27,9 +27,9 @@ class UserActivity : AppCompatActivity() {
             binding.tvId.text = user.userId
         }*/
 
-        val person = intent.getSerializableExtra("person_data") as PersonTest
+       /* val person = intent.getSerializableExtra("person_data") as PersonTest
         Log.d("person",person.name)
-        Log.d("person",person.age.toString())
+        Log.d("person",person.age.toString())*/
     }
 
     private fun getUser(): User {

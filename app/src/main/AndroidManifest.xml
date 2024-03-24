@@ -32,6 +32,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
         <activity
+            android:name=".activity.components.ThreadsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.components.NotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.components.NotifyActivity"
             android:exported="false" />
         <activity

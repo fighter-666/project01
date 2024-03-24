@@ -11,24 +11,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityNotifyBinding
+import com.example.myapplication.databinding.ActivityNotificationBinding
 
-class NotifyActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityNotifyBinding
+class NotificationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityNotificationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNotifyBinding.inflate(layoutInflater)
+        binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as
                 NotificationManager
-        //状态栏通知取消第二种方式
-        //manager.cancel(1)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val  channel = NotificationChannel("normal","Normal",NotificationManager.IMPORTANCE_DEFAULT)
+            val  channel = NotificationChannel("normal","Normal", NotificationManager.IMPORTANCE_DEFAULT)
             manager.createNotificationChannel(channel)
         }
-
-        binding.sendNotice.setOnClickListener {
+        binding.sendNotification.setOnClickListener {
             val intent = Intent(this, NotificationActivity::class.java)
             val pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
             val notification = NotificationCompat.Builder(this,"normal")
@@ -37,10 +34,9 @@ class NotifyActivity : AppCompatActivity() {
                 .setSmallIcon(R.drawable.card2)
                 .setLargeIcon(BitmapFactory.decodeResource(resources,R.drawable.card3))
                 .setContentIntent(pi)
-                //状态栏通知取消
-                .setAutoCancel(true)
                 .build()
             manager.notify(1,notification)
         }
+
     }
 }
