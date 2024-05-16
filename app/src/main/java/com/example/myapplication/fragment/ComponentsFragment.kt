@@ -45,6 +45,7 @@ import com.example.myapplication.activity.components.UserActivity
 import com.example.myapplication.activity.components.ViewpageActivity
 import com.example.myapplication.activity.components.bilibili.activity.Room2Activity
 import com.example.myapplication.activity.components.bilibili.activity.RoomActivity
+import com.example.myapplication.call.CallActivity
 import com.example.myapplication.databinding.FragmentComponentsBinding
 import com.example.myapplication.recharge.view.property.Piggy
 import com.gyf.immersionbar.ImmersionBar
@@ -125,6 +126,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "NotifyActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "NotificationActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "ThreadsActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "CallActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -302,6 +304,10 @@ class ComponentsFragment : Fragment() {
                 }
                 35 -> {
                     val intent = Intent(context, ThreadsActivity::class.java)
+                    startActivity(intent)
+                }
+                36 -> {
+                    val intent = Intent(context, CallActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

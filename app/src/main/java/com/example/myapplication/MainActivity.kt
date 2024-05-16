@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,14 +22,17 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        startService(Intent(this, MyService::class.java))
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //沉浸式处理
         ImmersionBar.with(this)
             .transparentStatusBar()  //透明状态栏，不写默认透明色
-
             .init()
 
+        Log.d("MainActivity", "onCreate: ")
 
         val tabs = arrayOf("Components", "Helper", "Lab", "Waterfall")
         val pics = arrayOf(
@@ -55,6 +59,11 @@ class MainActivity : AppCompatActivity() {
             tab.customView = tabView
         }
         mediator.attach()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("MainActivity", "onDestroy")
     }
 
     companion object {
