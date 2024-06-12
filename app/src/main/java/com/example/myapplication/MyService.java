@@ -18,12 +18,25 @@ public class MyService extends Service {
         public void pay() {
             Log.d("MyService", "Successfully paid");
         }
+
+        @Override
+        public void sendMessage(String message, IResponseCallback callback) throws RemoteException {
+            Log.d("MyService", "Received message: " + message);
+            try {
+                if (callback != null){
+                    callback.onResponse("Received: " + message);
+                }
+            } catch (RuntimeException e ){
+                Log.d(TAG,"Error responding", e);
+            }
+        }
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         Log.d("MyService", "onBind called");
         //throw new UnsupportedOperationException("Not yet implemented");
-        return new MyBinder();
+        return (IBinder) new MyBinder();
+        //return null;
     }
 }
