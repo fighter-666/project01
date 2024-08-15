@@ -43,6 +43,7 @@ import com.example.myapplication.activity.components.StudentActivity
 import com.example.myapplication.activity.components.ThreadsActivity
 import com.example.myapplication.activity.components.UserActivity
 import com.example.myapplication.activity.components.ViewpageActivity
+import com.example.myapplication.activity.WebViewX5Activity
 import com.example.myapplication.activity.components.bilibili.activity.Room2Activity
 import com.example.myapplication.activity.components.bilibili.activity.RoomActivity
 import com.example.myapplication.call.CallActivity
@@ -127,6 +128,7 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "NotificationActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "ThreadsActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "CallActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "WebViewX5Activity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -308,6 +310,10 @@ class ComponentsFragment : Fragment() {
                 }
                 36 -> {
                     val intent = Intent(context, CallActivity::class.java)
+                    startActivity(intent)
+                }
+                37 -> {
+                    val intent = Intent(context, WebViewX5Activity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...
