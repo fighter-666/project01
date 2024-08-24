@@ -100,7 +100,6 @@ class VariousTextviewActivity : AppCompatActivity() {
 
 
     private fun showUI2(result2: String) {
-        TODO("Not yet implemented")
     }
 
     private suspend fun getResult(): String =
@@ -111,7 +110,6 @@ class VariousTextviewActivity : AppCompatActivity() {
 
 
     private fun showUI(result: String) {
-        TODO("Not yet implemented")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -190,11 +188,9 @@ class VariousTextviewActivity : AppCompatActivity() {
 
        /* okHttpClient.newCall(request).enqueue(object : Callback{
             override fun onFailure(call: Call, e: IOException) {
-                TODO("Not yet implemented")
             }
 
             override fun onResponse(call: Call, response: Response) {
-                TODO("Not yet implemented")
             }
 
         })*/

@@ -32,6 +32,9 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="33">
+        <activity
+            android:name=".activity.components.AudioTrackActivity"
+            android:exported="false" />
 
         <service
             android:name=".MyService"
@@ -41,12 +44,10 @@
                 <action android:name="com.example.myapplication.MyService" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
-            android:process=":dexopt" >
-        </service>
+            android:process=":dexopt"></service>
 
         <activity
             android:name=".activity.WebViewX5Activity"

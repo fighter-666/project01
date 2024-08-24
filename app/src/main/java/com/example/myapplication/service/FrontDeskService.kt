@@ -69,7 +69,6 @@ class FrontDeskService : IntentService("MyService") {
     }
 
     override fun onHandleIntent(intent: Intent?) {
-        TODO("Not yet implemented")
     }
 
     override fun onDestroy() {

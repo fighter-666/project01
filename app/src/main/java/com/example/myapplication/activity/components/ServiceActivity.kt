@@ -55,7 +55,6 @@ class ServiceActivity : AppCompatActivity() {
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
-            TODO("Not yet implemented")
         }
 
     }
@@ -63,11 +62,9 @@ class ServiceActivity : AppCompatActivity() {
 
 /*    private val connect = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            TODO("Not yet implemented")
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
-            TODO("Not yet implemented")
         }
     }*/
 }

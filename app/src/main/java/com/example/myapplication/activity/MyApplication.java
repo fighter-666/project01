@@ -22,7 +22,6 @@ public class MyApplication extends Application {
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
             @Override
             public void onCoreInitFinished() {
-                // TODO Auto-generated method stub
             }
 
 
