@@ -4,20 +4,39 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Process
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.activity.components.AdvertisingActivity
 import com.example.myapplication.adapter.DynamicFragmentAdapter
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gyf.immersionbar.ImmersionBar
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    fun getProcessName(): String? {
+        return try {
+            val file = File("/proc/" + Process.myPid() + "/" + "cmdline")
+            val mBufferedReader = BufferedReader(FileReader(file))
+            val processName = mBufferedReader.readLine().trim { it <= ' ' }
+            mBufferedReader.close()
+            processName
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +52,17 @@ class MainActivity : AppCompatActivity() {
             .init()
 
         Log.d("MainActivity", "onCreate: ")
+
+        val processName = getProcessName()
+
+//判断进程名，保证只有主进程运行
+
+//判断进程名，保证只有主进程运行
+        if (!TextUtils.isEmpty(processName) && processName == this.packageName) {
+            //在这里进行主进程初始化逻辑操作
+            Log.i(">>>>>>", "oncreate")
+        }
+
 
         val tabs = arrayOf("Components", "Helper", "Lab", "Waterfall")
         val pics = arrayOf(

@@ -7,9 +7,6 @@
 
     <cloud-backup tools:ignore="FullBackupContent">
 
-        <include .../>
-        <exclude .../>
-        -->
         <include path="." />
     </cloud-backup>
     <!--
