@@ -11,6 +11,9 @@ public class GameOriginator {
       currentScore = memento.getStore();
    }
 
+   /**
+    *
+    */
    public void playGame() {
       System.out.println("------------------开始游戏------------------");
       System.out.println("当前分数为："+ currentScore);
