@@ -1,6 +1,7 @@
 package com.example.myapplication.leetcode
 
 import kotlin.math.max
+
 /**
  * 121.买卖股票的最佳时机
  * 给定一个数组 price, 他的第 i 个元素 price[i] 表示一只给定股票第 i 天的价格。
@@ -19,29 +20,34 @@ import kotlin.math.max
  *
  *
  * 提示：
- *
  * 1 <= prices.length <= 105
  * 0 <= prices[i] <= 104
  */
 class MaxProfit {
-    companion object{
+    companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            println(MaxProfit().maxProfit(intArrayOf(7,1,5,3,6,4)))
-            println(MaxProfit().maxProfit(intArrayOf(7,6,4,3,1)))
-            println(MaxProfit().maxProfit(intArrayOf(7,2,9,3,1,10)))
+            println(MaxProfit().maxProfit(intArrayOf(7, 1, 5, 3, 6, 4)))
+            println(MaxProfit().maxProfit(intArrayOf(7, 6, 4, 3, 1)))
+            println(MaxProfit().maxProfit(intArrayOf(7, 2, 9, 3, 1, 10)))
         }
     }
 
-    fun maxProfit(price: IntArray):Int{
+    /**
+     * 先找最小再找最大
+     *
+     * @param  price: IntArray
+     * @return 最大值
+     */
+    fun maxProfit(price: IntArray): Int {
         var max = 0
         var i = 1
         var temp = price[0]
         val n = price.size
-        while (i < n){
-            if (price[i] > temp){
+        while (i < n) {
+            if (price[i] > temp) {
                 max = max(max, price[i] - temp)
-            } else{
+            } else {
                 temp = price[i]
             }
             i++
