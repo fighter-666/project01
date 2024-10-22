@@ -1,8 +1,9 @@
 package com.example.myapplication.leetcode
+
 /**
  * 88.合并两个有序数组
  *
- * 给你两个按 非递减顺序 排列的整数数组 num1 和 num2，另有两个整数 m 和 n，分别表示 num1 和num 中的元素数目。
+ * 给你两个按 非递减顺序 排列的整数数组 num1 和 num2，另有两个整数 m 和 n，分别表示 num1 和num2 中的元素数目。
  * 请你合并Num2 到 num1 中，是合并后的数组同样按 非递减顺序 排列。
  * 注意：最终，合并后数组不应由函数返回，而是存储在数组 num1 中。为了应付这种情况，num1 的初始长度为 m+n,其中前 m 个元素表示合并的元素，后 n 个元素为 0,应忽略。num2 的长度为n.
  *
@@ -31,10 +32,27 @@ class Merge {
         fun main(arg: Array<String>) {
             val num1 = intArrayOf(1, 2, 3, 0, 0, 0)
             val num2 = intArrayOf(2, 5, 6)
-            Merge().merge(num1, 3, num2, 3)
+            Merge().merge2(num1, 3, num2, 3)
             num1.forEach {
                 println(it)
             }
+        }
+    }
+
+    fun merge2(num1: IntArray, m: Int, num2: IntArray, n: Int) {
+        var i = m - 1
+        var j = n - 1
+
+        while (i >= 0 && j >= 0) {
+            if (num1[i] <= num2[j]) {
+                num1[i + j + 1] = num2[j--]
+            } else {
+                num1[i + j + 1] = num1[i--]
+            }
+        }
+
+        while (j >= 0) {
+            num1[i + j + 1] = num2[j--]
         }
     }
 
