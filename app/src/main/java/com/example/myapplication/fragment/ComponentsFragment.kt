@@ -9,8 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.activity.AssetsActivity
 import com.example.myapplication.activity.BaseApplication
+import com.example.myapplication.activity.DataActivity
+import com.example.myapplication.activity.DataReadActivity
 import com.example.myapplication.activity.InterviewsActivity
+import com.example.myapplication.activity.RawActivity
+import com.example.myapplication.activity.SdcardActivity
 import com.example.myapplication.activity.TreeListActivity
 import com.example.myapplication.activity.components.AdvertisingActivity
 import com.example.myapplication.activity.components.AsyncServiceActivity
@@ -131,6 +136,11 @@ class ComponentsFragment : Fragment() {
             Pair(R.mipmap.icon_grid_tip_dialog, "CallActivity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "WebViewX5Activity"),
             Pair(R.mipmap.icon_grid_tip_dialog, "AudioTrackActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "RawActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "AssetsActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "DataActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "DataReadActivity"),
+            Pair(R.mipmap.icon_grid_tip_dialog, "SdcardActivity"),
         ).map { (imageResId, helperText) ->
             Piggy(imageResId, helperText)
         }.toMutableList()
@@ -320,6 +330,26 @@ class ComponentsFragment : Fragment() {
                 }
                 38 -> {
                     val intent = Intent(context, AudioTrackActivity::class.java)
+                    startActivity(intent)
+                }
+                39 -> {
+                    val intent = Intent(context, RawActivity::class.java)
+                    startActivity(intent)
+                }
+                40 -> {
+                    val intent = Intent(context, AssetsActivity::class.java)
+                    startActivity(intent)
+                }
+                41 -> {
+                    val intent = Intent(context, DataActivity::class.java)
+                    startActivity(intent)
+                }
+                42 -> {
+                    val intent = Intent(context, DataReadActivity::class.java)
+                    startActivity(intent)
+                }
+                43 -> {
+                    val intent = Intent(context, SdcardActivity::class.java)
                     startActivity(intent)
                 }
                 // 其他Piggy对象的处理逻辑...

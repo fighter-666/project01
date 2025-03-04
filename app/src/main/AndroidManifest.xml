@@ -50,6 +50,21 @@
             android:process=":dexopt"></service>
 
         <activity
+            android:name=".activity.SdcardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DataReadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AssetsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RawActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.WebViewX5Activity"
             android:exported="false" />
         <activity
